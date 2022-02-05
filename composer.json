@@ -13,9 +13,7 @@
         "laravel/tinker": "^1.0",
         "tymon/jwt-auth": "1.0.0-rc.2",
         "zizaco/entrust": "5.2.x-dev",
-      "ext-sqlite": "*",
-      "ext-curl": "*",
-      "ext-http": "*"
+        "ext-sqlite": "*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
@@ -30,7 +28,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "One\\": "src/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {
@@ -59,7 +57,10 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
