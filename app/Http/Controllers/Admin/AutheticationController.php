@@ -1,10 +1,6 @@
 <?php
 
-    namespace App\Http\Controllers\Admin;
-    use App\Http\Controllers\Api\V1\Controller;
-    use App\Permission;
-    use App\Role;
-    use App\User;
+    namespace App\Http\Controllers;
     use Illuminate\Contracts\View\Factory;
     use Illuminate\Database\QueryException;
     use Illuminate\Http\JsonResponse;
@@ -18,7 +14,7 @@
 
     class AutheticationController extends Controller
     {
-        
+
         public function __construct() {
             //$this->middleware('auth');
         }

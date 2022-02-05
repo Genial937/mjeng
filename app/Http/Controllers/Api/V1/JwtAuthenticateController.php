@@ -28,7 +28,7 @@
          */
         public function __construct()
         {
-            $this->notify_controller = new NotifyController();
+
             $this->middleware('auth:api', ['except' => ['authenticate', 'createUser', 'assignRole',"referralRanking"]]);
         }
 
@@ -76,41 +76,6 @@
             }
         }
 
-        /**
-         * @return JsonResponse
-         */
-        public function findUser(Request $request)
-        {
-
-            try {
-                //get the customer and wallets
-                $user = User::where("phone", $request->route("phone"))->first();
-                $micro = new MicroServiceController();
-                if(!isset($user->customer_code)):
-                    return response()->json([
-                        'success' => false,
-                        'errors' => 'Account not registered'
-                    ], JsonResponse::HTTP_NOT_FOUND);
-                endif;
-                 $result = $micro->get(new Request(), "customer/by/".$user->customer_code);
-                return response()->json([
-                    //'auth'=>Auth::user(),
-                    'success' => true,
-                    'message' => "Success",
-                    'user_id' => $user->id,
-                    'rank' => $user->notes,
-                    'membership_no' => $user->referral_code,
-                    'user' => $result->getData()->data
-                ]);
-            } catch (QueryException $e) {
-                // something went wrong
-                return response()->json([
-                    'success' => false,
-                    'error' => 'something went wrong',
-                    'exception' => $e->getMessage()
-                ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-            }
-        }
 
         /**
          * @param Request $request
@@ -195,55 +160,13 @@
                 "phone" => "required",
                 "email" => "nullable",
                 "password" => "required",
-                "invite_code" => "required",
-                "doc_type" => "required",
-                "doc_no" => "required",
-                "village" => "required",
-                "sub_county_id" => "required"
             ]);
             try {
-                $user = User::where("referral_code", $request->invite_code)->first();
-                if (empty($user)):
-                    return response()->json([
-                        'success' => false,
-                        'error' => "Invite code is invalid, Please try again."
-                    ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-                endif;
-                //generate referral code
-                $referral_code = $this->generateReferralCode();
-                $user_ = User::where("phone", $request->phone)->first();
-                if (empty($user_)):
-                    $request->request->add(["referral_code" => $referral_code, 'status' => 1]);
-                    $new_user = User::create($request->all(['firstname', 'middlename', 'surname', 'phone', 'email', 'password', 'status', "referral_code", "doc_type", "doc_no", 'village', "sub_county_id"]));
-                    //attach
-                    Referral::create(["user_id" => $new_user->id, 'referee_id' => $user->id]);
-                    $pay = new PaymentController();
-                    $pay->index(new Request([
-                        "amount" => 1000,
-                        "type" => "REG",
-                        "user_id" => $new_user->id
-                    ]));
-                else:
-               $payment=Payment::where("user_id",$user_->id)
-                        ->where("type","REG")
-                        ->where("amount",1000)
-                        ->where("status",1)
-                        ->first();
-                if(empty($payment)):
-                    $pay = new PaymentController();
-                    $pay->index(new Request([
-                        "amount" => 1000,
-                        "type" => "REG",
-                        "user_id" => $user_->id
-                    ]));
-                else:
-                      return response()->json([
-                          'success' => false, 'error' => 'User is registered.'
-                      ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-                endif;
-                endif;
+                $request->request->add(['status' => 1]);
+                $user = User::create($request->all(['firstname', 'middlename', 'surname', 'phone', 'email', 'password', 'status', "referral_code", "doc_type", "doc_no", 'village', "sub_county_id"]));
                 return response()->json([
-                    'success' => true, 'message' => 'Your account has been registered successfully'
+                    'success' => true,
+                    'message' => 'Your account has been registered successfully'
                 ], JsonResponse::HTTP_CREATED);
             } catch (QueryException $e) {
                 // something went wrong
@@ -252,31 +175,6 @@
                     'error' => 'something went wrong',
                     'exception' => $e->getMessage()
                 ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-            }
-
-        }
-
-        protected function generateReferralCode()
-        {
-            try {
-                for ($i = 1; $i <= 999999; $i++):
-                   // $count = str_split($i);
-//                    if (count($count) == 2):
-//                        $code = "FEP".$i;
-//                    elseif (count($count) == 1):
-//                        $code = "FEP0" . $i;
-//                    else:
-                        $code = "FEP00" . $i;
-                    //endif;
-
-                    $user = User::where('referral_code', $code)->first();
-                    if (empty($user)):
-                        break 1;
-                    endif;
-                endfor;
-                return $code;
-            } catch (QueryException $e) {
-                return $e->getMessage();
             }
 
         }
@@ -291,8 +189,6 @@
             try {
 
                 $request->request->remove('password');
-                //  $request->request->remove('otp_expiry');
-
                 $user = User::where('id', $request->request->get('id'))->first();
                 if (empty($user)):
                     return response()->json([

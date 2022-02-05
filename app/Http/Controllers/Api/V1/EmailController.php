@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers;
 
 use App\Mail\SendEmail;
 
-use App\Outlet;
-use App\OutletBillAccount;
-use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
