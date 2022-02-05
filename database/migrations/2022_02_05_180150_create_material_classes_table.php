@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectSitesTable extends Migration
+class CreateMaterialClassesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateProjectSitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_sites', function (Blueprint $table) {
+        Schema::create('material_classes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('projects')
+            $table->integer('material_type_id')->unsigned();
+            $table->foreign('material_type_id')->references('id')->on('material_types')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();
@@ -32,6 +32,6 @@ class CreateProjectSitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_sites');
+        Schema::dropIfExists('material_classes');
     }
 }
