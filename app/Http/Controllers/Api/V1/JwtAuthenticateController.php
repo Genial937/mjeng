@@ -1,9 +1,7 @@
 <?php
 
-    namespace App\Http\Controllers\Api\V1;
+    namespace App\Http\Controllers;
 
-    use App\Payment;
-    use App\Referral;
     use Illuminate\Database\QueryException;
     use App\Permission;
     use App\Role;
@@ -19,7 +17,6 @@
 
     class JwtAuthenticateController extends Controller
     {
-        protected $notify_controller;
 
         /**
          * Create a new AuthController instance.
@@ -29,7 +26,7 @@
         public function __construct()
         {
 
-            $this->middleware('auth:api', ['except' => ['authenticate', 'createUser', 'assignRole',"referralRanking"]]);
+            $this->middleware('auth:api', ['except' => ['authenticate', 'createUser']]);
         }
 
         /**
@@ -163,9 +160,10 @@
             ]);
             try {
                 $request->request->add(['status' => 1]);
-                $user = User::create($request->all(['firstname', 'middlename', 'surname', 'phone', 'email', 'password', 'status', "referral_code", "doc_type", "doc_no", 'village', "sub_county_id"]));
+                $user = User::create($request->all(['firstname', 'middlename', 'surname', 'phone', 'email', 'password', 'status']));
                 return response()->json([
                     'success' => true,
+                    "user"=>$user,
                     'message' => 'Your account has been registered successfully'
                 ], JsonResponse::HTTP_CREATED);
             } catch (QueryException $e) {
@@ -529,219 +527,5 @@
             }
         }
 
-        public function sendOtp(Request $request)
-        {
-            try {
-                $user = auth('api')->user();
-                $email = $user->email;
-                $otp = rand(100000, 999999);
-                $expiry = date('Y-m-d H:i:s');
-                User::where('email', $email)->update(['otp' => $otp]);
-                $request->request->add(['otp' => $otp, '']);
-                $notification = $this->notify_controller->AuthOtpNotification($request);
-                return response()->json([
-                    'success' => true,
-                    'message' => 'OTP sent'
-                ], JsonResponse::HTTP_CREATED);
 
-            } catch (QueryException $e) {
-                // something went wrong
-                return response()->json([
-                    'success' => false,
-                    'error' => 'something went wrong',
-                    'exception' => $e->getMessage()
-                ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-            }
-        }
-
-        public function verifyOtp(Request $request)
-        {
-            $this->validate($request, [
-                "otp" => "required|numeric",
-            ]);
-            try {
-                $user = auth('api')->user();
-                //$email = $user->email;
-                $otp = $request->request->get('otp');
-                $expiry = date('Y-m-d H:i:s');
-                $acc = User::where('id', $user->id)->where('otp', $otp)->first();
-                if (empty($acc)):
-                    return response()->json([
-
-                        'success' => false,
-                        'error' => 'Invalid OTP'
-                    ], JsonResponse::HTTP_NOT_FOUND);
-                endif;
-                //clear otp
-                User::where('id', $user->id)->update(['otp' => 0, 'otp_expiry' => null]);
-                return response()->json([
-                    'success' => true,
-                    'message' => 'OTP success'
-                ], JsonResponse::HTTP_OK);
-
-            } catch (QueryException $e) {
-                // something went wrong
-                return response()->json([
-                    'success' => false,
-                    'error' => 'something went wrong',
-                    'exception' => $e->getMessage()
-                ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-            }
-
-        }
-        public function referralLevels(Request $request){
-            $this->validate($request,[
-                "user_id"=>"required"
-            ]);
-            $user=User::find($request->user_id);
-            if(empty($user)):
-                return response()->json([
-                    'success' => false,
-                    'errors' => 'Account not found',
-                ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-            endif;
-            //get all referrals level 1
-            $referrals=Referral::where("referee_id",$user->id)->get();
-            $level1=0;
-            $level2=0;
-            $level3=0;
-            $level4=0;
-            $level5=0;
-            $level6=0;
-            $level7=0;
-            $level8=0;
-            foreach ($referrals as $referral):
-                $level1+=1;
-                 //level 2
-                $referrals_level_2=Referral::where("referee_id",$referral->id)->get();
-                foreach ($referrals_level_2 as $referral_2):
-                    $level2+=1;
-                    //level 3
-                    $referrals_level_3=Referral::where("referee_id",$referral_2->id)->get();
-                    foreach ($referrals_level_3 as $referral_3):
-                        $level3+=1;
-                        //level 4
-                        $referrals_level_4=Referral::where("referee_id",$referral_3->id)->get();
-                        foreach ($referrals_level_4 as $referral_4):
-                            $level4+=1;
-                            //level 5
-                            $referrals_level_5=Referral::where("referee_id",$referral_4->id)->get();
-                            foreach ($referrals_level_5 as $referral_5):
-                                $level5+=1;
-                                //level 6
-                                $referrals_level_6=Referral::where("referee_id",$referral_5->id)->get();
-                                foreach ($referrals_level_6 as $referral_6):
-                                    $level6+=1;
-                                    //level 7
-                                    $referrals_level_7=Referral::where("referee_id",$referral_6->id)->get();
-                                    foreach ($referrals_level_7 as $referral_7):
-                                        $level7+=1;
-                                        //level 8
-                                        $referrals_level_8=Referral::where("referee_id",$referral_7->id)->get();
-                                        foreach ($referrals_level_8 as $referral_8):
-                                            $level8+=1;
-                                        endforeach;
-                                    endforeach;
-                                endforeach;
-                            endforeach;
-                        endforeach;
-                    endforeach;
-                endforeach;
-            endforeach;
-            //update the rank for each person
-
-
-            return response()->json([
-                'success' => true,
-                'data' => [
-                    "level1"=>$level1,
-                    "level2"=>$level2,
-                    "level3"=>$level3,
-                    "level4"=>$level4,
-                    "level5"=>$level5,
-                    "level6"=>$level6,
-                    "level7"=>$level7,
-                    "level8"=>$level8
-                ]
-            ], JsonResponse::HTTP_OK);
-        }
-
-
-        public function referralRanking(Request $request){
-
-            $users=User::get();
-            if(!empty($users)):
-
-                foreach ($users as $user):
-                 $referrals=Referral::where("referee_id",$user->id)->get();
-                    User::where("id",$user->id)->update([
-                        "notes"=>"MEMBER"
-                    ]);
-                 if(count($referrals) >=12):
-                    User::where("id",$user->id)->update([
-                        "notes"=>"LEADER"
-                   ]);
-                  endif;
-                    $levels=$this->referralLevels(new Request(["user_id"=>$user->id]))->getData()->data;
-                    $level1=$levels->level1;
-                    $level2=$levels->level2;
-                    $level3=$levels->level3;
-                    $level4=$levels->level4;
-                    $level5=$levels->level5;
-                    $level6=$levels->level6;
-                    $level7=$levels->level7;
-                    $level8=$levels->level8;
-                    $members=$level1+$level2+$level3+$level4+$level5+$level6+$level7;
-                    $leaders=0;
-                    $cordinators=0;
-                    $directors=0;
-                    $generals=0;
-
-                  foreach($referrals as $referral):
-                   $user_id=$referral->user_id;
-                   $user=User::where("id",$user_id)->first();
-                   if(!empty($user)):
-                       if($user->notes=="LEADER"):
-                           $leaders++;
-                       elseif($user->notes=="COORDINATOR"):
-                           $cordinators++;
-                       elseif($user->notes=="DIRECTOR"):
-                           $directors++;
-                       elseif($user->notes=="GENERAL"):
-                           $generals++;
-                        endif;
-                    endif;
-                  endforeach;
-                    Log::info("USERID ====>".$user->id);
-                    Log::info("REFERRALS ".count($referrals));
-                    Log::info("LEADER ".$leaders);
-                    Log::info("COORDINATOR ".$cordinators);
-                    Log::info("DIRECTOR ".$directors);
-                    Log::info("GENERAL ".$generals);
-                    Log::info("MEMBERS ".$members);
-                   if($leaders >=3 || $members >= 50):
-                        User::where("id",$user->id)->update([
-                            "notes"=>"COORDINATOR"
-                        ]);
-                   endif;
-
-                    if($cordinators >=3 || $members >= 200):
-                        User::where("id",$user->id)->update([
-                            "notes"=>"DIRECTOR"
-                        ]);
-                    endif;
-                    if($directors>=3 || $members >= 500):
-                        User::where("id",$user->id)->update([
-                            "notes"=>"GENERAL"
-                        ]);
-                    endif;
-
-                    if($generals >=3 || $members >= 3000):
-                        User::where("id",$user->id)->update([
-                            "notes"=>"EXECUTIVE GENERAL"
-                        ]);
-                    endif;
-                endforeach;
-            endif;
-        }
     }
