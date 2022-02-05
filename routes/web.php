@@ -94,6 +94,7 @@
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@deleteUser'
         ]);
     });
+
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [
             'as' => 'profile',
@@ -108,51 +109,4 @@
             'uses' => '\App\Http\Controllers\Admin\ProfileController@changePassword'
         ]);
     });
-    Route::group(['prefix' => 'members','middleware' => ['ability_:admin,create-members|view-members|update-members|delete-members']], function () {
-        Route::get('/', [
-            'as' => 'members-view',
-            'uses' => '\App\Http\Controllers\Admin\MembersController@index'
-        ]);
-        Route::get('/edit-view/{member_id}', [
-            'as' => 'members-edit-view',
-            'uses' => '\App\Http\Controllers\Admin\MembersController@editView'
-        ]);
-        Route::post('/update-member', [
-            'as' => 'update-member',
-            'uses' => '\App\Http\Controllers\Admin\MembersController@updateMember'
-        ]);
-    });
-    Route::group(['prefix' => 'airtime','middleware' => ['ability_:admin,create-airtime|view-airtime|update-airtime|delete-airtime']], function () {
-        Route::get('/', [
-            'as' => 'airtime-view',
-            'uses' => '\App\Http\Controllers\Admin\AirtimeController@index'
-        ]);
-        Route::get('/edit-view/{airtime_id}', [
-            'as' => 'airtime-edit-view',
-            'uses' => '\App\Http\Controllers\Admin\AirtimeController@editView'
-        ]);
-        Route::post('/resend', [
-            'as' => 'resend-airtime',
-            'uses' => '\App\Http\Controllers\Admin\AirtimeController@resendAirtime'
-        ]);
-    });
-    Route::group(['prefix' => 'payments','middleware' => ['ability_:admin,create-payments|view-payments|update-payments|delete-payments']], function () {
-        Route::get('/', [
-            'as' => 'payments-view',
-            'uses' => '\App\Http\Controllers\Admin\PaymentsController@index'
-        ]);
-    });
-    Route::group(['prefix' => 'withdrawals','middleware' => ['ability_:admin,create-withdrawals|view-withdrawals|update-withdrawals|delete-withdrawals']], function () {
-        Route::get('/', [
-            'as' => 'withdrawals-view',
-            'uses' => '\App\Http\Controllers\Admin\WithdrawalsController@index'
-        ]);
 
-    });
-    Route::group(['prefix' => 'businesses','middleware' => ['ability_:admin,create-businesses|view-businesses|update-businesses|delete-businesses']], function () {
-        Route::get('/', [
-            'as' => 'businesses-view',
-            'uses' => '\App\Http\Controllers\Admin\BusinessesController@index'
-        ]);
-
-    });
