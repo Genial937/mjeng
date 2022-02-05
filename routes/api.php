@@ -13,14 +13,14 @@
     |
     */
 
-    Route::group(['prefix' => 'auth'], function () {
+    Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
         Route::post('login', 'Api\V1\JwtAuthenticateController@authenticate');
         Route::get('refresh', 'Api\V1\JwtAuthenticateController@refresh');
         Route::get('me', 'Api\V1\JwtAuthenticateController@me');
         Route::get('logout', 'Api\V1\JwtAuthenticateController@logout');
         Route::post('change-password', 'Api\V1\JwtAuthenticateController@assistedChangePassword');
     });
-    Route::group(['prefix' => 'admin', 'middleware' => ['ability:admin,create-users']], function () {
+    Route::group(['prefix' => 'admin', 'middleware' => 'log.route', ['ability:admin,create-users']], function () {
         Route::post('role', 'Api\V1\JwtAuthenticateController@createRole');
         Route::post('permission', 'Api\V1\JwtAuthenticateController@createPermission');
         Route::get('roles', 'Api\V1\JwtAuthenticateController@roles');

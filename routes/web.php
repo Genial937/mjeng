@@ -12,9 +12,9 @@
     */
 
 
-    Route::get('/', '\App\Http\Controllers\Admin\AutheticationController@index');
-    Route::get('/dashboard', ['as' => 'dashboard', 'uses' => '\App\Http\Controllers\Admin\DashboardController@index']);
-    Route::group(['prefix' => 'auth'], function () {
+    Route::get('/', '\App\Http\Controllers\Admin\AutheticationController@index')->middleware('log.route');
+    Route::get('/dashboard', ['as' => 'dashboard', 'uses' => '\App\Http\Controllers\Admin\DashboardController@index'])->middleware('log.route');
+    Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
         Route::get('/', [
             'as' => 'login',
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@index'
@@ -28,7 +28,7 @@
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@login'
         ]);
     });
-    Route::group(['prefix' => 'roles','middleware' => ['ability_:admin,create-roles|view-roles|update-roles|delete-roles']], function () {
+    Route::group(['prefix' => 'roles','middleware' =>'log.route', ['ability_:admin,create-roles|view-roles|update-roles|delete-roles']], function () {
         Route::get('/', [
             'as' => 'role-permission-view',
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@roles'
@@ -54,7 +54,7 @@
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@deleteRole'
         ]);
     });
-    Route::group(['prefix' => 'permissions','middleware' => ['ability_:admin,create-roles|view-roles|update-roles|delete-roles']], function () {
+    Route::group(['prefix' => 'permissions','middleware' =>'log.route', ['ability_:admin,create-roles|view-roles|update-roles|delete-roles']], function () {
         Route::get('/create', [
             'as' => 'create-permission-view',
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@createPermissionView'
@@ -64,7 +64,7 @@
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@createPermission'
         ]);
     });
-    Route::group(['prefix' => 'users','middleware' => ['ability_:admin,create-users|view-users|update-users|delete-users']], function () {
+    Route::group(['prefix' => 'users','middleware' =>'log.route', ['ability_:admin,create-users|view-users|update-users|delete-users']], function () {
         Route::get('/', [
             'as' => 'users-view',
             'uses' => '\App\Http\Controllers\Admin\AutheticationController@usersView'
@@ -95,7 +95,7 @@
         ]);
     });
 
-    Route::group(['prefix' => 'profile'], function () {
+    Route::group(['prefix' => 'profile','middleware' =>'log.route',], function () {
         Route::get('/', [
             'as' => 'profile',
             'uses' => '\App\Http\Controllers\Admin\ProfileController@index'
