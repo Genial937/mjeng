@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.v1.auth')
 
 @section('content')
     <div id="main-wrapper" class="h-100">

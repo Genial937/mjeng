@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.v1.app')
 
 @section('content')
-    @include('layouts.sidebar')
+    @include('layouts.v1.sidebar')
     <div class="main-panel">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
