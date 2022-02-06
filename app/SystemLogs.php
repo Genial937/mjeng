@@ -10,6 +10,7 @@ class SystemLogs extends Model
         'user_id',
         "ip",
         "url",
+        "agent",
         "method",
         "request_body",
         "response"

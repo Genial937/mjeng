@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\SystemLogs;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -33,6 +34,7 @@ class LogRoute
                    "user_id"=> Auth::id()??NULL,
                    "url"=>$request->getUri(),
                    "ip"=> $request->ip(),
+                   "agent"=>$request->header('user-agent'),
                    "method"=>$request->getMethod(),
                    "request_body"=>json_encode($request->all()),
                    'response' => "GET"

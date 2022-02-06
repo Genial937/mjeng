@@ -20,6 +20,7 @@ class CreateSystemLogsTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->string('ip');
             $table->text('url');
+            $table->string('agent');
             $table->string('method');
             $table->text('request_body');
             $table->text('response');

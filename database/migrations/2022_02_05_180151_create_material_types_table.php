@@ -18,9 +18,6 @@ class CreateMaterialTypesTable extends Migration
             $table->integer('task_id')->unsigned();
             $table->foreign('task_id')->references('id')->on('tasks')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('material_class_id')->unsigned();
-            $table->foreign('material_class_id')->references('id')->on('material_classes')
-                ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('material_types')
                 ->onUpdate('cascade')->onDelete('cascade');

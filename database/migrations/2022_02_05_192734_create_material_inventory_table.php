@@ -22,12 +22,11 @@ class CreateMaterialsTable extends Migration
             $table->integer('material_type_id')->unsigned();
             $table->foreign('material_type_id')->references('id')->on('material_types')
                 ->onUpdate('cascade')->onDelete('cascade');
-
-            $table->string('size');
-            $table->text('description')->nullable();
-            $table->integer('status')->default(1)->comment("0-draft,1-published,2-deleted");
-            $table->timestamps();
-            $table->timestamps();
+            $table->integer('material_class_id')->unsigned();
+            $table->foreign('material_class_id')->references('id')->on('material_classes')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('status')->default(0)->comment("0-pending approval,1-active,2-inactive,3-deleted");
+            $table->text('comment')->nullable();
         });
     }
 

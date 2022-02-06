@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEquipmentsTable extends Migration
+class CreateEquipmentInventoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEquipmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipments', function (Blueprint $table) {
+        Schema::create('equipment_inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reg_no')->unique();
             $table->integer('user_id')->unsigned();
@@ -34,7 +34,7 @@ class CreateEquipmentsTable extends Migration
             $table->string('ownership');
             $table->string('fuel_type');
             $table->string('engine_capacity');
-            $table->integer('status')->default(1)->comment("0-pending approval,1-active,2-inactive,3-deleted");
+            $table->integer('status')->default(0)->comment("0-pending approval,1-active,2-inactive,3-deleted");
             $table->text('comment')->nullable();
             $table->timestamps();
         });
