@@ -15,13 +15,13 @@
 
 Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
     Route::get('/', [
-        'as' => 'login',
+        'as' => 'web.login',
         'uses' => '\App\Http\Controllers\Admin\AutheticationController@index'
-    ])->name('general.login');
+    ]);
     Route::get('/password/reset', [
-        'as' => 'password-reset',
+        'as' => 'web.password.reset',
         'uses' => '\App\Http\Controllers\Admin\AutheticationController@passwordReset'
-    ])->name('general.password.reset');
+    ]);
     Route::get('/logout', [
         'as' => 'logout',
         'uses' => '\App\Http\Controllers\Admin\AutheticationController@logout'
