@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectSiteTaskTable extends Migration
+class CreateSiteTaskTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProjectSiteTaskTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_site_task', function (Blueprint $table) {
+        Schema::create('site_task', function (Blueprint $table) {
             $table->integer('project_site_id')->unsigned();
             $table->foreign('project_site_id')->references('id')->on('project_sites')
                 ->onUpdate('cascade')->onDelete('cascade');
