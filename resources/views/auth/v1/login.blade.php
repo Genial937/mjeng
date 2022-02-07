@@ -24,11 +24,11 @@
                     </div>
                     <a href="{{url("password/reset")}}">Reset password</a>
                 </div>
-                <button class="btn btn-primary btn-block btn-lg btn-uppercase">Let's go</button>
+                <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Let's go</button>
             </div>
             <div class="otp">
                 <div class="form-group text-left">
-                    <h2>Two-factor authentication</h2>
+                    <h4>Two-factor authentication</h4>
                     <p>An Email with your verification code has been sent to your phone and email address.</p>
                     <label>6-character code</label>
                     <input type="text" class="form-control" placeholder="6-character code" required autofocus>
