@@ -10,7 +10,8 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{url("assets/media/image/favicon.png")}}"/>
-
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@200;400;500&display=swap" rel="stylesheet">
     <!-- Plugin styles -->
     <link rel="stylesheet" href="{{url("plugins/bundle.css")}}" type="text/css">
 
