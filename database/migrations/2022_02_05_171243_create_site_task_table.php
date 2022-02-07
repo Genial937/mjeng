@@ -14,8 +14,8 @@ class CreateSiteTaskTable extends Migration
     public function up()
     {
         Schema::create('site_task', function (Blueprint $table) {
-            $table->integer('project_site_id')->unsigned();
-            $table->foreign('project_site_id')->references('id')->on('project_sites')
+            $table->integer('site_id')->unsigned();
+            $table->foreign('site_id')->references('id')->on('sites')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('task_id')->unsigned();
             $table->foreign('task_id')->references('id')->on('tasks')
