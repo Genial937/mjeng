@@ -3,9 +3,10 @@
 @section('content')
     <div class="form-wrapper ">
         <div class="text-left">
-        <h5>Login</h5>
+        <h4>Login </h4>
+         <p>Enter your email or username and password</p>
         </div>
-        <div class="">
+        <div class="username-paw">
         <!-- form -->
         <form>
             <div class="form-group text-left">
