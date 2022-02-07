@@ -11,7 +11,7 @@
 |
 */
 
-
+Auth::routes();
 Route::get('/', '\App\Http\Controllers\Admin\AutheticationController@index')->middleware('log.route');
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => '\App\Http\Controllers\Admin\DashboardController@index'])->middleware('log.route');
 Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
