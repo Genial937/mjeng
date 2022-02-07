@@ -22,7 +22,7 @@
                         <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
                         <label class="custom-control-label" for="customCheck1">Remember me</label>
                     </div>
-                    <a href="#">Reset password</a>
+                    <a href="{{url("password/reset")}}">Reset password</a>
                 </div>
                 <button class="btn btn-primary btn-block btn-lg btn-uppercase">Let's go</button>
             </div>
@@ -44,6 +44,5 @@
     </div>
     <script>
         $(".otp").hidden();
-
     </script>
 @endsection
