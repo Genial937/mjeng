@@ -13,7 +13,7 @@ class EquipmentInventoryEquipementRequired extends Migration
      */
     public function up()
     {
-        Schema::create('e_inventory_required', function (Blueprint $table) {
+        Schema::create('einventory_required', function (Blueprint $table) {
             $table->integer('equipment_inventory_id')->unsigned();
             $table->foreign('equipment_inventory_id')->references('id')->on('equipment_inventory')
                 ->onUpdate('cascade')->onDelete('cascade');

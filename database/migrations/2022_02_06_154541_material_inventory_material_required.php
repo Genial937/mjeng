@@ -13,7 +13,7 @@ class MaterialInventoryMaterialRequired extends Migration
      */
     public function up()
     {
-        Schema::create('m_inventory_required', function (Blueprint $table) {
+        Schema::create('inventory_required', function (Blueprint $table) {
             $table->integer('material_inventory_id')->unsigned();
             $table->foreign('material_inventory_id')->references('id')->on('material_inventory')
                 ->onUpdate('cascade')->onDelete('cascade');
