@@ -1,6 +1,8 @@
 @extends('layouts.v1.auth')
 
 @section('content')
+
+    
     <div class="wrapper wrapper-full-page">
         <div class="full-page login-page" data-color="" data-image="{{url("img/background/background-2.jpg")}}">
             <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
