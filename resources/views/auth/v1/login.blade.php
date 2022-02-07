@@ -1,92 +1,71 @@
 @extends('layouts.v1.auth')
 
 @section('content')
+    <div class="form-wrapper">
 
-
-    <div class="wrapper wrapper-full-page">
-        <div class="full-page login-page" data-color="" data-image="{{url("img/background/background-2.jpg")}}">
-            <!--   you can change the color of the filter page using: data-color="blue | azure | green | orange | red | purple" -->
-            <div class="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <form method="POST" action="{{route('login')}}" id="loginForm">
-                                @csrf
-                                <div class="card" data-background="color" data-color="blue">
-
-                                    <div class="card-content">
-                                        <div class="form-group">
-                                            <label>Email address</label>
-                                            <input type="email" name="email" placeholder="Enter email" class="form-control input-no-border">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Password</label>
-                                            <input type="password" name="password" placeholder="Password" class="form-control input-no-border">
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer text-center">
-                                        <button type="submit" class="btn btn-fill btn-wd btn-submit ">Let's go</button>
-                                        <div class="forgot">
-                                            <a href="#pablo">Forgot your password?</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <footer class="footer footer-transparent">
-                <div class="container">
-                    <div class="copyright">
-                        &copy; <script>document.write(new Date().getFullYear())</script>
-                    </div>
-                </div>
-            </footer>
+        <!-- logo -->
+        <div id="logo">
+            <img src="{{asset("assets/media/image/logo-dark.png")}}" alt="image">
         </div>
+        <!-- ./ logo -->
+
+
+        <h5>Sign in</h5>
+
+        <!-- form -->
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Username or email" required autofocus>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="form-group d-flex justify-content-between">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1">Remember me</label>
+                </div>
+                <a href="#">Reset password</a>
+            </div>
+            <button class="btn btn-primary btn-block">Sign in</button>
+            <hr>
+            <p class="text-muted">Login with your social media account.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-floating btn-facebook">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-floating btn-twitter">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-floating btn-dribbble">
+                        <i class="fa fa-dribbble"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-floating btn-linkedin">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-floating btn-google">
+                        <i class="fa fa-google"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="btn btn-floating btn-behance">
+                        <i class="fa fa-behance"></i>
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <p class="text-muted">Don't have an account?</p>
+            <a href="register.html" class="btn btn-outline-light btn-sm">Register now!</a>
+        </form>
+        <!-- ./ form -->
     </div>
-
-    <script type="text/javascript">
-
-        $( document ).on('submit','#loginForm',function(e) {
-            e.preventDefault();
-            $('.btn-submit').text('');
-            $('.btn-submit').append('<div class="circle"></div>');
-            var url=$('#loginForm').attr('action');
-            $.post( url, $( "#loginForm" ).serialize())
-                .done(function( data ) {
-                    console.log(data)
-                    if (data['success']) {
-                        GrowlNotification.notify({
-                            title: '',
-                            description: data['message'],
-                            type: 'success',
-                            position: 'top-center',
-                            showProgress:true,
-                            closeTimeout: 10000
-                        });
-                        setTimeout(function(){
-                            $('.btn-submit').text('Login');
-                            location.href= data['intended'];
-                        }, 1000);
-                    };
-                })
-                .fail(function(data) {
-                    $('.btn-submit').text('Login');
-                    var errors = data.responseJSON;
-                    $.each(errors.errors, function( key, value ) {
-                        GrowlNotification.notify({
-                            title: '',
-                            description: value[0] ,
-                            type: 'warning',
-                            position: 'top-center',
-                            showProgress:true,
-                            closeTimeout: 30000
-                        });
-                    });
-                })
-        });
-    </script>
 @endsection
