@@ -14,5 +14,5 @@
 
 
 Route::get('/', function () {
-    view('error.v1.page_not_found');
+    return view('error.v1.page_not_found');
 });
