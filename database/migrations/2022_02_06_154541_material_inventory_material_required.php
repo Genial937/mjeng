@@ -14,11 +14,11 @@ class MaterialInventoryMaterialRequired extends Migration
     public function up()
     {
         Schema::create('inventory_required', function (Blueprint $table) {
-            $table->integer('material_inventory_id')->unsigned();
-            $table->foreign('material_inventory_id')->references('id')->on('material_inventory')
+            $table->integer('m_inventory_id')->unsigned();
+            $table->foreign('m_inventory_id')->references('id')->on('material_inventory')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('material_required_id')->unsigned();
-            $table->foreign('material_required_id')->references('id')->on('material_required')
+            $table->integer('m_required_id')->unsigned();
+            $table->foreign('m_required_id')->references('id')->on('material_required')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
     }
