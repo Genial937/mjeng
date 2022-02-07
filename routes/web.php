@@ -25,7 +25,7 @@ Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
     Route::get('/logout', [
         'as' => 'logout',
         'uses' => '\App\Http\Controllers\Admin\AutheticationController@logout'
-    ])->name('general.logout');
+    ]);
     Route::post('/', [
         'as' => 'login',
         'uses' => '\App\Http\Controllers\Admin\AutheticationController@login'
