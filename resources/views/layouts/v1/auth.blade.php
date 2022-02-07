@@ -17,6 +17,11 @@
 
     <!-- App styles -->
     <link rel="stylesheet" href="{{url("assets/css/app.min.css")}}" type="text/css">
+
+    <!-- Plugin scripts -->
+    <script src="{{url("plugins/bundle.js")}}"></script>
+    <!-- App scripts -->
+    <script src="{{"assets/js/app.min.js"}}"></script>
 </head>
 <body class="form-membership" style="background: url({{asset("assets/media/image/image1.jpg")}})">
 
@@ -28,10 +33,6 @@
 @yield('content')
 
 
-<!-- Plugin scripts -->
-<script src="{{url("plugins/bundle.js")}}"></script>
-<!-- App scripts -->
-<script src="{{"assets/js/app.min.js"}}"></script>
 </body>
 
 </html>
