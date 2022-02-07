@@ -22,7 +22,7 @@
                         <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
                         <label class="custom-control-label" for="customCheck1">Remember me</label>
                     </div>
-                    <a href="{{url("password/reset")}}">Reset password</a>
+                    <a href="{{route("general.password-reset")}}">Reset password</a>
                 </div>
                 <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Let's go</button>
             </div>

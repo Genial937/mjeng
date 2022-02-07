@@ -27,7 +27,14 @@
                 return view('auth.v1.login');
            endif;
         }
-
+        public function passwordReset(Request $request)
+        {
+            if(auth()->check()):
+                return redirect(route('dashboard'));
+            else:
+                return view('auth.v1.password.reset');
+            endif;
+        }
         public function login(Request $request)
         {
             $request->validate([

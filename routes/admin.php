@@ -11,23 +11,10 @@
 |
 */
 
-Auth::routes();
+
 Route::get('/', '\App\Http\Controllers\Admin\AutheticationController@index')->middleware('log.route');
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => '\App\Http\Controllers\Admin\DashboardController@index'])->middleware('log.route');
-Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
-    Route::get('/', [
-        'as' => 'login',
-        'uses' => '\App\Http\Controllers\Admin\AutheticationController@index'
-    ]);
-    Route::get('/logout', [
-        'as' => 'logout',
-        'uses' => '\App\Http\Controllers\Admin\AutheticationController@logout'
-    ]);
-    Route::post('/', [
-        'as' => 'login',
-        'uses' => '\App\Http\Controllers\Admin\AutheticationController@login'
-    ]);
-});
+
 Route::group(['prefix' => 'roles','middleware' =>'log.route', ['ability_:admin,create-roles|view-roles|update-roles|delete-roles']], function () {
     Route::get('/', [
         'as' => 'role-permission-view',
