@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="form-wrapper ">
-        <h5 class="pull-left">Login</h5>
+        <div class="text-left">
+        <h5>Login</h5>
+        </div>
+        <div class="">
         <!-- form -->
         <form>
             <div class="form-group text-left">
@@ -20,9 +23,10 @@
                 </div>
                 <a href="#">Reset password</a>
             </div>
-            <button class="btn btn-primary btn-block">Sign in</button>
+            <button class="btn btn-primary btn-block btn-lg btn-uppercase">Let's go</button>
 
         </form>
         <!-- ./ form -->
+    </div>
     </div>
 @endsection
