@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Http\Controllers;
+    namespace App\Http\Controllers\Admin;
     use Illuminate\Contracts\View\Factory;
     use Illuminate\Database\QueryException;
     use Illuminate\Http\JsonResponse;
