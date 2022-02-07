@@ -32,7 +32,7 @@
             if(auth()->check()):
                 return redirect(route('dashboard'));
             else:
-                return view('auth.v1.password.reset');
+                return view('auth.v1.passwords.reset');
             endif;
         }
         public function login(Request $request)
