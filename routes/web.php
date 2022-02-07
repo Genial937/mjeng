@@ -21,7 +21,7 @@ Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
     Route::get('/password/reset', [
         'as' => 'password-reset',
         'uses' => '\App\Http\Controllers\Admin\AutheticationController@passwordReset'
-    ])->name('general.password-reset');
+    ])->name('general.password.reset');
     Route::get('/logout', [
         'as' => 'logout',
         'uses' => '\App\Http\Controllers\Admin\AutheticationController@logout'
