@@ -13,7 +13,7 @@ class CreateMaterialInventoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('material_inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reg_no')->unique();
             $table->integer('user_id')->unsigned();
