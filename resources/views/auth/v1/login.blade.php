@@ -43,6 +43,6 @@
         <!-- ./ form -->
     </div>
     <script>
-        $(".otp").hidden();
+        $(".otp").slideUp();
     </script>
 @endsection
