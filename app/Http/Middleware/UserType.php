@@ -31,6 +31,9 @@ class UserType
                 return view('errors.v1.page_404',compact("error_type","error_description"));
             endif;
         endif;
+        $error_type="USER NO FOUND";
+        $error_description="Unknown user type. Please contact support for assistance.";
+        return view('errors.v1.page_404',compact("error_type","error_description"));
         return $next($request);
     }
 }
