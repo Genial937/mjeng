@@ -14,9 +14,9 @@
                 <input type="text" class="form-control" placeholder="Username or email" required autofocus>
             </div>
             <button class="btn btn-primary btn-block btn-lg btn-uppercase">Send</button>
-            <div class="form-group ">
-                <p>I remember my password</p>
-                <a href="{{route("web.login")}}" class="btn btn-primary btn-block btn-rounded btn-uppercase">Back</a>
+            <div class="form-group mt-3">
+                <p>I remember my password  <a href="{{route("web.login")}}" class="btn btn-primary btn-block btn-rounded btn-uppercase">Login</a></p>
+
             </div>
         </form>
         <!-- ./ form -->
