@@ -6,12 +6,10 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploying to Mijengo staging
-        uses: appleboy/ssh-action@master
+        uses: garygrossgarten/github-action-ssh@release
         with: 
+          command: git pull origin main
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: |
-            cd /var/www/mijengo/staging/mijengo/mijengo_v3
-            git pull 
