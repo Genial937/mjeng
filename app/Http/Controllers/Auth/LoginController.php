@@ -34,7 +34,6 @@ class LoginController extends Controller
             return view('auth.v1.login');
 
     }
-
     /**
      * @param Request $request
      * @return \Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector

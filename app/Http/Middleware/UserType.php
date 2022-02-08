@@ -29,6 +29,7 @@ class UserType
                 return redirect(route('web.error',"USER_404"));
             endif;
         endif;
+        return redirect(route('web.error',"USER_404"));
         return $next($request);
     }
 }
