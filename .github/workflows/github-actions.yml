@@ -8,7 +8,7 @@ jobs:
       - name: Deploying to Mijengo staging
         uses: garygrossgarten/github-action-ssh@release
         with: 
-          command: git pull origin main
+          command: cd /var/www/mijengo/staging/mijengo && git pull origin main
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
