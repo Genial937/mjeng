@@ -6,7 +6,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Deploying to Mijengo staging
-        uses: appleboy/ssh-action@main
+        uses: appleboy/ssh-action@master
         with: 
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
