@@ -14,7 +14,7 @@
 
 
 Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
-    Route::resource('login', 'LoginController')->names([
+    Route::resource('login', 'Auth\LoginController')->names([
         'index' => 'web.login',
         'autheticate' => 'web.login.post'
     ]);
