@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', '\App\Http\Controllers\Admin\AutheticationController@index')->middleware('log.route');
+//Route::get('/', '\App\Http\Controllers\Admin\AutheticationController@index')->middleware('log.route');
 Route::get('/dashboard', ['as' => 'dashboard', 'uses' => '\App\Http\Controllers\Admin\DashboardController@index'])->middleware('log.route');
 
 Route::group(['prefix' => 'roles','middleware' =>'log.route', ['ability_:admin,create-roles|view-roles|update-roles|delete-roles']], function () {

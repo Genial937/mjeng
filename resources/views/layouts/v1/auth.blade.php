@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
-    <title>{{env("APP_NAME")}} - PAGE NOT FOUND</title>
+    <title>{{env("APP_NAME")}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{url("assets/media/image/favicon.png")}}"/>
@@ -26,9 +26,9 @@
 <body class="form-membership" style="background: url({{asset("assets/media/image/image1.jpg")}})">
 
 <!-- begin::preloader-->
-<div class="preloader">
-    <div class="preloader-icon"></div>
-</div>
+{{--<div class="preloader">--}}
+{{--    <div class="preloader-icon"></div>--}}
+{{--</div>--}}
 <!-- end::preloader -->
 @yield('content')
 
