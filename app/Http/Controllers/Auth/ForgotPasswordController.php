@@ -27,11 +27,8 @@ class ForgotPasswordController extends Controller
      */
     public function index(Request $request)
     {
-        if(auth()->check()):
-            //check user
-            return redirect(route('dashboard'));
-        else:
+
             return view('auth.v1.passwords.email');
-        endif;
+
     }
 }

@@ -30,11 +30,9 @@ class LoginController extends Controller
      */
     public function index(Request $request)
     {
-        if (auth()->check()):
-            return redirect(route('dashboard'));
-        else:
+
             return view('auth.v1.login');
-        endif;
+
     }
 
     /**
@@ -53,7 +51,7 @@ class LoginController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function autheticate(Request $request)
+    public function authenticate(Request $request)
     {
         $request->validate([
             'email' => 'required',

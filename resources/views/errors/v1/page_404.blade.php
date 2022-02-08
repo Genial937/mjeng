@@ -23,7 +23,8 @@
 </head>
 <body class="error-page bg-white" style="background: url({{asset("assets/media/image/image1.jpg")}})">
 <div>
-    <h4 class="mb-0 font-weight-normal">Upps! Page not found!</h4>
+    <h4 class="mb-0 font-weight-normal">Oops! {{$error_type}}!</h4>
+    <p>{{$error_description}}</p>
     <div class="my-4">
         <span class="error-page-item font-weight-bold">4</span>
         <span class="error-page-item font-weight-bold">0</span>

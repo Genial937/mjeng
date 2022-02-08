@@ -13,10 +13,10 @@
 */
 
 
-Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
+Route::group(['prefix' => 'auth','middleware' => ['log.route','user.type']], function () {
     Route::resource('login', 'Auth\LoginController')->names([
         'index' => 'web.login',
-        'autheticate' => 'web.login.post'
+        'authenticate' => 'web.login.post'
     ]);
     Route::get('/forgot/password', [
         'as' => 'web.forgot.password',
@@ -29,5 +29,11 @@ Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
     Route::get('/logout', [
         'as' => 'web.logout',
         'uses' => '\App\Http\Controllers\Auth\LoginController@logout'
+    ]);
+});
+Route::group(['prefix' => 'error','middleware' => ['log.route']], function () {
+    Route::get('/page/{error_code}', [
+        'as' => 'web.error',
+        'uses' => '\App\Http\Controllers\ErrorsController@index'
     ]);
 });
