@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function passwordReset(Request $request)
+    public function index(Request $request)
     {
         if(auth()->check()):
             return redirect(route('dashboard'));
