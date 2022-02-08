@@ -17,8 +17,8 @@ class ErrorsController extends Controller
         $err_code=$request->route("error_code");
         if($err_code=="USER_404"):
         $error_type="USER NO FOUND";
-        $error_description="Unknown user/does not exist. Please contact support for assistance.";
-        return view('errors.v1.page_404',compact("error_type","error_description"));
+        $error_description="User unknown/does not exist. Please contact support for assistance.";
+          return view('errors.v1.page_404',compact("error_type","error_description"));
         endif;
     }
 

@@ -51,7 +51,7 @@ class LoginController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function autheticate(Request $request)
+    public function authenticate(Request $request)
     {
         $request->validate([
             'email' => 'required',
