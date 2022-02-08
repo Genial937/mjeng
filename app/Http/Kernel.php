@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\LogRoute;
+use App\Http\Middleware\UserType;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,6 +68,7 @@ class Kernel extends HttpKernel
         'permission'=>\Zizaco\Entrust\Middleware\EntrustPermission::class,
         'cors'=> \App\Http\Middleware\Cors::class,
         'ability_' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
-        'log.route' => LogRoute::class
+        'log.route' => LogRoute::class,
+        'user.type'=> UserType::class
     ];
 }
