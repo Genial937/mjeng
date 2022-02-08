@@ -26,14 +26,10 @@ class UserType
                 return redirect(route('contractor.dashboard'));
             else:
                 //unknown user
-                $error_type="USER NO FOUND";
-                $error_description="Unknown user type. Please contact support for assistance.";
-                return view('errors.v1.page_404',compact("error_type","error_description"));
+                return redirect(route('web.error',"USER_404"));
             endif;
         endif;
-        $error_type="USER NO FOUND";
-        $error_description="Unknown user type. Please contact support for assistance.";
-        return view('errors.v1.page_404',compact("error_type","error_description"));
+        return redirect(route('web.error',"USER_404"));
        // return $next($request);
     }
 }

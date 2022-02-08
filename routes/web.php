@@ -31,3 +31,9 @@ Route::group(['prefix' => 'auth','middleware' => ['log.route','user.type']], fun
         'uses' => '\App\Http\Controllers\Auth\LoginController@logout'
     ]);
 });
+Route::group(['prefix' => 'error','middleware' => ['log.route']], function () {
+    Route::get('/page/{error_code}', [
+        'as' => 'web.error',
+        'uses' => '\App\Http\Controllers\ErrorsController@index'
+    ]);
+});
