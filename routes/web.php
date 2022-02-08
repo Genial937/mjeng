@@ -14,9 +14,9 @@
 
 
 Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
-    Route::get('/', [
-        'as' => 'web.login',
-        'uses' => '\App\Http\Controllers\Auth\LoginController@index'
+    Route::resource('login', 'LoginController')->names([
+        'index' => 'web.login',
+        'autheticate' => 'web.login.post'
     ]);
     Route::get('/forgot/password', [
         'as' => 'web.forgot.password',
@@ -29,9 +29,5 @@ Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
     Route::get('/logout', [
         'as' => 'web.logout',
         'uses' => '\App\Http\Controllers\Auth\LoginController@logout'
-    ]);
-    Route::post('/', [
-        'as' => 'login',
-        'uses' => '\App\Http\Controllers\Admin\AutheticationController@login'
     ]);
 });
