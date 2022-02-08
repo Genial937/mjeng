@@ -1,6 +1,9 @@
 <?php
 
     namespace App\Http\Controllers\Admin;
+    use App\Permission;
+    use App\Role;
+    use App\User;
     use Illuminate\Contracts\View\Factory;
     use Illuminate\Database\QueryException;
     use Illuminate\Http\JsonResponse;
@@ -16,68 +19,10 @@
     {
 
         public function __construct() {
-            //$this->middleware('auth');
+            $this->middleware('auth');
         }
 
-        public function index(Request $request)
-        {
-            if(auth()->check()):
-                return redirect(route('dashboard'));
-             else:
-                return view('auth.v1.login');
-           endif;
-        }
-        public function passwordReset(Request $request)
-        {
-            if(auth()->check()):
-                return redirect(route('dashboard'));
-            else:
-                return view('auth.v1.passwords.reset');
-            endif;
-        }
-        public function login(Request $request)
-        {
-            $request->validate([
-                'email' => 'required',
-                'password' => 'required',
-            ]);
-            $user = User::whereEmail($request->email)->where("status",1)->where("user_type","SYSTEMS")->first();
-            if(empty($user)):
-                return response()->json([
-                    'success'=>false,
-                    'errors'=>["errors"=>["Sorry, Your are not authorised to access. Please contact support for any assistance."]]
-                ],JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-            endif;
-            try {
-                $credentials = $request->only('email', 'password');
-               // if ($token = JWTAuth::attempt($credentials)) :
-                if (auth('web')->attempt($credentials)):
-                    return response()->json([
-                        'success'=>true,
-                         "message"=>"Success",
-                        "intended"=>"dashboard",
-                    ],JsonResponse::HTTP_OK);
-                    else:
-                        return response()->json([
-                            'success' => false,
-                            'errors'=>["errors"=>["Invalid email or password."]]
-                        ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-                endif;
-            } catch (JWTException $e) {
-                // something went wrong
-                return response()->json([
-                    'success' => false,
-                    'error' => 'could not create token'
-                ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
-            }
-        }
-        public function logout(Request $request)
-        {
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect('/');
-        }
+
         //display
         public function roles(Request $request)
         {

@@ -16,15 +16,19 @@
 Route::group(['prefix' => 'auth','middleware' => 'log.route'], function () {
     Route::get('/', [
         'as' => 'web.login',
-        'uses' => '\App\Http\Controllers\Admin\AutheticationController@index'
+        'uses' => '\App\Http\Controllers\Auth\LoginController@index'
+    ]);
+    Route::get('/forgot/password', [
+        'as' => 'web.forgot.password',
+        'uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@index'
     ]);
     Route::get('/password/reset', [
         'as' => 'web.password.reset',
-        'uses' => '\App\Http\Controllers\Admin\AutheticationController@passwordReset'
+        'uses' => '\App\Http\Controllers\Auth\ResetPasswordController@index'
     ]);
     Route::get('/logout', [
-        'as' => 'logout',
-        'uses' => '\App\Http\Controllers\Admin\AutheticationController@logout'
+        'as' => 'web.logout',
+        'uses' => '\App\Http\Controllers\Auth\LoginController@logout'
     ]);
     Route::post('/', [
         'as' => 'login',

@@ -15,7 +15,7 @@
             </div>
             <button class="btn btn-primary btn-block btn-lg btn-uppercase">Send</button>
             <div class="form-group mt-3">
-                <p>I remember my password  <a href="{{route("web.login")}}" class="">Login</a></p>
+                <p>  <a href="{{route("web.login")}}">Back</a></p>
 
             </div>
         </form>
