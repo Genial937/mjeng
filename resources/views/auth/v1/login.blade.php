@@ -23,7 +23,7 @@
                         <label class="custom-control-label" for="customCheck1">Remember me</label>
                     </div>
 
-                    <a href="{{route("web.password.reset")}}">Reset password</a>
+                    <a href="{{route("web.forgot.password")}}">Reset password</a>
                 </div>
                 <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Let's go</button>
             </div>
