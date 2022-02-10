@@ -62,7 +62,7 @@
 
 <!-- Form wizard -->
 <script src="{{url("plugins/form-wizard/jquery.steps.min.js")}}"></script>
-<script src="{{url("assets/js/examples/form-wizard.js")}}"></script>
+<script src="{{url("assets/js/mijengo/form-wizard.js")}}"></script>
 <!-- App scripts -->
 <script src="url({{"assets/js/app.min.js"}}"></script>
 
