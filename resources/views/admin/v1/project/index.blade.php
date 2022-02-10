@@ -16,15 +16,12 @@
             <div class="content-body">
                 <!-- Content -->
                 <div class="content">
-                    <div class="page-header d-flex justify-content-between">
-                        <h2>Projects</h2>
-                        <a href="#" class="files-toggler">
-                            <i class="ti-menu"></i>
-                        </a>
-                    </div>
+
 
                     <div class="row">
-
+                        <div class="content-title mt-0">
+                            <h4>Projects</h4>
+                        </div>
                         <div class="col-xl-10 offset-1">
                             <div class="text-right">
                                 <a href="" class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>
