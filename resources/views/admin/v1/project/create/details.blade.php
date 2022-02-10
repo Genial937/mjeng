@@ -28,13 +28,13 @@
                                 </div>
                             </div>
                             <div class="m-15">
-                                <a href="#" class="btn btn-primary btn-uppercase btn-lg btn-link"><span><span>1. Details</span></span></a>
+                                <a href="#" class="btn btn-primary btn-uppercase btn-lg text-white ">1. Details</a>
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>2. Sites</span></span></a>
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>3. Equipment Required</span></span></a>
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>4. Material Required</span></span></a>
                             </div>
-                            <div class="m-15 card">
-                                <div class="m-15 card-body">
+                            <div class="m-15 ">
+                                <div class="">
                             <form class="needs-validation" novalidate>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
