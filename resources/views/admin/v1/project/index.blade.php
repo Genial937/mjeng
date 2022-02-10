@@ -24,7 +24,7 @@
                             <div class="content-title mt-0">
                                 <h4>Projects</h4>
                                 <div class="text-right">
-                                    <a href="{{route("admin.create")}}" class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>
+                                    <a href="{{route("admin.create.project.details")}}" class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>
                                 </div>
 
                             </div>
