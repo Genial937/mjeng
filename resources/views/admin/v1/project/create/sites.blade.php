@@ -20,7 +20,7 @@
 
                     <div class="row">
 
-                        <div class="col-xl-8 offset-2">
+                        <div class="col-xl-12">
                             <div class="content-title mt-0">
                                 <h4>Create Project</h4>
                             </div>
