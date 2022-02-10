@@ -53,7 +53,7 @@
                                 </ul>
                             </div>
                             <div class="table-responsive">
-                                <table id="table-files" class="table table-borderless table-hover">
+                                <table class="table table-borderless table-hover data-table">
                                     <thead>
                                     <tr>
                                         <th>

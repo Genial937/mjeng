@@ -47,8 +47,7 @@
     <script src="{{url("plugins/jstree/jstree.min.js")}}"></script>
     <!-- Javascript -->
     <script src="{{url("plugins/datepicker/daterangepicker.js")}}"></script>
-    <!-- Files page  -->
-    <script src="{{url("assets/js/mijengo/files.js")}}"></script>
+
     <!-- Prism -->
     <script src="{{url("plugins/prism/prism.js")}}"></script>
     <!-- Select two -->
@@ -63,7 +62,10 @@
 {{--</div>--}}
 <!-- end::preloader -->
 @yield('content')
-
+<!-- Files page  -->
+<script src="{{url("assets/js/mijengo/files.js")}}"></script>
+<!-- Files page  -->
+<script src="{{url("assets/js/mijengo/datatable.js")}}"></script>
 <!-- App scripts -->
 <script src="{{url("assets/js/app.min.js")}}"></script>
 </body>

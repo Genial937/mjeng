@@ -76,6 +76,7 @@
                                 <div class="col-md-4 border-left">
                                     <h4>Sites Added</h4>
                                     <div class="table-responsive">
+
                                         <table class="table" id="table-files">
                                             <thead class="thead-light">
                                             <tr>
@@ -89,8 +90,8 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Site A</td>
-                                                <td>Contruction of bridge along Mombasa-Syokimau Rd</td>
-                                                <td><span class="badge badge-primary">Excavating</span><span class="badge badge-primary">Transporting</span></td>
+                                                <td class="text-wrap">Contruction of bridge along Mombasa-Syokimau Rd</td>
+                                                <td class="text-wrap"><span class="badge badge-primary">Excavating</span><span class="badge badge-primary">Transporting</span></td>
                                             </tr>
                                             </tbody>
                                         </table>

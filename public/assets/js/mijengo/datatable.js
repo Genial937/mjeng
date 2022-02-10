@@ -1,13 +1,9 @@
 'use strict';
 $(document).ready(function () {
 
-    $('#example1').DataTable({
+    $('#data-table').DataTable({
         responsive: true
     });
 
-    $('#example2').DataTable({
-        "scrollY": "400px",
-        "scrollCollapse": true
-    });
 
 });
