@@ -26,14 +26,18 @@
                     <div class="row">
 
                         <div class="col-xl-12">
+                            <div>
+                                <a href="" class="btn btn-secondary btn-uppercase">Create a project</a>
+                            </div>
                             <div class="d-md-flex justify-content-between mb-4">
                                 <ul class="list-inline mb-3">
                                     <li class="list-inline-item mb-0">
                                         <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
-                                            Add
+                                            Export
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">New Project</a>
+                                            <a class="dropdown-item" href="#">CSV</a>
+                                            <a class="dropdown-item" href="#">PDF</a>
                                         </div>
                                     </li>
 
