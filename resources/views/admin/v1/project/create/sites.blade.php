@@ -75,8 +75,7 @@
                                 </div>
                                 <div class="col-md-4 border-left">
                                     <h4>Sites Added</h4>
-                                    <div class="table-responsive">
-
+                                    <div >
                                         <table class="table" id="data-table">
                                             <thead class="thead-light">
                                             <tr>
