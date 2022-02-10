@@ -23,9 +23,9 @@
 <body>
 
 <!-- begin::preloader-->
-<div class="preloader">
-    <div class="preloader-icon"></div>
-</div>
+{{--<div class="preloader">--}}
+{{--    <div class="preloader-icon"></div>--}}
+{{--</div>--}}
 <!-- end::preloader -->
 @yield('content')
 <!-- Plugin scripts -->
