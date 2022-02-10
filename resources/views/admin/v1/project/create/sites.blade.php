@@ -38,6 +38,7 @@
                             <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-4">
+                                    <h4>Project Sites</h4>
                                     <form class="needs-validation margin-10-p" novalidate>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
@@ -76,6 +77,7 @@
                                     </form>
                                 </div>
                                 <div class="col-md-4 border-left">
+                                    <h4>Project Sites</h4>
                                     <div class="accordion margin-10-p" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne">
