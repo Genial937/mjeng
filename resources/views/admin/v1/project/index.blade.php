@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="row">
-                     
-                        <div class="col-xl-9">
+
+                        <div class="col-xl-12">
                             <div class="content-title mt-0">
                                 <h4>All Projects</h4>
                             </div>
