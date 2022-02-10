@@ -23,7 +23,7 @@
          */
         public function index(Request $request)
         {
-            return view('dashboard');
+            return view('admin.v.dashboard');
         }
 
     }
