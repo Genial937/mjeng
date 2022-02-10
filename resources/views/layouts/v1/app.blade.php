@@ -61,7 +61,7 @@
 <!-- Select two -->
 <script src="{{url("plugins/select2/js/select2.min.js")}}"></script>
 <!-- App scripts -->
-<script src="url({{"assets/js/app.min.js"}}"></script>
+<script src="{{url("assets/js/app.min.js"}}"></script>
 
 </body>
 
