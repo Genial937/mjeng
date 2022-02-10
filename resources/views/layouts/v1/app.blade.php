@@ -30,6 +30,10 @@
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{url("plugins/select2/css/select2.min.css")}}" type="text/css">
+    <!-- Prism -->
+    <link rel="stylesheet" href="{{url("plugins/prism/prism.css")}}" type="text/css">
+    <!-- Form wizard -->
+    <link rel="stylesheet" href="{{url("plugins/form-wizard/jquery.steps.css")}}" type="text/css">
     <!-- App styles -->
     <link rel="stylesheet" href="{{url("assets/css/app.min.css")}}" type="text/css">
 
