@@ -25,7 +25,7 @@
 
                     <div class="row">
 
-                        <div class="col-xl-12">
+                        <div class="col-xl-8 col-md-offset-2">
                             <div>
                                 <a href="" class="btn btn-secondary btn-uppercase">Create a project</a>
                             </div>
