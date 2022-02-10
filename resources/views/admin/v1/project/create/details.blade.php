@@ -55,30 +55,33 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="validationCustom03">Project name</label>
-                                        <input type="text" class="form-control" id="validationCustom03"
-                                               placeholder="City" required>
+                                        <label for="project-name">Project name</label>
+                                        <input type="text" class="form-control" id="project-name"
+                                               placeholder="Project name e.g ABC Contruction" required>
                                         <div class="invalid-feedback">
-                                            Please provide a valid city.
+                                            Please provide a project name.
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="validationCustom04">State</label>
-                                        <input type="text" class="form-control" id="validationCustom04"
-                                               placeholder="State" required>
-                                        <div class="invalid-feedback">
-                                            Please provide a valid state.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label for="validationCustom05">Zip</label>
-                                        <input type="text" class="form-control" id="validationCustom05"
-                                               placeholder="Zip" required>
-                                        <div class="invalid-feedback">
-                                            Please provide a valid zip.
-                                        </div>
-                                    </div>
+
                                 </div>
+                                     <div class="form-row">
+                                     <div class="col-md-6 mb-3">
+                                         <label for="start-date">Start Date</label>
+                                         <input type="text" class="form-control" id="start-date"
+                                                placeholder="" required>
+                                         <div class="invalid-feedback">
+                                             Please provide a valid start date.
+                                         </div>
+                                     </div>
+                                     <div class="col-md-3 mb-3">
+                                         <label for="end-date">End Date</label>
+                                         <input type="text" class="form-control" id="end-date"
+                                                placeholder="" required>
+                                         <div class="invalid-feedback">
+                                             Please provide a valid end date.
+                                         </div>
+                                     </div>
+                                     </div>
                                 <div class="form-group">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck"
