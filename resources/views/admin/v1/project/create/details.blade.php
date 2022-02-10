@@ -27,7 +27,7 @@
                                     <a href="#" class="btn btn-primary btn-uppercase btn-link text-white">Back</a>
                                 </div>
                             </div>
-                            <div class="m-15 row ">
+                            <div class="m-15 row mb-5">
                                 <div class="col-md-12 text-center">
                                 <a href="#" class="btn btn-primary btn-uppercase btn-lg text-white ">1. Details</a>
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>2. Sites</span></span></a>
@@ -35,43 +35,27 @@
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>4. Material Required</span></span></a>
                             </div>
                             </div>
-                            <div class="m-15 row ">
+                            <div class="row">
                                 <div class="col-md-8 offset-2">
                             <form class="needs-validation" novalidate>
                                 <div class="form-row">
-                                    <div class="col-md-4 mb-3">
-                                        <label for="validationCustom01">First name</label>
-                                        <input type="text" class="form-control" id="validationCustom01"
-                                               placeholder="First name" value="Mark" required>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="validationCustom02">Last name</label>
-                                        <input type="text" class="form-control" id="validationCustom02"
-                                               placeholder="Last name" value="Otto" required>
-                                        <div class="valid-feedback">
-                                            Looks good!
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label for="validationCustomUsername">Username</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                            </div>
-                                            <input type="text" class="form-control" id="validationCustomUsername"
-                                                   placeholder="Username" aria-describedby="inputGroupPrepend" required>
-                                            <div class="invalid-feedback">
-                                                Please choose a username.
-                                            </div>
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="validationCustom01">Choose Contractor</label>
+                                        <select class="select2-example">
+                                            <option>Select</option>
+                                            <option value="France">France</option>
+                                            <option value="Brazil">Brazil</option>
+                                            <option value="Yemen">Yemen</option>
+                                            <option value="United States">United States</option>
+                                            <option value="China">China</option>
+                                            <option value="Argentina">Argentina</option>
+                                            <option value="Bulgaria">Bulgaria</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="validationCustom03">City</label>
+                                        <label for="validationCustom03">Project name</label>
                                         <input type="text" class="form-control" id="validationCustom03"
                                                placeholder="City" required>
                                         <div class="invalid-feedback">

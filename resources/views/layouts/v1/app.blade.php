@@ -58,7 +58,8 @@
 
 <!-- Prism -->
 <script src="{{url("plugins/prism/prism.js")}}"></script>
-
+<!-- Select two -->
+<script src="{{url("plugins/select2/js/select2.min.js")}}"></script>
 <!-- App scripts -->
 <script src="url({{"assets/js/app.min.js"}}"></script>
 
