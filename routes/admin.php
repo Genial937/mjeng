@@ -17,6 +17,6 @@ Route::group(['prefix' => '/','middleware' => ['log.route']], function () {
     ]);
     Route::resource('projects', 'Admin\ProjectController')->names([
         'index' => 'admin.project',
-        'createDetails' => 'admin.project.create.details.view'
+        'createDetails' => 'admin.project.details'
     ]);
 });
