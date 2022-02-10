@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <div class="m-15 row ">
-                                <div class="col-md-10 offset-1">
+                                <div class="col-md-12 text-center">
                                 <a href="#" class="btn btn-primary btn-uppercase btn-lg text-white ">1. Details</a>
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>2. Sites</span></span></a>
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>3. Equipment Required</span></span></a>
