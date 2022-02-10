@@ -40,6 +40,20 @@
     <!-- Plugin scripts -->
     <script src="{{url("plugins/bundle.js")}}"></script>
 
+    <!-- Datatable -->
+    <script src="{{url("plugins/dataTable/datatables.min.js")}}"></script>
+
+    <!-- Jstree -->
+    <script src="{{url("plugins/jstree/jstree.min.js")}}"></script>
+    <!-- Javascript -->
+    <script src="{{url("plugins/datepicker/daterangepicker.js")}}"></script>
+    <!-- Files page  -->
+    <script src="{{url("assets/js/mijengo/files.js")}}"></script>
+    <!-- Prism -->
+    <script src="{{url("plugins/prism/prism.js")}}"></script>
+    <!-- Select two -->
+    <script src="{{url("plugins/select2/js/select2.min.js")}}"></script>
+
 </head>
 <body>
 
@@ -50,20 +64,8 @@
 <!-- end::preloader -->
 @yield('content')
 
-<!-- Datatable -->
-<script src="{{url("plugins/dataTable/datatables.min.js")}}"></script>
-
-<!-- Jstree -->
-<script src="{{url("plugins/jstree/jstree.min.js")}}"></script>
-<!-- Files page  -->
-<script src="{{url("assets/js/mijengo/files.js")}}"></script>
-<!-- Prism -->
-<script src="{{url("plugins/prism/prism.js")}}"></script>
-<!-- Select two -->
-<script src="{{url("plugins/select2/js/select2.min.js")}}"></script>
 <!-- App scripts -->
 <script src="{{url("assets/js/app.min.js")}}"></script>
-
 </body>
 
 </html>

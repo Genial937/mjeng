@@ -70,7 +70,7 @@
                                      <div class="form-row">
                                      <div class="col-md-6 mb-3">
                                          <label for="start-date">Start Date</label>
-                                         <input type="text" class="form-control" id="start-date"
+                                         <input type="text" class="form-control date-picker" id="start-date"
                                                 placeholder="" required>
                                          <div class="invalid-feedback">
                                              Please provide a valid start date.
@@ -78,7 +78,7 @@
                                      </div>
                                      <div class="col-md-6 mb-3">
                                          <label for="end-date">End Date</label>
-                                         <input type="text" class="form-control" id="end-date"
+                                         <input type="text" class="form-control date-picker" id="end-date"
                                                 placeholder="" required>
                                          <div class="invalid-feedback">
                                              Please provide a valid end date.
@@ -97,13 +97,29 @@
                                      <div class="form-row">
                                          <div class="col-md-6 mb-3">
                                              <label for="start-date">County</label>
-                                             <input type="text" class="form-control" id="start-date"
-                                                    placeholder="" required>
+                                             <select class=" form-control form-select-2">
+                                                 <option>Select</option>
+                                                 <option value="France">France</option>
+                                                 <option value="Brazil">Brazil</option>
+                                                 <option value="Yemen">Yemen</option>
+                                                 <option value="United States">United States</option>
+                                                 <option value="China">China</option>
+                                                 <option value="Argentina">Argentina</option>
+                                                 <option value="Bulgaria">Bulgaria</option>
+                                             </select>
                                          </div>
-                                         <div class="col-md-3 mb-3">
-                                             <label for="end-date">Subcounty</label>
-                                             <input type="text" class="form-control" id="end-date"
-                                                    placeholder="" required>
+                                         <div class="col-md-6 mb-3">
+                                             <label for="end-date">Sub County</label>
+                                             <select class=" form-control form-select-2">
+                                                 <option>Select</option>
+                                                 <option value="France">France</option>
+                                                 <option value="Brazil">Brazil</option>
+                                                 <option value="Yemen">Yemen</option>
+                                                 <option value="United States">United States</option>
+                                                 <option value="China">China</option>
+                                                 <option value="Argentina">Argentina</option>
+                                                 <option value="Bulgaria">Bulgaria</option>
+                                             </select>
                                          </div>
                                      </div>
 
@@ -127,4 +143,5 @@
     </div>
     <!-- Files page  -->
     <script src="{{url("assets/js/mijengo/select2.js")}}"></script>
+    <script src="{{url("assets/js/mijengo/datepicker.js")}}"></script>
 @endsection
