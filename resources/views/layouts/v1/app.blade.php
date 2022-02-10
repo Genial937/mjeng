@@ -56,6 +56,13 @@
 <script src="{{url("plugins/jstree/jstree.min.js")}}"></script>
 <!-- Files page  -->
 <script src="{{url("assets/js/mijengo/files.js")}}"></script>
+
+<!-- Prism -->
+<script src="{{url("plugins/prism/prism.js")}}"></script>
+
+<!-- Form wizard -->
+<script src="{{url("plugins/form-wizard/jquery.steps.min.js")}}"></script>
+<script src="{{url("assets/js/examples/form-wizard.js")}}"></script>
 <!-- App scripts -->
 <script src="url({{"assets/js/app.min.js"}}"></script>
 
