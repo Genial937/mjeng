@@ -55,7 +55,6 @@
 <script src="{{url("plugins/jstree/jstree.min.js")}}"></script>
 <!-- Files page  -->
 <script src="{{url("assets/js/mijengo/files.js")}}"></script>
-
 <!-- Prism -->
 <script src="{{url("plugins/prism/prism.js")}}"></script>
 <!-- Select two -->

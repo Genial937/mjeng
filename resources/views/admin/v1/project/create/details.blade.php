@@ -109,4 +109,6 @@
         </div>
         <!-- ./ Content wrapper -->
     </div>
+    <!-- Files page  -->
+    <script src="{{url("assets/js/mijengo/select2.js")}}"></script>
 @endsection
