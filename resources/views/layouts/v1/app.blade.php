@@ -35,7 +35,8 @@
 
     <!-- App styles -->
     <link rel="stylesheet" href="{{url("assets/css/app.min.css")}}" type="text/css">
-
+    <!-- Plugin scripts -->
+    <script src="{{url("plugins/bundle.js")}}"></script>
 
 </head>
 <body>
@@ -46,8 +47,7 @@
 {{--</div>--}}
 <!-- end::preloader -->
 @yield('content')
-<!-- Plugin scripts -->
-<script src="{{url("plugins/bundle.js")}}"></script>
+
 <!-- Datatable -->
 <script src="{{url("plugins/dataTable/datatables.min.js")}}"></script>
 

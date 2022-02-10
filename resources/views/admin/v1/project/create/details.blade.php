@@ -41,7 +41,7 @@
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="validationCustom01">Choose Contractor</label>
-                                        <select class="select2-example">
+                                        <select class=" form-control form-select-2">
                                             <option>Select</option>
                                             <option value="France">France</option>
                                             <option value="Brazil">Brazil</option>
@@ -106,8 +106,6 @@
             <!-- ./ Footer -->
             </div>
             <!-- ./ Content body -->
-
-
         </div>
         <!-- ./ Content wrapper -->
     </div>

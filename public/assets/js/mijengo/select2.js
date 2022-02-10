@@ -1,7 +1,7 @@
 'use strict';
 $(document).ready(function () {
 
-    $('.js-example-basic-single').select2({
+    $('.form-select-2').select2({
         placeholder: 'Select'
     });
 
