@@ -75,7 +75,72 @@
                                                     Please provide a Loading  Capacity.
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="site-name">Number of Equipments Type Required</label>
+                                                <input type="text" class="form-control" id="site-name"
+                                                       placeholder="Site name e.g Mombasa-Syokimau Extension" required>
+                                                <div class="invalid-feedback">
+                                                    Please provide a Loading  Capacity.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="site-name">Duration the Equipments Type is Required</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="validationCustomUsername"
+                                                           placeholder="Username" aria-describedby="inputGroupPrepend"
+                                                           required="">
+                                                    <div class="invalid-feedback">
+                                                        Please choose a username.
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <select class="form-control">
+                                                            <option>DAYS</option>
+                                                        </select>
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="site-name">Payment Term</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" id="validationCustomUsername"
+                                                           placeholder="Username" aria-describedby="inputGroupPrepend"
+                                                           required="">
+                                                    <div class="invalid-feedback">
+                                                        Please choose a username.
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <select class="form-control">
+                                                            <option>DAYS</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="end-date">Fuel Provision</label>
+                                                <select class="form-select-2" >
+                                                    <option>Select</option>
+                                                    <option value="France">OWNER</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="end-date">CESS Provision</label>
+                                                <select class="form-select-2" >
+                                                    <option>Select</option>
+                                                    <option value="France">OWNER</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
