@@ -75,8 +75,8 @@
                                         <a hre="#" class="btn btn-primary text-white" >Next</a>
                                     </form>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="accordion" id="accordionExample">
+                                <div class="col-md-4 border-left">
+                                    <div class="accordion margin-10-p" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne">
                                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
