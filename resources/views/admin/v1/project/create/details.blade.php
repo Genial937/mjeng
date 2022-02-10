@@ -37,7 +37,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-8 offset-2">
-                            <form class="needs-validation" novalidate>
+                                 <form class="needs-validation margin-10-p" novalidate>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="validationCustom01">Choose Contractor</label>
