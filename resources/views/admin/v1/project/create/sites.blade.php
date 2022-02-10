@@ -29,13 +29,16 @@
                             </div>
                             @include("admin.v1.project.create.includes.form-steps")
                             <div class="row">
+                                <div class="col-md-8 offset-2">
+                                    <div class="content-title mt-0">
+                                        <h4>Site Details</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-4">
                                     <form class="needs-validation margin-10-p" novalidate>
-                                        <div class="content-title mt-0">
-                                            <h4>Site Details</h4>
-                                        </div>
-
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
                                                 <label for="site-name">Site name</label>
@@ -73,44 +76,41 @@
                                     </form>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="content-title mt-0">
-                                        <h4>Project Sites Created</h4>
-                                    </div>
                                     <div class="accordion" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne">
                                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                                                         aria-expanded="true" aria-controls="collapseOne">
-                                                    Collapsible Group Item #1
+                                                    Site A
                                                 </button>
                                             </div>
                                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                                  data-parent="#accordionExample">
-                                                <div class="card-body">...</div>
+                                                <div class="card-body">Description</div>
                                             </div>
                                         </div>
                                         <div class="card">
                                             <div class="card-header" id="headingTwo">
                                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                                         data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    Collapsible Group Item #2
+                                                   Site B
                                                 </button>
                                             </div>
                                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                                  data-parent="#accordionExample">
-                                                <div class="card-body">...</div>
+                                                <div class="card-body">Description</div>
                                             </div>
                                         </div>
                                         <div class="card">
                                             <div class="card-header" id="headingThree">
                                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                                         data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    Collapsible Group Item #3
+                                                   Site C
                                                 </button>
                                             </div>
                                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                                  data-parent="#accordionExample">
-                                                <div class="card-body">...</div>
+                                                <div class="card-body">Description</div>
                                             </div>
                                         </div>
                                     </div>

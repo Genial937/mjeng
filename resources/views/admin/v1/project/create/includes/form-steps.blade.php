@@ -1,4 +1,4 @@
-<div class="m-15 row mb-5">
+<div class=" row margin-10-p">
     <div class="col-md-12 text-center">
         <a href="{{route("admin.create.project.details")}}" class="btn btn-primary btn-uppercase btn-lg text-white ">1. Details</a>
         <a href="{{route("admin.create.project.sites")}}" class="btn btn-apple btn-uppercase btn-lg">2. Sites</a>
