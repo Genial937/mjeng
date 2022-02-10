@@ -30,9 +30,15 @@
 @yield('content')
 <!-- Plugin scripts -->
 <script src="{{url("plugins/bundle.js")}}"></script>
+<!-- Datatable -->
+<script src="{{url("plugins/dataTable/datatables.min.js")}}"></script>
 
+<!-- Jstree -->
+<script src="{{url("plugins/jstree/jstree.min.js")}}"></script>
+<!-- Files page  -->
+<script src="{{url("assets/js/mijengo/files.js")}}"></script>
 <!-- App scripts -->
-<script src="{{"assets/js/app.min.js"}}"></script>
+<script src="url({{"assets/js/app.min.js"}}"></script>
 
 </body>
 

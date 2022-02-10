@@ -13,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a  href="#">
+            <a  href="{{route("admin.project")}}">
                 <i class="nav-link-icon ti-folder"></i>
                 <span class="nav-link-label">Projects</span>
             </a>
