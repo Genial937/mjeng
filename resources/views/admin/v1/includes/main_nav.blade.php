@@ -1,6 +1,6 @@
 <div class="navigation">
     <div class="logo">
-        <a href="{{route("admin.dashboard")}">
+        <a href={{route("admin.dashboard")}>
             <img src="{{asset("assets/media/image/logo_light.png")}}" height="20" alt="logo">
         </a>
     </div>
