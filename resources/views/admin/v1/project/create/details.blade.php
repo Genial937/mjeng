@@ -94,7 +94,7 @@
                                      <div class="content-title mt-0">
                                          <h4>Project Location</h4>
                                      </div>
-                                     <div class="form-row">
+                                     <div class="form-row margin-10-p">
                                          <div class="col-md-6 mb-3">
                                              <label for="start-date">County</label>
                                              <select class=" form-control form-select-2">
