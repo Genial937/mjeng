@@ -27,7 +27,7 @@
 
                         <div class="col-xl-8 col-md-offset-2">
                             <div>
-                                <a href="" class="btn btn-secondary btn-uppercase">Create a project</a>
+                                <a href="" class="btn btn-secondary btn-uppercase btn-link text-white">Create a project</a>
                             </div>
                             <div class="d-md-flex justify-content-between mb-4">
                                 <ul class="list-inline mb-3">
