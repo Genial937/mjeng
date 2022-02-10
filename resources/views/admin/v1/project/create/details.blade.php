@@ -27,7 +27,12 @@
                                     <a href="#" class="btn btn-primary btn-uppercase btn-link text-white">Back</a>
                                 </div>
                             </div>
-                            <div><a href="#" class="btn btn-apple"><span><span>1 </span><span>Project Details</span></span></a></div>
+                            <div>
+                                <a href="#" class="btn btn-apple"><span><span>1. Details</span></span></a>
+                                <a href="#" class="btn btn-apple"><span><span>2. Sites</span></span></a>
+                                <a href="#" class="btn btn-apple"><span><span>3. Equipment Required</span></span></a>
+                                <a href="#" class="btn btn-apple"><span><span>4. Material Required</span></span></a>
+                            </div>
                             <form class="needs-validation" novalidate>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
