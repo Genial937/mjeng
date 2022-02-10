@@ -24,12 +24,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xl-3 files-sidebar">
-                            <div class="card border-0">
-                                <h6 class="card-title">My Projects</h6>
-                                <div id="files"></div>
-                            </div>
-                        </div>
+                     
                         <div class="col-xl-9">
                             <div class="content-title mt-0">
                                 <h4>All Projects</h4>
