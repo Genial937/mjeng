@@ -1,7 +1,7 @@
 @extends('layouts.v1.app')
 
 @section('content')
-   
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper">
         <!-- Header -->
