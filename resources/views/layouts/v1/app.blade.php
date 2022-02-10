@@ -30,6 +30,7 @@
 </div>
 <!-- end::preloader -->
 @yield('content')
+
 <!-- App scripts -->
 <script src="{{"assets/js/app.min.js"}}"></script>
 
