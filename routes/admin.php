@@ -31,4 +31,8 @@ Route::group(['prefix' => '/','middleware' => ['log.route']], function () {
         'as' => 'admin.create.project.equipment.required',
         'uses' => 'Admin\ProjectController@createEquipmentRequired'
     ]);
+    Route::get('/project/form/site/material/required', [
+        'as' => 'admin.create.project.material.required',
+        'uses' => 'Admin\ProjectController@createViewMaterialRequired'
+    ]);
 });

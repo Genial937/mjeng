@@ -45,6 +45,15 @@ class ProjectController extends Controller
         return view('admin.v1.project.create.equipments-required');
     }
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createViewMaterialRequired()
+    {
+        return view('admin.v1.project.create.materials-required');
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
