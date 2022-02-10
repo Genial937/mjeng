@@ -88,7 +88,7 @@
                                      <div class="form-row">
                                          <div class="col-md-12 mb-3">
                                              <label for="project-description">Description</label>
-                                             <textarea id="project-description"></textarea>
+                                             <textarea class="form-control" id="project-description"></textarea>
                                          </div>
                                      </div>
                                      <div class="content-title mt-0">
