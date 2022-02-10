@@ -8756,8 +8756,8 @@ body.colorful-navigation.small-navigation .content-footer {
 
 .header {
   z-index: 999;
-  position: fixed;
-  right: 300px;
+  position: absolute;
+  right: 0px;
   left: 110px;
   top: 0;
   background-color: white;
