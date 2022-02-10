@@ -22,9 +22,7 @@
 
                         <div class="col-xl-8 offset-2">
                             <div class="content-title mt-0">
-                                <div class="text-left">
-                                    <a href="#" class="btn btn-primary btn-uppercase btn-link text-white">Back</a>
-                                </div>
+
                                 <h4>Create Project</h4>
 
                             </div>
