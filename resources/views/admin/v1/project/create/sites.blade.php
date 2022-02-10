@@ -75,43 +75,58 @@
                                 </div>
                                 <div class="col-md-4 border-left">
                                     <h4>Sites Added</h4>
-                                    <div class="accordion accordion-primary margin-10-p" id="accordionExample">
-                                        <div class="card">
-                                            <div class="card-header" id="headingOne">
-                                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                                        aria-expanded="true" aria-controls="collapseOne">
-                                                    Site A
-                                                </button>
-                                            </div>
-                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                                 data-parent="#accordionExample">
-                                                <div class="card-body">Description</div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header" id="headingTwo">
-                                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                   Site B
-                                                </button>
-                                            </div>
-                                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                                 data-parent="#accordionExample">
-                                                <div class="card-body">Description</div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header" id="headingThree">
-                                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                   Site C
-                                                </button>
-                                            </div>
-                                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                                 data-parent="#accordionExample">
-                                                <div class="card-body">Description</div>
-                                            </div>
-                                        </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First</th>
+                                                <th scope="col">Last</th>
+                                                <th scope="col">Handle</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Site</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Task</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Site A</td>
+                                                <td>Desc......</td>
+                                                <td><span class="badge badge-primary">Excavating</span><span class="badge badge-primary">Transporting</span></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
