@@ -36,29 +36,17 @@
                                             Add
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">New Folder</a>
-                                            <a class="dropdown-item" href="#">New File</a>
+                                            <a class="dropdown-item" href="#">New Project</a>
                                         </div>
                                     </li>
-                                    <li class="list-inline-item mb-0">
-                                        <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
-                                            Tags
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Public</a>
-                                            <a class="dropdown-item" href="#">Project</a>
-                                            <a class="dropdown-item" href="#">Software</a>
-                                            <a class="dropdown-item" href="#">Social Media</a>
-                                            <a class="dropdown-item" href="#">Design</a>
-                                        </div>
-                                    </li>
+
                                     <li class="list-inline-item mb-0">
                                         <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
                                             Sort
                                         </a>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Ascending</a>
-                                            <a class="dropdown-item" href="#">Descending</a>
+                                            <a class="dropdown-item" href="#">Published</a>
+                                            <a class="dropdown-item" href="#">Draft</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -93,9 +81,9 @@
                                             </div>
                                         </th>
                                         <th>Name</th>
-                                        <th>Modified</th>
+                                        <th>End Date</th>
                                         <th>Label</th>
-                                        <th>Members</th>
+                                        <th>Contractor</th>
                                         <th></th>
                                     </tr>
                                     </thead>
