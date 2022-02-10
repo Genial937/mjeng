@@ -1,7 +1,7 @@
 @extends('layouts.v1.app')
 
 @section('content')
-    @include('layouts.v1.outer_sidebar')
+   
     <!-- Layout wrapper -->
     <div class="layout-wrapper">
         <!-- Header -->
