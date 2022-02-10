@@ -26,7 +26,15 @@ class ProjectController extends Controller
     {
         return view('admin.v1.project.create.details');
     }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createSites()
+    {
+        return view('admin.v1.project.create.sites');
+    }
     /**
      * Store a newly created resource in storage.
      *

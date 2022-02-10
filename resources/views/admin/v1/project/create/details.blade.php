@@ -27,14 +27,7 @@
                                     <a href="#" class="btn btn-primary btn-uppercase btn-link text-white">Back</a>
                                 </div>
                             </div>
-                            <div class="m-15 row mb-5">
-                                <div class="col-md-12 text-center">
-                                <a href="#" class="btn btn-primary btn-uppercase btn-lg text-white ">1. Details</a>
-                                <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>2. Sites</span></span></a>
-                                <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>3. Equipment Required</span></span></a>
-                                <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>4. Material Required</span></span></a>
-                            </div>
-                            </div>
+                            @include("admin.v1.project.create.includes.form-steps")
                             <div class="row">
                                 <div class="col-md-8 offset-2">
                                  <form class="needs-validation margin-10-p" novalidate>
