@@ -20,8 +20,7 @@
 
     <!-- Plugin scripts -->
     <script src="{{url("plugins/bundle.js")}}"></script>
-    <!-- App scripts -->
-    <script src="{{"assets/js/app.min.js"}}"></script>
+
 </head>
 <body>
 
@@ -31,7 +30,8 @@
 </div>
 <!-- end::preloader -->
 @yield('content')
-
+<!-- App scripts -->
+<script src="{{"assets/js/app.min.js"}}"></script>
 
 </body>
 
