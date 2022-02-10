@@ -32,8 +32,7 @@
     <link rel="stylesheet" href="{{url("plugins/select2/css/select2.min.css")}}" type="text/css">
     <!-- Prism -->
     <link rel="stylesheet" href="{{url("plugins/prism/prism.css")}}" type="text/css">
-    <!-- Form wizard -->
-    <link rel="stylesheet" href="{{url("plugins/form-wizard/jquery.steps.css")}}" type="text/css">
+
     <!-- App styles -->
     <link rel="stylesheet" href="{{url("assets/css/app.min.css")}}" type="text/css">
 
@@ -60,9 +59,6 @@
 <!-- Prism -->
 <script src="{{url("plugins/prism/prism.js")}}"></script>
 
-<!-- Form wizard -->
-<script src="{{url("plugins/form-wizard/jquery.steps.min.js")}}"></script>
-<script src="{{url("assets/js/mijengo/form-wizard.js")}}"></script>
 <!-- App scripts -->
 <script src="url({{"assets/js/app.min.js"}}"></script>
 
