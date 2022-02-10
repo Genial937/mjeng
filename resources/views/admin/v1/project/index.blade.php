@@ -52,7 +52,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="table-responsive">
+                            <div >
                                 <table class="table table-borderless table-hover data-table">
                                     <thead>
                                     <tr>
