@@ -77,7 +77,7 @@
                                     <h4>Sites Added</h4>
                                     <div class="table-responsive">
 
-                                        <table class="table" id="table-files">
+                                        <table class="table" id="data-table">
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">#</th>

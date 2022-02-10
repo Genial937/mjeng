@@ -52,8 +52,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div >
-                                <table class="table table-borderless table-hover data-table">
+                            <div class="table-responsive">
+                                <table id="table-files" class="table table-borderless table-hover">
                                     <thead>
                                     <tr>
                                         <th>

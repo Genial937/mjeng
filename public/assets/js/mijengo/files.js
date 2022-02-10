@@ -107,6 +107,7 @@ $(function () {
     });
 
     var table = $('#table-files').DataTable({
+        responsive: true,
         'columnDefs': [
             {
                 'targets': 0,
