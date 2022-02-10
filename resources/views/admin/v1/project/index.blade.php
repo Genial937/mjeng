@@ -24,7 +24,7 @@
                             <div class="content-title mt-0">
                                 <h4>Projects</h4>
                                 <div class="text-right">
-                                    <a href="" class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>
+                                    <a href="{{route("admin.project.create.details.view")}}" class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>
                                 </div>
 
                             </div>
@@ -51,25 +51,6 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <div id="file-actions" class="d-none">
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item mb-0">
-                                            <a href="#" class="btn btn-outline-light" data-toggle="tooltip" title="Move">
-                                                <i class="ti-arrow-top-right"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item mb-0">
-                                            <a href="#" class="btn btn-outline-light" data-toggle="tooltip" title="Download">
-                                                <i class="ti-download"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item mb-0">
-                                            <a href="#" class="btn btn-outline-danger" data-toggle="tooltip" title="Delete">
-                                                <i class="ti-trash"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                             <div class="table-responsive">
                                 <table id="table-files" class="table table-borderless table-hover">
