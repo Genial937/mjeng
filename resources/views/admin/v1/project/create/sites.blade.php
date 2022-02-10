@@ -29,7 +29,8 @@
                             </div>
                             @include("admin.v1.project.create.includes.form-steps")
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
                                     <form class="needs-validation margin-10-p" novalidate>
                                         <div class="content-title mt-0">
                                             <h4>Site Details</h4>
@@ -71,7 +72,10 @@
                                         <a hre="#" class="btn btn-primary text-white" >Next</a>
                                     </form>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="content-title mt-0">
+                                        <h4>Project Sites Created</h4>
+                                    </div>
                                     <div class="accordion" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne">
