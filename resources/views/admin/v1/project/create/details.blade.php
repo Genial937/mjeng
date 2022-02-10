@@ -33,8 +33,8 @@
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>3. Equipment Required</span></span></a>
                                 <a href="#" class="btn btn-apple btn-uppercase btn-lg"><span><span>4. Material Required</span></span></a>
                             </div>
-                            <div class="m-15 ">
-                                <div class="">
+                            <div class="m-15 row ">
+                                <div class="col-md-8 offset-2">
                             <form class="needs-validation" novalidate>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
