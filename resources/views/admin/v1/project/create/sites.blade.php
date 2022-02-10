@@ -89,7 +89,7 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Site A</td>
-                                                <td>Desc......</td>
+                                                <td>Contruction of bridge along Mombasa-Syokimau Rd</td>
                                                 <td><span class="badge badge-primary">Excavating</span><span class="badge badge-primary">Transporting</span></td>
                                             </tr>
                                             </tbody>
