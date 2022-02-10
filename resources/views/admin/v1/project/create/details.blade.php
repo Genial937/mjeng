@@ -22,10 +22,11 @@
 
                         <div class="col-xl-8 offset-2">
                             <div class="content-title mt-0">
-                                <h4>Create Project</h4>
-                                <div class="text-right">
+                                <div class="text-left">
                                     <a href="#" class="btn btn-primary btn-uppercase btn-link text-white">Back</a>
                                 </div>
+                                <h4>Create Project</h4>
+
                             </div>
                             @include("admin.v1.project.create.includes.form-steps")
                             <div class="row">

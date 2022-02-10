@@ -23,9 +23,6 @@
                         <div class="col-xl-8 offset-2">
                             <div class="content-title mt-0">
                                 <h4>Create Project</h4>
-                                <div class="text-right">
-                                    <a href="#" class="btn btn-primary btn-uppercase btn-link text-white">Back</a>
-                                </div>
                             </div>
                             @include("admin.v1.project.create.includes.form-steps")
                             <div class="row margin-5-p">
@@ -78,7 +75,7 @@
                                 </div>
                                 <div class="col-md-4 border-left">
                                     <h4>Sites Added</h4>
-                                    <div class="accordion margin-10-p" id="accordionExample">
+                                    <div class="accordion accordion-primary margin-10-p" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne">
                                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
