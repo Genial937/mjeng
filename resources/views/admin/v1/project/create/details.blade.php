@@ -76,7 +76,7 @@
                                              Please provide a valid start date.
                                          </div>
                                      </div>
-                                     <div class="col-md-3 mb-3">
+                                     <div class="col-md-6 mb-3">
                                          <label for="end-date">End Date</label>
                                          <input type="text" class="form-control" id="end-date"
                                                 placeholder="" required>
@@ -84,6 +84,12 @@
                                              Please provide a valid end date.
                                          </div>
                                      </div>
+                                     </div>
+                                     <div class="form-row">
+                                         <div class="col-md-12 mb-3">
+                                             <label for="project-description">Description</label>
+                                             <textarea id="project-description"></textarea>
+                                         </div>
                                      </div>
                                      <div class="content-title mt-0">
                                          <h4>Project Location</h4>
