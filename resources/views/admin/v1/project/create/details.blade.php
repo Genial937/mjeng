@@ -51,9 +51,15 @@
                                     </form>
                                 </section>
                                 <h3>Billing Information</h3>
+                                <section class="card card-body border mb-0">
+                                    <h5>Billing Information</h5>
 
+                                </section>
                                 <h3>Payment Details</h3>
-                              
+                                <section class="card card-body border mb-0">
+                                    <h5>Payment Details</h5>
+                                   
+                                </section>
                             </div>
 
                         </div>
