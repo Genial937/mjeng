@@ -27,13 +27,7 @@
                                     <a href="#" class="btn btn-primary btn-uppercase btn-link text-white">Back</a>
                                 </div>
                             </div>
-                            <div><a href="#" class="btn btn-apple">
-                                    <i class="fa fa-apple"></i>
-                                    <span>
-    <span>Download on the</span>
-    <span>App Store</span>
-  </span>
-                                </a></div>
+                            <div><a href="#" class="btn btn-apple">1<span><span>Project </span><span>Details</span></span></a></div>
                             <form class="needs-validation" novalidate>
                                 <div class="form-row">
                                     <div class="col-md-4 mb-3">
