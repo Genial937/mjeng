@@ -16,7 +16,7 @@ class UserType
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()):
+        if (Auth::guard($guard)->check()) :
             //check user user type
             $user=auth()->user();
             if($user->user_type=="ADMIN"):
