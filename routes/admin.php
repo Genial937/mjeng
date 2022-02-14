@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => '/','middleware' => ['log.route']], function () {
+Route::group(['prefix' => '/','middleware' => ['log.route','user.type']], function () {
     Route::resource('dashboard', 'Admin\DashboardController')->names([
         'index' => 'admin.dashboard'
     ]);
