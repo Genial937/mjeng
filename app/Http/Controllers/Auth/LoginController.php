@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-        $user = User::whereEmail($request->email)->where("status", 1)->where("user_type", "SYSTEMS")->first();
+        $user = User::whereEmail($request->email)->where("status", 1)->first();
         if (empty($user)):
             return response()->json([
                 'success' => false,
@@ -65,25 +66,23 @@ class LoginController extends Controller
         endif;
         try {
             $credentials = $request->only('email', 'password');
-            // if ($token = JWTAuth::attempt($credentials)) :
             if (auth('web')->attempt($credentials)):
                 return response()->json([
                     'success' => true,
                     "message" => "Success",
-                    "intended" => "dashboard",
                 ], JsonResponse::HTTP_OK);
             else:
                 return response()->json([
                     'success' => false,
-                    'errors' => ["errors" => ["Invalid email or password."]]
+                    'errors' => ["errors" => ["Invalid email or password. Please try again"]]
                 ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             endif;
-        } catch (JWTException $e) {
+        } catch (Exception $e) {
             // something went wrong
             return response()->json([
                 'success' => false,
-                'error' => 'could not create token'
-            ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
+                'error' => $e->getMessage(),
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
 }
