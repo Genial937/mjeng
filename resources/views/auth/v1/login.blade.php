@@ -4,7 +4,7 @@
     <div class="form-wrapper ">
         <!-- form -->
         <form>
-            <div class="username-password">
+            <div class="login-section">
                 <div class="text-left">
                     <h4>Login </h4>
                     <p>Enter your email or username and password</p>
@@ -27,7 +27,7 @@
                 </div>
                 <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Let's go</button>
             </div>
-            <div class="otp">
+            <div class="login-otp-section">
                 <div class="form-group text-left">
                     <h4>Two-factor authentication</h4>
                     <p>An Email with your verification code has been sent to your phone and email address.</p>
@@ -44,6 +44,6 @@
         <!-- ./ form -->
     </div>
     <script>
-        $(".otp").slideUp();
+        $(".login-otp-section").slideUp();
     </script>
 @endsection
