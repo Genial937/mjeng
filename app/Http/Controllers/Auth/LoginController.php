@@ -25,9 +25,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('user.type')->except('logout');
+        $this->middleware('guest');
     }
-    use AuthenticatesUsers;
 
     /**
      * @param Request $request
@@ -36,7 +35,7 @@ class LoginController extends Controller
     public function index(Request $request)
     {
 
-            return view('auth.login');
+            return view('auth.v1.login');
 
     }
     /**
