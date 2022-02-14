@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(document).on('submit', '#login-form', function (e) {
         e.preventDefault();
         $('.btn-login-submit').text('');
-        $('.btn-login-submit').append('<div class="circle"></div>');
+        $('.btn-login-submit').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);;
         var url = $('#login-form').attr('action');
         $.post(url, $("#login-form").serialize())
             .done(function (data) {
@@ -17,14 +17,14 @@ $(document).ready(function () {
                     } else {
                         toastr.success('Successfully completed');
                         setTimeout(function () {
-                            $('.btn-login-submit').text('Login');
+                            $('.btn-login-submit').text('Login').prop('disabled', false);
                             location.reload();
                         }, 1000);
                     }
                 }
             })
             .fail(function (data) {
-                $('.btn-login-submit').text('Try Again');
+                $('.btn-login-submit').text('Try Again').prop('disabled', false);
                 var errors = data.responseJSON;
 
                 $.each(errors.errors, function (key, value) {
