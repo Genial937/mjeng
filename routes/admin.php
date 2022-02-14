@@ -15,6 +15,8 @@ Route::get('/dashboard', [
     'as' => 'admin.dashboard',
     'uses' => 'Admin\ProjectController@index'
 ]);
+
+
 Route::group(['prefix' => '/','middleware' => ['log.route']], function () {
 
     Route::resource('projects', 'Admin\ProjectController')->names([
