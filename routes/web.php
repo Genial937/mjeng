@@ -11,10 +11,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [
-    'as' => 'web.login',
-    'uses' => 'Auth\LoginController@index'
-]);
 
 Auth::routes();
 Route::group(['prefix' => 'auth','middleware' => ['log.route']], function () {
@@ -35,6 +31,7 @@ Route::group(['prefix' => 'auth','middleware' => ['log.route']], function () {
         'uses' => '\App\Http\Controllers\Auth\LoginController@logout'
     ]);
 });
+
 Route::group(['prefix' => 'error','middleware' => ['log.route']], function () {
     Route::get('/page/{error_code}', [
         'as' => 'web.error',
