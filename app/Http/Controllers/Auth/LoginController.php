@@ -17,6 +17,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
  */
 class LoginController extends Controller
 {
+    use AuthenticatesUsers;
     /**
      * LoginController constructor.
      */
