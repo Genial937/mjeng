@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group text-left">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password"name="password" required >
+                    <input type="password" class="form-control" placeholder="Password" name="password" required >
                 </div>
                 <div class="form-group d-flex justify-content-between">
                     <div class="custom-control custom-checkbox">
@@ -32,7 +32,7 @@
                     <h4>Two-factor authentication</h4>
                     <p>An Email with your verification code has been sent to your phone and email address.</p>
                     <label>6-character code</label>
-                    <input type="text" class="form-control" placeholder="6-character code" required autofocus>
+                    <input type="text" class="form-control" placeholder="6-character code" name="otp" required >
                 </div>
                 <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Verify Code</button>
                 <div class="form-group ">
