@@ -19,15 +19,15 @@ class LoginController extends Controller
 {
 
 
-    use AuthenticatesUsers;
 
     /**
      * LoginController constructor.
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest')->except('logout');
     }
+    use AuthenticatesUsers;
 
     /**
      * @param Request $request

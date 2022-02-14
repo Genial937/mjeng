@@ -31,8 +31,6 @@ class RedirectIfAuthenticated
                 return redirect(route('web.error',"USER_404"));
             endif;
         endif;
-
-
         return $next($request);
     }
 }
