@@ -11,11 +11,11 @@
                 </div>
                 <div class="form-group text-left">
                     <label>Username or email</label>
-                    <input type="text" class="form-control" placeholder="Username or email"  name="email" required autofocus>
+                    <input type="text" class="form-control" placeholder="Username or email"  name="email" required >
                 </div>
                 <div class="form-group text-left">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password"name="password" required autofocus>
+                    <input type="password" class="form-control" placeholder="Password"name="password" required >
                 </div>
                 <div class="form-group d-flex justify-content-between">
                     <div class="custom-control custom-checkbox">
