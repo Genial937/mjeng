@@ -1,7 +1,7 @@
 <?php
 
-    namespace App\Http\Controllers;
 
+    use App\Http\Controllers\Controller;
     use Illuminate\Database\QueryException;
     use App\Permission;
     use App\Role;
