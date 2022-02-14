@@ -15,8 +15,7 @@ Route::get('/', [
     'as' => 'web.login',
     'uses' => 'Auth\LoginController@index'
 ]);
-Auth::routes(['register' => false]);
-Auth::routes(['login' => false]);
+
 Route::group(['prefix' => 'auth','middleware' => ['log.route','user.type']], function () {
     Route::resource('login', 'Auth\LoginController')->names([
         'index' => 'web.login',
