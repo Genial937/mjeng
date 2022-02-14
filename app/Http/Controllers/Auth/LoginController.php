@@ -36,7 +36,7 @@ class LoginController extends Controller
     public function index(Request $request)
     {
 
-            return view('auth.v1.login');
+            return view('auth.login');
 
     }
     /**
