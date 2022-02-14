@@ -46,4 +46,6 @@
     <script>
         $(".login-otp-section").slideUp();
     </script>
+    <!-- App scripts -->
+    <script src="{{"assets/js/mijengo/ajax/auth.js"}}"></script>
 @endsection
