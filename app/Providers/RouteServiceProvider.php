@@ -41,7 +41,6 @@ class RouteServiceProvider extends ServiceProvider
         //custom
         $this->mapAdminRoutes();
         $this->mapVendorRoutes();
-        $this->mapVendorRoutes();
     }
 
     /**
