@@ -4,6 +4,7 @@
     <div class="form-wrapper ">
         <!-- form -->
         <form id="login-form" action="{{route("web.login.post")}}">
+            @csrf
             <div class="login-section">
                 <div class="text-left">
                     <h4>Login </h4>

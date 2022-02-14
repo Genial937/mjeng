@@ -24,6 +24,15 @@
     <script src="{{url("assets/js/app.min.js")}}"></script>
     <!-- App scripts -->
     <script src="{{url("assets/js/mijengo/ajax/custom.js")}}"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        });
+    </script>
 </head>
 <body class="form-membership" style="background: url({{asset("assets/media/image/image1.jpg")}})">
 
