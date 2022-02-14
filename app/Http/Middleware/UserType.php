@@ -19,16 +19,12 @@ class UserType
         if (Auth::guard($guard)->check()) :
             //check user user type
             $user=auth()->user();
-            if($user->user_type=="ADMIN"):
+            if($user->user_type=="ADMIN")
                 return redirect(route('admin.dashboard'));
-            elseif($user->user_type=="BUSINESS"):
+            if($user->user_type=="BUSINESS")
                 return redirect(route('vendor.dashboard'));
-            elseif($user->user_type=="CONTRACTOR"):
+            if($user->user_type=="CONTRACTOR")
                 return redirect(route('contractor.dashboard'));
-            else:
-                //unknown user
-                return redirect(route('web.error',"USER_404"));
-            endif;
         endif;
 
         return $next($request);
