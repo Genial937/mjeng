@@ -18,10 +18,6 @@ Route::get('/', [
 
 Auth::routes();
 Route::group(['prefix' => 'auth','middleware' => ['log.route','user.type']], function () {
-    Route::resource('login', 'Auth\LoginController')->names([
-        'index' => 'web.login',
-        'authenticate' => 'web.login.post'
-    ]);
     Route::post('/login', [
         'as' => 'web.login.post',
         'uses' => 'Auth\LoginController@authenticate'

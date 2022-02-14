@@ -18,14 +18,12 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class LoginController extends Controller
 {
 
-
-
     /**
      * LoginController constructor.
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware(['auth','user.type'])->except('index');
     }
     use AuthenticatesUsers;
 
