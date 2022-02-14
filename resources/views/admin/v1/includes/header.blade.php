@@ -175,7 +175,7 @@
                                          class="rounded-circle" alt="image">
                                 </figure>
 
-                                <h5 class="mb-0">{{auth()->user()->firstname}} {{Auth()->user()->surname}}</h5>
+                                <h5 class="mb-0">{{Auth::user()->firstname}} {{Auth::user()->surname}}</h5>
                             </div>
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item" data-sidebar-target="#settings">Settings</a>
