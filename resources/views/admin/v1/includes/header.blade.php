@@ -174,11 +174,11 @@
                                     <img src="../../assets/media/image/user/man_avatar3.jpg"
                                          class="rounded-circle" alt="image">
                                 </figure>
-                                <h5 class="mb-0">Bony Gidden</h5>
+                                <h5 class="mb-0">{{Auth::user()->firstname}} {{Auth::user()->surname}}</h5>
                             </div>
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item" data-sidebar-target="#settings">Settings</a>
-                                <a href="http://bifor.laborasyon.com/login" class="list-group-item text-danger"
+                                <a href="{{route("web.logout")}}" class="list-group-item text-danger"
                                    data-sidebar-target="#settings">Sign Out!</a>
                             </div>
                             <div class="pb-0 p-4">
