@@ -21,6 +21,10 @@ Route::group(['prefix' => 'auth','middleware' => ['log.route','user.type']], fun
         'index' => 'web.login',
         'authenticate' => 'web.login.post'
     ]);
+    Route::post('/login', [
+        'as' => 'web.login.post',
+        'uses' => 'Auth\LoginController@authenticate'
+    ]);
     Route::get('/forgot/password', [
         'as' => 'web.forgot.password',
         'uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@index'
