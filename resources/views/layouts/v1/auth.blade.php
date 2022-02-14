@@ -21,9 +21,9 @@
     <!-- Plugin scripts -->
     <script src="{{url("plugins/bundle.js")}}"></script>
     <!-- App scripts -->
-    <script src="{{"assets/js/app.min.js"}}"></script>
+    <script src="{{url("assets/js/app.min.js")}}"></script>
     <!-- App scripts -->
-    <script src="{{"assets/js/mijengo/ajax/custom.js"}}"></script>
+    <script src="{{url("assets/js/mijengo/ajax/custom.js")}}"></script>
 </head>
 <body class="form-membership" style="background: url({{asset("assets/media/image/image1.jpg")}})">
 
