@@ -25,7 +25,7 @@
 
                     <a href="{{route("web.forgot.password")}}">Reset password</a>
                 </div>
-                <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Let's go</button>
+                <button class="btn btn-primary btn-block  btn-uppercase btn-rounded">Let's go</button>
             </div>
             <div class="login-otp-section">
                 <div class="form-group text-left">
