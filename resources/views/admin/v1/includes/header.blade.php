@@ -174,7 +174,7 @@
                                     <img src="../../assets/media/image/user/man_avatar3.jpg"
                                          class="rounded-circle" alt="image">
                                 </figure>
-                                {{dd(auth()->user())}}
+                                {{dd(auth('web')->user())}}
                                 <h5 class="mb-0">{{Auth()->user()->firstname}} {{Auth()->user()->surname}}</h5>
                             </div>
                             <div class="list-group list-group-flush">
