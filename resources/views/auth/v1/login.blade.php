@@ -3,7 +3,7 @@
 @section('content')
     <div class="form-wrapper ">
         <!-- form -->
-        <form>
+        <form id="login-form" action="{{route("web.login.post")}}">
             <div class="login-section">
                 <div class="text-left">
                     <h4>Login </h4>
@@ -25,7 +25,7 @@
 
                     <a href="{{route("web.forgot.password")}}">Reset password</a>
                 </div>
-                <button class="btn btn-primary btn-block  btn-uppercase btn-rounded">Let's go</button>
+                <button class="btn btn-primary btn-block  btn-uppercase btn-rounded btn-login-submit">Let's go</button>
             </div>
             <div class="login-otp-section">
                 <div class="form-group text-left">

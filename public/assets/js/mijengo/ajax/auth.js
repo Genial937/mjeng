@@ -4,15 +4,15 @@ $(document).ready(function () {
         e.preventDefault();
         $('.btn-login-submit').text('');
         $('.btn-login-submit').append('<div class="circle"></div>');
-        var url = $('#loginForm').attr('action');
-        $.post(url, $("#loginForm").serialize())
+        var url = $('#login-form').attr('action');
+        $.post(url, $("#login-form").serialize())
             .done(function (data) {
                 console.log(data)
                 if (data['success']) {
                     if (data['otp']) {
                         $(".login-section").slideUp();
                         $(".login-otp-section").slideDown();
-                        toastr.error(data['message']);
+                        toastr.success(data['message']);
                         $('.btn-login-submit').text('Verify Code');
                     } else {
                         toastr.success('Successfully completed');
@@ -22,20 +22,13 @@ $(document).ready(function () {
                         }, 1000);
                     }
                 }
-                ;
             })
             .fail(function (data) {
-                $('.btn-submit').text('Login');
+                $('.btn-login-submit').text('Try Again');
                 var errors = data.responseJSON;
+
                 $.each(errors.errors, function (key, value) {
-                    GrowlNotification.notify({
-                        title: '',
-                        description: value[0],
-                        type: 'warning',
-                        position: 'top-center',
-                        showProgress: true,
-                        closeTimeout: 30000
-                    });
+                    toastr.error(value[0]);
                 });
             })
     });
