@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class UserType
 {
@@ -13,9 +14,9 @@ class UserType
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        if(auth()->check()):
+        if (Auth::guard($guard)->check()):
             //check user user type
             $user=auth()->user();
             if($user->user_type=="ADMIN"):
