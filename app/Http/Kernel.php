@@ -69,6 +69,6 @@ class Kernel extends HttpKernel
         'cors'=> \App\Http\Middleware\Cors::class,
         'ability_' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
         'log.route' => LogRoute::class,
-        'user.type'=> UserType::class
+      
     ];
 }
