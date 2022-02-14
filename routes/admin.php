@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('dashboard', 'Admin\DashboardController')->names([
-    'index' => 'admin.dashboard'
+
+Route::get('/dashboard', [
+    'as' => 'admin.dashboard',
+    'uses' => 'Admin\DashboardController@index'
 ]);
 Route::group(['prefix' => '/','middleware' => ['log.route']], function () {
 
