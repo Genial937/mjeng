@@ -24,7 +24,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest');
     }
-
+    use AuthenticatesUsers;
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
