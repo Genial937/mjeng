@@ -11,11 +11,11 @@
                 </div>
                 <div class="form-group text-left">
                     <label>Username or email</label>
-                    <input type="text" class="form-control" placeholder="Username or email" required autofocus>
+                    <input type="text" class="form-control" placeholder="Username or email"  name="email" required autofocus>
                 </div>
                 <div class="form-group text-left">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password" required>
+                    <input type="password" class="form-control" placeholder="Password"name="password" required autofocus>
                 </div>
                 <div class="form-group d-flex justify-content-between">
                     <div class="custom-control custom-checkbox">
@@ -25,7 +25,7 @@
 
                     <a href="{{route("web.forgot.password")}}">Reset password</a>
                 </div>
-                <button class="btn btn-primary btn-block  btn-uppercase btn-rounded btn-login-submit">Let's go</button>
+                <button class="btn btn-primary btn-block  btn-uppercase btn-rounded btn-login-submit btn-lg">Let's go</button>
             </div>
             <div class="login-otp-section">
                 <div class="form-group text-left">
