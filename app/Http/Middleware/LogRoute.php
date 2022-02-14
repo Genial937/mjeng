@@ -34,7 +34,7 @@ class LogRoute
                    "user_id"=> Auth::id()??NULL,
                    "url"=>$request->getUri(),
                    "ip"=> $request->ip(),
-                   "agent"=>$request->header('user-agent')??"_SYSTEM_",
+                   "agent"=> $request->header('user-agent') !== null ?$request->header('user-agent'):"_SYSTEM_",
                    "method"=>$request->getMethod(),
                    "request_body"=>json_encode($request->all()),
                    'response' => "GET"
