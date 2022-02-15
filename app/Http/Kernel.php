@@ -4,7 +4,6 @@ namespace App\Http;
 
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\LogRoute;
-use App\Http\Middleware\UserType;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel

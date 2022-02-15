@@ -15,7 +15,7 @@
 
 Route::group(['prefix' => '/','middleware' => ['log.route']], function () {
 
-    Route::get('/dashboard', [
+    Route::get('/', [
         'as' => 'admin.dashboard',
         'uses' => 'Admin\DashboardController@index'
     ]);

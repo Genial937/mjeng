@@ -3,7 +3,7 @@
 @section('content')
     <div class="form-wrapper ">
         <!-- form -->
-        <form id="login-form" action="{{route("web.login.post")}}">
+        <form id="login-form" action="{{route("login.post")}}">
             @csrf
             <div class="login-section">
                 <div class="text-left">
@@ -24,7 +24,7 @@
                         <label class="custom-control-label" for="customCheck1">Remember me</label>
                     </div>
 
-                    <a href="{{route("web.forgot.password")}}">Reset password</a>
+                    <a href="{{route("password.email")}}">Reset password</a>
                 </div>
                 <button class="btn btn-primary btn-block  btn-uppercase btn-rounded btn-login-submit btn-lg">Let's go</button>
             </div>
@@ -38,8 +38,8 @@
                 <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Verify Code</button>
                 <div class="form-group ">
                     <p>Didn't receive an SMS/Email?</p>
-                    <button class="btn btn-primary btn-block btn-rounded btn-uppercase">Resend</button>
                 </div>
+                <button class="btn btn-primary btn-block btn-rounded btn-uppercase btn-lg ">Resend</button>
             </div>
         </form>
         <!-- ./ form -->

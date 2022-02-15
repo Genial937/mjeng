@@ -1,5 +1,13 @@
 'use strict';
 $(document).ready(function () {
+    toastr.options = {
+        timeOut: 3000,
+        progressBar: true,
+        showMethod: "slideDown",
+        hideMethod: "slideUp",
+        showDuration: 500,
+        hideDuration: 500
+    };
     $(document).on('submit', '#login-form', function (e) {
         e.preventDefault();
         $('.btn-login-submit').text('');
@@ -7,19 +15,18 @@ $(document).ready(function () {
         var url = $('#login-form').attr('action');
         $.post(url, $("#login-form").serialize())
             .done(function (data) {
-                console.log(data)
                 if (data['success']) {
                     if (data['otp']) {
-                        $(".login-section").slideUp();
-                        $(".login-otp-section").slideDown();
                         toastr.success(data['message']);
-                        $('.btn-login-submit').text('Verify Code');
-                    } else {
-                        toastr.success('Successfully completed');
                         setTimeout(function () {
                             $('.btn-login-submit').text('Login').prop('disabled', false);
                             location.reload();
                         }, 1000);
+                    } else {
+                        $(".login-section").slideUp();
+                        $(".login-otp-section").slideDown();
+                        toastr.success(data['message']);
+                        $('.btn-login-submit').text('Verify Code');
                     }
                 }
             })

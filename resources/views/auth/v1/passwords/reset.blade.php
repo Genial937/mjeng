@@ -22,7 +22,7 @@
             </div>
             <button class="btn btn-primary btn-block btn-lg btn-uppercase">Confirm</button>
             <div class="form-group mt-3">
-                <p>  <a href="{{route("web.forgot.password")}}">Back</a></p>
+                <p>  <a href="{{route("password.email")}}">Back</a></p>
             </div>
         </form>
         <!-- ./ form -->

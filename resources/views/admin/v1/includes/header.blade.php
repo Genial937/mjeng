@@ -179,8 +179,7 @@
                             </div>
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item" data-sidebar-target="#settings">Settings</a>
-                                <a href="{{route("web.logout")}}" class="list-group-item text-danger"
-                                   data-sidebar-target="#settings">Sign Out!</a>
+                                <a href="{{route("logout")}}" class="list-group-item text-danger">Sign Out!</a>
                             </div>
                             <div class="pb-0 p-4">
                                 <div class="mb-4">

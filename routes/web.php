@@ -12,27 +12,31 @@
 |
 */
 
-Auth::routes();
-Route::group(['prefix' => 'auth','middleware' => ['log.route']], function () {
+///Auth::routes();
+Route::get('/', [
+    'as' => 'login',
+    'uses' => 'Auth\LoginController@index'
+]);
+Route::group(['prefix' => '/auth','middleware' => ['log.route']], function () {
     Route::get('/', [
-        'as' => 'web.login',
-        'uses' => '\App\Http\Controllers\Auth\LoginController@index'
+        'as' => 'login',
+        'uses' => 'Auth\LoginController@index'
     ]);
     Route::post('/login', [
-        'as' => 'web.login.post',
+        'as' => 'login.post',
         'uses' => 'Auth\LoginController@authenticate'
     ]);
-    Route::get('/forgot/password', [
-        'as' => 'web.forgot.password',
+    Route::get('/password/email', [
+        'as' => 'password.email',
         'uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@index'
     ]);
     Route::get('/password/reset', [
-        'as' => 'web.password.reset',
+        'as' => 'password.reset',
         'uses' => '\App\Http\Controllers\Auth\ResetPasswordController@index'
     ]);
     Route::get('/logout', [
-        'as' => 'web.logout',
-        'uses' => '\App\Http\Controllers\Auth\LoginController@logout'
+        'as' => 'logout',
+        'uses' => 'Auth\LoginController@logout'
     ]);
 });
 
