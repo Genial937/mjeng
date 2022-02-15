@@ -11,13 +11,14 @@
 |
 */
 
-Route::get('/dashboard', [
-    'as' => 'admin.dashboard',
-    'uses' => 'Admin\DashboardController@index'
-]);
+
 
 Route::group(['prefix' => '/','middleware' => ['log.route']], function () {
 
+    Route::get('/dashboard', [
+        'as' => 'admin.dashboard',
+        'uses' => 'Admin\DashboardController@index'
+    ]);
     Route::resource('projects', 'Admin\ProjectController')->names([
         'index' => 'admin.project',
         'createDetails' => 'admin.create'
