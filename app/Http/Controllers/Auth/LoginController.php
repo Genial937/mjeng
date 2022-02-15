@@ -35,6 +35,16 @@ class LoginController extends Controller
     }
     /**
      * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+
+        return view('auth.login');
+
+    }
+    /**
+     * @param Request $request
      * @return JsonResponse
      */
     public function authenticate(Request $request)

@@ -14,6 +14,10 @@
 
 Auth::routes();
 Route::group(['prefix' => 'auth','middleware' => ['log.route']], function () {
+    Route::get('/', [
+        'as' => 'web.login',
+        'uses' => '\App\Http\Controllers\Auth\LoginController@index'
+    ]);
     Route::post('/login', [
         'as' => 'web.login.post',
         'uses' => 'Auth\LoginController@authenticate'
