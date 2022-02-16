@@ -23,7 +23,7 @@ class SendEmailController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:web', ['except' => []]);
+//        $this->middleware('auth:web', ['except' => []]);
     }
 
     public function otp(Request $request){
@@ -37,6 +37,7 @@ class SendEmailController extends Controller
             $data['from_name'] = env("APP_NAME");
             $data['subject'] = "One Time Password";
             $data['code'] =$request->otp;
+            $data['email'] =$request->email;
             $data['template']="emails.one_time_password";
             $status=Mail::to($request->email)->send(new SendEmail($data));
             if (Mail::failures()) {
