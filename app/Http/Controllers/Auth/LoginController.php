@@ -76,7 +76,7 @@ class LoginController extends Controller
                     //generate 6 digit otp and update user
                     $otp=$this->generateOTPCode();
                     User::where("id",$user->id)->update(["otp" => $otp]);
-                    $request->request->add(["otp" => $otp,'email'=>$user->email]);
+                    $request->request->add(["otp" => $otp]);
                     //send email otp
                     $sendMail=new SendEmailController();
                     $resp = $sendMail->otp($request);
