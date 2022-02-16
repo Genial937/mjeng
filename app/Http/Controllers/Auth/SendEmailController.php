@@ -33,6 +33,7 @@ class SendEmailController extends Controller
         ]);
 
         try {
+            Log::error(json_encode($request->all()));
             //load them setting
             $data['from_name'] = env("APP_NAME");
             $data['subject'] = "One Time Password";
