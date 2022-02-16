@@ -92,7 +92,7 @@ class LoginController extends Controller
                         return response()->json(
                             [
                                 'success' => false,
-                                'errors' => ['otp' => ["Something went wrong sending email verification code"]]
+                                'errors' => $result->errors
                             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
                     endif;
                 else:

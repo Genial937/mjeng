@@ -44,8 +44,7 @@ class SendEmailController extends Controller
                 Log::error(json_encode(Mail::failures()));
                 return response()->json([
                     "success" => false,
-                    "error" => "something went wrong",
-                    "exception" => Mail::failures()
+                    "errors" =>["err_sending_email"=>[Mail::failures()]]
                 ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             }
             return response()->json([
@@ -56,8 +55,7 @@ class SendEmailController extends Controller
         }catch(\Swift_TransportException $transportExp){
             return response()->json([
                 "success" => false,
-                "error" => "something went wrong",
-                "exception" => $transportExp->getMessage()
+                "errors" => ["err_sending_email"=>[$transportExp->getMessage()]]
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 

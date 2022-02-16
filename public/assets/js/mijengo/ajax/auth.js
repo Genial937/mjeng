@@ -5,8 +5,8 @@ $(document).ready(function () {
         progressBar: true,
         showMethod: "slideDown",
         hideMethod: "slideUp",
-        showDuration: 500,
-        hideDuration: 500
+        showDuration: 1500,
+        hideDuration: 1500
     };
     $(document).on('submit', '#login-form', function (e) {
         e.preventDefault();
