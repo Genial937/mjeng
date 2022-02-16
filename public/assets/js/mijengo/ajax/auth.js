@@ -17,16 +17,17 @@ $(document).ready(function () {
             .done(function (data) {
                 if (data['success']) {
                     if (data['otp']) {
+                        $(".login-section").slideUp();
+                        $(".login-otp-section").slideDown();
+                        toastr.success(data['message']);
+                        $('.btn-login-submit').text('Verify Code');
+                    } else {
                         toastr.success(data['message']);
                         setTimeout(function () {
                             $('.btn-login-submit').text('Login').prop('disabled', false);
                             location.reload();
                         }, 1000);
-                    } else {
-                        $(".login-section").slideUp();
-                        $(".login-otp-section").slideDown();
-                        toastr.success(data['message']);
-                        $('.btn-login-submit').text('Verify Code');
+
                     }
                 }
             })

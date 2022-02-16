@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Web\OneTimePasswordController;
 use App\User;
 use Exception;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -73,24 +73,28 @@ class LoginController extends Controller
             if (!isset($request->otp)):
                 //check if password is correct before sending
                 if (Hash::check($request->password, $user->password)):
-                    $request->request->add(["otp" => $user->phone]);
+                    //generate 6 digit otp and update user
+                    $otp=$this->generateOTPCode();
+                    User::where("id",$user->id)->update(["otp" => $otp]);
+                    $request->request->add(["otp" => $otp,'email'=>$user->email]);
                     //send email otp
-//                    $resp = $one_time_pass->sendEmail($request);
-//                    $result = $resp->getData();
-//                    if ($result->success):
+                    $sendMail=new SendEmailController();
+                    $resp = $sendMail->otp($request);
+                    $result = $resp->getData();
+                    if ($result->success):
                     return response()->json(
                         [
                             'success' => true,
                             'otp' => true,
                             'message' => 'Please check your phone/email inbox for verification code.'
                         ], JsonResponse::HTTP_CREATED);
-//                    else:
-//                        return response()->json(
-//                            [
-//                                'success' => false,
-//                                'errors' => ['otp' => ["Something went wrong sending email verification code"]]
-//                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-//                    endif;
+                    else:
+                        return response()->json(
+                            [
+                                'success' => false,
+                                'errors' => ['otp' => ["Something went wrong sending email verification code"]]
+                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                    endif;
                 else:
                     //invalid password
                     return response()->json([
@@ -125,11 +129,26 @@ class LoginController extends Controller
             // something went wrong
             return response()->json([
                 'success' => false,
-                'error' => $e->getMessage(),
+                'errors' => ["errors" => [$e->getMessage()]]
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
+    protected function generateOTPCode()
+    {
+        try {
+            for ($i = 100001; $i <= 999999; $i++):
+                $code = sprintf("%06s", $i);
+                $user = User::where('otp', $code)->first();
+                if (empty($user)):
+                    break 1;
+                endif;
+            endfor;
+            return $code;
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
 
+    }
     public function logout(Request $request)
     {
         Auth::logout();
