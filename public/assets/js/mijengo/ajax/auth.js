@@ -32,6 +32,7 @@ $(document).ready(function () {
                 }
             })
             .fail(function (data) {
+                console.error(data)
                 $('.btn-login-submit').text('Try Again').prop('disabled', false);
                 var errors = data.responseJSON;
 
