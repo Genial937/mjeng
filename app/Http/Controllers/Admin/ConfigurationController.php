@@ -1,8 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Configuration;
+use App\Business;
+use App\County;
+use App\Http\Controllers\Controller;
+use App\Project;
+use App\SubCounty;
+use App\User;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ConfigurationController extends Controller
@@ -10,11 +17,13 @@ class ConfigurationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
-        //
+        $counties=County::all();
+        $subcounties=SubCounty::all();
+        return view('admin.v1.config.index',compact("counties","subcounties"));
     }
 
     /**
@@ -35,7 +44,12 @@ class ConfigurationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "column"=>"required",
+            "value"=>"required",
+        ]);
+
+
     }
 
     /**

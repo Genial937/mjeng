@@ -1,8 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Business;
+use App\Configuration;
+use App\County;
+use App\Http\Controllers\Controller;
+use App\Project;
+use App\SubCounty;
 use App\Task;
+use App\User;
+use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -10,32 +20,46 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
-        //
+        $tasks=Task::all();
+        return view('admin.v1.config.tasks.index',compact("tasks"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "name"=>"required",
+            "description"=>"required"
+        ]);
+        try {
+            $task=Task::create($request->only('name','description'));
+            return response()->json([
+                'success' => true,
+                "task"=>$task,
+                'message' => 'Task added successfully',
+            ], JsonResponse::HTTP_OK);
+
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "users"=>[
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
     }
 
     /**

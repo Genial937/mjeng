@@ -11,8 +11,5 @@ class SubCounty extends Model
     {
         return $this->belongsTo(County::class);
     }
-    public function users()
-    {
-        return $this->hasMany(Users::class);
-    }
+
 }

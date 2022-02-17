@@ -16,8 +16,15 @@
             <div class="content-body">
                 <!-- Content -->
                 <div class="content">
+                    <div class="row">
+                        <div class="col-xl-10 offset-1">
+                            <div class="mb-4">
+                                <a href="{{route("admin.users")}}"
+                                   class="btn btn-outline-primary ">
+                                    <i class="ti-arrow-left"></i> Back</a>
+                            </div>
                     <div class="page-header">
-                        <h2>User Details</h2>
+                        <h2 class="text-capitalize">{{$user->firstname??""}} {{$user->surname??""}} Account Details</h2>
                     </div>
 
                     <div class="nav nav-pills mb-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -25,10 +32,11 @@
                            href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Account</a>
                         <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
                            role="tab" aria-controls="v-pills-profile" aria-selected="false">Businesses</a>
-                        <a class="nav-item nav-link" id="v-pills-messages-tab" data-toggle="pill"
-                           href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Security</a>
                         <a class="nav-item nav-link" id="v-pills-permissions-tab" data-toggle="pill"
                            href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Permission</a>
+                        <a class="nav-item nav-link" id="v-pills-messages-tab" data-toggle="pill"
+                           href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Security</a>
+
                     </div>
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -144,36 +152,38 @@
                                 <h4>Assign Access to Business/Organisation</h4>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <form action="{{route("admin.assign.user.business")}}">
+                                <div class="col-md-6 margin-10-b">
+                                    <form action="{{route("admin.assign.user.business")}}" id="update-user-businesses" >
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Supplier/Business/Vendor</label>
-                                                    <select id="business-id" name="business_id"
+                                                    <select id="business-id" name="businesses[]"
                                                             class="form-control form-select-2" multiple>
                                                         <option value="">Choose a Business/Organisation</option>
                                                           @if(!empty($businesses))
                                                               @foreach($businesses as $business)
-                                                                  <option value="{{$business->id}}">{{$business->name}}</option>
+                                                                  <option  @foreach($user->businesses as $business_) @if($business->id===$business_->id) selected  @endif   @endforeach  value="{{$business->id}}">{{$business->name}}</option>
                                                               @endforeach
                                                            @endif
                                                     </select>
+                                                    <input type="hidden" value="{{$user->id}}" name="user_id">
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary">Save Changes</button>
+                                        <button class="btn btn-primary  btn-uppercase btn-rounded btn-update-user-business ">Save Changes</button>
                                     </form>
                                 </div>
                                 <div class="col-md-4 border-left">
-                                    <p class="text-capitalize">Business/Organisation {{$user->firstname }} can access.</p>
+                                    <p class="text-capitalize">All Business/Organisation.</p>
                                     <div >
                                         <table class="table" id="data-table">
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Business/Organisation</th>
-                                                <th scope="col">Staff</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">Staffs</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -188,19 +198,8 @@
                                                         <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="{{$user->firstname}} {{$user->surname}}">
                                                             <img src="https://www.pngfind.com/pngs/m/381-3819326_default-avatar-svg-png-icon-free-download-avatar.png" class="rounded-circle" alt="image">
                                                         </figure>
-
                                                             @endforeach
                                                         @endif
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="dropdown">
-                                                        <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                            <i class="ti-more-alt"></i>
-                                                        </a>
-                                                        <div class="dropdown-menu dropdown-menu-right">
-                                                          <a href="#" class="dropdown-item">Delete</a>
-                                                        </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -282,6 +281,7 @@
                         </div>
                     </div>
                 </div>
+                    </div>
                 <!-- ./ Content -->
 
                 <!-- Footer -->

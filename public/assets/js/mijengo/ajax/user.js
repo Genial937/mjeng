@@ -51,6 +51,9 @@ $(document).ready(function () {
                 if (data['success']) {
                     $('.btn-update-user').text('Save Changes').prop('disabled', false);
                     toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
                 } else {
                     $('.btn-update-user').text('Save Changes').prop('disabled', false);
                     toastr.success(data['message']);
@@ -59,6 +62,32 @@ $(document).ready(function () {
             .fail(function (data) {
                 console.error(data)
                 $('.btn-update-user').text('Save Changes').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
+    $(document).on('submit', '#update-user-businesses', function (e) {
+        e.preventDefault();
+        $('.btn-update-user-business').text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url = $('#update-user-businesses').attr('action');
+        $.post(url, $("#update-user-businesses").serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    $('.btn-update-user-business').text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    $('.btn-update-user-business').text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                $('.btn-update-user-business').text('Save Changes').prop('disabled', false);
                 var errors = data.responseJSON;
                 $.each(errors.errors, function (key, value) {
                     toastr.error(value[0]);
@@ -112,4 +141,41 @@ const checkVendorAccType=function(){
 
     }
 
+}
+//detach user from the business/organisation
+const deleteUser=function(user_id,url){
+    //confirm to delete
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this record!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.post(url, {user_id})
+                    .done(function (data) {
+                        if (data['success']) {
+                            toastr.success(data['message']);
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            toastr.success(data['message']);
+                        }
+
+                    })
+                    .fail(function (data) {
+                        console.error(data)
+                        var errors = data.responseJSON;
+                        $.each(errors.errors, function (key, value) {
+                            toastr.error(value[0]);
+                        });
+                    })
+
+            } else {
+                toastr.info('Delete Cancelled!');
+            }
+        })
 }

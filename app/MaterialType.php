@@ -13,7 +13,6 @@ class MaterialType extends Model
     protected $fillable=[
         "name",
         "task_id",
-        "material_class_id",
         "parent_id",
         "description",
         "status"
@@ -35,11 +34,5 @@ class MaterialType extends Model
     {
         return $this->belongsTo(Task::class);
     }
-    /**
-     * @return BelongsTo
-     */
-    public function classification(): BelongsTo
-    {
-        return $this->belongsTo(MaterialClass::class);
-    }
+
 }

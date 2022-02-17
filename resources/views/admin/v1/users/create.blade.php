@@ -20,7 +20,7 @@
                         <div class="col-xl-10 offset-1">
                             <div class="mb-4">
                                 <a href="{{route("admin.users")}}"
-                                   class="btn btn-outline-secondary">
+                                   class="btn btn-outline-primary ">
                                     <i class="ti-arrow-left"></i> Back</a>
                             </div>
                             <div class="content-title mt-0">

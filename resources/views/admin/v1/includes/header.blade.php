@@ -99,18 +99,18 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link profile-nav-link dropdown-toggle" title="User menu"
                            data-toggle="dropdown">
-                            <span class="mr-2 d-sm-inline d-none">Bony Gidden</span>
+                            <span class="mr-2 d-sm-inline d-none text-capitalize">{{Auth::user()->firstname}} {{Auth::user()->surname}}</span>
                             <figure class="avatar avatar-sm">
-                                <img src="../../assets/media/image/user/man_avatar3.jpg"
+                                <img src="{{asset("assets/media/image/user/man_avatar3.jpg")}}"
                                      class="rounded-circle"
                                      alt="avatar">
                             </figure>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
                             <div class="text-center py-4"
-                                 data-background-image="../../assets/media/image/image1.jpg">
+                                 data-background-image="{{asset("assets/media/image/image1.jpg")}}">
                                 <figure class="avatar avatar-lg mb-3 border-0">
-                                    <img src="../../assets/media/image/user/man_avatar3.jpg"
+                                    <img src="{{asset("assets/media/image/user/man_avatar3.jpg")}}"
                                          class="rounded-circle" alt="image">
                                 </figure>
 

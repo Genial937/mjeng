@@ -20,7 +20,7 @@ class EquipmentModel extends Model
     /**
      * @return BelongsTo
      */
-    public function make(): BelongsTo
+    public function equipmentMake(): BelongsTo
     {
         return $this->belongsTo(EquipmentMake::class);
     }

@@ -14,4 +14,9 @@ class EquipmentMake extends Model
         "description",
         "status"
     ];
+
+    public function equipmentTypes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(EquipmentType::class);
+    }
 }

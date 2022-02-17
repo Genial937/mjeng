@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
+    <meta name="_token" content="{{ csrf_token() }}">
     <title>{{env("APP_NAME")}}</title>
 
     <!-- Favicon -->
@@ -27,34 +28,41 @@
 
     <!-- Datatable -->
     <link rel="stylesheet" href="{{url("plugins/dataTable/datatables.min.css")}}" type="text/css">
-
     <!-- Select2 -->
     <link rel="stylesheet" href="{{url("plugins/select2/css/select2.min.css")}}" type="text/css">
     <!-- Prism -->
     <link rel="stylesheet" href="{{url("plugins/prism/prism.css")}}" type="text/css">
-
     <!-- App styles -->
     <link rel="stylesheet" href="{{url("assets/css/app.min.css")}}" type="text/css">
+    <!-- Style -->
+    <link rel="stylesheet" href="{{url("plugins/tagsinput/bootstrap-tagsinput.css")}}" type="text/css">
     <!-- Custom css -->
     <link rel="stylesheet" href="{{url("assets/css/custom.css")}}" type="text/css">
     <!-- Plugin scripts -->
     <script src="{{url("plugins/bundle.js")}}"></script>
-
     <!-- Datatable -->
     <script src="{{url("plugins/dataTable/datatables.min.js")}}"></script>
-
     <!-- Jstree -->
     <script src="{{url("plugins/jstree/jstree.min.js")}}"></script>
     <!-- Javascript -->
     <script src="{{url("plugins/datepicker/daterangepicker.js")}}"></script>
-
     <!-- Prism -->
     <script src="{{url("plugins/prism/prism.js")}}"></script>
     <!-- Select two -->
     <script src="{{url("plugins/select2/js/select2.min.js")}}"></script>
-
+    <!-- Javascript -->
+    <script src="{{url("plugins/tagsinput/bootstrap-tagsinput.js")}}"></script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+                }
+            });
+        });
+    </script>
 </head>
-<body>
+<body class="dark">
 
 <!-- begin::preloader-->
 {{--<div class="preloader">--}}

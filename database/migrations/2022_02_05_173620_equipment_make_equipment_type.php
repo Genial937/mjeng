@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EquipmentTypeEquipmentMake extends Migration
+class EquipmentMakeEquipmentType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class EquipmentTypeEquipmentMake extends Migration
      */
     public function up()
     {
-        Schema::create('equipment_type_equipment_make', function (Blueprint $table) {
+        Schema::create('equipment_make_equipment_type', function (Blueprint $table) {
             $table->integer('equipment_type_id')->unsigned();
             $table->foreign('equipment_type_id')->references('id')->on('equipment_types')
                 ->onUpdate('cascade')->onDelete('cascade');

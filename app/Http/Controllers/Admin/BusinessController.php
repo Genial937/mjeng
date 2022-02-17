@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Business;
 use App\Http\Controllers\Controller;
 use App\Project;
+use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,13 +25,30 @@ class BusinessController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function assignUser(Request $request)
+    public function attachUser(Request $request)
     {
         $this->validate($request, [
-            "businesses"=>"",
+            "businesses"=>"nullable",
+            "user_id"=>"required",
         ]);
+        try{
+            //get user
+            $user=User::find($request->user_id);
+            //attach businesses id
+            $user->businesses()->sync($request->businesses);
+            return response()->json([
+            'success' => true,
+            'message' => 'Business assigned successfully.'
+        ], JsonResponse::HTTP_OK);
+        } catch (QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => ["exception" => [$e->getMessage()]],
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
     }
 
     /**

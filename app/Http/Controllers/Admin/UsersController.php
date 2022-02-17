@@ -36,7 +36,7 @@ use Illuminate\Http\Request;
         }
         public function showEditView(Request $request)
         {
-                $user=User::with("roles")->find($request->route("id"));
+                $user=User::with(["roles","businesses"])->find($request->route("id"));
                 $roles=Role::with(["users","permissions"])->get();
                 $businesses=Business::with("users")->where("status",1)->get();
                 return view('admin.v1.users.edit',compact("user",'roles','businesses'));
