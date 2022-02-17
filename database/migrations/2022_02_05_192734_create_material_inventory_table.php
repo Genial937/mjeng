@@ -16,8 +16,8 @@ class CreateMaterialInventoryTable extends Migration
         Schema::create('material_inventory', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reg_no')->unique();
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->integer('business_id')->unsigned();
+            $table->foreign('business_id')->references('id')->on('businesses')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('material_type_id')->unsigned();
             $table->foreign('material_type_id')->references('id')->on('material_types')

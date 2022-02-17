@@ -33,13 +33,15 @@
                     <h4>Two-factor authentication</h4>
                     <p>An Email with your verification code has been sent to your phone and email address.</p>
                     <label>6-character code</label>
-                    <input type="text" class="form-control" placeholder="6-character code" name="otp" >
+                    <input type="text" class="form-control" placeholder="6-character code" name="otp" id="login-verification" >
+
                 </div>
-                <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded">Verify Code</button>
-                <div class="form-group ">
+                <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded btn-verify-submit">Verify Code</button>
+                <div class="form-group mt-3">
                     <p>Didn't receive an SMS/Email?</p>
                 </div>
-                <button class="btn btn-primary btn-block btn-rounded btn-uppercase btn-lg ">Resend</button>
+
+                <a href="javascript:void(0)" onclick="resendOtp()" class="btn btn-primary btn-block btn-rounded btn-uppercase text-white btn-lg  btn-resend-submit">Resend</a>
             </div>
         </form>
         <!-- ./ form -->

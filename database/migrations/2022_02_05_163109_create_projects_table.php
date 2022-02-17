@@ -15,8 +15,8 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->integer('business_id')->unsigned();
+            $table->foreign('business_id')->references('id')->on('businesses')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();

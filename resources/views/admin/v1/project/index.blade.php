@@ -616,11 +616,8 @@
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
                                                         Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
+                                                    <a href="#" class="dropdown-item">View</a>
+                                                    <a href="#" class="dropdown-item">Update</a>
                                                     <a href="#" class="dropdown-item">Delete</a>
                                                 </div>
                                             </div>

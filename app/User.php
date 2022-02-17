@@ -18,7 +18,6 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        "customer_code",
         'firstname',
         'middlename',
         'surname',
@@ -44,22 +43,6 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Role::class);
     }
-    public function subcounty()
-    {
-        return $this->belongsTo(SubCounty::class,'sub_county_id','id')->with("county");
-    }
-    public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
-    public function withdrawals()
-    {
-        return $this->hasMany(Withdraw::class);
-    }
-    public function airtimes()
-    {
-        return $this->hasMany(Airtime::class);
-    }
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -68,5 +51,8 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function businesses() {
+        return $this->belongsToMany(Business::class);
     }
 }

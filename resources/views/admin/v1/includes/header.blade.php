@@ -12,12 +12,12 @@
                         <div class="header-search-form">
                             <form>
                                 <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button class="btn">
-                                            <i class="ti-search"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Search something...">
+{{--                                    <div class="input-group-prepend">--}}
+{{--                                        <button class="btn">--}}
+{{--                                            <i class="ti-search"></i>--}}
+{{--                                        </button>--}}
+{{--                                    </div>--}}
+{{--                                    <input type="text" class="form-control" placeholder="Search something...">--}}
                                     <div class="input-group-append">
                                         <button class="btn header-search-close-btn">
                                             <i data-feather="x"></i>
@@ -32,11 +32,11 @@
 
             <div class="header-body-right">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link mobile-header-search-btn" title="Search">
-                            <i class="ti-search"></i>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="#" class="nav-link mobile-header-search-btn" title="Search">--}}
+{{--                            <i class="ti-search"></i>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li class="nav-item">
                         <a href="#" class="nav-link" title="Dark">
                             <i class="fa fa-moon-o"></i>
@@ -53,71 +53,10 @@
                             </div>
                             <div class="dropdown-scroll">
                                 <ul class="list-group list-group-flush">
-                                    <li>
-                                        <a href="#"
-                                           class="list-group-item d-flex hide-show-toggler">
-                                            <div>
-                                                <figure class="avatar mr-3">
-                                                        <span
-                                                            class="avatar-title bg-secondary-bright text-secondary rounded-circle">
-                                                            <i class="ti-server"></i>
-                                                        </span>
-                                                </figure>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <p class="mb-0">
-                                                    Your storage space is running low!
-                                                    <i title="Mark as unread" data-toggle="tooltip"
-                                                       class="hide-show-toggler-item fa fa-check font-size-11 position-absolute right-0 top-0 mr-3 mt-3"></i>
-                                                </p>
-                                                <span class="text-muted small">4 sec ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                           class="list-group-item d-flex hide-show-toggler">
-                                            <div>
-                                                <figure class="avatar mr-3">
-                                                    <img src="../../assets/media/image/user/man_avatar4.jpg"
-                                                         class="rounded-circle" alt="avatar">
-                                                </figure>
-                                            </div>
-                                            <div>
-                                                <p class="mb-0">
-                                                    <span class="text-primary">Jonny Richie</span> uploaded new
-                                                    files
-                                                    <i title="Mark as read" data-toggle="tooltip"
-                                                       class="hide-show-toggler-item fa fa-circle-o font-size-11 position-absolute right-0 top-0 mr-3 mt-3"></i>
-                                                </p>
-                                                <span class="text-muted small">20 min ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="text-divider text-center small pb-2 px-3">
-                                        <span>Old notifications</span>
-                                    </li>
-                                    <li>
-                                        <a href="#"
-                                           class="list-group-item d-flex hide-show-toggler">
-                                            <div>
-                                                <figure class="avatar mr-3">
-                                                        <span
-                                                            class="avatar-title bg-info-bright text-info rounded-circle">
-                                                            <i class="fa fa-cloud-upload"></i>
-                                                        </span>
-                                                </figure>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <p class="mb-0">
-                                                    Upgrade plan
-                                                    <i title="Mark as unread" data-toggle="tooltip"
-                                                       class="hide-show-toggler-item fa fa-check font-size-11 position-absolute right-0 top-0 mr-3 mt-3"></i>
-                                                </p>
-                                                <span class="text-muted small">45 sec ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
+
+
+
+
                                     <li>
                                         <a href="#"
                                            class="list-group-item d-flex hide-show-toggler">

@@ -78,23 +78,23 @@ class LoginController extends Controller
                     User::where("id",$user->id)->update(["otp" => $otp]);
                     $request->request->add(["otp" => $otp]);
                     //send email otp
-                    $sendMail=new SendEmailController();
-                    $resp = $sendMail->otp($request);
-                    $result = $resp->getData();
-                    if ($result->success):
+//                    $sendMail=new SendEmailController();
+//                    $resp = $sendMail->otp($request);
+//                    $result = $resp->getData();
+//                    if ($result->success):
                     return response()->json(
                         [
                             'success' => true,
                             'otp' => true,
                             'message' => 'Please check your phone/email inbox for verification code.'
                         ], JsonResponse::HTTP_CREATED);
-                    else:
-                        return response()->json(
-                            [
-                                'success' => false,
-                                'errors' => $result->errors
-                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-                    endif;
+//                    else:
+//                        return response()->json(
+//                            [
+//                                'success' => false,
+//                                'errors' => $result->errors
+//                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+//                    endif;
                 else:
                     //invalid password
                     return response()->json([
@@ -137,7 +137,7 @@ class LoginController extends Controller
     {
         try {
             for ($i = 100001; $i <= 999999; $i++):
-                $code = sprintf("%06s", $i);
+                $code = sprintf("%06d", mt_rand(1, 999999));
                 $user = User::where('otp', $code)->first();
                 if (empty($user)):
                     break 1;

@@ -26,7 +26,7 @@
             </a>
         </li>
         <li>
-            <a  href="users.html">
+            <a  href="{{route("admin.users")}}">
                 <i class="nav-link-icon ti-user"></i>
                 <span class="nav-link-label">Users</span>
             </a>

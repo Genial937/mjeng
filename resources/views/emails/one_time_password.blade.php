@@ -385,7 +385,7 @@
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">
                                                                     It looks like you tried to sign in from a different location, device, or browser:<br>
                                                                     Date: {{date("Y-m-d H:i:s")}}<br>
-                                                                    Account:
+                                                                    Account: {{$data['email']}}<br>
 
                                                                     IP Address: {{$_SERVER['REMOTE_ADDR']}}<br>
                                                                     Operating system: {{php_uname('s')}}<br>

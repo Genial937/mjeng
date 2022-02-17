@@ -36,7 +36,7 @@
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="validationCustom01">Choose Contractor</label>
-                                        <select class=" form-control form-select-2">
+                                        <select class=" form-control form-select-2" name="contractor_id">
                                             <option>Select</option>
                                             <option value="France">France</option>
                                             <option value="Brazil">Brazil</option>
@@ -86,7 +86,7 @@
                                      <div class="content-title mt-0">
                                          <h4>Project Location</h4>
                                      </div>
-                                     <div class="form-row margin-10-p">
+                                     <div class="form-row margin-5-p">
                                          <div class="col-md-6 mb-3">
                                              <label for="start-date">County</label>
                                              <select class=" form-control form-select-2">
@@ -114,8 +114,9 @@
                                              </select>
                                          </div>
                                      </div>
-
-                                <button class="btn btn-primary" type="submit">Save & Continue</button>
+                                     <div class="form-row margin-5-p">
+                                <button class="btn btn-primary  btn-uppercase btn-rounded" type="submit">Save & Continue</button>
+                                     </div>
                             </form>
                                 </div>
                             </div>
