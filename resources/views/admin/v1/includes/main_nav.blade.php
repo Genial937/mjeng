@@ -33,7 +33,7 @@
             </a>
         </li>
         <li>
-            <a class="{{Request::is('admin/config/counties') ? 'active' : ''||Request::is('admin/config/subcounties') ? 'active' : ''}}" href="{{route("admin.counties")}}">
+            <a class="{{Request::is('admin/config/*') ? 'active' : ''}}" href="{{route("admin.counties")}}">
                 <i class="nav-link-icon ti-settings"></i>
                 <span class="nav-link-label">Config</span>
             </a>
