@@ -37,14 +37,12 @@
                                     <div class="col-md-6 mb-3">
                                         <label for="validationCustom01">Choose Contractor</label>
                                         <select class=" form-control form-select-2" name="contractor_id">
-                                            <option>Select</option>
-                                            <option value="France">France</option>
-                                            <option value="Brazil">Brazil</option>
-                                            <option value="Yemen">Yemen</option>
-                                            <option value="United States">United States</option>
-                                            <option value="China">China</option>
-                                            <option value="Argentina">Argentina</option>
-                                            <option value="Bulgaria">Bulgaria</option>
+                                            <option>Select a Contractor</option>
+                                            @if(!empty($contractors))
+                                                @foreach($contractors as $contractor)
+                                                    <option class="text-capitalize"  value="{{$contractor->id}}">{{$contractor->firstname}} {{$contractor->surname}}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
@@ -91,13 +89,11 @@
                                              <label for="start-date">County</label>
                                              <select class=" form-control form-select-2">
                                                  <option>Select</option>
-                                                 <option value="France">France</option>
-                                                 <option value="Brazil">Brazil</option>
-                                                 <option value="Yemen">Yemen</option>
-                                                 <option value="United States">United States</option>
-                                                 <option value="China">China</option>
-                                                 <option value="Argentina">Argentina</option>
-                                                 <option value="Bulgaria">Bulgaria</option>
+                                                 @if(!empty($counties))
+                                                     @foreach($counties as $county)
+                                                         <option  value="{{$county->id}}">{{$county->name}}</option>
+                                                     @endforeach
+                                                 @endif
                                              </select>
                                          </div>
                                          <div class="col-md-6 mb-3">

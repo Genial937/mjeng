@@ -4807,8 +4807,8 @@ a.btn:focus {
 .btn.btn-primary,
 a.btn[href="#next"],
 a.btn[href="#previous"] {
-  background: #ff5252;
-  border-color: #ff5252;
+  background: #fab915;
+  border-color: #fab915;
   cursor: pointer;
 }
 
@@ -4825,8 +4825,8 @@ a.btn[href="#previous"]:not(:disabled):not(.disabled):active,
 a.btn[href="#next"]:not(:disabled):not(.disabled).active,
 a.btn[href="#previous"]:not(:disabled):not(.disabled).active {
   cursor: pointer;
-  background: #ff1f1f;
-  border-color: #ff1f1f;
+  background: #fab915;
+  border-color: #fab915;
 }
 
 .btn.btn-primary:not(:disabled):not(.disabled):focus,
@@ -8207,7 +8207,7 @@ button.toast-close-button {
   left: 0;
   bottom: 0;
   top: 0;
-  background-color: #ff5252;
+  background-color: #fab915;
 }
 
 .navigation .logo {

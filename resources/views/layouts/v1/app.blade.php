@@ -52,6 +52,8 @@
     <script src="{{url("plugins/select2/js/select2.min.js")}}"></script>
     <!-- Javascript -->
     <script src="{{url("plugins/tagsinput/bootstrap-tagsinput.js")}}"></script>
+    <!-- Javascript -->
+    <script src="{{url("plugins/input-mask/jquery.mask.js")}}"></script>
     <script>
         $(function() {
             $.ajaxSetup({
@@ -60,9 +62,10 @@
                 }
             });
         });
+
     </script>
 </head>
-<body class="dark">
+<body class="">
 
 <!-- begin::preloader-->
 {{--<div class="preloader">--}}
@@ -70,6 +73,9 @@
 {{--</div>--}}
 <!-- end::preloader -->
 @yield('content')
+<script >
+    $('[data-input-mask="phone"]').mask('(000) 000-000-000');
+</script>
 <!-- Files page  -->
 <script src="{{url("assets/js/mijengo/files.js")}}"></script>
 <!-- Files page  -->

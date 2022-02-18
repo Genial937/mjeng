@@ -23,24 +23,18 @@
                                    class="btn btn-outline-primary ">
                                     <i class="ti-arrow-left"></i> Back</a>
                             </div>
-                    <div class="page-header">
-                        <h2 class="text-capitalize">{{$user->firstname??""}} {{$user->surname??""}} Account Details</h2>
-                    </div>
+
 
                     <div class="nav nav-pills mb-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-item nav-link active" id="v-pills-home-tab" data-toggle="pill"
-                           href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Account</a>
-                        <a class="nav-item nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile"
-                           role="tab" aria-controls="v-pills-profile" aria-selected="false">Businesses</a>
-                        <a class="nav-item nav-link" id="v-pills-permissions-tab" data-toggle="pill"
-                           href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Permission</a>
+                        <a class="nav-item nav-link active" id="v-pills-acc-tab" data-toggle="pill"
+                           href="#v-pills-acc" role="tab" aria-controls="v-pills-home" aria-selected="true">Account Details</a>
                         <a class="nav-item nav-link" id="v-pills-messages-tab" data-toggle="pill"
-                           href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Security</a>
+                           href="#v-pills-security" role="tab" aria-controls="v-pills-security" aria-selected="false">Security</a>
 
                     </div>
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                             aria-labelledby="v-pills-home-tab">
+                        <div class="tab-pane fade show active" id="v-pills-acc" role="tabpanel"
+                             aria-labelledby="v-pills-acc-tab">
                             <div class="content-title">
                                 <h4>Account</h4>
                             </div>
@@ -98,10 +92,11 @@
                                                     <input type="tel" name="phone" id="phone"
                                                            minlength="9"
                                                            maxlength="10"
+                                                           data-input-mask="phone"
                                                            required
                                                            value="{{$user->phone??""}}"
                                                            class="form-control border-input"
-                                                           placeholder="e.g 0722 XXX XXX">
+                                                           placeholder="e.g (254) 722 222 222">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -146,7 +141,58 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                        <div class="tab-pane fade" id="v-pills-security" role="tabpanel"
+                             aria-labelledby="v-pills-messages-tab">
+                            <div class="content-title">
+                                <h4>Change Password</h4>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form id="change-password-form" action="{{route("admin.change.user.password")}}">
+                                        <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label> Strong New Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" name="password"
+                                                           {{--                                                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"--}}
+                                                           title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
+                                                           class="form-control border-input"
+                                                           required
+                                                           placeholder="password">
+                                                    <div class="input-group-append toggle-password">
+                                                        <span class="input-group-text mdi ti-eye"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Confirm New Password</label>
+                                                <div class="input-group">
+                                                    <input type="password" name="password_confirmation"
+                                                           {{--                                                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"--}}
+                                                           title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
+                                                           class="form-control border-input"
+                                                           required
+                                                           placeholder="confirm password">
+                                                    <div class="input-group-append toggle-password">
+                                                        <span class="input-group-text mdi ti-eye"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <button class="btn btn-primary btn-change-password">Save Changes</button>
+                                        <input type="hidden" value="{{$user->id}}" name="id">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="v-pills-business" role="tabpanel"
                              aria-labelledby="v-pills-profile-tab">
                             <div class="content-title">
                                 <h4>Assign Access to Business/Organisation</h4>
@@ -162,11 +208,11 @@
                                                     <select id="business-id" name="businesses[]"
                                                             class="form-control form-select-2" multiple>
                                                         <option value="">Choose a Business/Organisation</option>
-                                                          @if(!empty($businesses))
-                                                              @foreach($businesses as $business)
-                                                                  <option  @foreach($user->businesses as $business_) @if($business->id===$business_->id) selected  @endif   @endforeach  value="{{$business->id}}">{{$business->name}}</option>
-                                                              @endforeach
-                                                           @endif
+                                                        @if(!empty($businesses))
+                                                            @foreach($businesses as $business)
+                                                                <option  @foreach($user->businesses as $business_) @if($business->id===$business_->id) selected  @endif   @endforeach  value="{{$business->id}}">{{$business->name}}</option>
+                                                            @endforeach
+                                                        @endif
                                                     </select>
                                                     <input type="hidden" value="{{$user->id}}" name="user_id">
                                                 </div>
@@ -189,93 +235,25 @@
                                             <tbody>
                                             @if(!empty($businesses))
                                                 @foreach($businesses as $business)
-                                            <tr>
-                                                 <td>{{$business->name}}</td>
-                                                <td>
-                                                    <div class="avatar-group">
-                                                        @if(!empty($business->users))
-                                                            @foreach($business->users as $user)
-                                                        <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="{{$user->firstname}} {{$user->surname}}">
-                                                            <img src="https://www.pngfind.com/pngs/m/381-3819326_default-avatar-svg-png-icon-free-download-avatar.png" class="rounded-circle" alt="image">
-                                                        </figure>
-                                                            @endforeach
-                                                        @endif
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    <tr>
+                                                        <td>{{$business->name}}</td>
+                                                        <td>
+                                                            <div class="avatar-group">
+                                                                @if(!empty($business->users))
+                                                                    @foreach($business->users as $user)
+                                                                        <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="{{$user->firstname}} {{$user->surname}}">
+                                                                            <img src="https://www.pngfind.com/pngs/m/381-3819326_default-avatar-svg-png-icon-free-download-avatar.png" class="rounded-circle" alt="image">
+                                                                        </figure>
+                                                                    @endforeach
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             @endif
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                             aria-labelledby="v-pills-messages-tab">
-                            <div class="content-title">
-                                <h4>Security</h4>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Old Password</label>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>New Password</label>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>New Password Repeat</label>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary">Save Changes</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                             aria-labelledby="v-pills-settings-tab">
-                            <div class="content-title">
-                                <h4>Social</h4>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Twitter</label>
-                                                    <input type="text" class="form-control"
-                                                           value="https://twitter.com/roxana-roussell">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Facebook</label>
-                                                    <input type="text" class="form-control"
-                                                           value="https://www.facebook.com/roxana-roussell">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Instagram</label>
-                                                    <input type="text" class="form-control"
-                                                           value="https://www.instagram.com/roxana-roussell/">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>GitHub</label>
-                                                    <input type="text" class="form-control"
-                                                           value="https://github.com/roxana-roussell">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary">Save Changes</button>
-                                    </form>
                                 </div>
                             </div>
                         </div>

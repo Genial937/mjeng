@@ -31,8 +31,7 @@ use Illuminate\Http\Request;
         public function showCreateView(Request $request)
         {
                 $roles=Role::with(["users","permissions"])->get();
-                $businesses=Business::where("status",1)->get();
-                return view('admin.v1.users.create',compact("roles","businesses"));
+                return view('admin.v1.users.create',compact("roles"));
         }
         public function showEditView(Request $request)
         {
@@ -94,8 +93,8 @@ use Illuminate\Http\Request;
                 "firstname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
                 // "middlename" => "required",
                 "surname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
-                "phone" => "required|numeric",
-                "email" => "required",
+                "phone" => "required|numeric|unique:users",
+                "email" => "required|unique:users",
                 'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
                 'password_confirmation' => 'min:6',
                 'role_id' => 'required',
@@ -118,16 +117,16 @@ use Illuminate\Http\Request;
                     "otp",
                     "user_type"
                 ]));
-                if($request->user_type=="CONTRACTOR"):
-                //create new business and attached to a user
-                 $business=new BusinessController();
-                 $request->request->add(['name'=>$request->org_name,'org_address'=>$request->org_address,'user_id'=>$user->id]);
-                 $business->store($request);
-                elseif($request->user_type=="VENDOR"):
-                //$request->business_id
-                //attach user to the business
-                $user->businesses()->sync($request->business_id);
-                 endif;
+//                if($request->user_type=="CONTRACTOR"):
+//                //create new business and attached to a user
+//                 $business=new BusinessController();
+//                 $request->request->add(['name'=>$request->org_name,'org_address'=>$request->org_address,'user_id'=>$user->id]);
+//                 $business->store($request);
+//                elseif($request->user_type=="VENDOR"):
+//                //$request->business_id
+//                //attach user to the business
+//                $user->businesses()->sync($request->business_id);
+//                 endif;
                 //attach roles
                 $user->roles()->sync($request->request->get('role_id'));
                 return response()->json([
@@ -147,23 +146,22 @@ use Illuminate\Http\Request;
             $this->validate($request, [
                 'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
                 'password_confirmation' => 'min:6',
+                'id' => 'required|exists:users',
             ]);
             //get me
-
-            $user = User::find($request->route("id"));
             $new = bcrypt($request->password);
             try {
-                User::where('email',$user->email)->update(['password' => $new]);
+                User::where('id',$request->id)->update(['password' => $new]);
                 return response()->json([
                     'success' => true,
-                    'message' => 'User update successfully',
+                    'message' => 'Password updated successfully',
                 ], JsonResponse::HTTP_OK);
 
             } catch (QueryException $e) {
                 // something went wrong
                 return response()->json([
                     'success' => false,
-                    'errors' =>["exception"=>[ $e->getMessage()]]
+                    'errors' =>["exception"=>[$e->getMessage()]]
                 ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             }
         }

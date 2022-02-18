@@ -9,12 +9,12 @@ $(document).ready(function () {
         hideDuration: 1500
     };
     // form user type sections
-    $("#contractor-fields").slideUp();
-    $("#vendor-fields").slideUp();
-    $("#admin-fields").slideUp();
+    // $("#contractor-fields").slideUp();
+    // $("#vendor-fields").slideUp();
+    // $("#admin-fields").slideUp();
 
     //form usertype- vendor -organisation
-    $("#vendor-organisation-fields").slideUp();
+    // $("#vendor-organisation-fields").slideUp();
 
     $(document).on('submit', '#create-user-form', function (e) {
         e.preventDefault();
@@ -94,54 +94,80 @@ $(document).ready(function () {
                 });
             })
     });
-
+    //change password
+    $(document).on('submit', '#change-password-form', function (e) {
+        e.preventDefault();
+        $('.btn-change-password').text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url = $('#change-password-form').attr('action');
+        $.post(url, $("#change-password-form").serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    $('.btn-change-password').text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    $('.btn-change-password').text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                $('.btn-change-password').text('Save Changes').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 //function expression
-const checkUserInputFields=function(){
-    //check user type input
-    let userType=$("#user-type").val()
-    //hide/show user input field
-    switch(userType){
-        case "CONTRACTOR":
-            $("#contractor-fields").slideDown();
-            $("#vendor-fields").slideUp();
-            $("#admin-fields").slideUp();
-            break;
-        case "VENDOR" :
-            $("#contractor-fields").slideUp();
-            $("#vendor-fields").slideDown();
-            $("#admin-fields").slideUp();
-            break;
-        case "ADMIN" :
-            $("#contractor-fields").slideUp();
-            $("#vendor-fields").slideUp();
-            $("#admin-fields").slideDown();
-            break;
-        default:
-            $("#contractor-fields").slideUp();
-            $("#vendor-fields").slideUp();
-            $("#admin-fields").slideUp();
-    }
-
-}
+// const checkUserInputFields=function(){
+//     //check user type input
+//     let userType=$("#user-type").val()
+//     //hide/show user input field
+//     switch(userType){
+//         case "CONTRACTOR":
+//             $("#contractor-fields").slideDown();
+//             $("#vendor-fields").slideUp();
+//             $("#admin-fields").slideUp();
+//             break;
+//         case "VENDOR" :
+//             $("#contractor-fields").slideUp();
+//             $("#vendor-fields").slideDown();
+//             $("#admin-fields").slideUp();
+//             break;
+//         case "ADMIN" :
+//             $("#contractor-fields").slideUp();
+//             $("#vendor-fields").slideUp();
+//             $("#admin-fields").slideDown();
+//             break;
+//         default:
+//             $("#contractor-fields").slideUp();
+//             $("#vendor-fields").slideUp();
+//             $("#admin-fields").slideUp();
+//     }
+//
+// }
 //function expression
-const checkVendorAccType=function(){
-    //check vendor type input
-    let accType=$("#vendor-acc-type").val()
-    //hide/show user input field
-    switch(accType){
-        case "INDIVIDUAL":
-            $("#vendor-organisation-fields").slideUp();
-            break;
-        case "ORGANIZATION" :
-            $("#vendor-organisation-fields").slideDown();
-            break;
-        default:
-            $("#vendor-organisation-fields").slideUp();
-
-    }
-
-}
+// const checkVendorAccType=function(){
+//     //check vendor type input
+//     let accType=$("#vendor-acc-type").val()
+//     //hide/show user input field
+//     switch(accType){
+//         case "INDIVIDUAL":
+//             $("#vendor-organisation-fields").slideUp();
+//             break;
+//         case "ORGANIZATION" :
+//             $("#vendor-organisation-fields").slideDown();
+//             break;
+//         default:
+//             $("#vendor-organisation-fields").slideUp();
+//
+//     }
+//
+// }
 //detach user from the business/organisation
 const deleteUser=function(user_id,url){
     //confirm to delete
@@ -158,9 +184,9 @@ const deleteUser=function(user_id,url){
                     .done(function (data) {
                         if (data['success']) {
                             toastr.success(data['message']);
-                            setTimeout(function () {
-                                location.reload();
-                            }, 2000);
+                            // setTimeout(function () {
+                            //     location.reload();
+                            // }, 2000);
                         } else {
                             toastr.success(data['message']);
                         }
@@ -179,3 +205,7 @@ const deleteUser=function(user_id,url){
             }
         })
 }
+$('.toggle-password').click(function(){
+    let input = $(this).prev();
+    input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
+});

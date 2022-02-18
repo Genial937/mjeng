@@ -23,7 +23,7 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
     ]);
     Route::get('/form/details', [
         'as' => 'admin.create.project.details',
-        'uses' => 'Admin\ProjectController@createDetails'
+        'uses' => 'Admin\ProjectController@createDetailView'
     ]);
     Route::get('/form/sites', [
         'as' => 'admin.create.project.sites',
@@ -58,10 +58,14 @@ Route::group(['prefix' => '/users','middleware' => ['log.route']], function () {
         'as' => 'admin.update.user',
         'uses' => 'Admin\UsersController@update'
     ]);
+    Route::post('/change/password', [
+        'as' => 'admin.change.user.password',
+        'uses' => 'Admin\UsersController@changePassword'
+    ]);
 });
 Route::group(['prefix' => '/business','middleware' => ['log.route']], function () {
-    Route::resource('/', 'Admin\BusinessController')->names([
-        'index' => 'admin.businesses',
+    Route::resource('/contractor', 'Admin\BusinessController')->names([
+        'index' => 'admin.contractor.businesses',
     ]);
     Route::post('/assign/user', [
         'as' => 'admin.assign.user.business',

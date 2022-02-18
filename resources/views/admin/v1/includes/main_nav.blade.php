@@ -20,6 +20,12 @@
             </a>
         </li>
         <li>
+            <a class="{{ Request::is('admin/business') ? 'active' : ''}}" href="{{route("admin.contractor.businesses")}}">
+                <i class="nav-link-icon ti-briefcase"></i>
+                <span class="nav-link-label">Businesses</span>
+            </a>
+        </li>
+        <li>
             <a  href="#">
                 <i class="nav-link-icon ti-pie-chart"></i>
                 <span class="nav-link-label">Inventory</span>
@@ -33,7 +39,7 @@
             </a>
         </li>
         <li>
-            <a class="{{Request::is('admin/config/*') ? 'active' : ''}}" href="{{route("admin.counties")}}">
+            <a class="{{Request::is('admin/config/*') ? 'active' : ''}}" href="{{route("admin.task")}}">
                 <i class="nav-link-icon ti-settings"></i>
                 <span class="nav-link-label">Config</span>
             </a>

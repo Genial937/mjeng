@@ -15,11 +15,11 @@ class BusinessController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
     public function index()
     {
-        //
+        return view('admin.v1.businesses.contractor.index');
     }
 
     /**

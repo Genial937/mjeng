@@ -156,7 +156,7 @@
                                 <div class="col-md-4 border-left">
                                     <h4>Equipment Required Added</h4>
                                     <div >
-                                        <table class="table" id="data-table">
+                                        <table class="table data-table">
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">#</th>

@@ -25,6 +25,7 @@
                             </div>
                             <div class="content-title mt-0">
                                 <h4>Create User</h4>
+                                <p>To enable user to login to {{env("APP_NAME")}} platform.</p>
                             </div>
                             <div class="row">
 
@@ -32,78 +33,75 @@
                                       action="{{route("admin.create.user")}}">
                                     @csrf
                                     <div class="col-lg-6 col-md-6">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>System User Type</label>
-                                                    <select id="user-type" name="user_type"
-                                                            class="form-control form-select-2"
-                                                            required
-                                                            onchange="checkUserInputFields()">
-                                                        <option value="">Choose user type</option>
-                                                        <option value="ADMIN">{{env("APP_NAME")}} Staff</option>
-                                                        <option value="CONTRACTOR">Contractor Staff</option>
-                                                        <option value="VENDOR">Supplier Staff</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="contractor-fields">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Account Type</label>
-                                                        <select id="vendor-acc-type" name="vendor_acc_type"
-                                                                class="form-control form-select-2"
-                                                                onchange="checkVendorAccType()">
-                                                            <option value="">Choose account type</option>
-                                                            <option value="INDIVIDUAL">Individual</option>
-                                                            <option value="ORGANIZATION">Organization</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="vendor-organisation-fields">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Organisation name</label>
-                                                            <input type="text" name="org_name"
-                                                                   class="form-control border-input"
-                                                                   placeholder="organisation eg. TK Engineers">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Organisation Address</label>
-                                                            <input type="text" name="org_address"
-                                                                   class="form-control border-input"
-                                                                   placeholder="organisation address e.g One Pandmore, 2nd floor">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="vendor-fields">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Supplier/Business/Vendor</label>
-                                                        <select id="business-id" name="business_id"
-                                                                class="form-control form-select-2">
-                                                            <option value="">Choose a Supplier</option>
-                                                            <option value="1">Supplier A</option>
 
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h4> User details </h4>
-                                            <p>To enable user to login to {{env("APP_NAME")}} platform.</p>
-                                            <hr>
-                                        </div>
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-md-6">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label>System User Type</label>--}}
+{{--                                                    <select id="user-type" name="user_type"--}}
+{{--                                                            class="form-control form-select-2"--}}
+{{--                                                            required--}}
+{{--                                                            onchange="checkUserInputFields()">--}}
+{{--                                                        <option value="">Choose user type</option>--}}
+{{--                                                        <option value="ADMIN">{{env("APP_NAME")}} Staff</option>--}}
+{{--                                                        <option value="CONTRACTOR">Contractor Staff</option>--}}
+{{--                                                        <option value="VENDOR">Supplier Staff</option>--}}
+{{--                                                    </select>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div id="contractor-fields">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-md-6">--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <label>Account Type</label>--}}
+{{--                                                        <select id="vendor-acc-type" name="vendor_acc_type"--}}
+{{--                                                                class="form-control form-select-2"--}}
+{{--                                                                onchange="checkVendorAccType()">--}}
+{{--                                                            <option value="">Choose account type</option>--}}
+{{--                                                            <option value="INDIVIDUAL">Individual</option>--}}
+{{--                                                            <option value="ORGANIZATION">Organization</option>--}}
+{{--                                                        </select>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div id="vendor-organisation-fields">--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-md-6">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label>Organisation name</label>--}}
+{{--                                                            <input type="text" name="org_name"--}}
+{{--                                                                   class="form-control border-input"--}}
+{{--                                                                   placeholder="organisation eg. TK Engineers">--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-6">--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <label>Organisation Address</label>--}}
+{{--                                                            <input type="text" name="org_address"--}}
+{{--                                                                   class="form-control border-input"--}}
+{{--                                                                   placeholder="organisation address e.g One Pandmore, 2nd floor">--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div id="vendor-fields">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-md-6">--}}
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <label>Supplier/Business/Vendor</label>--}}
+{{--                                                        <select id="business-id" name="business_id"--}}
+{{--                                                                class="form-control form-select-2">--}}
+{{--                                                            <option value="">Choose a Supplier</option>--}}
+{{--                                                            <option value="1">Supplier A</option>--}}
+
+{{--                                                        </select>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -141,30 +139,40 @@
                                                            maxlength="10"
                                                            required
                                                            class="form-control border-input"
-                                                           placeholder="e.g 0722 XXX XXX">
+                                                           placeholder="e.g (254) 722 222 222">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label> Strong Password</label>
+                                                    <div class="input-group">
                                                     <input type="password" name="password"
                                                            {{--                                                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"--}}
                                                            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
                                                            class="form-control border-input"
                                                            required
                                                            placeholder="password">
+                                                    <div class="input-group-append toggle-password">
+                                                        <span class="input-group-text mdi ti-eye"></span>
+                                                    </div>
                                                 </div>
+                                            </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Confirm Password</label>
+                                                    <div class="input-group">
                                                     <input type="password" name="password_confirmation"
                                                            {{--                                                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"--}}
                                                            title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
                                                            class="form-control border-input"
                                                            required
                                                            placeholder="confirm password">
+                                                        <div class="input-group-append toggle-password">
+                                                            <span class="input-group-text mdi ti-eye"></span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -196,6 +204,7 @@
                                     <div class="col-lg-6 col-md-6">
 
                                     </div>
+                                    <input type="hidden" name="user_type" value="ADMIN">
                                 </form>
 
                             </div>

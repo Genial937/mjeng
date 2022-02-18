@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\County;
 use App\Http\Controllers\Controller;
 use App\Project;
+use App\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -21,11 +23,14 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function createDetails()
+    public function createDetailView()
     {
-        return view('admin.v1.project.create.details');
+
+        $contractors=User::where("user_type","CONTRACTOR")->get();
+        $counties=County::all();
+        return view('admin.v1.project.create.details',compact("contractors","counties"));
     }
     /**
      * Show the form for creating a new resource.
