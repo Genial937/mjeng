@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Validator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
@@ -15,8 +16,8 @@ class SendAuthEmail
 {
 
 
-    public function otp(Request $request){
-        $this->validate($request,[
+    public static function otp(Request $request){
+        Validator::make($request,[
             "email"=>"required",
             "otp"=>"required"
         ]);
