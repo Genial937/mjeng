@@ -23,7 +23,17 @@
     </xml><![endif]--> <!--[if !mso]><!-- -->
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@200;400;500&display=swap" rel="stylesheet">
-  <style type="text/css">#outlook a {
+    <style type="text/css">
+        body{
+            width:100%;
+            font-family:'Josefin Sans', sans-serif;
+            -webkit-text-size-adjust:100%;
+            -ms-text-size-adjust:100%;
+            padding:0;
+            margin:0;
+            font-size: 15px;
+        }
+        #outlook a {
             padding: 0;
         }
 
@@ -101,7 +111,11 @@
                 text-align: center;
                 line-height: 120% !important
             }
-
+            h4 {
+                font-size: 15px !important;
+                text-align: center;
+                line-height: 120% !important
+            }
             .es-header-body h1 a, .es-content-body h1 a, .es-footer-body h1 a {
                 font-size: 20px !important
             }
@@ -254,8 +268,7 @@
             }
         }</style>
 </head>
-<body
-    style="width:100%;font-family:'Josefin Sans', sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
+<body >
 <div class="es-wrapper-color" style="background-color:#FAFAFA"> <!--[if gte mso 9]>
     <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
     <v:fill type="tile" color="#fafafa"></v:fill>
@@ -349,7 +362,7 @@
                     <tr style="border-collapse:collapse">
                         <td style="padding:0;Margin:0;background-color:#FAFAFA" bgcolor="#fafafa" align="center">
                             <table class="es-content-body"
-                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px"
+                                   style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#FFFFFF;width:600px;margin:50px;"
                                    cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
                                 <tr style="border-collapse:collapse">
                                     <td style="padding:0;Margin:0;padding-left:20px;padding-right:20px;padding-top:40px;background-color:transparent"
@@ -358,10 +371,9 @@
                                                style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                             <tr style="border-collapse:collapse">
                                                 <td valign="top" align="center" style="padding:0;Margin:0;width:560px">
-                                                    <table
-                                                        style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-position:left top"
-                                                        width="100%" cellspacing="0" cellpadding="0"
-                                                        role="presentation">
+                                                    <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-position:left top"
+                                                           width="100%" cellspacing="0" cellpadding="0"
+                                                           role="presentation">
                                                         <tr style="border-collapse:collapse">
                                                             <td align="center"
                                                                 style="padding:0;Margin:0;padding-top:5px;padding-bottom:5px;font-size:0px">
@@ -374,15 +386,15 @@
                                                         <tr style="border-collapse:collapse">
                                                             <td align="center"
                                                                 style="padding:0;Margin:0;padding-top:15px;padding-bottom:15px">
-                                                                <h1 style="Margin:0;line-height:24px;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#333333">
-                                                                    <strong style="background-color:transparent">Verification One Time Password<span
-                                                                            style="font-family:lato, 'helvetica neue', helvetica, arial, sans-serif"></span></strong>
+                                                                <h1 style="margin:0;line-height:24px; mso-line-height-rule:exactly;color:#333333;font-size: 17px;;">
+                                                                    Verification One Time Password
+
                                                                 </h1></td>
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
                                                             <td align="left"
                                                                 style="padding:0;Margin:0;padding-left:40px;padding-right:40px">
-                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">
+                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;">
                                                                     It looks like you tried to sign in from a different location, device, or browser:<br>
                                                                 </p>
                                                             </td>
@@ -390,7 +402,7 @@
                                                         <tr style="border-collapse:collapse">
                                                             <td align="left"
                                                                 style="padding:0;Margin:0;padding-left:40px;padding-right:40px">
-                                                                <p style="margin-top:35px;:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">
+                                                                <p style="margin-top:35px;:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;">
                                                                     Date: {{date("Y-m-d H:i:s")}}<br>
                                                                     Account: {{$data['email']}}<br>
                                                                     IP Address: {{$_SERVER['REMOTE_ADDR']}}<br>
@@ -401,7 +413,7 @@
                                                         <tr style="border-collapse:collapse">
                                                             <td align="left"
                                                                 style="padding:0;margin:0;margin-top:35px; padding-right:35px;padding-left:40px">
-                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#666666;font-size:16px">
+                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;line-height:24px;color:#666666;">
                                                                     Enter this 6 digit otp on the sign in page to verify
                                                                     your account.</p></td>
                                                         </tr>
@@ -414,8 +426,8 @@
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
                                                             <td align="center"
-                                                                style="padding:0;Margin:0;padding-top:25px;padding-left:40px;padding-right:40px">
-                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#666666;font-size:16px">
+                                                                style="padding:0;Margin:0;padding-top:25px;padding-left:40px;padding-right:40px; padding-bottom: 40px;">
+                                                                <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;">
                                                                     If did not make this request, just ignore this
                                                                     email.</p></td>
                                                         </tr>
@@ -430,10 +442,6 @@
                         </td>
                     </tr>
                 </table>
-
-
-
-
             </td>
         </tr>
     </table>
