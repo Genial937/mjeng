@@ -384,16 +384,23 @@
                                                                 style="padding:0;Margin:0;padding-left:40px;padding-right:40px">
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">
                                                                     It looks like you tried to sign in from a different location, device, or browser:<br>
-                                                                    Date: {{date("Y-m-d H:i:s")}}<br>
-                                                                    Account: {{$data['email']}}<br>
-
-                                                                    IP Address: {{$_SERVER['REMOTE_ADDR']}}<br>
-                                                                    Browser: {{request()->userAgent()??""}}<br>
-                                                                </p></td>
+                                                                </p>
+                                                            </td>
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
                                                             <td align="left"
-                                                                style="padding:0;Margin:0;padding-right:35px;padding-left:40px">
+                                                                style="padding:0;Margin:0;padding-left:40px;padding-right:40px">
+                                                                <p style="margin-top:35px;:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">
+                                                                    Date: {{date("Y-m-d H:i:s")}}<br>
+                                                                    Account: {{$data['email']}}<br>
+                                                                    IP Address: {{$_SERVER['REMOTE_ADDR']}}<br>
+                                                                    Browser: {{request()->userAgent()??""}}<br>
+                                                                </p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border-collapse:collapse">
+                                                            <td align="left"
+                                                                style="padding:0;margin:0;margin-top:35px; padding-right:35px;padding-left:40px">
                                                                 <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#666666;font-size:16px">
                                                                     Enter this 6 digit otp on the sign in page to verify
                                                                     your account.</p></td>
