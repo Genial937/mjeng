@@ -8,7 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Validator;
+use Illuminate\Contracts\Validation\Validator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
@@ -17,10 +17,17 @@ class SendAuthEmail
 
 
     public static function otp(Request $request){
-        Validator::make($request,[
+        $validator = Validator::make($request,[
             "email"=>"required",
             "otp"=>"required"
         ]);
+        if($validator->fails())
+            return response()->json([
+                "success" => false,
+                "errors" =>["err_sending_email"=>[$validator->messages()]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+
+
 
         try {
             Log::error(json_encode($request->all()));
