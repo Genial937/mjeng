@@ -8,14 +8,7 @@ $(document).ready(function () {
         showDuration: 1200,
         hideDuration: 1500
     };
-    // form user type sections
-    // $("#contractor-fields").slideUp();
-    // $("#vendor-fields").slideUp();
-    // $("#admin-fields").slideUp();
-
-    //form usertype- vendor -organisation
-    // $("#vendor-organisation-fields").slideUp();
-
+   ///create user
     $(document).on('submit', '#create-user-form', function (e) {
         e.preventDefault();
         $('.btn-create-user').text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
@@ -26,7 +19,7 @@ $(document).ready(function () {
                     $('.btn-create-user').text('Save User').prop('disabled', false);
                         toastr.success(data['message']);
                     setTimeout(function () {
-                        location.reload();
+                        history.back();
                     }, 2000);
                     } else {
                     $('.btn-create-user').text('Save User').prop('disabled', false);
@@ -52,7 +45,7 @@ $(document).ready(function () {
                     $('.btn-update-user').text('Save Changes').prop('disabled', false);
                     toastr.success(data['message']);
                     setTimeout(function () {
-                        location.reload();
+                        history.back();
                     }, 2000);
                 } else {
                     $('.btn-update-user').text('Save Changes').prop('disabled', false);
@@ -78,7 +71,7 @@ $(document).ready(function () {
                     $('.btn-update-user-business').text('Save Changes').prop('disabled', false);
                     toastr.success(data['message']);
                     setTimeout(function () {
-                        location.reload();
+                        history.back();
                     }, 2000);
                 } else {
                     $('.btn-update-user-business').text('Save Changes').prop('disabled', false);
@@ -105,7 +98,7 @@ $(document).ready(function () {
                     $('.btn-change-password').text('Save Changes').prop('disabled', false);
                     toastr.success(data['message']);
                     setTimeout(function () {
-                        location.reload();
+                        history.back();
                     }, 2000);
                 } else {
                     $('.btn-change-password').text('Save Changes').prop('disabled', false);
@@ -122,52 +115,7 @@ $(document).ready(function () {
             })
     });
 });
-//function expression
-// const checkUserInputFields=function(){
-//     //check user type input
-//     let userType=$("#user-type").val()
-//     //hide/show user input field
-//     switch(userType){
-//         case "CONTRACTOR":
-//             $("#contractor-fields").slideDown();
-//             $("#vendor-fields").slideUp();
-//             $("#admin-fields").slideUp();
-//             break;
-//         case "VENDOR" :
-//             $("#contractor-fields").slideUp();
-//             $("#vendor-fields").slideDown();
-//             $("#admin-fields").slideUp();
-//             break;
-//         case "ADMIN" :
-//             $("#contractor-fields").slideUp();
-//             $("#vendor-fields").slideUp();
-//             $("#admin-fields").slideDown();
-//             break;
-//         default:
-//             $("#contractor-fields").slideUp();
-//             $("#vendor-fields").slideUp();
-//             $("#admin-fields").slideUp();
-//     }
-//
-// }
-//function expression
-// const checkVendorAccType=function(){
-//     //check vendor type input
-//     let accType=$("#vendor-acc-type").val()
-//     //hide/show user input field
-//     switch(accType){
-//         case "INDIVIDUAL":
-//             $("#vendor-organisation-fields").slideUp();
-//             break;
-//         case "ORGANIZATION" :
-//             $("#vendor-organisation-fields").slideDown();
-//             break;
-//         default:
-//             $("#vendor-organisation-fields").slideUp();
-//
-//     }
-//
-// }
+
 //detach user from the business/organisation
 const deleteUser=function(user_id,url){
     //confirm to delete

@@ -192,71 +192,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="v-pills-business" role="tabpanel"
-                             aria-labelledby="v-pills-profile-tab">
-                            <div class="content-title">
-                                <h4>Assign Access to Business/Organisation</h4>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 margin-10-b">
-                                    <form action="{{route("admin.assign.user.business")}}" id="update-user-businesses" >
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Supplier/Business/Vendor</label>
-                                                    <select id="business-id" name="businesses[]"
-                                                            class="form-control form-select-2" multiple>
-                                                        <option value="">Choose a Business/Organisation</option>
-                                                        @if(!empty($businesses))
-                                                            @foreach($businesses as $business)
-                                                                <option  @foreach($user->businesses as $business_) @if($business->id===$business_->id) selected  @endif   @endforeach  value="{{$business->id}}">{{$business->name}}</option>
-                                                            @endforeach
-                                                        @endif
-                                                    </select>
-                                                    <input type="hidden" value="{{$user->id}}" name="user_id">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="btn btn-primary  btn-uppercase btn-rounded btn-update-user-business ">Save Changes</button>
-                                    </form>
-                                </div>
-                                <div class="col-md-4 border-left">
-                                    <p class="text-capitalize">All Business/Organisation.</p>
-                                    <div >
-                                        <table class="table" id="data-table">
-                                            <thead class="thead-light">
-                                            <tr>
-                                                <th scope="col">Business/Organisation</th>
-                                                <th scope="col">Staffs</th>
 
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @if(!empty($businesses))
-                                                @foreach($businesses as $business)
-                                                    <tr>
-                                                        <td>{{$business->name}}</td>
-                                                        <td>
-                                                            <div class="avatar-group">
-                                                                @if(!empty($business->users))
-                                                                    @foreach($business->users as $user)
-                                                                        <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="{{$user->firstname}} {{$user->surname}}">
-                                                                            <img src="https://www.pngfind.com/pngs/m/381-3819326_default-avatar-svg-png-icon-free-download-avatar.png" class="rounded-circle" alt="image">
-                                                                        </figure>
-                                                                    @endforeach
-                                                                @endif
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                     </div>

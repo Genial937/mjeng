@@ -65,13 +65,28 @@ Route::group(['prefix' => '/users','middleware' => ['log.route']], function () {
 });
 Route::group(['prefix' => '/business','middleware' => ['log.route']], function () {
     Route::resource('/contractor', 'Admin\BusinessController')->names([
-        'index' => 'admin.contractor.businesses',
+        'index' => 'admin.contractor.businesses'
     ]);
-    Route::post('/assign/user', [
-        'as' => 'admin.assign.user.business',
-        'uses' => 'Admin\BusinessController@attachUser'
+    Route::get('/contractor/create', [
+        'as' => 'admin.create.contractor',
+        'uses' => 'Admin\BusinessController@showCreateContractorView'
     ]);
-
+    Route::get('/contractor/edit/{id}', [
+        'as' => 'admin.edit.contractor',
+        'uses' => 'Admin\BusinessController@showEditContractorView'
+    ]);
+    Route::post('/add/users', [
+        'as' => 'admin.add.business.user',
+        'uses' => 'Admin\BusinessController@addUsers'
+    ]);
+    Route::post('/contractor/add', [
+        'as' => 'admin.create.business.contractor',
+        'uses' => 'Admin\BusinessController@store'
+    ]);
+    Route::post('/contractor/update', [
+        'as' => 'admin.update.business.contractor',
+        'uses' => 'Admin\BusinessController@update'
+    ]);
 });
 Route::group(['prefix' => '/config/counties','middleware' => ['log.route']], function () {
     Route::resource('/', 'Admin\CountyController')->names([

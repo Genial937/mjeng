@@ -91,7 +91,6 @@ use Illuminate\Http\Request;
         {
             $this->validate($request, [
                 "firstname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
-                // "middlename" => "required",
                 "surname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
                 "phone" => "required|numeric|unique:users",
                 "email" => "required|unique:users",
@@ -99,8 +98,6 @@ use Illuminate\Http\Request;
                 'password_confirmation' => 'min:6',
                 'role_id' => 'required',
                 "user_type"=>"required",
-                "org_name"=>"nullable",
-                "org_address"=>"nullable",
                 "business_id"=>"nullable"
             ]);
             try {
@@ -117,16 +114,12 @@ use Illuminate\Http\Request;
                     "otp",
                     "user_type"
                 ]));
-//                if($request->user_type=="CONTRACTOR"):
-//                //create new business and attached to a user
-//                 $business=new BusinessController();
-//                 $request->request->add(['name'=>$request->org_name,'org_address'=>$request->org_address,'user_id'=>$user->id]);
-//                 $business->store($request);
-//                elseif($request->user_type=="VENDOR"):
-//                //$request->business_id
-//                //attach user to the business
-//                $user->businesses()->sync($request->business_id);
-//                 endif;
+
+                if($request->user_type=="CONTRACTOR"):
+                //$request->business_id
+                //attach user to the business
+                $user->businesses()->sync($request->business_id);
+                 endif;
                 //attach roles
                 $user->roles()->sync($request->request->get('role_id'));
                 return response()->json([

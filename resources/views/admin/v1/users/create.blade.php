@@ -19,7 +19,8 @@
                     <div class="row">
                         <div class="col-xl-10 offset-1">
                             <div class="mb-4">
-                                <a href="{{route("admin.users")}}"
+                                <a href="javascript:void(0)"
+                                   onclick="history.back()"
                                    class="btn btn-outline-primary ">
                                     <i class="ti-arrow-left"></i> Back</a>
                             </div>
@@ -33,75 +34,6 @@
                                       action="{{route("admin.create.user")}}">
                                     @csrf
                                     <div class="col-lg-6 col-md-6">
-
-{{--                                        <div class="row">--}}
-{{--                                            <div class="col-md-6">--}}
-{{--                                                <div class="form-group">--}}
-{{--                                                    <label>System User Type</label>--}}
-{{--                                                    <select id="user-type" name="user_type"--}}
-{{--                                                            class="form-control form-select-2"--}}
-{{--                                                            required--}}
-{{--                                                            onchange="checkUserInputFields()">--}}
-{{--                                                        <option value="">Choose user type</option>--}}
-{{--                                                        <option value="ADMIN">{{env("APP_NAME")}} Staff</option>--}}
-{{--                                                        <option value="CONTRACTOR">Contractor Staff</option>--}}
-{{--                                                        <option value="VENDOR">Supplier Staff</option>--}}
-{{--                                                    </select>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div id="contractor-fields">--}}
-{{--                                            <div class="row">--}}
-{{--                                                <div class="col-md-6">--}}
-{{--                                                    <div class="form-group">--}}
-{{--                                                        <label>Account Type</label>--}}
-{{--                                                        <select id="vendor-acc-type" name="vendor_acc_type"--}}
-{{--                                                                class="form-control form-select-2"--}}
-{{--                                                                onchange="checkVendorAccType()">--}}
-{{--                                                            <option value="">Choose account type</option>--}}
-{{--                                                            <option value="INDIVIDUAL">Individual</option>--}}
-{{--                                                            <option value="ORGANIZATION">Organization</option>--}}
-{{--                                                        </select>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div id="vendor-organisation-fields">--}}
-{{--                                                <div class="row">--}}
-{{--                                                    <div class="col-md-6">--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <label>Organisation name</label>--}}
-{{--                                                            <input type="text" name="org_name"--}}
-{{--                                                                   class="form-control border-input"--}}
-{{--                                                                   placeholder="organisation eg. TK Engineers">--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="col-md-6">--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <label>Organisation Address</label>--}}
-{{--                                                            <input type="text" name="org_address"--}}
-{{--                                                                   class="form-control border-input"--}}
-{{--                                                                   placeholder="organisation address e.g One Pandmore, 2nd floor">--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div id="vendor-fields">--}}
-{{--                                            <div class="row">--}}
-{{--                                                <div class="col-md-6">--}}
-{{--                                                    <div class="form-group">--}}
-{{--                                                        <label>Supplier/Business/Vendor</label>--}}
-{{--                                                        <select id="business-id" name="business_id"--}}
-{{--                                                                class="form-control form-select-2">--}}
-{{--                                                            <option value="">Choose a Supplier</option>--}}
-{{--                                                            <option value="1">Supplier A</option>--}}
-
-{{--                                                        </select>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -138,8 +70,9 @@
                                                            minlength="9"
                                                            maxlength="10"
                                                            required
+                                                           data-input-mask="phone"
                                                            class="form-control border-input"
-                                                           placeholder="e.g (254) 722 222 222">
+                                                           placeholder="(254) 722 222 222">
                                                 </div>
                                             </div>
 
@@ -202,9 +135,9 @@
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
-
                                     </div>
-                                    <input type="hidden" name="user_type" value="ADMIN">
+                                    <input type="hidden" name="user_type" value="{{Request::get('type')??"ADMIN" }}">
+                                    <input type="hidden" name="business_id" value="{{Request::get('business_id')??"ADMIN" }}">
                                 </form>
 
                             </div>

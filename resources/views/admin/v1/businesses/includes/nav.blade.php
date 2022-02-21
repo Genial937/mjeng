@@ -7,15 +7,20 @@
         var jsonData = {
             'data': [
                 {
-                    'text': 'Contractor Businesses',
-                    'type': 'folder',
+                    'text': 'Contractor',
+                    'type': 'business',
                     'state': {
                         'opened': true,
                         'selected': true
                     },
                     'children': [
                         {
-                            'text': 'View',
+                            'text': 'Create/Add',
+                            'type': 'file',
+                            "a_attr" : { "href" : "{{route("admin.create.contractor")}}" },
+                        },
+                        {
+                            'text': 'Businesses({{count($businesses)}})',
                             'type': 'file',
                             "a_attr" : { "href" : "{{route("admin.contractor.businesses")}}" },
                         },
@@ -23,8 +28,8 @@
                     ]
                 },
                 {
-                    'text': 'Vendor/Supplier Businesses',
-                    'type': 'folder',
+                    'text': 'Vendor/Supplier',
+                    'type': 'business',
                     'state': {
                         'opened': true,
                         'selected': true
@@ -32,15 +37,11 @@
 
                     'children': [
                         {
-                            'text': 'Approved',
+                            'text': 'Businesses',
                             'type': 'file',
                             "a_attr" : { "href" : "{{route("admin.counties")}}" }
-                        },
-                        {
-                            'text': 'Pending Approval',
-                            'type': 'file',
-                            "a_attr" : { "href" : "{{route("admin.subcounties")}}" }
-                        },
+                        }
+
                     ]
                 }
             ],
@@ -57,15 +58,22 @@
                 },
                 "file": {
                     "icon": "ti-file",
+                },
+                "business": {
+                    "icon": "ti-briefcase",
                 }
             },
             plugins: ["types"]
         }).on('changed.jstree', function (e, data) {
-            var href = data.node.a_attr.href;
-            var parentId = data.node.a_attr.parent_id;
-            if(href == '#')
-                return '';
-            window.location.href = href;
+            try {
+                var href = data.node.a_attr.href;
+                if (href === '#')
+                    return '';
+                window.location.href = href;
+            }catch (e) {
+                //log
+                console.log(e.message);
+            }
         });
     });
 </script>

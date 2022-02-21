@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Business;
+use App\Helpers\UniqueRandomChar;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+
 
 class BusinessController extends Controller
 {
@@ -19,28 +21,51 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        return view('admin.v1.businesses.contractor.index');
+        $businesses=Business::with("users")->get();
+        $users=User::all();
+        return view('admin.v1.businesses.contractor.index',compact("businesses",'users'));
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function showCreateContractorView()
+    {
+        $businesses=Business::with("users")->get();
+        return view('admin.v1.businesses.contractor.create',compact("businesses"));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function showEditContractorView(Request $request)
+    {
+        $businesses=Business::with("users")->get();
+        $business=Business::find($request->route('id'));
+        return view('admin.v1.businesses.contractor.edit',compact("business",'businesses'));
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return JsonResponse
      */
-    public function attachUser(Request $request)
+    public function addUsers(Request $request)
     {
         $this->validate($request, [
-            "businesses"=>"nullable",
-            "user_id"=>"required",
+            "users"=>"required|array",
+            "users.*"=>"required|min:1",
+            "business_id"=>"required",
         ]);
         try{
             //get user
-            $user=User::find($request->user_id);
+            $business=Business::find($request->business_id);
             //attach businesses id
-            $user->businesses()->sync($request->businesses);
+            $business->users()->sync($request->users);
             return response()->json([
             'success' => true,
-            'message' => 'Business assigned successfully.'
+            'message' => 'User(s) added successfully.'
         ], JsonResponse::HTTP_OK);
         } catch (QueryException $e) {
             return response()->json([
@@ -60,7 +85,7 @@ class BusinessController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            "user_id" => "required|exists:users,id",
+//            "user_id" => "required|exists:users,id",
             "name" => "required",
             "phone" => "nullable",
             "country" => "nullable",
@@ -72,7 +97,7 @@ class BusinessController extends Controller
         $this->validate($request, $rules,$custom_msg);
 
         try {
-            $business_code=$this->generateCode();
+            $business_code=UniqueRandomChar::businessCode();
             $request->request->add(["business_code"=>$business_code]);
             $business = Business::updateOrCreate(["name"=>$request->name,"phone"=>$request->phone],$request->only([
                 "business_code",
@@ -87,7 +112,7 @@ class BusinessController extends Controller
                 "description"
             ]));
             //attach business to merchant
-            $business->users()->sync($request->user_id);
+            //$business->users()->sync($request->user_id);
             return response()->json([
                 'success' => true,
                 'message' => 'Business added successfully.'
@@ -99,54 +124,43 @@ class BusinessController extends Controller
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
-    protected function generateCode()
-    {
-        try {
-            for ($i = 100001; $i <= 999999; $i++):
-                $code = "BC".sprintf("%06s", $i);
-                $business = Business::where('business_code', $code)->first();
-                if (empty($business)):
-                    break 1;
-                endif;
-            endfor;
-            return $code;
-        } catch (QueryException $e) {
-            return $e->getMessage();
-        }
 
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Business  $business
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Business $business)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Business  $business
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Business $business)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Business  $business
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function update(Request $request, Business $business)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            "id"=>"required|exists:businesses",
+            "name"=>"required"
+        ]);
+        try {
+        Business::where("id",$request->id)->update($request->only(
+            "name",
+            "email",
+            "phone",
+            "country",
+            "city",
+            "address",
+            "status",
+            "type",
+            "description"
+           ));
+            return response()->json([
+                'success' => true,
+                'message' => 'Business added successfully.'
+            ], JsonResponse::HTTP_OK);
+        } catch (QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => ["exception" => [$e->getMessage()]],
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
 
     /**
