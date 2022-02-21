@@ -17,16 +17,10 @@ class SendAuthEmail
 
 
     public static function otp(Request $request){
-        $validator = Validator::make($request,[
-            "email"=>"required",
-            "otp"=>"required"
-        ]);
-        if($validator->fails())
-            return response()->json([
-                "success" => false,
-                "errors" =>["err_sending_email"=>[$validator->messages()]]
-            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-
+         $request->validate([
+             'title' => 'required|unique:posts|max:255',
+             'body' => 'required',
+         ]);
 
 
         try {
