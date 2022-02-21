@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class SendAuthEmail
 {
 
-
     public static function otp(Request $request){
 
         $request->validate([
@@ -24,14 +23,13 @@ class SendAuthEmail
         ]);
 
         try {
-            Log::error(json_encode($request->all()));
             //load them setting
             $data['from_name'] = env("APP_NAME");
             $data['subject'] = "One Time Password";
             $data['code'] =$request->otp;
             $data['email'] =$request->email;
-            $data['template']="emails.one_time_password";
-            $status=Mail::to($request->email)->send(new SendEmail($data));
+            $data['template']="emails.auth.otp";
+            Mail::to($request->email)->send(new SendEmail($data));
             if (Mail::failures()) {
                 Log::error(json_encode(Mail::failures()));
                 return response()->json([
