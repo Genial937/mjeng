@@ -99,15 +99,19 @@ const addStaffModal=function (jsonBusiness,newStaffLink){
     $("#add-new-staff-href").attr("href",newStaffLink);
 }
 const viewStaffsModal=function (jsonBusiness){
-    $("#view-busines-staff").modal("show");
     let business=$.parseJSON(jsonBusiness);
-    let data=[];
-    $('.staff-table').dataTable().fnClearTable()
-    $.each(business.users, function(key,val) {
-        data.push([val.firstname,val.surname,val.email,'<button type="button" id="remove-business-staff-'+val.id+'" onclick="removeBusinessStaff('+val.id+','+business.id+')" class="btn btn-danger btn-floating"><i class="ti-close"></i></button>']);
-    });
-    console.log(data)
-    $('.staff-table').dataTable().fnAddData(data);
+    if(business.users.length > 0) {
+        $("#view-busines-staff").modal("show");
+
+        let data = [];
+        $('.staff-table').dataTable().fnClearTable()
+        $.each(business.users, function (key, val) {
+            data.push([val.firstname, val.surname, val.email, '<button type="button" id="remove-business-staff-' + val.id + '" onclick="removeBusinessStaff(' + val.id + ',' + business.id + ')" class="btn btn-danger btn-floating"><i class="ti-close"></i></button>']);
+        });
+        $('.staff-table').dataTable().fnAddData(data);
+    }else{
+        toastr.error("Business doesn't have staff to view.");
+    }
 }
 
 const removeBusinessStaff=function(user_id,business_id){
@@ -117,7 +121,7 @@ const removeBusinessStaff=function(user_id,business_id){
         .done(function (data) {
             if (data['success']) {
                 toastr.success(data['message']);
-                $("#add-staff").modal("hide");
+                $("#view-busines-staff").modal("hide");
             } else {
                 toastr.success(data['message']);
             }
