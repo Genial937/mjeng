@@ -21,7 +21,6 @@
                             <h5 class="margin-5-p">Business : <span class="business-name"></span></h5>
                             <hr>
                             <p>To add an existing user, searching the user by email below.</p>
-
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
