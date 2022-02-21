@@ -17,11 +17,11 @@ class SendAuthEmail
 
 
     public static function otp(Request $request){
-         $request->validate([
-             'title' => 'required|unique:posts|max:255',
-             'body' => 'required',
-         ]);
 
+        $request->validate([
+            "email"=>"required",
+            "otp"=>"required"
+        ]);
 
         try {
             Log::error(json_encode($request->all()));
