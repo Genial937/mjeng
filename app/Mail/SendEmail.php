@@ -24,7 +24,7 @@ class SendEmail extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS'),$this->data["MAIL_FROM_NAME"])
+        return $this->from(env('MAIL_FROM_EMAIL_ADDRESS'),env('MAIL_FROM_NAME'))
             ->subject($this->data['subject'])
             ->view($this->data['template'])
             ->with('data', $this->data);
