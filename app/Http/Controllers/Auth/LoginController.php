@@ -78,22 +78,32 @@ class LoginController extends Controller
                     User::where("id",$user->id)->update(["otp" => $otp]);
                     $request->request->add(["otp" => $otp]);
                     //send email otp;
-                    $resp = SendAuthEmail::otp($request);
-                    $result = $resp->getData();
-                    if ($result->success):
-                    return response()->json(
-                        [
-                            'success' => true,
-                            'otp' => true,
-                            'message' => 'Please check your phone/email inbox for verification code.'
-                        ], JsonResponse::HTTP_CREATED);
-                    else:
+                    //check if dev
+                    if(env("APP_ENV")=="production") {
+                        $resp = SendAuthEmail::otp($request);
+                        $result = $resp->getData();
+                        if ($result->success):
+                            return response()->json(
+                                [
+                                    'success' => true,
+                                    'otp' => true,
+                                    'message' => 'Please check your phone/email inbox for verification code.'
+                                ], JsonResponse::HTTP_CREATED);
+                        else:
+                            return response()->json(
+                                [
+                                    'success' => false,
+                                    'errors' => $result->errors
+                                ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                        endif;
+                    }else{
                         return response()->json(
                             [
-                                'success' => false,
-                                'errors' => $result->errors
-                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-                    endif;
+                                'success' => true,
+                                'otp' => true,
+                                'message' => 'Please check your phone/email inbox for verification code.'
+                            ], JsonResponse::HTTP_CREATED);
+                    }
                 else:
                     //invalid password
                     return response()->json([

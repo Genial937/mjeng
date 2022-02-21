@@ -62,7 +62,7 @@ class BusinessController extends Controller
             //get user
             $business=Business::find($request->business_id);
             //attach businesses id
-            $business->users()->sync($request->users);
+            $business->users()->attach($request->users);
             return response()->json([
             'success' => true,
             'message' => 'User(s) added successfully.'
@@ -75,7 +75,35 @@ class BusinessController extends Controller
         }
 
     }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return JsonResponse
+     */
+    public function detachUsers(Request $request)
+    {
+        $this->validate($request, [
+            "users"=>"required|array",
+            "users.*"=>"required|min:1",
+            "business_id"=>"required",
+        ]);
+        try{
+            //get user
+            $business=Business::find($request->business_id);
+            //attach businesses id
+            $business->users()->attach($request->users);
+            return response()->json([
+                'success' => true,
+                'message' => 'User(s) added successfully.'
+            ], JsonResponse::HTTP_OK);
+        } catch (QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => ["exception" => [$e->getMessage()]],
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
+    }
     /**
      * Store a newly created resource in storage.
      *

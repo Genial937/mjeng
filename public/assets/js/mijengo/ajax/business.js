@@ -1,5 +1,4 @@
 'use strict';
-$('.staff-table').dataTable();
 $(document).ready(function () {
     toastr.options = {
         timeOut: 9000,
@@ -103,10 +102,38 @@ const viewStaffsModal=function (jsonBusiness){
     $("#view-busines-staff").modal("show");
     let business=$.parseJSON(jsonBusiness);
     let userTable = $('#staff-table').dataTable();
-     console.log(business.users)
-        var data = [
-           "James","email","phone","<"
-        ];
+    let data=[];
+    userTable.clear();
+    $.each(business.users, function(key,val) {
+        data.push([val.firstname,val.surname,val.email,'<button type="button" onclick="removeBusinessStaff('+val+')" class="btn btn-danger btn-floating"><i class="ti-close"></i></button>']);
+    });
+    console.log(data)
+    userTable.fnAddData(data);
+}
 
-    $('.staff-table').dataTable().fnAddData(data);
+const removeBusinessStaff=function(users){
+    //po
+    console.log(users);
+    $.post('/business/contractor/detach/user', {users})
+        .done(function (data) {
+            if (data['success']) {
+                toastr.success(data['message']);
+                setTimeout(function () {
+                    //close the modal
+                    $("#add-staff").modal("hide");
+                    //reload
+                    location.reload();
+                }, 1000);
+            } else {
+                toastr.success(data['message']);
+            }
+        })
+        .fail(function (data) {
+            console.error(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+
 }
