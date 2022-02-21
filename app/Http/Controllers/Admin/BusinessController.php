@@ -80,21 +80,20 @@ class BusinessController extends Controller
      *
      * @return JsonResponse
      */
-    public function detachUsers(Request $request)
+    public function detachUser(Request $request)
     {
         $this->validate($request, [
-            "users"=>"required|array",
-            "users.*"=>"required|min:1",
-            "business_id"=>"required",
+            "user_id"=>"required|exists:users,id",
+            "business_id"=>"required|exists:businesses,id",
         ]);
         try{
             //get user
             $business=Business::find($request->business_id);
             //attach businesses id
-            $business->users()->attach($request->users);
+            $business->users()->detach($request->user_id);
             return response()->json([
                 'success' => true,
-                'message' => 'User(s) added successfully.'
+                'message' => 'User(s) removed successfully.'
             ], JsonResponse::HTTP_OK);
         } catch (QueryException $e) {
             return response()->json([

@@ -101,29 +101,23 @@ const addStaffModal=function (jsonBusiness,newStaffLink){
 const viewStaffsModal=function (jsonBusiness){
     $("#view-busines-staff").modal("show");
     let business=$.parseJSON(jsonBusiness);
-    let userTable = $('#staff-table').dataTable();
     let data=[];
-    userTable.clear();
+    $('.staff-table').dataTable().fnClearTable()
     $.each(business.users, function(key,val) {
-        data.push([val.firstname,val.surname,val.email,'<button type="button" onclick="removeBusinessStaff('+val+')" class="btn btn-danger btn-floating"><i class="ti-close"></i></button>']);
+        data.push([val.firstname,val.surname,val.email,'<button type="button" id="remove-business-staff-'+val.id+'" onclick="removeBusinessStaff('+val.id+','+business.id+')" class="btn btn-danger btn-floating"><i class="ti-close"></i></button>']);
     });
     console.log(data)
-    userTable.fnAddData(data);
+    $('.staff-table').dataTable().fnAddData(data);
 }
 
-const removeBusinessStaff=function(users){
+const removeBusinessStaff=function(user_id,business_id){
     //po
-    console.log(users);
-    $.post('/business/contractor/detach/user', {users})
+    $('.remove-business-staff-'+user_id).text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+    $.post('/admin/business/contractor/detach/user', {business_id,user_id})
         .done(function (data) {
             if (data['success']) {
                 toastr.success(data['message']);
-                setTimeout(function () {
-                    //close the modal
-                    $("#add-staff").modal("hide");
-                    //reload
-                    location.reload();
-                }, 1000);
+                $("#add-staff").modal("hide");
             } else {
                 toastr.success(data['message']);
             }
@@ -136,4 +130,4 @@ const removeBusinessStaff=function(users){
             });
         })
 
-}
+};

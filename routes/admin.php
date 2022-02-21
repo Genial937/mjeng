@@ -79,9 +79,9 @@ Route::group(['prefix' => '/business','middleware' => ['log.route']], function (
         'as' => 'admin.add.business.user',
         'uses' => 'Admin\BusinessController@addUsers'
     ]);
-    Route::post('/business/contractor/detach/user', [
+    Route::post('/contractor/detach/user', [
         'as' => 'admin.detach.business.user',
-        'uses' => 'Admin\BusinessController@detachUsers',
+        'uses' => 'Admin\BusinessController@detachUser',
     ]);
     Route::post('/contractor/add', [
         'as' => 'admin.create.business.contractor',
