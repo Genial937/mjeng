@@ -389,7 +389,7 @@
 
                                                                     IP Address: {{$_SERVER['REMOTE_ADDR']}}<br>
                                                                     Operating system: {{php_uname('s')}}<br>
-                                                                    Browser: {{get_browser($request->header('User-Agent'), true)["parent"]}}<br>
+                                                                    Browser: {{get_browser(request()->userAgent(), true)["parent"]}}<br>
                                                                 </p></td>
                                                         </tr>
                                                         <tr style="border-collapse:collapse">
