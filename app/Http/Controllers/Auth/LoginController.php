@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
+use App\Helpers\SendAuthEmail;
 /**
  * Class LoginController
  * @package App\Http\Controllers\Auth
@@ -77,24 +77,23 @@ class LoginController extends Controller
                     $otp=$this->generateOTPCode();
                     User::where("id",$user->id)->update(["otp" => $otp]);
                     $request->request->add(["otp" => $otp]);
-                    //send email otp
-//                    $sendMail=new SendEmailController();
-//                    $resp = $sendMail->otp($request);
-//                    $result = $resp->getData();
-//                    if ($result->success):
+                    //send email otp;
+                    $resp = SendAuthEmail::otp($request);
+                    $result = $resp->getData();
+                    if ($result->success):
                     return response()->json(
                         [
                             'success' => true,
                             'otp' => true,
                             'message' => 'Please check your phone/email inbox for verification code.'
                         ], JsonResponse::HTTP_CREATED);
-//                    else:
-//                        return response()->json(
-//                            [
-//                                'success' => false,
-//                                'errors' => $result->errors
-//                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-//                    endif;
+                    else:
+                        return response()->json(
+                            [
+                                'success' => false,
+                                'errors' => $result->errors
+                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                    endif;
                 else:
                     //invalid password
                     return response()->json([
