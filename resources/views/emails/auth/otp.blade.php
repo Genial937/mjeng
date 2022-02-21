@@ -21,9 +21,9 @@
         <o:PixelsPerInch>96</o:PixelsPerInch>
     </o:OfficeDocumentSettings>
     </xml><![endif]--> <!--[if !mso]><!-- -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet"> <!--<![endif]-->
-    <style type="text/css">#outlook a {
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:wght@200;400;500&display=swap" rel="stylesheet">
+  <style type="text/css">#outlook a {
             padding: 0;
         }
 
@@ -255,7 +255,7 @@
         }</style>
 </head>
 <body
-    style="width:100%;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
+    style="width:100%;font-family:'Josefin Sans', sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
 <div class="es-wrapper-color" style="background-color:#FAFAFA"> <!--[if gte mso 9]>
     <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
     <v:fill type="tile" color="#fafafa"></v:fill>
