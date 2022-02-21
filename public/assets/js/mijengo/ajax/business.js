@@ -112,7 +112,7 @@ const viewStaffsModal=function (jsonBusiness){
 
 const removeBusinessStaff=function(user_id,business_id){
     //po
-    $('.remove-business-staff-'+user_id).text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+    $('#remove-business-staff-'+user_id).text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
     $.post('/admin/business/contractor/detach/user', {business_id,user_id})
         .done(function (data) {
             if (data['success']) {
