@@ -58,7 +58,7 @@
                                                                             data-toggle="tooltip"
                                                                             data-original-title="{{$user->firstname}} {{$user->surname}}">
                                                                         <img
-                                                                            src="https://www.pngfind.com/pngs/m/381-3819326_default-avatar-svg-png-icon-free-download-avatar.png"
+                                                                            src="{{asset("assets/media/image/user/avatar.png")}}"
                                                                             class="rounded-circle" alt="image">
                                                                     </figure>
                                                                 @endforeach
@@ -72,6 +72,8 @@
                                                                 <i class="ti-more-alt"></i>
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right">
+                                                                <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
+                                                                    Details</a>
                                                                 <a href="{{route("admin.edit.contractor",$business->id)}}"
                                                                    class="dropdown-item">Edit</a>
                                                                 <a href="javascript:void(0)" onclick="viewStaffsModal('{{json_encode($business)}}')" class="dropdown-item">View Staff(s)</a>
