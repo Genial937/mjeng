@@ -85,7 +85,7 @@ class ProjectController extends Controller
             return response()->json([
                 'success' => true,
                 "project" =>$project,
-                "next_step"=>route("admin.create.project.sites",$project->id),
+                "next_step"=>route("admin.form.create.project.sites",$project->id),
                 'message' => 'Project successfully saved.',
             ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {

@@ -58,7 +58,7 @@
                                         <button class="btn btn-primary btn-rounded  btn-create-project-site" type="submit">
                                             Save
                                         </button>
-                                        <a href="{{route("admin.create.project.equipment.required",Request::segment(5))}}" class="btn btn-gradient-dark btn-rounded text-white">Next</a>
+                                        <a href="{{route("admin.form.create.project.equipment.required",Request::segment(5))}}" class="btn btn-gradient-dark btn-rounded text-white">Next</a>
                                     </form>
                                 </div>
                                 <div class="col-md-6 border-left">

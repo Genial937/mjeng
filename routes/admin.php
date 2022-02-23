@@ -22,7 +22,7 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'createDetails' => 'admin.create'
     ]);
     Route::get('/form/create/details', [
-        'as' => 'admin.create.project.details',
+        'as' => 'admin.form.create.project.details',
         'uses' => 'Admin\ProjectController@createDetailView'
     ]);
     Route::post('/create/details', [
@@ -30,7 +30,7 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'uses' => 'Admin\ProjectController@store'
     ]);
     Route::get('/form/create/site/{project_id}', [
-        'as' => 'admin.create.project.sites',
+        'as' => 'admin.form.create.project.sites',
         'uses' => 'Admin\ProjectSiteController@index'
     ]);
     Route::post('/create/site', [
@@ -46,7 +46,7 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'uses' => 'Admin\ProjectSiteController@destroy'
     ]);
     Route::get('/form/create/equipment/required/{project_id}', [
-        'as' => 'admin.create.project.equipment.required',
+        'as' => 'admin.form.create.project.equipment.required',
         'uses' => 'Admin\ProjectController@createEquipmentRequired'
     ]);
     Route::get('/form/site/material/required', [
