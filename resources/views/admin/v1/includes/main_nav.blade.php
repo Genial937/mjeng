@@ -14,13 +14,13 @@
             </a>
         </li>
         <li>
-            <a class="{{ Request::is('admin/projects') ? 'active' : ''}}" href="{{route("admin.project")}}">
+            <a class=" {{ Request::is('admin/projects/*') ? 'active' : ''}}" href="{{route("admin.project")}}">
                 <i class="nav-link-icon ti-folder"></i>
                 <span class="nav-link-label">Projects</span>
             </a>
         </li>
         <li>
-            <a class="{{ Request::is('admin/business') ? 'active' : ''}}" href="{{route("admin.contractor.businesses")}}">
+            <a class="{{ Request::is('admin/business/*') ? 'active' : ''}}" href="{{route("admin.contractor.businesses")}}">
                 <i class="nav-link-icon ti-briefcase"></i>
                 <span class="nav-link-label">Businesses</span>
             </a>

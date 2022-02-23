@@ -61,7 +61,7 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        //try {
+        try {
             //check email exist and user is active
             $user = User::whereEmail($request->email)->where("status", 1)->first();
             if (empty($user)):
@@ -120,6 +120,8 @@ class LoginController extends Controller
                     'errors' => ["errors" => ["Invalid OTP. Please type again or resend"]]
                 ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             endif;
+            //clear the otp used
+            User::where('otp', $request->otp)->update(["otp"=>""]);
             //authenticate user
             $credentials = $request->only('email', 'password');
             if (auth('web')->attempt($credentials)):
@@ -134,13 +136,13 @@ class LoginController extends Controller
                     'errors' => ["errors" => ["Invalid email or password. Please try again"]]
                 ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             endif;
-//        } catch (Exception $e) {
-//            // something went wrong
-//            return response()->json([
-//                'success' => false,
-//                'errors' => ["errors" => [$e->getMessage()]]
-//            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-//        }
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => ["errors" => [$e->getMessage()]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
     protected function generateOTPCode()
     {

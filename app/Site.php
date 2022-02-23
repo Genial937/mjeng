@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProjectSite extends Model
+class Site extends Model
 {
     /**
      * @var string[]
@@ -23,5 +23,12 @@ class ProjectSite extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tasks(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Task::class);
     }
 }

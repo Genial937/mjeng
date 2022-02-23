@@ -21,15 +21,31 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'index' => 'admin.project',
         'createDetails' => 'admin.create'
     ]);
-    Route::get('/form/details', [
+    Route::get('/form/create/details', [
         'as' => 'admin.create.project.details',
         'uses' => 'Admin\ProjectController@createDetailView'
     ]);
-    Route::get('/form/sites', [
-        'as' => 'admin.create.project.sites',
-        'uses' => 'Admin\ProjectController@createSites'
+    Route::post('/create/details', [
+        'as' => 'admin.create.project.details',
+        'uses' => 'Admin\ProjectController@store'
     ]);
-    Route::get('/form/site/equipment/required', [
+    Route::get('/form/create/site/{project_id}', [
+        'as' => 'admin.create.project.sites',
+        'uses' => 'Admin\ProjectSiteController@index'
+    ]);
+    Route::post('/create/site', [
+        'as' => 'admin.create.sites.details',
+        'uses' => 'Admin\ProjectSiteController@store'
+    ]);
+    Route::post('/edit/site', [
+        'as' => 'admin.update.project.sites',
+        'uses' => 'Admin\ProjectSiteController@update'
+    ]);
+    Route::get('/delete/site/{id}', [
+        'as' => 'admin.delete.project.site',
+        'uses' => 'Admin\ProjectSiteController@destroy'
+    ]);
+    Route::get('/form/create/equipment/required/{project_id}', [
         'as' => 'admin.create.project.equipment.required',
         'uses' => 'Admin\ProjectController@createEquipmentRequired'
     ]);
@@ -92,17 +108,21 @@ Route::group(['prefix' => '/business','middleware' => ['log.route']], function (
         'uses' => 'Admin\BusinessController@update'
     ]);
 });
-Route::group(['prefix' => '/config/counties','middleware' => ['log.route']], function () {
+Route::group(['prefix' => '/config/county','middleware' => ['log.route']], function () {
     Route::resource('/', 'Admin\CountyController')->names([
         'index' => 'admin.counties',
     ]);
-    Route::post('/config/add/county', [
+    Route::post('/add', [
         'as' => 'admin.create.county',
         'uses' => 'Admin\CountyController@store'
     ]);
-    Route::post('/config/edit/county', [
+    Route::post('/edit', [
         'as' => 'admin.edit.county',
         'uses' => 'Admin\CountyController@update'
+    ]);
+    Route::get('/find/{id}', [
+        'as' => 'admin.find.county',
+        'uses' => 'Admin\CountyController@find'
     ]);
 });
 
@@ -162,6 +182,10 @@ Route::group(['prefix' => '/config/equipment/type','middleware' => ['log.route']
     Route::post('/add', [
         'as' => 'admin.create.equipment.type',
         'uses' => 'Admin\EquipmentTypeController@store'
+    ]);
+    Route::get('/{id}', [
+        'as' => 'admin.get.equipment.type',
+        'uses' => 'Admin\EquipmentTypeController@find'
     ]);
 
 });

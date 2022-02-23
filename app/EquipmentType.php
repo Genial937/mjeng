@@ -33,4 +33,12 @@ class EquipmentType extends Model
     {
         return $this->belongsTo(Task::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function equipmentMakes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(EquipmentMake::class);
+    }
 }

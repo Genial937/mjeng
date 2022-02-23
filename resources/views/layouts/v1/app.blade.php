@@ -38,6 +38,9 @@
     <link rel="stylesheet" href="{{url("plugins/tagsinput/bootstrap-tagsinput.css")}}" type="text/css">
     <!-- Custom css -->
     <link rel="stylesheet" href="{{url("assets/css/custom.css")}}" type="text/css">
+
+    <!-- Style css -->
+    <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css">
     <!-- Plugin scripts -->
     <script src="{{url("plugins/bundle.js")}}"></script>
     <!-- Datatable -->

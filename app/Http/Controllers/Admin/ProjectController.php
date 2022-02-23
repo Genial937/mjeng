@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Business;
 use App\County;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\User;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -28,19 +31,11 @@ class ProjectController extends Controller
     public function createDetailView()
     {
 
-        $contractors=User::where("user_type","CONTRACTOR")->get();
+        $businesses=Business::get();
         $counties=County::all();
-        return view('admin.v1.project.create.details',compact("contractors","counties"));
+        return view('admin.v1.project.create.details',compact("businesses","counties"));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createSites()
-    {
-        return view('admin.v1.project.create.sites');
-    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -63,11 +58,46 @@ class ProjectController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "name"=>"required|unique:projects",
+            "description"=>"required",
+            "business_id"=>"required|exists:businesses,id",
+            "start_date"=>"required",
+            "end_date"=>"required",
+            "sub_county_id"=>"required",
+        ]);
+
+        try{
+
+            $project=Project::create($request->only(
+                "name",
+                "description",
+                "business_id",
+                "start_date",
+                "end_date",
+                "sub_county_id",
+                "status"
+            ));
+            return response()->json([
+                'success' => true,
+                "project" =>$project,
+                "next_step"=>route("admin.create.project.sites",$project->id),
+                'message' => 'Project successfully saved.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
 
     /**

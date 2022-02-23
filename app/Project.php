@@ -13,7 +13,7 @@ class Project extends Model
     protected $fillable=[
         "name",
         "description",
-        "user_id",
+        "business_id",
         "start_date",
         "end_date",
         "sub_county_id",
@@ -23,9 +23,9 @@ class Project extends Model
     /**
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function business(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Business::class);
     }
 
     /**

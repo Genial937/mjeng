@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Business;
 use App\County;
+use App\EquipmentType;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\SubCounty;
@@ -93,4 +94,31 @@ class CountyController extends Controller
 
 
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\EquipmentType  $equipmentType
+     * @return JsonResponse
+     */
+    public function find(Request $request)
+    {
+        try{
+            return response()->json([
+                'success' => true,
+                "county"=>County::with("subcounties")->find($request->route("id")),
+                'message' => 'Success',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+    }
+
 }

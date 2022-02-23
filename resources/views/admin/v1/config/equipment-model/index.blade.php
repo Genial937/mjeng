@@ -36,8 +36,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Equipment Type</label>
-                                                    <select id="equipment-type-id" name="equipment_type_id" class="form-control form-select-2">
-                                                        <option selected value="">Choose equipment type</option>
+                                                    <select id="equipment-type-id" name="equipment_type_id" class="form-control form-select-2" onchange="getEquipmentMake()">
+                                                        <option selected >Choose equipment type</option>
                                                         @if(!empty($equipment_types))
                                                             @foreach($equipment_types as $equipment_type)
                                                                 <option  value="{{$equipment_type->id}}">{{$equipment_type->name}}</option>
@@ -47,17 +47,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" id="equipment-make-div">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Equipment Make</label>
-                                                    <select id="make-id" name="equipment_make_id" class="form-control form-select-2" required>
-                                                        <option selected value="" >Choose task</option>
-                                                        @if(!empty($equipment_makes))
-                                                            @foreach($equipment_makes as $equipment_make)
-                                                                <option  value="{{$equipment_make->id}}">{{$equipment_make->name}}</option>
-                                                            @endforeach
-                                                        @endif
+                                                    <select id="equipment-make-id" name="equipment_make_id" class="form-control form-select-2" required>
+                                                        <option selected value="" >Choose make</option>
                                                     </select>
                                                 </div>
                                             </div>

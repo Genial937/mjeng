@@ -128,11 +128,16 @@
             },
             plugins: ["types"]
         }).on('changed.jstree', function (e, data) {
+            try{
             var href = data.node.a_attr.href;
             var parentId = data.node.a_attr.parent_id;
             if(href == '#')
                 return '';
             window.location.href = href;
+            }catch (e) {
+                //log
+                console.log(e.message);
+            }
         });
     });
 </script>

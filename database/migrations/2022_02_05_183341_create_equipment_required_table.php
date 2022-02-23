@@ -20,8 +20,8 @@ class CreateEquipmentRequiredTable extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('no_equipment');
             $table->float('payload_capacity');
-            $table->string('duration_type');
-            $table->float('duration_value');
+            $table->string('duration_unit');
+            $table->float('duration');
             $table->float('currency')->comment("KES");
             $table->float('lease_rates')->comment("1000");
             $table->string('lease_modality')->comment("per month,per day ect");

@@ -77,35 +77,30 @@ class EquipmentTypeController extends Controller
      * Display the specified resource.
      *
      * @param  \App\EquipmentType  $equipmentType
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function show(EquipmentType $equipmentType)
+    public function find(Request $request)
     {
-        //
+        try{
+            return response()->json([
+                'success' => true,
+                "equipment_type"=>EquipmentType::with("equipmentMakes")->find($request->route("id")),
+                'message' => 'Success',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\EquipmentType  $equipmentType
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(EquipmentType $equipmentType)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EquipmentType  $equipmentType
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, EquipmentType $equipmentType)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

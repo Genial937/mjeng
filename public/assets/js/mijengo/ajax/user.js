@@ -5,30 +5,32 @@ $(document).ready(function () {
         progressBar: true,
         showMethod: "slideDown",
         hideMethod: "slideUp",
-        showDuration: 1200,
+        showDuration: 100,
         hideDuration: 1500
     };
    ///create user
     $(document).on('submit', '#create-user-form', function (e) {
         e.preventDefault();
-        $('.btn-create-user').text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
-        var url = $('#create-user-form').attr('action');
-        $.post(url, $("#create-user-form").serialize())
+        let submit_button= $('.btn-create-user');
+        let form=$('#create-user-form');
+            submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url = form.attr('action');
+        $.post(url, form.serialize())
             .done(function (data) {
                 if (data['success']) {
-                    $('.btn-create-user').text('Save User').prop('disabled', false);
+                    submit_button.text('Save User').prop('disabled', false);
                         toastr.success(data['message']);
                     setTimeout(function () {
                         history.back();
                     }, 2000);
                     } else {
-                    $('.btn-create-user').text('Save User').prop('disabled', false);
+                    submit_button.text('Save User').prop('disabled', false);
                         toastr.success(data['message']);
                     }
             })
             .fail(function (data) {
                 console.error(data)
-                $('.btn-create-user').text('Save User').prop('disabled', false);
+                submit_button.text('Save User').prop('disabled', false);
                 var errors = data.responseJSON;
                 $.each(errors.errors, function (key, value) {
                     toastr.error(value[0]);

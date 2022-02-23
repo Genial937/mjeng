@@ -21,83 +21,69 @@
                     <div class="row">
 
                         <div class="col-xl-12">
-                            <div class="content-title mt-0">
-                                <a href="" class="btn btn-outline-secondary btn-uppercase">
-                                    <i class="ti-arrow-left mr-2"></i> Back
-                                </a>
-                            </div>
                             @include("admin.v1.project.create.includes.form-steps")
                             <div class="row margin-5-p">
-                                <div class="col-md-8 offset-2">
+                                <div class="col-md-3 offset-1">
                                     <div class="content-title mt-0">
-                                        <h4>Site Equipment Required</h4>
+                                        <h4>Project Equipment Required</h4>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4">
-                                    <h4>Add an Equipment Required</h4>
-                                    <form class="needs-validation margin-10-p" novalidate>
+                                    <form class="needs-validation margin-5-p">
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
                                                 <label for="end-date">Choose a Site</label>
-                                                <select class="form-select-2" >
+                                                <select class="form-select-2" id="site-id" name="site_id">
                                                     <option>Select</option>
-                                                    <option value="France">Site A</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
-                                                <label for="end-date">Choose a Task</label>
-                                                <select class="form-select-2" >
+                                                <label for="end-date">Choose a Site Task</label>
+                                                <select class="form-select-2" id="task-id" name="task_id">
                                                     <option>Select</option>
-                                                    <option value="France">Transporting</option>
+
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
                                                 <label for="end-date">Choose an Equipment Type</label>
-                                                <select class="form-select-2" >
+                                                <select class="form-select-2" id="equipment-type-id" name="equipment_type_id" >
                                                     <option>Select</option>
-                                                    <option value="France">Tipper</option>
+
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
-                                                <label for="site-name">Equipment Minimum Loading Capacity </label>
-                                                <input type="text" class="form-control" id="site-name"
-                                                       placeholder="Site name e.g Mombasa-Syokimau Extension" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a Loading  Capacity.
-                                                </div>
+                                                <label for="no-equipment">Number of Equipments Type Required</label>
+                                                <input type="number" class="form-control" id="no-equipment"
+                                                       placeholder="2" name="no_equipment">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
-                                                <label for="site-name">Number of Equipments Type Required</label>
-                                                <input type="text" class="form-control" id="site-name"
-                                                       placeholder="Site name e.g Mombasa-Syokimau Extension" required>
-                                                <div class="invalid-feedback">
-                                                    Please provide a Loading  Capacity.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-md-12 mb-3">
-                                                <label for="site-name">Duration the Equipments Type is Required</label>
+                                                <label for="site-name">Equipment Minimum Loading Capacity e.g 30 tonnes</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="validationCustomUsername"
-                                                           placeholder="Username" aria-describedby="inputGroupPrepend"
-                                                           required="">
-                                                    <div class="invalid-feedback">
-                                                        Please choose a username.
-                                                    </div>
+                                                    <input type="number" class="form-control" id="min-loading-capacity" name="payload_capacity"
+                                                           placeholder="3">
                                                     <div class="input-group-prepend">
                                                         <select class="form-control">
+                                                            <option>TONNES</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label for="duration">Duration the Equipments Type is Required e.g 5days</label>
+                                                <div class="input-group">
+                                                    <input type="number" class="form-control" id="duration"
+                                                           placeholder="Username" name="duration">
+                                                    <div class="input-group-prepend">
+                                                        <select name="duration_unit" class="form-control">
                                                             <option>DAYS</option>
                                                         </select>
                                                     </div>
@@ -107,16 +93,12 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
-                                                <label for="site-name">Payment Term</label>
+                                                <label >Payment Term e.g 3000/day</label>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="validationCustomUsername"
-                                                           placeholder="Username" aria-describedby="inputGroupPrepend"
-                                                           required="">
-                                                    <div class="invalid-feedback">
-                                                        Please choose a username.
-                                                    </div>
+                                                    <input type="number" class="form-control" id="lease-rates"
+                                                           placeholder="Payment term">
                                                     <div class="input-group-prepend">
-                                                        <select class="form-control">
+                                                        <select name="lease_modality" class="form-control">
                                                             <option>DAYS</option>
                                                         </select>
                                                     </div>
@@ -126,8 +108,8 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
-                                                <label for="end-date">Fuel Provision</label>
-                                                <select class="form-select-2" >
+                                                <label>Fuel Provision</label>
+                                                <select class="form-select-2" name="fuel_provision">
                                                     <option>Select</option>
                                                     <option value="France">OWNER</option>
                                                 </select>
@@ -136,7 +118,7 @@
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
                                                 <label for="end-date">CESS Provision</label>
-                                                <select class="form-select-2" >
+                                                <select class="form-select-2" name="cess_provision">
                                                     <option>Select</option>
                                                     <option value="France">OWNER</option>
                                                 </select>
@@ -149,12 +131,12 @@
                                             </div>
                                         </div>
 
-                                        <button class="btn btn-primary" type="submit">Save</button>
-                                        <a href="#" class="btn btn-info text-white" >Next</a>
+                                        <button class="btn btn-primary btn-rounded" type="submit">Save</button>
+                                        <a href="#" class="btn btn-gradient-dark btn-rounded text-white" >Next</a>
                                     </form>
                                 </div>
-                                <div class="col-md-4 border-left">
-                                    <h4>Equipment Required Added</h4>
+                                <div class="col-md-6 border-left">
+
                                     <div >
                                         <table class="table data-table">
                                             <thead class="thead-light">
