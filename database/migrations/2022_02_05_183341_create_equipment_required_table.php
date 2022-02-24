@@ -13,16 +13,20 @@ class CreateEquipmentRequiredTable extends Migration
      */
     public function up()
     {
-        Schema::create('equipment_required', function (Blueprint $table) {
+        Schema::create('equipment_requireds', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('site_id')->unsigned();
+            $table->foreign('site_id')->references('id')->on('sites')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('equipment_type_id')->unsigned();
             $table->foreign('equipment_type_id')->references('id')->on('equipment_types')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('no_equipment');
             $table->float('payload_capacity');
+            $table->float('payload_unit');
             $table->string('duration_unit');
             $table->float('duration');
-            $table->float('currency')->comment("KES");
+            $table->string('currency')->comment("KES");
             $table->float('lease_rates')->comment("1000");
             $table->string('lease_modality')->comment("per month,per day ect");
             $table->string('fuel_provision');

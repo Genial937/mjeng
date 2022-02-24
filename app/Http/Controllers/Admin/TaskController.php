@@ -7,6 +7,7 @@ use App\Configuration;
 use App\County;
 use App\Http\Controllers\Controller;
 use App\Project;
+use App\Site;
 use App\SubCounty;
 use App\Task;
 use App\User;
@@ -17,6 +18,10 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +33,32 @@ class TaskController extends Controller
         return view('admin.v1.config.tasks.index',compact("tasks"));
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\EquipmentType  $equipmentType
+     * @return JsonResponse
+     */
+    public function find(Request $request)
+    {
+        try{
+            return response()->json([
+                'success' => true,
+                "task"=>Task::with("equipmentTypes")->find($request->route("id")),
+                'message' => 'Success',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
+    }
     /**
      * Store a newly created resource in storage.
      *

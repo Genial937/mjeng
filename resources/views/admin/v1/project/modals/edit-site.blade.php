@@ -14,7 +14,7 @@
                             <h5 class="modal-title">
                                 <figure class="avatar avatar-sm mr-3">
                                     <span class="avatar-title bg-warning text-black-50 rounded-pill">
-                                        <i class="ti-user"></i>
+                                        <i class="ti-file"></i>
                                     </span>
                                 </figure>
                                 Edit Project Site</h5>

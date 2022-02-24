@@ -13,8 +13,14 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ProjectSiteController extends Controller
+class SiteController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +32,32 @@ class ProjectSiteController extends Controller
         $sites=Site::with("tasks")->get();
         return view('admin.v1.project.create.sites',compact("tasks","sites"));
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\EquipmentType  $equipmentType
+     * @return JsonResponse
+     */
+    public function find(Request $request)
+    {
+        try{
+            return response()->json([
+                'success' => true,
+                "site"=>Site::with("tasks")->find($request->route("id")),
+                'message' => 'Success',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
+    }
     /**
      * Store a newly created resource in storage.
      *

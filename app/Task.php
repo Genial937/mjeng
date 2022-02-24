@@ -14,5 +14,9 @@ class Task extends Model
         "description",
         "status"
     ];
+    public function equipmentTypes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(EquipmentType::class);
+    }
 
 }

@@ -31,23 +31,31 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
     ]);
     Route::get('/form/create/site/{project_id}', [
         'as' => 'admin.form.create.project.sites',
-        'uses' => 'Admin\ProjectSiteController@index'
+        'uses' => 'Admin\SiteController@index'
     ]);
     Route::post('/create/site', [
         'as' => 'admin.create.sites.details',
-        'uses' => 'Admin\ProjectSiteController@store'
+        'uses' => 'Admin\SiteController@store'
     ]);
     Route::post('/edit/site', [
         'as' => 'admin.update.project.sites',
-        'uses' => 'Admin\ProjectSiteController@update'
+        'uses' => 'Admin\SiteController@update'
     ]);
     Route::get('/delete/site/{id}', [
         'as' => 'admin.delete.project.site',
-        'uses' => 'Admin\ProjectSiteController@destroy'
+        'uses' => 'Admin\SiteController@destroy'
+    ]);
+    Route::get('/find/site/{id}', [
+        'as' => 'admin.find.project.site',
+        'uses' => 'Admin\SiteController@find'
     ]);
     Route::get('/form/create/equipment/required/{project_id}', [
         'as' => 'admin.form.create.project.equipment.required',
-        'uses' => 'Admin\ProjectController@createEquipmentRequired'
+        'uses' => 'Admin\EquipmentRequiredController@index'
+    ]);
+    Route::post('/create/equipment/required', [
+        'as' => 'admin.create.project.equipment.required',
+        'uses' => 'Admin\EquipmentRequiredController@store'
     ]);
     Route::get('/form/site/material/required', [
         'as' => 'admin.create.project.material.required',
@@ -219,6 +227,10 @@ Route::group(['prefix' => '/config/task','middleware' => ['log.route']], functio
     Route::post('/materials', [
         'as' => 'admin.task.materials',
         'uses' => 'Admin\TaskController@store'
+    ]);
+    Route::get('/find/{id}', [
+        'as' => 'admin.find.task',
+        'uses' => 'Admin\TaskController@find'
     ]);
 
 });

@@ -100,7 +100,34 @@ $(document).ready(function () {
                 });
             })
     });
-
+    //add equipment required
+    $(document).on('submit', '#create-equipment-required-form', function (e) {
+        e.preventDefault();
+        let form=$('#create-equipment-required-form');
+        let submit_button= $('.btn-create-equipment-required');
+        submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url, form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                    //reload page
+                    location.reload();
+                } else {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_button.text('Save').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 //get the county{id}-subcounties
 const getSubcounties=function(){
@@ -180,4 +207,70 @@ const deleteProjectSite=function(url) {
                 toastr.info('Delete Cancelled!');
             }
         })
+}
+//get site-tasks
+const getSiteTasks=function (){
+    let site_id =$("#site-id").val();
+    let form_select= $("#task-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/projects/find/site/"+site_id)
+        .done(function (data) {
+            if(data["site"] && data["site"].tasks.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose task</option>');
+                //populate
+                $.each(data["site"].tasks,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
+//get task-equipment type
+const getTaskEquipmentType=function (){
+    let task_id =$("#task-id").val();
+    let form_select= $("#equipment-type-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/config/task/find/"+task_id)
+        .done(function (data) {
+            console.log(data)
+            if(data["task"] && data["task"].equipment_types.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose task</option>');
+                //populate
+                $.each(data["task"].equipment_types,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
+//edit equipment required
+const editEquipmentRequired=function(requirement){
+    //decode
+    let decode_requirement=$.parseJSON(requirement);
+    //show edit modal
+    $("#edit-equipment-required").modal('show');
+    //set values
+    $("#modal-input-site-name").val(decode_site.name);
+    $("#modal-input-site-description").val(decode_site.description);
+    $('#modal-input-site-tasks').select2().val(task_ids).trigger('change');
+    $("#modal-input-site-id").val(decode_site.id);
+
 }

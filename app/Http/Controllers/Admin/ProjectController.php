@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,15 +40,7 @@ class ProjectController extends Controller
         return view('admin.v1.project.create.details',compact("businesses","counties"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createEquipmentRequired()
-    {
-        return view('admin.v1.project.create.equipments-required');
-    }
+
     /**
      * Show the form for creating a new resource.
      *
