@@ -154,3 +154,4 @@
         </div>
     </div>
 </div>
+<script src="{{url("assets/js/mijengo/select2.js")}}"></script>
