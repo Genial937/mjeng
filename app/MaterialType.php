@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MaterialType extends Model
 {
@@ -34,5 +35,12 @@ class MaterialType extends Model
     {
         return $this->belongsTo(Task::class);
     }
-
+    /**
+     * @return HasMany
+     * Project task
+     */
+    public function classifications(): HasMany
+    {
+        return $this->hasMany(MaterialClass::class);
+    }
 }

@@ -63,13 +63,16 @@
                                             </div>
                                         </th>
                                         <th>Name</th>
+                                        <th>Start Date</th>
                                         <th>End Date</th>
-                                        <th>Label</th>
+                                        <th>Status</th>
                                         <th>Contractor</th>
-                                        <th></th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @if(!empty($projects))
+                                    @foreach($projects as $project)
                                     <tr>
                                         <td></td>
                                         <td>
@@ -80,93 +83,37 @@
                                     </span>
                                                 </figure>
                                                 <span class="d-flex flex-column">
-                                    <span class="text-primary">Design Thinking Project</span>
-                                    <span class="small font-italic">550 KB</span>
+                                    <span class="text-primary">{{$project->name}}</span>
+
                                 </span>
                                             </a>
                                         </td>
-                                        <td>3/9/19, 2:40PM</td>
+                                        <td>{{$project->start_date}}</td>
+                                        <td>{{$project->end_date}}</td>
                                         <td>
-                                            <div class="badge bg-info-bright text-info">Design</div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Jo Hugill"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar1.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Cullie Philcott"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                    <span class="avatar-title bg-warning text-black-50 rounded-pill">
-                                        <i class="ti-folder"></i>
-                                    </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                    <span class="text-primary">User Research</span>
-                                    <span class="small font-italic">250 KB</span>
-                                </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
+                                            @if($project->status==0)
+                                            <div class="badge bg-info-bright text-info">Draft</div>
+                                            @elseif($project->status==1)
+                                            <div class="badge bg-info-bright text-info">Published</div>
+                                            @elseif($project->status==2)
+                                                <div class="badge bg-info-bright text-info">Ongoing</div>
+                                            @elseif($project->status==3)
+                                                <div class="badge bg-info-bright text-info">Closed</div>
+                                            @elseif($project->status==4)
+                                                <div class="badge bg-info-bright text-info">Deleted</div>
+                                            @endif
+
                                         </td>
                                         <td>
                                             <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
+                                                <figure class="avatar avatar-sm" title="{{$project->business->name}}"
                                                         data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
+                                                    <img src="{{asset("assets/media/image/user/avatar.png")}}"
                                                          class="rounded-circle"
                                                          alt="image">
+                                                    {{$project->business->name}}
                                                 </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
+
                                             </div>
                                         </td>
                                         <td class="text-right">
@@ -177,452 +124,15 @@
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
                                                         Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
+                                                    <a href="{{route("admin.form.create.project.sites",$project->id)}}?action=edit" class="dropdown-item">Project Sites</a>
+                                                    <a href="{{route("admin.form.create.project.equipment.required",$project->id)}}?action=edit" class="dropdown-item">Equipment Required</a>
+                                                    <a href="{{route("admin.form.create.material.required",$project->id)}}?action=edit" class="dropdown-item">Material Required</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                    <span class="avatar-title bg-warning text-black-50 rounded-pill">
-                                        <i class="ti-folder"></i>
-                                    </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                    <span class="text-primary">Important Documents</span>
-                                    <span class="small font-italic">590 KB</span>
-                                </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                    <span class="avatar-title rounded-pill">
-                                        <i class="ti-file"></i>
-                                    </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                    <span class="text-primary">Meeting-notes.doc</span>
-                                    <span class="small font-italic">139KB</span>
-                                </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                            <div class="badge bg-primary-bright text-primary">Public</div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Mella Mixter"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar1.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="" data-toggle="tooltip"
-                                                        data-original-title="Cullie Philcott">
-                                                    <span class="avatar-title bg-primary rounded-circle">+ 5</span>
-                                                </figure>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                            <span class="avatar-title rounded-pill">
-                                                <i class="ti-file"></i>
-                                            </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                    <span class="text-primary">composer.json</span>
-                                    <span class="small font-italic">55 KB</span>
-                                </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                            <div class="badge bg-primary-bright text-primary">Public</div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Mella Mixter"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar1.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Jo Hugill"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar1.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Cullie Philcott"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="" data-toggle="tooltip"
-                                                        data-original-title="Cullie Philcott">
-                                                    <span class="avatar-title bg-primary rounded-circle">+ 5</span>
-                                                </figure>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                            <span class="avatar-title rounded-pill">
-                                                <i class="ti-folder"></i>
-                                            </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                    <span class="text-primary">error_log.txt</span>
-                                    <span class="small font-italic">2MB</span>
-                                </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                            <div class="badge bg-warning-bright text-warning">Project</div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                            <span class="avatar-title rounded-pill">
-                                                <i class="ti-folder"></i>
-                                            </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                    <span class="text-primary">package.json</span>
-                                    <span class="small font-italic">5 KB</span>
-                                </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                            <div class="badge bg-warning-bright text-warning">Project</div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                            <span class="avatar-title rounded-pill">
-                                                <i class="ti-image"></i>
-                                            </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                            <span class="text-primary">Sitemap.png</span>
-                                            <span class="small font-italic">810KB</span>
-                                        </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                            <div class="badge bg-success-bright text-success">Social Media</div>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                            <span class="avatar-title rounded-pill">
-                                                <i class="ti-file"></i>
-                                            </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                            <span class="text-primary">Analytics.pdf</span>
-                                            <span class="small font-italic">10KB</span>
-                                        </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                            <div class="badge bg-info-bright text-info">Design</div>
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="Lisle Essam"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar2.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Baxie Roseblade"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/man_avatar5.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Mella Mixter"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar1.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                                <figure class="avatar avatar-sm" title="Mella Mixter"
-                                                        data-toggle="tooltip">
-                                                    <img src="../../assets/media/image/user/women_avatar4.jpg"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                </figure>
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">Share</a>
-                                                    <a href="#" class="dropdown-item">Download</a>
-                                                    <a href="#" class="dropdown-item">Copy to</a>
-                                                    <a href="#" class="dropdown-item">Move to</a>
-                                                    <a href="#" class="dropdown-item">Rename</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
-                                            <span class="avatar-title rounded-pill">
-                                                <i class="ti-file"></i>
-                                            </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
-                                            <span class="text-primary">Task-list.txt</span>
-                                            <span class="small font-italic">12 KB</span>
-                                        </span>
-                                            </a>
-                                        </td>
-                                        <td>3/9/19, 2:40PM</td>
-                                        <td>
-                                            <div class="badge bg-info-bright text-info">Design</div>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="#" class="dropdown-item">View</a>
-                                                    <a href="#" class="dropdown-item">Update</a>
-                                                    <a href="#" class="dropdown-item">Delete</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>

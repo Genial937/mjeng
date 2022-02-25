@@ -44,7 +44,7 @@ class TaskController extends Controller
         try{
             return response()->json([
                 'success' => true,
-                "task"=>Task::with("equipmentTypes")->find($request->route("id")),
+                "task"=>Task::with(["equipmentTypes","materialTypes"])->find($request->route("id")),
                 'message' => 'Success',
             ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {

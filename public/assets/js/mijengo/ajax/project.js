@@ -128,6 +128,66 @@ $(document).ready(function () {
                 });
             })
     });
+    //edit equipment required
+    $(document).on('submit', '#edit-equipment-required-form', function (e) {
+        e.preventDefault();
+        let form=$('#edit-equipment-required-form');
+        let submit_button= $('.btn-edit-equipment-required');
+        submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url, form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                    //show edit modal
+                    $("#edit-equipment-required").modal('hide');
+                    setTimeout(function () {
+                        location.reload();
+                    },2000)
+                } else {
+                    submit_button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_button.text('Save Changes').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
+    //add material required
+    $(document).on('submit', '#create-material-required-form', function (e) {
+        e.preventDefault();
+        let form=$('#create-material-required-form');
+        let submit_button= $('.btn-create-material-required');
+        submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url, form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.reload();
+                    },2000)
+                } else {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_button.text('Save').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 //get the county{id}-subcounties
 const getSubcounties=function(){
@@ -172,7 +232,7 @@ const editProjectSites=function(site){
 
 }
 
-const deleteProjectSite=function(url) {
+const deleteRecord=function(url) {
     //confirm delete
     swal({
         title: "Are you sure?",
@@ -209,7 +269,7 @@ const deleteProjectSite=function(url) {
         })
 }
 //get site-tasks
-const getSiteTasks=function (){
+const formAddGetSiteTasks=function (){
     let site_id =$("#site-id").val();
     let form_select= $("#task-id");
     form_select.empty().append('<option selected  >Loading ...</option>');
@@ -235,9 +295,116 @@ const getSiteTasks=function (){
         })
 }
 //get task-equipment type
-const getTaskEquipmentType=function (){
+const formAddGetTaskEquipmentType=function (){
     let task_id =$("#task-id").val();
     let form_select= $("#equipment-type-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/config/task/find/"+task_id)
+        .done(function (data) {
+            console.log(data)
+            if(data["task"] && data["task"].equipment_types.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose equipment type</option>');
+                //populate
+                $.each(data["task"].equipment_types,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
+//get task-material type
+const formAddGetTaskMaterialType=function (){
+    let task_id =$("#task-id").val();
+    let form_select= $("#material-type-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/config/task/find/"+task_id)
+        .done(function (data) {
+            console.log(data)
+            if(data["task"] && data["task"].material_types.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose material type</option>');
+                //populate
+                $.each(data["task"].material_types,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
+//get material-class type
+const formAddGetMaterialClass=function (){
+    let material_type_id =$("#material-type-id").val();
+    let form_select= $("#material-class-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/config/material/type/find/"+material_type_id)
+        .done(function (data) {
+            console.log(data)
+            if(data["material_type"] && data["material_type"].classifications.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose material classification</option>');
+                //populate
+                $.each(data["material_type"].classifications,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
+//get site-tasks
+const formEditGetSiteTasks=function (){
+    let site_id =$("#modal-input-site-id").val();
+    let form_select= $("#modal-input-task-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/projects/find/site/"+site_id)
+        .done(function (data) {
+            if(data["site"] && data["site"].tasks.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose task</option>');
+                //populate
+                $.each(data["site"].tasks,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
+//get task-equipment type
+const formEditGetTaskEquipmentType=function (){
+    let task_id =$("#modal-input-task-id").val();
+    let form_select= $("#modal-input-equipment-type-id");
     form_select.empty().append('<option selected  >Loading ...</option>');
     //request
     $.get("/admin/config/task/find/"+task_id)
@@ -268,9 +435,24 @@ const editEquipmentRequired=function(requirement){
     //show edit modal
     $("#edit-equipment-required").modal('show');
     //set values
-    $("#modal-input-site-name").val(decode_site.name);
-    $("#modal-input-site-description").val(decode_site.description);
-    $('#modal-input-site-tasks').select2().val(task_ids).trigger('change');
-    $("#modal-input-site-id").val(decode_site.id);
-
+    $("#modal-input-site-id").select2().val(decode_requirement.site.id).trigger('change');
+    //wait for 5sec- for the site change event to fetch task
+    setTimeout(function () {
+        $("#modal-input-task-id").select2().val(decode_requirement.task_id).trigger('change');
+        //wait for 5sec- for the site change event to fetch task
+        setTimeout(function () {
+            $("#modal-input-equipment-type-id").select2().val(decode_requirement.equipment_type_id).trigger('change');
+        }, 5000);
+    }, 5000);
+    $("#modal-input-no-equipment").val(decode_requirement.no_equipment);
+    $("#modal-input-min-loading-capacity").val(decode_requirement.payload_capacity);
+    $("#modal-input-payload-unit").val(decode_requirement.payload_unit);
+    $("#modal-input-duration").val(decode_requirement.duration);
+    $("#modal-input-duration-unit").val(decode_requirement.duration_unit);
+    $("#modal-input-currency").val(decode_requirement.currency);
+    $("#modal-input-lease-rates").val(decode_requirement.lease_rates);
+    $("#modal-input-lease-modality").val(decode_requirement.lease_modality);
+    $("#modal-input-fuel-provision").val(decode_requirement.fuel_provision);
+    $("#modal-input-cess-provision").val(decode_requirement.cess_provision);
+    $("#modal-equipment-required-id").val(decode_requirement.id);
 }

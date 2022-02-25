@@ -21,7 +21,9 @@
                     <div class="row">
 
                         <div class="col-xl-12">
-                            @include("admin.v1.project.create.includes.form-steps")
+                            @if(Request::get('action')!="edit")
+                               @include("admin.v1.project.create.includes.form-steps")
+                            @endif
                             <div class="row margin-5-p">
                                 <div class="col-md-3 offset-1">
                                     <div class="content-title mt-0">
@@ -31,7 +33,7 @@
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
                                                 <label for="end-date">Choose a project site</label>
-                                                <select class="form-select-2" id="site-id" name="site_id" onchange="getSiteTasks()">
+                                                <select class="form-select-2" id="site-id" name="site_id" onchange="formAddGetSiteTasks()">
                                                     <option>Choose site</option>
                                                     @if(!empty($sites))
                                                         @foreach($sites as $site)
@@ -45,7 +47,7 @@
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
                                                 <label for="end-date">Choose a site task</label>
-                                                <select class="form-select-2" id="task-id" name="task_id" onchange="getTaskEquipmentType()">
+                                                <select class="form-select-2" id="task-id" name="task_id" onchange="formAddGetTaskEquipmentType()">
                                                     <option>Select</option>
 
                                                 </select>
@@ -119,7 +121,7 @@
                                                     <input type="number" class="form-control" id="lease-rates" name="lease_rates"
                                                            placeholder="amount">
                                                     <div class="input-group-prepend">
-                                                        <select name="lease_modality" class="form-control">
+                                                        <select name="lease_modality" class="form-control" id="lease-modality">
                                                             <option value="HOUR">Hrs</option>
                                                             <option selected value="DAY">Day</option>
                                                             <option value="MONTH">Month</option>
@@ -153,10 +155,12 @@
 
 
                                         <button class="btn btn-primary btn-rounded btn-create-equipment-required" type="submit">Save</button>
-                                        <a href="#" class="btn btn-gradient-dark btn-rounded text-white" >Next</a>
+                                        @if(Request::get('action')!="edit")
+                                        <a href="{{route("admin.form.create.material.required",Request::segment(7))}}" class="btn btn-gradient-dark btn-rounded text-white">Continue <i class="ti-arrow-right"></i></a>
+                                         @endif
                                     </form>
                                 </div>
-                                <div class="col-md-6 border-left">
+                                <div class="col-md-7 border-left">
                                     <div class="content-title mt-0">
                                         <h4>Project Equipment Required List</h4>
                                     </div>
@@ -165,6 +169,7 @@
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Site</th>
+                                                <th scope="col">Task</th>
                                                 <th scope="col">Required Number</th>
                                                 <th scope="col">Payload Capacity</th>
                                                 <th scope="col">Duration Required</th>
@@ -180,10 +185,11 @@
                                                     @foreach($equipments_required as $equipment)
                                                         <tr>
                                                         <td>{{$equipment->site->name}}</td>
-                                                        <td>{{$equipment->no_equipment}}{{$equipment->equipmentType->name}}</td>
-                                                        <td >{{$equipment->payload_capacity}}{{$equipment->payload_unit}}</td>
-                                                        <td>{{$equipment->duration}}{{$equipment->duration_unit}}</td>
-                                                        <td>{{$equipment->currency}}{{$equipment->lease_rates}}/{{$equipment->lease_modality}}</td>
+                                                         <td>{{$equipment->task->name}}</td>
+                                                        <td>{{$equipment->no_equipment}} {{$equipment->equipmentType->name}}</td>
+                                                        <td >{{$equipment->payload_capacity}} {{$equipment->payload_unit}}</td>
+                                                        <td>{{$equipment->duration}} {{$equipment->duration_unit}}</td>
+                                                        <td>{{$equipment->currency}} {{$equipment->lease_rates}}/{{$equipment->lease_modality}}</td>
                                                         <td>{{$equipment->fuel_provision}}</td>
                                                         <td>{{$equipment->cess_provision}}</td>
                                                             <td class="text-left">
@@ -193,7 +199,7 @@
                                                                     </a>
                                                                     <div class="dropdown-menu dropdown-menu-right">
                                                                         <a href="#" class="dropdown-item" onclick="editEquipmentRequired('{{json_encode($equipment)}}')">Edit</a>
-                                                                        <a href="#" class="dropdown-item" onclick="deleteEquipmentRequired('{{route("admin.delete.project.site",$site->id)}}')">Delete</a>
+                                                                        <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("admin.delete.equipment.required",$equipment->id)}}')">Delete</a>
                                                                     </div>
                                                                 </div>
                                                             </td>

@@ -8,6 +8,7 @@ class EquipmentRequired extends Model
 {
     protected $fillable=[
         "site_id",
+        "task_id",
         "equipment_type_id",
         "no_equipment",
         "payload_capacity",
@@ -28,5 +29,9 @@ class EquipmentRequired extends Model
     public function site(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Site::class);
+    }
+    public function task(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Task::class);
     }
 }

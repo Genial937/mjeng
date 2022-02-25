@@ -12,6 +12,8 @@
 */
 
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', [
     'as' => 'admin.dashboard',
     'uses' => 'Admin\DashboardController@index'
@@ -57,9 +59,25 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'as' => 'admin.create.project.equipment.required',
         'uses' => 'Admin\EquipmentRequiredController@store'
     ]);
-    Route::get('/form/site/material/required', [
+    Route::post('/update/equipment/required', [
+        'as' => 'admin.update.project.equipment.required',
+        'uses' => 'Admin\EquipmentRequiredController@update'
+    ]);
+    Route::get('/delete/equipment/required/{id}', [
+        'as' => 'admin.delete.equipment.required',
+        'uses' => 'Admin\EquipmentRequiredController@destroy'
+    ]);
+    Route::get('/form/create/material/required/{project_id}', [
+        'as' => 'admin.form.create.material.required',
+        'uses' => 'Admin\MaterialRequiredController@index'
+    ]);
+    Route::post('/create/material/required', [
         'as' => 'admin.create.project.material.required',
-        'uses' => 'Admin\ProjectController@createViewMaterialRequired'
+        'uses' => 'Admin\MaterialRequiredController@store'
+    ]);
+    Route::get('/delete/material/required/{id}', [
+        'as' => 'admin.delete.material.required',
+        'uses' => 'Admin\SiteController@destroy'
     ]);
 });
 Route::group(['prefix' => '/users','middleware' => ['log.route']], function () {
@@ -170,6 +188,10 @@ Route::group(['prefix' => '/config/material/type','middleware' => ['log.route']]
     Route::post('/add', [
         'as' => 'admin.create.material.type',
         'uses' => 'Admin\MaterialTypeController@store'
+    ]);
+    Route::get('/find/{id}', [
+        'as' => 'admin.find.material.type',
+        'uses' => 'Admin\MaterialTypeController@find'
     ]);
 
 });

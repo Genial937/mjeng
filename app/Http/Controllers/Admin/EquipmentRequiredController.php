@@ -39,7 +39,7 @@ class EquipmentRequiredController extends Controller
         $currencies=Configuration::where("column","currency")->first();
         $currencies=empty($currencies) ?[]:json_decode($currencies->data);
         //equipment required
-        $equipments_required=EquipmentRequired::with(["equipmentType","site"])->get();
+        $equipments_required=EquipmentRequired::with(["equipmentType","site","task"])->get();
         return view('admin.v1.project.create.equipments-required',compact("sites","measurement_units","currencies",'equipments_required'));
     }
 
@@ -53,6 +53,7 @@ class EquipmentRequiredController extends Controller
     {
        $this->validate($request, [
            "site_id"=>"required|exists:sites,id",
+           "task_id"=>"required|exists:tasks,id",
            "equipment_type_id"=>"required|exists:equipment_types,id",
            "no_equipment"=>"required|numeric|min:0",
            "payload_capacity"=>"required|numeric|min:0",
@@ -69,6 +70,7 @@ class EquipmentRequiredController extends Controller
         try{
             $equipment_required=EquipmentRequired::create($request->only([
                 "site_id",
+                "task_id",
                 "equipment_type_id",
                 "no_equipment",
                 "payload_capacity",
@@ -97,49 +99,88 @@ class EquipmentRequiredController extends Controller
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
-
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\EquipmentRequired  $taskEquipmentRequired
-     * @return \Illuminate\Http\Response
-     */
-    public function show(EquipmentRequired $taskEquipmentRequired)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\EquipmentRequired  $taskEquipmentRequired
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(EquipmentRequired $taskEquipmentRequired)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EquipmentRequired  $taskEquipmentRequired
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function update(Request $request, EquipmentRequired $taskEquipmentRequired)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            "id"=>"required|exists:equipment_requireds,id",
+            "site_id"=>"required|exists:sites,id",
+            "task_id"=>"required|exists:tasks,id",
+            "equipment_type_id"=>"required|exists:equipment_types,id",
+            "no_equipment"=>"required|numeric|min:0",
+            "payload_capacity"=>"required|numeric|min:0",
+            "payload_unit"=>"required|string",
+            "duration_unit"=>"required|string",
+            "duration"=>"required|numeric|min:0",
+            "currency"=>"required|string",
+            "lease_rates"=>"required|numeric|min:0",
+            "lease_modality"=>"required|string",
+            "fuel_provision"=>"required|string",
+            "cess_provision"=>"required|string",
+        ]);
+        //store to db
+        try{
+            EquipmentRequired::where("id",$request->id)->update($request->only([
+                "site_id",
+                "task_id",
+                "equipment_type_id",
+                "no_equipment",
+                "payload_capacity",
+                "payload_unit",
+                "duration_unit",
+                "duration",
+                "currency",
+                "lease_rates",
+                "lease_modality",
+                "fuel_provision",
+                "cess_provision"
+            ]));
+            return response()->json([
+                'success' => true,
+                'message' => 'Equipment required successfully updated.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EquipmentRequired  $taskEquipmentRequired
-     * @return \Illuminate\Http\Response
+     * @param  \App\Site  $projectSite
+     * @return JsonResponse
      */
-    public function destroy(EquipmentRequired $taskEquipmentRequired)
+    public function destroy(Request $request)
     {
-        //
+        try{
+            $site=EquipmentRequired::find($request->route("id"));
+            $site->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Equipment required successfully deleted.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
     }
 }

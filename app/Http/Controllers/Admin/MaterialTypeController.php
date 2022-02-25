@@ -75,37 +75,29 @@ class MaterialTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\MaterialType $materialType
-     * @return \Illuminate\Http\Response
+     * @param  \App\EquipmentType  $equipmentType
+     * @return JsonResponse
      */
-    public function show(MaterialType $materialType)
+    public function find(Request $request)
     {
-        //
-    }
+        try{
+            return response()->json([
+                'success' => true,
+                "material_type"=>MaterialType::with(["classifications"])->find($request->route("id")),
+                'message' => 'Success',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\MaterialType $materialType
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(MaterialType $materialType)
-    {
-        //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\MaterialType $materialType
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, MaterialType $materialType)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      *

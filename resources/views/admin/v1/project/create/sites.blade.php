@@ -18,11 +18,13 @@
                 <div class="content">
                     <div class="row">
                         <div class="col-xl-12">
-                            @include("admin.v1.project.create.includes.form-steps")
+                            @if(Request::get('action')!="edit")
+                                @include("admin.v1.project.create.includes.form-steps")
+                            @endif
                             <div class="row margin-5-p">
                                 <div class="col-md-3 offset-1">
                                     <div class="content-title mt-0">
-                                        <h4>Project Sites</h4>
+                                        <h4>Add a Project Sites</h4>
                                     </div>
                                     <form class="margin-10-p" id="create-project-site-form"
                                           action="{{route("admin.create.sites.details")}}">
@@ -58,10 +60,15 @@
                                         <button class="btn btn-primary btn-rounded  btn-create-project-site" type="submit">
                                             Save
                                         </button>
-                                        <a href="{{route("admin.form.create.project.equipment.required",Request::segment(5))}}" class="btn btn-gradient-dark btn-rounded text-white">Next</a>
+                                        @if(Request::get('action')!="edit")
+                                            <a href="{{route("admin.form.create.project.equipment.required",Request::segment(5))}}" class="btn btn-gradient-dark btn-rounded text-white">Next</a>
+                                        @endif
                                     </form>
                                 </div>
                                 <div class="col-md-6 border-left">
+                                    <div class="content-title mt-0">
+                                        <h4>Project Sites</h4>
+                                    </div>
                                     <div>
                                         <table class="table data-table">
                                             <thead class="thead-light">

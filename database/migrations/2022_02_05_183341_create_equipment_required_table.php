@@ -18,6 +18,9 @@ class CreateEquipmentRequiredTable extends Migration
             $table->integer('site_id')->unsigned();
             $table->foreign('site_id')->references('id')->on('sites')
                 ->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('task_id')->unsigned();
+            $table->foreign('task_id')->references('id')->on('tasks')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('equipment_type_id')->unsigned();
             $table->foreign('equipment_type_id')->references('id')->on('equipment_types')
                 ->onUpdate('cascade')->onDelete('cascade');

@@ -18,5 +18,9 @@ class Task extends Model
     {
         return $this->hasMany(EquipmentType::class);
     }
+    public function materialTypes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(MaterialType::class);
+    }
 
 }

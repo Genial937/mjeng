@@ -24,7 +24,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('admin.v1.project.index');
+
+        //projects
+        $projects = Project::with(["business"])->get();
+        return view('admin.v1.project.index',compact("projects"));
     }
 
     /**
@@ -40,16 +43,6 @@ class ProjectController extends Controller
         return view('admin.v1.project.create.details',compact("businesses","counties"));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createViewMaterialRequired()
-    {
-        return view('admin.v1.project.create.materials-required');
-    }
     /**
      * Store a newly created resource in storage.
      *
