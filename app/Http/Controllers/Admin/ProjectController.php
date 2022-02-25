@@ -24,10 +24,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-
+        $businesses=Business::get();
+        $counties=County::all();
         //projects
         $projects = Project::with(["business"])->get();
-        return view('admin.v1.project.index',compact("projects"));
+        return view('admin.v1.project.index',compact("projects","businesses","counties"));
     }
 
     /**

@@ -215,7 +215,19 @@ const getSubcounties=function(){
             });
         })
 }
+//edit project details
+const editProjectDetails=function(project){
+    //decode
+    let decoded_project=$.parseJSON(project);
+    //show edit modal
+    $("#edit-project").modal('show');
+    //set values
+    $("#modal-input-project-name").val(decoded_project.name);
+    $("#modal-input-project-description").val(decoded_project.description);
+    $('#modal-input-start-date').val(decoded_project.start_date);
+    $("#modal-input-end-date").val(decoded_project.end_date);
 
+}
 //edit site
 const editProjectSites=function(site){
     //decode

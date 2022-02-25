@@ -23,6 +23,10 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'index' => 'admin.project',
         'createDetails' => 'admin.create'
     ]);
+    Route::post('/edit/details', [
+        'as' => 'admin.edit.project.details',
+        'uses' => 'Admin\ProjectController@store'
+    ]);
     Route::get('/form/create/details', [
         'as' => 'admin.form.create.project.details',
         'uses' => 'Admin\ProjectController@createDetailView'

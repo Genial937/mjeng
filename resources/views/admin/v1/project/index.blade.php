@@ -24,7 +24,8 @@
                             <div class="content-title mt-0">
                                 <h4>Projects</h4>
                                 <div class="text-right">
-                                    <a href="{{route("admin.form.create.project.details")}}" class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>
+                                    <a href="{{route("admin.form.create.project.details")}}"
+                                       class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>
                                 </div>
 
                             </div>
@@ -32,7 +33,8 @@
                             <div class="d-md-flex justify-content-between mb-4">
                                 <ul class="list-inline mb-3">
                                     <li class="list-inline-item mb-0">
-                                        <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
+                                        <a href="#" class="btn btn-outline-light dropdown-toggle"
+                                           data-toggle="dropdown">
                                             Export
                                         </a>
                                         <div class="dropdown-menu">
@@ -42,7 +44,8 @@
                                     </li>
 
                                     <li class="list-inline-item mb-0">
-                                        <a href="#" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">
+                                        <a href="#" class="btn btn-outline-light dropdown-toggle"
+                                           data-toggle="dropdown">
                                             Sort
                                         </a>
                                         <div class="dropdown-menu">
@@ -58,7 +61,8 @@
                                     <tr>
                                         <th>
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="files-select-all">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       id="files-select-all">
                                                 <label class="custom-control-label" for="files-select-all"></label>
                                             </div>
                                         </th>
@@ -72,66 +76,72 @@
                                     </thead>
                                     <tbody>
                                     @if(!empty($projects))
-                                    @foreach($projects as $project)
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <figure class="avatar avatar-sm mr-3">
+                                        @foreach($projects as $project)
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <a href="#" class="d-flex align-items-center">
+                                                        <figure class="avatar avatar-sm mr-3">
                                     <span class="avatar-title bg-warning text-black-50 rounded-pill">
                                         <i class="ti-folder"></i>
                                     </span>
-                                                </figure>
-                                                <span class="d-flex flex-column">
+                                                        </figure>
+                                                        <span class="d-flex flex-column">
                                     <span class="text-primary">{{$project->name}}</span>
-
+                                        <span class="small font-italic">{{$project->description}}</span>
                                 </span>
-                                            </a>
-                                        </td>
-                                        <td>{{$project->start_date}}</td>
-                                        <td>{{$project->end_date}}</td>
-                                        <td>
-                                            @if($project->status==0)
-                                            <div class="badge bg-info-bright text-info">Draft</div>
-                                            @elseif($project->status==1)
-                                            <div class="badge bg-info-bright text-info">Published</div>
-                                            @elseif($project->status==2)
-                                                <div class="badge bg-info-bright text-info">Ongoing</div>
-                                            @elseif($project->status==3)
-                                                <div class="badge bg-info-bright text-info">Closed</div>
-                                            @elseif($project->status==4)
-                                                <div class="badge bg-info-bright text-info">Deleted</div>
-                                            @endif
+                                                    </a>
+                                                </td>
+                                                <td>{{$project->start_date}}</td>
+                                                <td>{{$project->end_date}}</td>
+                                                <td>
+                                                    @if($project->status==0)
+                                                        <div class="badge bg-info-bright text-info">Draft</div>
+                                                    @elseif($project->status==1)
+                                                        <div class="badge bg-info-bright text-info">Published</div>
+                                                    @elseif($project->status==2)
+                                                        <div class="badge bg-info-bright text-info">Ongoing</div>
+                                                    @elseif($project->status==3)
+                                                        <div class="badge bg-info-bright text-info">Closed</div>
+                                                    @elseif($project->status==4)
+                                                        <div class="badge bg-info-bright text-info">Deleted</div>
+                                                    @endif
 
-                                        </td>
-                                        <td>
-                                            <div class="avatar-group">
-                                                <figure class="avatar avatar-sm" title="{{$project->business->name}}"
-                                                        data-toggle="tooltip">
-                                                    <img src="{{asset("assets/media/image/user/avatar.png")}}"
-                                                         class="rounded-circle"
-                                                         alt="image">
-                                                    {{$project->business->name}}
-                                                </figure>
+                                                </td>
+                                                <td>
+                                                    <div class="avatar-group">
+                                                        <figure class="avatar avatar-sm"
+                                                                title="{{$project->business->name}}"
+                                                                data-toggle="tooltip">
+                                                            <img src="{{asset("assets/media/image/user/avatar.png")}}"
+                                                                 class="rounded-circle"
+                                                                 alt="image">
+                                                            {{$project->business->name}}
+                                                        </figure>
 
-                                            </div>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="btn btn-floating" data-toggle="dropdown">
-                                                    <i class="ti-more-alt"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                        Details</a>
-                                                    <a href="{{route("admin.form.create.project.sites",$project->id)}}?action=edit" class="dropdown-item">Project Sites</a>
-                                                    <a href="{{route("admin.form.create.project.equipment.required",$project->id)}}?action=edit" class="dropdown-item">Equipment Required</a>
-                                                    <a href="{{route("admin.form.create.material.required",$project->id)}}?action=edit" class="dropdown-item">Material Required</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                                    </div>
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="dropdown">
+                                                        <a href="#" class="btn btn-floating" data-toggle="dropdown">
+                                                            <i class="ti-more-alt"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a href="#" class="dropdown-item"
+                                                               data-sidebar-target="#view-detail">View
+                                                                Details</a>
+                                                            <a href="javascript:void(0)" class="dropdown-item" onclick="editProjectDetails('{{json_encode($project)}}')" >Edit Project Details</a>
+                                                            <a href="{{route("admin.form.create.project.sites",$project->id)}}?action=edit"
+                                                               class="dropdown-item">Project Sites</a>
+                                                            <a href="{{route("admin.form.create.project.equipment.required",$project->id)}}?action=edit"
+                                                               class="dropdown-item">Equipment Required</a>
+                                                            <a href="{{route("admin.form.create.material.required",$project->id)}}?action=edit"
+                                                               class="dropdown-item">Material Required</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     @endif
                                     </tbody>
                                 </table>
@@ -151,4 +161,10 @@
         </div>
         <!-- ./ Content wrapper -->
     </div>
+    <!-- modals  -->
+    @include("admin.v1.project.modals.edit-project")
+    <!-- Files page  -->
+    <script src="{{url("assets/js/mijengo/select2.js")}}"></script>
+    <script src="{{url("assets/js/mijengo/datepicker.js")}}"></script>
+    <script src="{{url("assets/js/mijengo/ajax/project.js")}}"></script>
 @endsection
