@@ -22,7 +22,7 @@ class BusinessController extends Controller
     public function index()
     {
         $businesses=Business::with("users")->get();
-        $users=User::all();
+        $users=User::where("user_type","CONTRACTOR")->get();
         return view('admin.v1.businesses.contractor.index',compact("businesses",'users'));
     }
     /**

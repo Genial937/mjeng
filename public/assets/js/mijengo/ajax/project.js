@@ -219,6 +219,35 @@ $(document).ready(function () {
                 });
             })
     });
+    //edit material required
+    $(document).on('submit', '#edit-material-required-form', function (e) {
+        e.preventDefault();
+        let form=$('#edit-material-required-form');
+        let submit_button= $('.btn-edit-material-required');
+        submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url, form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.reload();
+                    },2000)
+                } else {
+                    submit_button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_button.text('Save Changes').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 //get the county{id}-subcounties
 const getSubcounties=function(){

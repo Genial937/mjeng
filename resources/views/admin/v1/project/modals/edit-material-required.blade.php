@@ -19,7 +19,7 @@
                                 </figure>
                                 Edit Material Required</h5>
                             <hr>
-                            <form class=" margin-10-p" id="create-material-required-form" action="{{route("admin.create.project.material.required")}}">
+                            <form class=" margin-10-p" id="edit-material-required-form" action="{{route("admin.edit.project.material.required")}}">
                                 <div class="form-row">
                                     <div class="col-md-12 mb-3">
                                         <label >Choose a project site</label>
@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="id" id="modal-input-material-required-id">
-                                <button class="btn btn-primary btn-rounded btn-create-material-required" type="submit">Save</button>
+                                <button class="btn btn-primary btn-rounded btn-edit-material-required" type="submit">Save Changes</button>
                             </form>
                         </div>
                     </div>

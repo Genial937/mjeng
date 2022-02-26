@@ -79,9 +79,13 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'as' => 'admin.create.project.material.required',
         'uses' => 'Admin\MaterialRequiredController@store'
     ]);
+    Route::post('/edit/material/required', [
+        'as' => 'admin.edit.project.material.required',
+        'uses' => 'Admin\MaterialRequiredController@update'
+    ]);
     Route::get('/delete/material/required/{id}', [
         'as' => 'admin.delete.material.required',
-        'uses' => 'Admin\SiteController@destroy'
+        'uses' => 'Admin\MaterialRequiredController@destroy'
     ]);
 });
 Route::group(['prefix' => '/users','middleware' => ['log.route']], function () {

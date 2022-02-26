@@ -29,7 +29,7 @@
                                         <ol class="cd-breadcrumb">
                                             <li><a href="{{route("admin.dashboard")}}" class="text-sm-left">Home</a></li>
                                             <li><a href="{{route("admin.project")}}">Projects</a></li>
-                                            <li class="current"><em>Equipment Required</em></li>
+                                            <li class="current"><em>Material Required</em></li>
                                         </ol>
                                     </nav>
                                 </div>

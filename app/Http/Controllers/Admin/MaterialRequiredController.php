@@ -98,15 +98,87 @@ class MaterialRequiredController extends Controller
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
-
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return JsonResponse
+     */
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            "id"=>"required|exists:materials_requireds,id",
+            "site_id"=>"required|exists:sites,id",
+            "task_id"=>"required|exists:tasks,id",
+            "material_type_id"=>"required|exists:material_types,id",
+            "material_class_id"=>"required|exists:material_classes,id",
+            "quantity_required"=>"required|numeric|min:0",
+            "quantity_required_unit"=>"required|string",
+            "quantity_required_per_day"=>"required|numeric|min:0",
+            "quantity_required_per_day_unit"=>"required|string",
+            "currency"=>"required|string",
+            "lease_rates"=>"required|numeric|min:0",
+            "lease_modality"=>"required|string",
+            "payment_term_desc"=>"required|string",
+            "cess"=>"required|string",
+        ]);
+        //udpate to db
+        try{
+            MaterialsRequired::where("id",$request->id)->update($request->only([
+                "site_id",
+                "task_id",
+                "material_type_id",
+                "material_class_id",
+                "quantity_required",
+                "quantity_required_unit",
+                "quantity_required_per_day",
+                "quantity_required_per_day_unit",
+                "currency",
+                "lease_rates",
+                "lease_modality",
+                "payment_term_desc",
+                "cess"
+            ]));
+            return response()->json([
+                'success' => true,
+                'message' => 'Material required successfully update.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TaskMaterialRequired  $taskMaterialRequired
-     * @return \Illuminate\Http\Response
+     * @param  \App\Site  $projectSite
+     * @return JsonResponse
      */
-    public function destroy(TaskMaterialRequired $taskMaterialRequired)
+    public function destroy(Request $request)
     {
-        //
+        try{
+            $material_required=MaterialsRequired::find($request->route("id"));
+            $material_required->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Material Required successfully deleted.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
     }
 }

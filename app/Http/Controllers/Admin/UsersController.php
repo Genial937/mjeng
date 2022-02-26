@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
         public function index(Request $request)
         {
 
-          $users=User::with("roles")->get();
+          $users=User::with("roles")->where("user_type","ADMIN")->get();
 
           return view('admin.v1.users.index',compact("users"));
         }
@@ -35,7 +35,7 @@ use Illuminate\Http\Request;
         }
         public function showEditView(Request $request)
         {
-                $user=User::with(["roles","businesses"])->find($request->route("id"));
+                $user=User::with(["roles","businesses"])->where("user_type","ADMIN")->find($request->route("id"));
                 $roles=Role::with(["users","permissions"])->get();
                 $businesses=Business::with("users")->where("status",1)->get();
                 return view('admin.v1.users.edit',compact("user",'roles','businesses'));

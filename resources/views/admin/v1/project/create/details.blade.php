@@ -19,7 +19,14 @@
 
 
                     <div class="row">
-
+                        <div class="content-title mt-0">
+                            <nav>
+                                <ol class="cd-breadcrumb">
+                                    <li><a href="{{route("admin.dashboard")}}" class="text-sm-left">Home</a></li>
+                                    <li class="current"><em>Businesses</em></li>
+                                </ol>
+                            </nav>
+                        </div>
                         <div class="col-xl-12">
                             @include("admin.v1.project.create.includes.form-steps")
                             <form class="needs-validation margin-5-p" novalidate action="{{route("admin.create.project.details")}}" id="create-project-detail-form">
