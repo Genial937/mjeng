@@ -23,10 +23,11 @@ class MaterialRequiredController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $project_id=$request->route("project_id");
         //sites
-        $sites=Site::get();
+        $sites=Site::where("project_id",$project_id)->get();
         //measurement units
         $units=Configuration::where("column","units")->first();
         $measurement_units=empty($units) ?[]:json_decode($units->data);
@@ -34,7 +35,10 @@ class MaterialRequiredController extends Controller
         $currencies=Configuration::where("column","currency")->first();
         $currencies=empty($currencies) ?[]:json_decode($currencies->data);
         //material required
-        $materials_required=MaterialsRequired::with(["materialType","site","task",'classification'])->get();
+        $materials_required=MaterialsRequired::with(["materialType","site","task",'classification'])
+            ->join('sites', 'sites.id', 'materials_requireds.site_id')
+            ->where("sites.project_id",$project_id)
+            ->get();
         return view('admin.v1.project.create.materials-required',compact("sites","measurement_units","currencies",'materials_required'));
     }
 

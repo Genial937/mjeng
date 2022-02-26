@@ -56,6 +56,7 @@ $(document).ready(function () {
                     toastr.success(data['message']);
                     //reset the form
                     form.trigger("reset");
+                    location.reload();
                 } else {
                     submit_button.text('Save').prop('disabled', false);
                     toastr.success(data['message']);
@@ -188,6 +189,36 @@ $(document).ready(function () {
                 });
             })
     });
+
+    //edit project
+    $(document).on('submit', '#edit-project-detail-form', function (e) {
+        e.preventDefault();
+        let form=$('#edit-project-detail-form');
+        let submit_button= $('.btn-edit-project-details');
+        submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url, form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.reload();
+                    },2000)
+                } else {
+                    submit_button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_button.text('Save Changes').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 //get the county{id}-subcounties
 const getSubcounties=function(){
@@ -215,10 +246,36 @@ const getSubcounties=function(){
             });
         })
 }
+const getEditSubcounties=function(){
+    let county_id =$("#modal-input-county-id").val();
+    let form_select= $("#modal-input-sub-county-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/config/county/find/"+county_id)
+        .done(function (data) {
+            if(data["county"] && data["county"].subcounties.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose subcounty</option>');
+                //populate
+                $.each(data["county"].subcounties,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
 //edit project details
 const editProjectDetails=function(project){
     //decode
     let decoded_project=$.parseJSON(project);
+    console.log(decoded_project)
     //show edit modal
     $("#edit-project").modal('show');
     //set values
@@ -226,6 +283,12 @@ const editProjectDetails=function(project){
     $("#modal-input-project-description").val(decoded_project.description);
     $('#modal-input-start-date').val(decoded_project.start_date);
     $("#modal-input-end-date").val(decoded_project.end_date);
+    $("#modal-input-business-id").select2().val(decoded_project.business_id).trigger('change');
+    $("#modal-input-county-id").select2().val(decoded_project.sub_county.county.id).trigger('change');
+    setTimeout(function () {
+        $("#modal-input-sub-county-id").select2().val(decoded_project.sub_county.id).trigger('change');
+    },5000)
+    $("#modal-input-project-id").val(decoded_project.id);
 
 }
 //edit site
@@ -467,4 +530,5 @@ const editEquipmentRequired=function(requirement){
     $("#modal-input-fuel-provision").val(decode_requirement.fuel_provision);
     $("#modal-input-cess-provision").val(decode_requirement.cess_provision);
     $("#modal-equipment-required-id").val(decode_requirement.id);
+
 }

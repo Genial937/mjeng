@@ -27,7 +27,7 @@ class ProjectController extends Controller
         $businesses=Business::get();
         $counties=County::all();
         //projects
-        $projects = Project::with(["business"])->get();
+        $projects = Project::with(["business","subCounty"])->get();
         return view('admin.v1.project.index',compact("projects","businesses","counties"));
     }
 
@@ -89,40 +89,51 @@ class ProjectController extends Controller
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
-
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            "id"=>"required",
+            "name"=>"required",
+            "description"=>"required",
+            "business_id"=>"required|exists:businesses,id",
+            "start_date"=>"required",
+            "end_date"=>"required",
+            "sub_county_id"=>"required",
+        ]);
+
+        try{
+
+               Project::where("id",$request->id)->update($request->only(
+                "name",
+                "description",
+                "business_id",
+                "start_date",
+                "end_date",
+                "sub_county_id",
+                "status"
+            ));
+            return response()->json([
+                'success' => true,
+                'message' => 'Project successfully updated.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

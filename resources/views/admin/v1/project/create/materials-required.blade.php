@@ -28,7 +28,7 @@
                                 </div>
                             @endif
                             <div class="row margin-5-p">
-                                <div class="col-md-3 offset-1">
+                                <div class="col-md-4 offset-1">
                                     <div class="content-title mt-0">
                                         <h4>Add a Material Required</h4>
                                     </div>
@@ -157,7 +157,7 @@
                                         <button class="btn btn-primary btn-rounded btn-create-material-required" type="submit">Save</button>
                                      </form>
                                 </div>
-                                <div class="col-md-7 border-left">
+                                <div class="col-md-6 border-left">
                                     <div class="content-title mt-0">
                                     <h4>Material Required List</h4>
                                     </div>

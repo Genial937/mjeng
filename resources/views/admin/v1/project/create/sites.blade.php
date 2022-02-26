@@ -60,12 +60,12 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="project_id" value="{{Request::segment(5)}}" >
+                                        <input type="hidden" name="project_id" value="{{$project_id}}" >
                                         <button class="btn btn-primary btn-rounded  btn-create-project-site" type="submit">
                                             Save
                                         </button>
                                         @if(Request::get('action')!="edit")
-                                            <a href="{{route("admin.form.create.project.equipment.required",Request::segment(5))}}" class="btn btn-gradient-dark btn-rounded text-white">Next</a>
+                                            <a href="{{route("admin.form.create.project.equipment.required",$project_id)}}" class="btn btn-gradient-dark btn-rounded text-white">Next</a>
                                         @endif
                                     </form>
                                 </div>

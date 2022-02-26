@@ -26,11 +26,12 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $project_id=$request->route("project_id");
         $tasks=Task::all();
-        $sites=Site::with("tasks")->get();
-        return view('admin.v1.project.create.sites',compact("tasks","sites"));
+        $sites=Site::with("tasks")->where("project_id",$project_id)->get();
+        return view('admin.v1.project.create.sites',compact("tasks","sites","project_id"));
     }
     /**
      * Display the specified resource.

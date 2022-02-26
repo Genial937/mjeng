@@ -33,6 +33,6 @@ class Project extends Model
      */
     public function subCounty(): BelongsTo
     {
-       return $this->belongsTo(SubCounty::class);
+       return $this->belongsTo(SubCounty::class)->with("county");
     }
 }

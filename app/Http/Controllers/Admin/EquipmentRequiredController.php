@@ -28,10 +28,11 @@ class EquipmentRequiredController extends Controller
      *
      * @return Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $project_id=$request->route("project_id");
         //sites
-        $sites=Site::get();
+        $sites=Site::where("project_id",$project_id)->get();
         //measurement units
         $units=Configuration::where("column","units")->first();
         $measurement_units=empty($units) ?[]:json_decode($units->data);
@@ -39,8 +40,11 @@ class EquipmentRequiredController extends Controller
         $currencies=Configuration::where("column","currency")->first();
         $currencies=empty($currencies) ?[]:json_decode($currencies->data);
         //equipment required
-        $equipments_required=EquipmentRequired::with(["equipmentType","site","task"])->get();
-        return view('admin.v1.project.create.equipments-required',compact("sites","measurement_units","currencies",'equipments_required'));
+        $equipments_required=EquipmentRequired::with(["equipmentType","site","task"])
+            ->join('sites', 'sites.id', 'equipment_requireds.site_id')
+            ->where("sites.project_id",$project_id)
+            ->get();
+        return view('admin.v1.project.create.equipments-required',compact("sites","measurement_units","currencies",'equipments_required',"project_id"));
     }
 
     /**

@@ -79,7 +79,7 @@
                                         @foreach($projects as $project)
                                             <tr>
                                                 <td></td>
-                                                <td>
+                                                <td class="text-wrap">
                                                     <a href="#" class="d-flex align-items-center">
                                                         <figure class="avatar avatar-sm mr-3">
                                     <span class="avatar-title bg-warning text-black-50 rounded-pill">
@@ -88,7 +88,7 @@
                                                         </figure>
                                                         <span class="d-flex flex-column">
                                     <span class="text-primary">{{$project->name}}</span>
-                                        <span class="small font-italic">{{$project->description}}</span>
+                                        <span class="small font-italic ">{{$project->description}}</span>
                                 </span>
                                                     </a>
                                                 </td>

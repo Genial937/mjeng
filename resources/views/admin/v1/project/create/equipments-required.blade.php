@@ -160,7 +160,7 @@
 
                                         <button class="btn btn-primary btn-rounded btn-create-equipment-required" type="submit">Save</button>
                                         @if(Request::get('action')!="edit")
-                                        <a href="{{route("admin.form.create.material.required",Request::segment(7))}}" class="btn btn-gradient-dark btn-rounded text-white">Continue <i class="ti-arrow-right"></i></a>
+                                        <a href="{{route("admin.form.create.material.required",$project_id)}}" class="btn btn-gradient-dark btn-rounded text-white">Continue <i class="ti-arrow-right"></i></a>
                                          @endif
                                     </form>
                                 </div>

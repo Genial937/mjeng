@@ -92,7 +92,7 @@ use Illuminate\Http\Request;
             $this->validate($request, [
                 "firstname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
                 "surname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
-                "phone" => "required|numeric|unique:users",
+                "phone" => "required|unique:users",
                 "email" => "required|unique:users",
                 'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
                 'password_confirmation' => 'min:6',

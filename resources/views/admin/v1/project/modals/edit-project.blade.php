@@ -10,7 +10,7 @@
             <div class="modal-body">
 
                     <div class="row">
-                        <div class="col-md-8 offset-2">
+                        <div class="col-md-10 offset-1">
                             <h5 class="modal-title">
                                 <figure class="avatar avatar-sm mr-3">
                                     <span class="avatar-title bg-warning text-black-50 rounded-pill">
@@ -20,7 +20,6 @@
                                 Edit Project Details</h5>
                             <hr>
                             <form class=" margin-5-p" novalidate action="{{route("admin.edit.project.details")}}" id="edit-project-detail-form">
-
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
                                                 <label >Choose project owner(contractor business)</label>
@@ -69,7 +68,7 @@
                                         <div class="form-row ">
                                             <div class="col-md-12 mb-3">
                                                 <label for="start-date">County</label>
-                                                <select class="form-control form-select-2" name="county_id" id="modal-input-county-id" onchange="getSubcounties()">
+                                                <select class="form-control form-select-2" name="county_id" id="modal-input-county-id" onchange="getEditSubcounties()">
                                                     <option>Choose a county</option>
                                                     @if(!empty($counties))
                                                         @foreach($counties as $county)
@@ -89,10 +88,8 @@
                                             <button class="btn btn-primary  btn-uppercase btn-rounded btn-edit-project-details" type="submit">
                                                 Save Changes
                                             </button>
+                                            <input type="hidden" name="id" id="modal-input-project-id">
                                         </div>
-
-
-                                </div>
                             </form>
                         </div>
                     </div>
