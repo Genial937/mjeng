@@ -23,6 +23,12 @@
                         <div class="col-xl-10 offset-1">
                             <div class="content-title mt-0">
                                 <h4>Projects</h4>
+                                <nav>
+                                    <ol class="cd-breadcrumb">
+                                        <li><a href="{{route("admin.dashboard")}}" class="text-sm-left">Home</a></li>
+                                        <li class="current"><em>Projects</em></li>
+                                    </ol>
+                                </nav>
                                 <div class="text-right">
                                     <a href="{{route("admin.form.create.project.details")}}"
                                        class="btn btn-primary btn-uppercase btn-link text-white">Create a project</a>

@@ -10,7 +10,7 @@ Basic Style
   max-width: 768px;
   padding: 0.5em 1em;
   /*margin: 1em auto;*/
-  background-color: #edeff0;
+  background-color: transparent;
   border-radius: .25em;
 }
 .cd-breadcrumb:after, .cd-multi-steps:after {
@@ -37,7 +37,6 @@ Basic Style
 .cd-breadcrumb li > *, .cd-multi-steps li > * {
   /* single step */
   display: inline-block;
-  font-size: 1.4rem;
   color: #2c3f4c;
 }
 .cd-breadcrumb li.current > *, .cd-multi-steps li.current > * {
@@ -100,9 +99,7 @@ Basic Style
   .cd-breadcrumb li::after, .cd-multi-steps li::after {
     margin: 0 1em;
   }
-  .cd-breadcrumb li > *, .cd-multi-steps li > * {
-    font-size: 1.6rem;
-  }
+
 }
 
 /* --------------------------------

@@ -34,6 +34,7 @@ class CreateMaterialsRequiredTable extends Migration
             $table->string('currency');
             $table->string('lease_modality');
             $table->integer('lease_rates');
+            $table->mediumText('payment_term_desc')->nullable();
             $table->string('cess');
             $table->timestamps();
         });

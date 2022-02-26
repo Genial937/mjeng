@@ -20,12 +20,18 @@
 
                     <div class="row">
                         <div class="col-xl-12">
-                            @if(Request::get('action')=="edit")
+                            @if(Request::get('action')!="edit")
                                 @include("admin.v1.project.create.includes.form-steps")
                             @else
                                 <div class="content-title mt-0">
-                                    <a href="{{route("admin.project")}}" class="btn btn-gradient-dark text-white"><i class="ti-arrow-left"></i>Back to projects</a>
-                                </div>
+                                    <nav>
+                                        <ol class="cd-breadcrumb">
+                                            <li><a href="{{route("admin.dashboard")}}" class="text-sm-left">Home</a></li>
+                                            <li><a href="{{route("admin.project")}}">Projects</a></li>
+                                            <li class="current"><em>Material Required</em></li>
+                                        </ol>
+                                    </nav>
+                               </div>
                             @endif
                             <div class="row margin-5-p">
                                 <div class="col-md-4 offset-1">
@@ -143,6 +149,12 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12 mb-3">
+                                                <label for="end-date">Payment term description</label>
+                                                <textarea name="payment_term_desc" class="form-control" required placeholder="e.g Payment is KES200 per Km per tone"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
                                                 <label for="end-date">CESS Provision</label>
                                                 <select class="form-control" name="cess" id="cess-provision">
                                                     <option>Select</option>
@@ -151,6 +163,7 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         @if(Request::get('action')!="edit")
                                         <a href="{{route("admin.form.create.material.required",Request::segment(7))}}" class="btn btn-gradient-dark btn-rounded text-white"> <i class="ti-arrow-left"></i>Back</a>
                                          @endif
@@ -172,6 +185,7 @@
                                                 <th scope="col">Quantity Required</th>
                                                 <th scope="col">Quantity Required Daily</th>
                                                 <th scope="col">Payment Terms</th>
+                                                <th scope="col">Payment Term Description</th>
                                                 <th scope="col">CESS Provision</th>
                                                 <th scope="col">Actions</th>
                                             </tr>
@@ -187,6 +201,7 @@
                                                 <td>{{$material->quantity_required}} {{$material->quantity_required_unit}}</td>
                                                 <td>{{$material->quantity_required_per_day}} {{$material->quantity_required_per_day_unit}}</td>
                                                 <td>{{$material->currency}} {{$material->lease_rates}}/{{$material->lease_modality}}</td>
+                                                <td>{{$material->payment_term_desc}}</td>
                                                 <td>{{$material->cess}}</td>
                                                 <td class="text-left">
                                                     <div class="dropdown">
@@ -222,7 +237,7 @@
         <!-- ./ Content wrapper -->
     </div>
     <!-- modals  -->
-    @include("admin.v1.project.modals.edit-equipment-required")
+    @include("admin.v1.project.modals.edit-material-required")
     <!-- Files page  -->
     <script src="{{url("assets/js/mijengo/select2.js")}}"></script>
     <script src="{{url("assets/js/mijengo/ajax/project.js")}}"></script>

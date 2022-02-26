@@ -19,6 +19,7 @@ class MaterialsRequired extends Model
         "currency",
         "lease_rates",
         "lease_modality",
+        "payment_term_desc",
         "cess"
     ];
     /**

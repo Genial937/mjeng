@@ -62,6 +62,7 @@ class MaterialRequiredController extends Controller
             "currency"=>"required|string",
             "lease_rates"=>"required|numeric|min:0",
             "lease_modality"=>"required|string",
+            "payment_term_desc"=>"required|string",
             "cess"=>"required|string",
         ]);
         //store to db
@@ -78,6 +79,7 @@ class MaterialRequiredController extends Controller
                 "currency",
                 "lease_rates",
                 "lease_modality",
+                "payment_term_desc",
                 "cess"
             ]));
             return response()->json([

@@ -22,8 +22,14 @@
                                 @include("admin.v1.project.create.includes.form-steps")
                             @else
                                 <div class="content-title mt-0">
-                                    <a href="{{route("admin.project")}}" class="btn btn-gradient-dark text-white"><i class="ti-arrow-left"></i>Back to projects</a>
-                                </div>
+                                    <nav>
+                                        <ol class="cd-breadcrumb">
+                                            <li><a href="{{route("admin.dashboard")}}" class="text-sm-left">Home</a></li>
+                                            <li><a href="{{route("admin.project")}}">Projects</a></li>
+                                            <li class="current"><em>Sites</em></li>
+                                        </ol>
+                                    </nav>
+                                  </div>
                             @endif
                             <div class="row margin-5-p">
                                 <div class="col-md-3 offset-1">
