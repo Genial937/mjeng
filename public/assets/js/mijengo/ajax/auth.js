@@ -81,6 +81,31 @@ $(document).ready(function () {
                 });
             })
     });
+    $(document).on('submit', '#verify-email-form', function (e) {
+        e.preventDefault();
+        let submit_btn=$('.btn-verify-email-submit');
+        let form=$('#verify-email-form');
+        submit_btn.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url, form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_btn.text('Register').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.href = data['intended']
+                    }, 1000);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_btn.text('Verify').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 const resendOtp=function(){
     //get user input

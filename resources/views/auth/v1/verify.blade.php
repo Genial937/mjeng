@@ -1,27 +1,24 @@
-@extends('layouts.v1.app')
+@extends('layouts.v1.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
+    <div class="form-wrapper ">
+        <!-- form -->
+        <form id="verify-email-form" action="{{route("verify.post")}}">
+            @csrf
+            <div class="verify-section">
+                <div class="text-left">
+                    <h4>Verify your email address </h4>
+                    <p>Enter 6 digit code sent to your email address.</p>
                 </div>
+                <div class="form-group text-left">
+                    <label>Verification Code</label>
+                    <input type="text" class="form-control" placeholder="XXXXXX"  name="code" >
+                </div>
+                <button class="btn btn-primary btn-block  btn-uppercase btn-rounded btn-verify-email-submit btn-lg">Verify</button>
             </div>
-        </div>
+        </form>
+        <!-- ./ form -->
     </div>
-</div>
+    <!-- App scripts -->
+    <script src="{{url("assets/js/mijengo/ajax/auth.js")}}"></script>
 @endsection

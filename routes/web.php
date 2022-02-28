@@ -34,6 +34,14 @@ Route::group(['prefix' => '/auth','middleware' => ['log.route']], function () {
         'as' => 'register.post',
         'uses' => '\App\Http\Controllers\Auth\RegisterController@store'
     ]);
+    Route::get('/verify/{user_id}', [
+        'as' => 'email.verify',
+        'uses' => '\App\Http\Controllers\Auth\RegisterController@verify'
+    ]);
+    Route::post('/verify', [
+        'as' => 'verify.post',
+        'uses' => '\App\Http\Controllers\Auth\RegisterController@verifyEmail'
+    ]);
     Route::get('/password/email', [
         'as' => 'password.email',
         'uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@index'

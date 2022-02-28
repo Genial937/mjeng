@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -56,7 +57,47 @@ class RegisterController extends Controller
         return view('auth.v1.register');
 
     }
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function verify(Request $request)
+    {
 
+        return view('auth.v1.verify');
+
+    }
+
+    public function verifyEmail(Request $request){
+        $this->validate($request, [
+            "code" => "required|exists:users,otp"]
+        );
+        try {
+            //check code exist and user is active
+            $user = User::where("otp",$request->code)->where("status", 2)->first();
+            if (empty($user)):
+                return response()->json([
+                    'success' => false,
+                    'errors' => ["errors" => ["Sorry, Your account is already verified."]]
+                ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+            endif;
+            //clear the otp used
+            User::where('otp', $request->code)->update(["otp" => "","status"=>1]);
+            Auth::login($user);
+            return response()->json([
+                'success' => true,
+                "intended"=>route("vendor.profile.account"),
+                "message" => "Account verified successfully,Please proceed in settings up your business account",
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => ["errors" => [$e->getMessage()]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+
+    }
+    }
     /**
      * Create a new user instance after a valid registration.
      *
@@ -108,7 +149,7 @@ class RegisterController extends Controller
 
             return response()->json([
                 'success' => true,
-                "intended"=>"/verify/$user->id",
+                "intended"=>route("email.verify",$user->id),
                 "message" => "Account created successfully, Please check your email for verification code",
             ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {
