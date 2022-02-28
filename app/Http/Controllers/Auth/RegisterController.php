@@ -105,7 +105,7 @@ class RegisterController extends Controller
                         ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
                 endif;
             endif;
-            
+
             return response()->json([
                 'success' => true,
                 "user"=>$user,

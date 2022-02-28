@@ -38,27 +38,9 @@
                 </div>
                 <button class="btn btn-primary btn-block  btn-uppercase btn-rounded btn-register-submit btn-lg">Let's go</button>
             </div>
-            <div class="register-otp-section">
-                <div class="form-group text-left">
-                    <h4>Email Verification</h4>
-                    <p>An Email with your verification code has been sent to your phone and email address.</p>
-                    <label>6-character code</label>
-                    <input type="text" class="form-control" placeholder="6-character code" name="otp" id="login-verification" >
-
-                </div>
-                <button class="btn btn-primary btn-block btn-lg btn-uppercase btn-rounded btn-verify-submit">Verify Code</button>
-                <div class="form-group mt-3">
-                    <p>Didn't receive an SMS/Email?</p>
-                </div>
-
-                <a href="javascript:void(0)" onclick="resendOtp()" class="btn btn-primary btn-block btn-rounded btn-uppercase text-white btn-lg  btn-resend-submit">Resend</a>
-            </div>
         </form>
         <!-- ./ form -->
     </div>
-    <script>
-        $(".register-otp-section").slideUp();
-    </script>
     <!-- App scripts -->
     <script src="{{url("assets/js/mijengo/ajax/auth.js")}}"></script>
 @endsection

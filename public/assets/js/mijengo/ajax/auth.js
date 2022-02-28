@@ -14,11 +14,15 @@ $(document).ready(function () {
     });
     $(document).on('submit', '#login-form', function (e) {
         e.preventDefault();
-        $('.btn-login-submit').text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
-        $('.btn-verify-submit').show().text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
-        $('.btn-resend-submit').hide();
-        var url = $('#login-form').attr('action');
-        $.post(url, $("#login-form").serialize())
+        let submit_btn=$('.btn-login-submit');
+        let verify_btn=$('.btn-verify-submit');
+        let resend_btn= $('.btn-resend-submit');
+        let form=$('#login-form');
+        submit_btn.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        verify_btn.show().text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        resend_btn.hide();
+        var url =form.attr('action');
+        $.post(url, form.serialize())
             .done(function (data) {
                 if (data['success']) {
                     if (data['otp']) {
@@ -26,13 +30,13 @@ $(document).ready(function () {
                         $(".login-section").slideUp();
                         $(".login-otp-section").slideDown();
                         toastr.success(data['message']);
-                        $('.btn-login-submit').text('Login').prop('disabled', false);
-                        $('.btn-verify-submit').text('Verify Code').prop('disabled', false);
-                        $('.btn-resend-submit').show();
+                        submit_btn.text('Login').prop('disabled', false);
+                        verify_btn.text('Verify Code').prop('disabled', false);
+                        resend_btn.show();
 
                     } else {
-                        $('.btn-login-submit').text('Login').prop('disabled', false);
-                        $('.btn-verify-submit').text('Verify Code').prop('disabled', false);
+                        submit_btn.text('Login').prop('disabled', false);
+                       verify_btn.text('Verify Code').prop('disabled', false);
                         toastr.success(data['message']);
                         setTimeout(function () {
                             location.reload();
@@ -43,17 +47,40 @@ $(document).ready(function () {
             })
             .fail(function (data) {
                 console.error(data)
-                $('.btn-resend-submit').show();
-                $('.btn-login-submit').text('Login').prop('disabled', false);
-                $('.btn-verify-submit').text('Verify Code').prop('disabled', false);
+                resend_btn.show();
+                submit_btn.text('Login').prop('disabled', false);
+                verify_btn.text('Verify Code').prop('disabled', false);
                 var errors = data.responseJSON;
                 $.each(errors.errors, function (key, value) {
                     toastr.error(value[0]);
                 });
             })
     });
-
-
+    $(document).on('submit', '#register-form', function (e) {
+        e.preventDefault();
+        let submit_btn=$('.btn-register-submit');
+        let form=$('#register-form');
+        submit_btn.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url, form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_btn.text('Register').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                       location.href = data['intended']
+                    }, 1000);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_btn.text('Login').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 const resendOtp=function(){
     //get user input
