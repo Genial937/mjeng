@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,32 +45,60 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param Request $request
+     * @return Factory|View
      */
-    protected function validator(array $data)
+    public function index(Request $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+
+        return view('auth.v1.register');
+
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return JsonResponse
      */
-    protected function create(array $data)
+    protected function store(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $this->validate($request, [
+            "firstname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
+            "surname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
+//            "phone" => "required|unique:users",
+            "email" => "required|unique:users",
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6',
         ]);
+        try{
+        $request->request->add(["user_type"=>"BUSINESS","status"=>2]);
+        $user= User::create($request->only(
+            'firstname',
+            'middlename',
+            'surname',
+            'phone',
+            'email',
+            'password',
+            'status',
+            "notes",
+            "otp",
+            "user_type"
+        ));
+        //storre
+
+
+            return response()->json([
+                'success' => true,
+                "message" => "Account created successfully,Please veifry your ",
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => ["errors" => [$e->getMessage()]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
     }
 }

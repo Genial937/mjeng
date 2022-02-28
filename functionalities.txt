@@ -1,6 +1,3 @@
-# Mijengo Online Portal
-Mijengo is an online portal where Small businesses/Suppliers can register their company and get paid for supplying building material and equipment to large construction projects and get paid quickly.
-
 Mijengo V3
 -------------------------------------------
 
@@ -36,7 +33,7 @@ Folder structures
 Functionalities
 ****************
 
--Auth
+ -Auth
 ========================
 --login
 --otp via email- done
@@ -79,7 +76,7 @@ Dashboard
 --delete- done
 --Assign staff to sites
 --Add staffs to sites
-
+ 
 -Vendor/Supplier Business
 --Add- pending
 --Edit- pending
@@ -119,9 +116,9 @@ Dashboard
 --delete roles- pending
 
 - User profile/setting
-  ========================
-  --change theme
-  --Update profile
+========================
+--change theme
+--Update profile 
 
 VENDORS
 ----------------------------------------------------------------------------------
@@ -193,7 +190,7 @@ Projects
 
 Billing
 ===========================
--Activities done/issues under the Task
+-Activities done/issues under the Task 
 -Invoice pending/paid
 
 Users
@@ -204,8 +201,6 @@ Users
 -Assign/Detach Staff to projects->sites->task
 
 - User profile/setting
-  ========================
-  --change theme
-  --Update profile 
-
-
+========================
+--change theme
+--Update profile 

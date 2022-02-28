@@ -26,6 +26,14 @@ Route::group(['prefix' => '/auth','middleware' => ['log.route']], function () {
         'as' => 'login.post',
         'uses' => 'Auth\LoginController@authenticate'
     ]);
+    Route::get('/register', [
+        'as' => 'register',
+        'uses' => '\App\Http\Controllers\Auth\RegisterController@index'
+    ]);
+    Route::post('/register', [
+        'as' => 'register.post',
+        'uses' => '\App\Http\Controllers\Auth\RegisterController@store'
+    ]);
     Route::get('/password/email', [
         'as' => 'password.email',
         'uses' => '\App\Http\Controllers\Auth\ForgotPasswordController@index'
