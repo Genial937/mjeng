@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\SendAuthEmail;
+use App\Helpers\UniqueRandomChar;
 use App\User;
 use App\Http\Controllers\Controller;
 use Exception;
@@ -58,10 +60,10 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param Request $request
      * @return JsonResponse
      */
-    protected function store(Request $request)
+    protected function store(Request $request): JsonResponse
     {
         $this->validate($request, [
             "firstname" => "required|min:2|max:20|regex:/^([a-zA-Z]+)(\s[a-zA-Z]+)*$/",
@@ -84,13 +86,30 @@ class RegisterController extends Controller
             "notes",
             "otp",
             "user_type"
-        ));
-        //storre
-
-
+          ));
+          //send email verification code
+            //generate 6 digit otp and update user
+            $otp=UniqueRandomChar::otpCode();
+            User::where("id",$user->id)->update(["otp" => $otp]);
+            $request->request->add(["otp" => $otp]);
+            //send email otp;
+            //check if dev
+            if(env("APP_ENV")=="production") :
+                $resp = SendAuthEmail::verifyEmail($request);
+                $result = $resp->getData();
+                if (!$result->success):
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'errors' => $result->errors
+                        ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                endif;
+            endif;
+            
             return response()->json([
                 'success' => true,
-                "message" => "Account created successfully,Please veifry your ",
+                "user"=>$user,
+                "message" => "Account created successfully, Please check your email for verification code",
             ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {
             // something went wrong

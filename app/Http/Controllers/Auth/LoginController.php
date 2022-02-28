@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\UniqueRandomChar;
 use App\Http\Controllers\Controller;
 use App\User;
 use Exception;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Helpers\SendAuthEmail;
+
 /**
  * Class LoginController
  * @package App\Http\Controllers\Auth
@@ -72,45 +74,38 @@ class LoginController extends Controller
             endif;
             if (!isset($request->otp)):
                 //check if password is correct before sending
-                if (Hash::check($request->password, $user->password)):
-                    //generate 6 digit otp and update user
-                    $otp=$this->generateOTPCode();
-                    User::where("id",$user->id)->update(["otp" => $otp]);
-                    $request->request->add(["otp" => $otp]);
-                    //send email otp;
-                    //check if dev
-                    if(env("APP_ENV")=="production") {
-                        $resp = SendAuthEmail::otp($request);
-                        $result = $resp->getData();
-                        if ($result->success):
-                            return response()->json(
-                                [
-                                    'success' => true,
-                                    'otp' => true,
-                                    'message' => 'Please check your phone/email inbox for verification code.'
-                                ], JsonResponse::HTTP_CREATED);
-                        else:
-                            return response()->json(
-                                [
-                                    'success' => false,
-                                    'errors' => $result->errors
-                                ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
-                        endif;
-                    }else{
-                        return response()->json(
-                            [
-                                'success' => true,
-                                'otp' => true,
-                                'message' => 'Please check your phone/email inbox for verification code.'
-                            ], JsonResponse::HTTP_CREATED);
-                    }
-                else:
+                if (!Hash::check($request->password, $user->password)):
                     //invalid password
                     return response()->json([
                         'success' => false,
                         'errors' => ["errors" => ["Invalid email or password. Please try again."]]
                     ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
                 endif;
+                //generate 6 digit otp and update user
+                $otp = UniqueRandomChar::otpCode();
+                User::where("id", $user->id)->update(["otp" => $otp]);
+                $request->request->add(["otp" => $otp]);
+                //send email otp;
+                //check if dev
+                if (env("APP_ENV") == "production"):
+                    $resp = SendAuthEmail::otp($request);
+                    $result = $resp->getData();
+                    if (!$result->success):
+                        return response()->json(
+                            [
+                                'success' => false,
+                                'errors' => $result->errors
+                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                    endif;
+                endif;
+
+                return response()->json(
+                    [
+                        'success' => true,
+                        'otp' => true,
+                        'message' => 'Please check your email inbox for verification code.'
+                    ], JsonResponse::HTTP_CREATED);
+
             endif;
             //check if otp is correct
             $user = User::where('otp', $request->otp)->where("status", 1)->first();
@@ -121,7 +116,7 @@ class LoginController extends Controller
                 ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
             endif;
             //clear the otp used
-            User::where('otp', $request->otp)->update(["otp"=>""]);
+            User::where('otp', $request->otp)->update(["otp" => ""]);
             //authenticate user
             $credentials = $request->only('email', 'password');
             if (auth('web')->attempt($credentials)):
@@ -144,22 +139,7 @@ class LoginController extends Controller
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
-    protected function generateOTPCode()
-    {
-        try {
-            for ($i = 100001; $i <= 999999; $i++):
-                $code = sprintf("%06d", mt_rand(1, 999999));
-                $user = User::where('otp', $code)->first();
-                if (empty($user)):
-                    break 1;
-                endif;
-            endfor;
-            return $code;
-        } catch (QueryException $e) {
-            return $e->getMessage();
-        }
 
-    }
     public function logout(Request $request)
     {
         Auth::logout();
