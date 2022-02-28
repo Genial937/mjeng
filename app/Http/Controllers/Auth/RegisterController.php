@@ -108,7 +108,7 @@ class RegisterController extends Controller
 
             return response()->json([
                 'success' => true,
-                "user"=>$user,
+                "intended"=>"/verify/$user->id",
                 "message" => "Account created successfully, Please check your email for verification code",
             ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {
