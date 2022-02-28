@@ -88,10 +88,10 @@ class RegisterController extends Controller
             "user_type"
           ));
           //send email verification code
-            //generate 6 digit otp and update user
-            $otp=UniqueRandomChar::otpCode();
-            User::where("id",$user->id)->update(["otp" => $otp]);
-            $request->request->add(["otp" => $otp]);
+            //generate 6 digit code and update user
+            $code=UniqueRandomChar::otpCode();
+            User::where("id",$user->id)->update(["otp" => $code]);
+            $request->request->add(["code" => $code]);
             //send email otp;
             //check if dev
             if(env("APP_ENV")=="production") :
