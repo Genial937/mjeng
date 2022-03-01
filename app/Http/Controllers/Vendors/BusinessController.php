@@ -53,7 +53,11 @@ class BusinessController extends Controller
      */
     public function showEditView(Request $request)
     {
-        $businesses=Business::with("users")->get();
+        //user businesses
+        $user=User::with(["businesses",'staffs'])
+            ->where("id",Auth::id())
+            ->first();
+        $businesses =isset($user->businesses) ?$user->businesses:[];
         $business=Business::find($request->route('id'));
         $documents=json_decode($business->documents);
 

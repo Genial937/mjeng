@@ -36,9 +36,9 @@
                         @include("vendor.v1.businesses.includes.nav")
                         <div class="col-xl-8">
                             <div class="content-title mt-0">
-                                <h4> Business Details</h4>
+                                <h4> Edit Business Details</h4>
                             </div>
-                            <form action="{{route("vendor.edit.business")}}"
+                            <form action="{{route("vendor.update.business")}}"
                                   id="edit-vendor-business-form" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">

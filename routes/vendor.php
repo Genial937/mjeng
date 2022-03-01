@@ -37,7 +37,7 @@ Route::group(['prefix' => '/business','middleware' => ['log.route']], function (
         'uses' => 'Vendors\BusinessController@store'
     ]);
     Route::post('/update', [
-        'as' => 'vendor.edit.business',
+        'as' => 'vendor.update.business',
         'uses' => 'Vendors\BusinessController@update'
     ]);
 });
