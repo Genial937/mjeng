@@ -8,6 +8,84 @@ $(document).ready(function () {
         showDuration: 1200,
         hideDuration: 1500
     };
+    //create vendor business
+    $(document).on('submit', '#create-vendor-business-form', function (e) {
+        e.preventDefault();
+        let form= $('#create-vendor-business-form');
+        let button= $('.btn-create-vendor-business');
+        button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url = form.attr('action');
+        $.ajax({
+            url: url,
+            method: "POST",
+            data:  new FormData( this ),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: "json",
+            enctype: 'multipart/form-data',
+            success: function (data) {
+                console.log(data)
+                if (data['success']) {
+                    button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+
+                    }, 2000);
+                } else {
+                    button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            },
+            error: function (data) {
+                console.error(data)
+                button.text('Save').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            }
+        })
+    });
+    //edit vendor business
+    $(document).on('submit', '#edit-vendor-business-form', function (e) {
+        e.preventDefault();
+        let form= $('#edit-vendor-business-form');
+        let button= $('.btn-edit-vendor-business');
+        button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url = form.attr('action');
+        $.ajax({
+            url: url,
+            method: "POST",
+            data:  new FormData( this ),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: "json",
+            enctype: 'multipart/form-data',
+            success: function (data) {
+                console.log(data)
+                if (data['success']) {
+                    button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+
+                    }, 2000);
+                } else {
+                    button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            },
+            error: function (data) {
+                console.error(data)
+                button.text('Save').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            }
+        })
+    });
     $(document).on('submit', '#create-contractor-business-form', function (e) {
         e.preventDefault();
         $('.btn-create-contractor-business').text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
@@ -18,7 +96,7 @@ $(document).ready(function () {
                     $('.btn-create-contractor-business').text('Save').prop('disabled', false);
                     toastr.success(data['message']);
                     setTimeout(function () {
-                        history.back();
+                       location.reload();
                     }, 2000);
                 } else {
                     $('.btn-create-contractor-business').text('Save').prop('disabled', false);
@@ -44,7 +122,7 @@ $(document).ready(function () {
                     $('.btn-update-contractor-business').text('Save').prop('disabled', false);
                     toastr.success(data['message']);
                     setTimeout(function () {
-                      history.back();
+                        location.reload();
                     }, 2000);
                 } else {
                     $('.btn-update-contractor-business').text('Save').prop('disabled', false);

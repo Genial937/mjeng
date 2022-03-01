@@ -16,6 +16,7 @@ class Business extends Model
         "address",
         "status",
         "type",
+        "documents",
         "description"
     ];
     public function users() {

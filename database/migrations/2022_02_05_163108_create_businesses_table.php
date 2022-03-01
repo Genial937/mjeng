@@ -22,6 +22,7 @@ class CreateBusinessesTable extends Migration
             $table->string('country')->nullable();
             $table->string('city')->nullable();;
             $table->string('address')->nullable();
+            $table->json('documents')->nullable();
             $table->string('type')->nullable()->comment('1-sole,2-partnership,3-company');
             $table->smallInteger('status')->comment('1-pending,2-approved,3-decline');
             $table->text('description')->nullable();
