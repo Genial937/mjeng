@@ -156,7 +156,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Attach Scanned Copy of the Registration Document </label>
-                                                   <input type="file" class="form-control-file" required
+                                                   <input type="file" class="form-control-file"
                                                            id="business-doc-url" name="doc_file[0]">
                                                     <div class="mt-4">
                                                         <a href="{{$documents[0]->doc_url}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
@@ -194,7 +194,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Attach Scanned Copy of the Document </label>
-                                                    <input type="file" class="form-control-file" required
+                                                    <input type="file" class="form-control-file"
                                                            id="business-doc-url2" name="doc_file[1]">
                                                     <div class="mt-4">
                                                         <a href="{{$documents[1]->doc_url}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
