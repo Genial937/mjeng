@@ -45,20 +45,10 @@ class UploadFiles
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
-    public static function otpCode()
+    public static function viewDocument($url)
     {
-        try {
-            for ($i = 100001; $i <= 999999; $i++):
-                $code = sprintf("%06d", mt_rand(1, 999999));
-                $user = User::where('otp', $code)->first();
-                if (empty($user)):
-                    break 1;
-                endif;
-            endfor;
-            return $code;
-        } catch (QueryException $e) {
-            return $e->getMessage();
-        }
+
+        return str_ireplace("/var/www/mijengo/staging/mijengo/public",'',$url);
 
     }
 

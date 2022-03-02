@@ -6,7 +6,7 @@ use App\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class RedirectIfVendor
 {
     /**
      * Handle an incoming request.
@@ -20,13 +20,12 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             $user = auth()->user();
-            if ($user->user_type == "ADMIN")
-                return redirect(route('admin.dashboard'));
-            if ($user->user_type == "CONTRACTOR")
-                return redirect(route('contractor.dashboard'));
-            if ($user->user_type == "BUSINESS")
-                 return redirect(route('vendor.dashboard'));
-
+            if ($user->user_type == "BUSINESS"):
+                //check if user has business
+                if(!empty(auth()->user()->businesses())):
+                  return redirect(route('vendor.create.business'));
+                endif;
+            endif;
 
         }
 

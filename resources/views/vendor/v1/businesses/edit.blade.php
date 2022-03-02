@@ -131,9 +131,9 @@
                                                     <select id="business-doc-type" name="doc_type[0]"
                                                             class="form-control form-select-2" required>
                                                         <option value="">Choose business document type</option>
-                                                        <option @if($documents[0]->doc_type=="ID") selected @endif value="ID">National ID</option>
-                                                        <option @if($documents[0]->doc_type=="PASSPORT") selected @endif value="PASSPORT">Passport</option>
-                                                        <option @if($documents[0]->doc_type=="CERTIFICATE") selected @endif value="CERTIFICATE">Certificate of Registration</option>
+                                                        <option @if($documents[0]->doc_type??""=="ID") selected @endif value="ID">National ID</option>
+                                                        <option @if($documents[0]->doc_type??""=="PASSPORT") selected @endif value="PASSPORT">Passport</option>
+                                                        <option @if($documents[0]->doc_type??""=="CERTIFICATE") selected @endif value="CERTIFICATE">Certificate of Registration</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -146,7 +146,7 @@
                                                            minlength="3"
                                                            maxlength="20"
                                                            required
-                                                           value="{{$documents[0]->doc_no}}"
+                                                           value="{{$documents[0]->doc_no??""}}"
                                                            class="form-control border-input"
                                                            placeholder="e.g. PVT-093929">
                                                 </div>
@@ -159,7 +159,7 @@
                                                    <input type="file" class="form-control-file"
                                                            id="business-doc-url" name="doc_file[0]">
                                                     <div class="mt-4">
-                                                        <a href="{{$documents[0]->doc_url}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
+                                                        <a href="{{\App\Helpers\UploadFiles::viewDocument($documents[0]->doc_url??"")}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
                                                     </div>
                                                 </div>
                                            </div>
@@ -197,7 +197,7 @@
                                                     <input type="file" class="form-control-file"
                                                            id="business-doc-url2" name="doc_file[1]">
                                                     <div class="mt-4">
-                                                        <a href="{{$documents[1]->doc_url??""}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
+                                                        <a href="{{\App\Helpers\UploadFiles::viewDocument($documents[1]->doc_url??"")}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
                                                     </div>
                                                 </div>
                                             </div>

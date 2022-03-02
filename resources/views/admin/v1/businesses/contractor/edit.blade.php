@@ -118,7 +118,6 @@
                                             Save Changes
                                         </button>
                                         <input type="hidden" name="id" value="{{$business->id}}">
-
                                     </div>
                                     <div class="col-md-6">
 

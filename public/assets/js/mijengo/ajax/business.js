@@ -218,7 +218,7 @@ const removeBusinessStaff=function(user_id,business_id){
 const viewBusinessModal=function (jsonBusiness,jsonDocuments){
     $("#view-business").modal("show");
     let business=JSON.parse(jsonBusiness)
-    let documents=jsonDocuments
+    let documents=JSON.parse(jsonDocuments)
     console.log(documents)
    //details
     $(".modal-business-name").text(business.name);
@@ -228,7 +228,7 @@ const viewBusinessModal=function (jsonBusiness,jsonDocuments){
     $(".modal-business-type").text(business.type);
     //documents
     $.each(documents, function (key, value) {
-        $(".modal-business-type").append(' <h5 class="margin-5-p">'+value.doc_type+' : <span class="text-danger font-italic">'+value.doc_no+'</span></h5>');
-        $(".modal-business-type").append(' <h5 class="margin-5-p">Document View : <span class="text-danger font-italic"><a class="btn btn-outline-danger" href="'+value.doc_url+'">View</a> </span></h5>');
+        $(".modal-business-documents").append(' <h5 class="margin-5-p">'+value.doc_type+' : <span class="text-danger font-italic">'+value.doc_no+'</span></h5>');
+        $(".modal-business-documents").append(' <h5 class="margin-5-p">Document View : <span class="text-danger font-italic"><a class="btn btn-outline-info" href="'+value.doc_url+'">View</a> </span></h5>');
     })
 }

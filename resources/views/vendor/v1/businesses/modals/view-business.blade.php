@@ -24,7 +24,7 @@
                         <h5 class="margin-5-p">Phone : <span class="modal-business-phone text-danger font-italic"></span></h5>
                         <h5 class="margin-5-p">Address : <span class="modal-business-address text-danger font-italic"></span></h5>
                         <h5 class="margin-5-p">Type : <span class="modal-business-type text-danger font-italic"></span></h5>
-                        <h5 class="modal-title">
+                        <h5 class="modal-title margin-10-p">
                             <figure class="avatar avatar-sm mr-3">
                                     <span class="avatar-title bg-warning text-black-50 rounded-pill">
                                         <i class="ti-files"></i>

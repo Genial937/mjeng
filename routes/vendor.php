@@ -20,7 +20,7 @@ Route::get('/', [
     'as' => 'vendor.dashboard',
     'uses' => 'Vendors\DashboardController@index'
 ]);
-Route::group(['prefix' => '/business','middleware' => ['log.route']], function () {
+Route::group(['prefix' => '/business','middleware' => ['log.route','vendor.has.business']], function () {
     Route::resource('/', 'Vendors\BusinessController')->names([
         'index' => 'vendor.businesses'
     ]);
