@@ -15,11 +15,12 @@
 
 
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', [
-    'as' => 'vendor.dashboard',
-    'uses' => 'Vendors\DashboardController@index'
-]);
+Route::group(['prefix' => '/dashboard','middleware' => ['log.route','vendor.has.business']], function () {
+    Route::get('/', [
+        'as' => 'vendor.dashboard',
+        'uses' => 'Vendors\DashboardController@index'
+    ]);
+});
 Route::group(['prefix' => '/business','middleware' => ['log.route','vendor.has.business']], function () {
     Route::resource('/', 'Vendors\BusinessController')->names([
         'index' => 'vendor.businesses'
