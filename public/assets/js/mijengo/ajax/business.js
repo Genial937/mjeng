@@ -69,7 +69,7 @@ $(document).ready(function () {
                     button.text('Save').prop('disabled', false);
                     toastr.success(data['message']);
                     setTimeout(function () {
-
+                        location.reload()
                     }, 2000);
                 } else {
                     button.text('Save').prop('disabled', false);
@@ -215,3 +215,20 @@ const removeBusinessStaff=function(user_id,business_id){
         })
 
 };
+const viewBusinessModal=function (jsonBusiness,jsonDocuments){
+    $("#view-business").modal("show");
+    let business=JSON.parse(jsonBusiness)
+    let documents=jsonDocuments
+    console.log(documents)
+   //details
+    $(".modal-business-name").text(business.name);
+    $(".modal-business-email").text(business.email);
+    $(".modal-business-phone").text(business.phone);
+    $(".modal-business-address").text(business.address);
+    $(".modal-business-type").text(business.type);
+    //documents
+    $.each(documents, function (key, value) {
+        $(".modal-business-type").append(' <h5 class="margin-5-p">'+value.doc_type+' : <span class="text-danger font-italic">'+value.doc_no+'</span></h5>');
+        $(".modal-business-type").append(' <h5 class="margin-5-p">Document View : <span class="text-danger font-italic"><a class="btn btn-outline-danger" href="'+value.doc_url+'">View</a> </span></h5>');
+    })
+}

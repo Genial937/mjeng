@@ -172,7 +172,7 @@
                                                     <select id="business-doc-type1" name="doc_type[1]" required
                                                             class="form-control form-select-2">
                                                         <option disabled value="">Choose business document type</option>
-                                                        <option value="KRA" @if($documents[1]->doc_type=="KRA") selected @endif >KRA CERTIFICATE</option>
+                                                        <option value="KRA" @if($documents[1]->doc_type??""=="KRA") selected @endif >KRA CERTIFICATE</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -184,7 +184,7 @@
                                                            minlength="3"
                                                            maxlength="20"
                                                            required
-                                                           value="{{$documents[1]->doc_no}}"
+                                                           value="{{$documents[1]->doc_no??""}}"
                                                            class="form-control border-input"
                                                            placeholder="e.g. A09379292P">
                                                 </div>
@@ -197,7 +197,7 @@
                                                     <input type="file" class="form-control-file"
                                                            id="business-doc-url2" name="doc_file[1]">
                                                     <div class="mt-4">
-                                                        <a href="{{$documents[1]->doc_url}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
+                                                        <a href="{{$documents[1]->doc_url??""}}" class="btn btn-outline-primary"><i class="ti-files"></i> View Uploaded Document</a>
                                                     </div>
                                                 </div>
                                             </div>

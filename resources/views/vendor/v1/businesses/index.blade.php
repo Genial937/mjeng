@@ -80,8 +80,7 @@
                                                                 <i class="ti-more-alt"></i>
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item" data-sidebar-target="#view-detail">View
-                                                                    Details</a>
+                                                                <a href="#" class="dropdown-item" onclick="viewBusinessModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type']))}}','{{json_encode(json_decode($business->documents))}}')">View Details</a>
                                                                 <a href="{{route("vendor.edit.business",$business->id)}}"
                                                                    class="dropdown-item">Edit</a>
                                                                 <a href="javascript:void(0)" onclick="viewStaffsModal('{{json_encode($business)}}')" class="dropdown-item">View Staff(s)</a>
@@ -110,7 +109,7 @@
         <!-- ./ Content wrapper -->
     </div>
 {{--    @include("admin.v1.businesses.modals.add-staffs")--}}
-{{--    @include("admin.v1.businesses.modals.view-staffs")--}}
+    @include("vendor.v1.businesses.modals.view-business")
     <!-- App scripts -->
     <script src="{{url("assets/js/mijengo/select2.js")}}"></script>
     <script src="{{url("assets/js/mijengo/ajax/business.js")}}"></script>
