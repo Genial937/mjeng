@@ -19,4 +19,8 @@ class EquipmentMake extends Model
     {
         return $this->belongsToMany(EquipmentType::class);
     }
+    public function equipmentModels(): \Illuminate\Database\Eloquent\Relations\hasMany
+    {
+        return $this->hasMany(EquipmentModel::class);
+    }
 }

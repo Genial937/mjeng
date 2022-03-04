@@ -22,7 +22,7 @@ class RedirectIfVendor
             $user = auth()->user();
             if ($user->user_type == "BUSINESS"):
                 //check if user has business
-                if(!empty(auth()->user()->businesses())):
+                if(!count(User::where('id',$user->id)->with('businesses')->first()->businesses)):
                   return redirect(route('vendor.create.business'));
                 endif;
             endif;

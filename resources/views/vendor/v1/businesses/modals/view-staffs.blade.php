@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
 
-                <h5 class="modal-title" id="exampleModalCenterTitle">Users</h5>
+                <h5 class="modal-title" >Users</h5>
                 <p>User who have access </p>
                 <div class="table-responsive">
                     <table class="table staff-table">

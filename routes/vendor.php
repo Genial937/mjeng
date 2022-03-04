@@ -21,7 +21,12 @@ Route::group(['prefix' => '/dashboard','middleware' => ['log.route','vendor.has.
         'uses' => 'Vendors\DashboardController@index'
     ]);
 });
-Route::group(['prefix' => '/business','middleware' => ['log.route','vendor.has.business']], function () {
+Route::group(['prefix' => '/projects','middleware' => ['log.route']], function () {
+    Route::resource('/', 'Vendors\ProjectController')->names([
+        'index' => 'vendor.project'
+    ]);
+});
+Route::group(['prefix' => '/business','middleware' => ['log.route']], function () {
     Route::resource('/', 'Vendors\BusinessController')->names([
         'index' => 'vendor.businesses'
     ]);
@@ -40,5 +45,86 @@ Route::group(['prefix' => '/business','middleware' => ['log.route','vendor.has.b
     Route::post('/update', [
         'as' => 'vendor.update.business',
         'uses' => 'Vendors\BusinessController@update'
+    ]);
+    Route::post('/add/users', [
+        'as' => 'vendor.add.business.user',
+        'uses' => 'Vendors\BusinessController@addUsers'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'vendor.business.delete',
+        'uses' => 'Vendors\BusinessController@destroy'
+    ]);
+});
+Route::group(['prefix' => '/users','middleware' => ['log.route']], function () {
+    Route::resource('/', 'Vendors\UsersController')->names([
+        'index' => 'vendor.users',
+    ]);
+    Route::post('/new', [
+        'as' => 'vendor.create.user',
+        'uses' => 'Vendors\UsersController@store'
+    ]);
+    Route::get('/new', [
+        'as' => 'vendor.create.user',
+        'uses' => 'Vendors\UsersController@showCreateView'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'vendor.edit.user',
+        'uses' => 'Vendors\UsersController@showEditView'
+    ]);
+    Route::post('/update', [
+        'as' => 'vendor.update.user',
+        'uses' => 'Vendors\UsersController@update'
+    ]);
+    Route::post('/change/password', [
+        'as' => 'vendor.change.user.password',
+        'uses' => 'Vendors\UsersController@changePassword'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'vendor.user.delete',
+        'uses' => 'Vendors\UsersController@destroy'
+    ]);
+});
+Route::group(['prefix' => '/equipment','middleware' => ['log.route','vendor.has.business']], function () {
+    Route::get('/', [
+        'as' => 'vendor.inventory.equipment',
+        'uses' => 'Vendors\EquipmentController@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'vendor.inventory.create.equipment',
+        'uses' => 'Vendors\EquipmentController@showCreateView'
+    ]);
+    Route::post('/create', [
+        'as' => 'vendor.create.equipment',
+        'uses' => 'Vendors\EquipmentController@store'
+    ]);
+    Route::post('/images/{side}', [
+        'as' => 'vendor.inventory.equipment.images',
+        'uses' => 'Vendors\EquipmentController@storeImages'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'vendor.inventory.edit.equipment',
+        'uses' => 'Vendors\EquipmentController@showEditView'
+    ]);
+    Route::post('/update', [
+        'as' => 'vendor.edit.equipment',
+        'uses' => 'Vendors\EquipmentController@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'vendor.delete.equipment',
+        'uses' => 'Vendors\EquipmentController@destroy'
+    ]);
+});
+Route::group(['prefix' => '/material','middleware' => ['log.route','vendor.has.business']], function () {
+    Route::get('/', [
+        'as' => 'vendor.inventory.material',
+        'uses' => 'Vendors\MaterialController@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'vendor.inventory.create.material',
+        'uses' => 'Vendors\MaterialController@showCreateView'
+    ]);
+    Route::post('/create', [
+        'as' => 'vendor.material.equipment',
+        'uses' => 'Vendors\MaterialController@store'
     ]);
 });

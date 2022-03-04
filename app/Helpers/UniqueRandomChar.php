@@ -3,6 +3,8 @@
 
 namespace App\Helpers;
 use App\Business;
+use App\EquipmentInventory;
+use App\MaterialInventory;
 use App\User;
 use Illuminate\Database\QueryException;
 
@@ -43,5 +45,34 @@ class UniqueRandomChar
         }
 
     }
-
+    public static  function equipmentRegistrationID()
+    {
+        try {
+            for ($i = 100001; $i <= 999999; $i++):
+                $code = "ME".sprintf("%06s", $i);
+                $equipment = EquipmentInventory::where('reg_no', $code)->first();
+                if (empty($equipment)):
+                    break 1;
+                endif;
+            endfor;
+            return $code;
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
+    public static  function materialRegistrationID()
+    {
+        try {
+            for ($i = 100001; $i <= 999999; $i++):
+                $code = "ME".sprintf("%06s", $i);
+                $material = MaterialInventory::where('reg_no', $code)->first();
+                if (empty($material)):
+                    break 1;
+                endif;
+            endfor;
+            return $code;
+        } catch (QueryException $e) {
+            return $e->getMessage();
+        }
+    }
 }

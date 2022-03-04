@@ -30,7 +30,7 @@ $(document).ready(function () {
                     button.text('Save').prop('disabled', false);
                     toastr.success(data['message']);
                     setTimeout(function () {
-
+                        location.reload();
                     }, 2000);
                 } else {
                     button.text('Save').prop('disabled', false);
@@ -201,7 +201,7 @@ const removeBusinessStaff=function(user_id,business_id){
                 toastr.success(data['message']);
                 $("#view-busines-staff").modal("hide");
 
-               // location.reload();
+                location.reload();
             } else {
                 toastr.success(data['message']);
             }
@@ -219,16 +219,56 @@ const viewBusinessModal=function (jsonBusiness,jsonDocuments){
     $("#view-business").modal("show");
     let business=JSON.parse(jsonBusiness)
     let documents=JSON.parse(jsonDocuments)
-    console.log(documents)
    //details
     $(".modal-business-name").text(business.name);
     $(".modal-business-email").text(business.email);
     $(".modal-business-phone").text(business.phone);
     $(".modal-business-address").text(business.address);
     $(".modal-business-type").text(business.type);
+    $(".modal-business-status").append(business.status===1?'<label class="badge badge-warning">Pending Approval</label>':business.status===2?'<label class="badge badge-success">Approved</label>':"<label class=\"badge badge-danger\">Decline with reason</label>");
+    $(".modal-business-description").append(business.status===1?'<label class="badge badge-warning">'+business.description+'</label>':business.status===2?'<label class="badge badge-success">'+business.description+'</label>':"<label class=\"badge badge-danger\">'+business.description+'</label>");
+
     //documents
+    $(".modal-business-documents").text('')
     $.each(documents, function (key, value) {
         $(".modal-business-documents").append(' <h5 class="margin-5-p">'+value.doc_type+' : <span class="text-danger font-italic">'+value.doc_no+'</span></h5>');
         $(".modal-business-documents").append(' <h5 class="margin-5-p">Document View : <span class="text-danger font-italic"><a class="btn btn-outline-info" href="'+value.doc_url+'">View</a> </span></h5>');
     })
+}
+
+const deleteRecord=function(url) {
+    //confirm delete
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this record!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.get(url)
+                    .done(function (data) {
+                        if (data['success']) {
+                            toastr.success(data['message']);
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            toastr.success(data['message']);
+                        }
+
+                    })
+                    .fail(function (data) {
+                        console.error(data)
+                        var errors = data.responseJSON;
+                        $.each(errors.errors, function (key, value) {
+                            toastr.error(value[0]);
+                        });
+                    })
+
+            } else {
+                toastr.info('Delete Cancelled!');
+            }
+        })
 }

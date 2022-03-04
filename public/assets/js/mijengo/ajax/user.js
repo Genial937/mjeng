@@ -159,3 +159,54 @@ $('.toggle-password').click(function(){
     let input = $(this).prev();
     input.attr('type', input.attr('type') === 'password' ? 'text' : 'password');
 });
+const viewUserModal=function (jsonUser){
+    $("#view-user").modal("show");
+    let user=JSON.parse(jsonUser)
+    //details
+    $(".modal-user-name").text(user.firstname+' '+user.middlename+' '+user.surname);
+    $(".modal-user-email").text(user.email);
+    $(".modal-user-phone").text(user.phone);
+    $(".modal-user-status").append(user.status===1?'<label class="badge badge-primary">Active</label>':user.status===2?'<label class="badge badge-warning">Pending Email Verification</label>':"<label class=\"badge badge-danger\">Account Disabled</label>");
+    //documents
+    $(".modal-user-roles").text('')
+    $.each(user.roles, function (key, value) {
+        $(".modal-user-roles").append(' <a href="javascript:void(0)" class="text-white badge badge-dark">'+value.display_name+'</a>');
+    })
+}
+
+const deleteRecord=function(url) {
+    //confirm delete
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this record!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.get(url)
+                    .done(function (data) {
+                        if (data['success']) {
+                            toastr.success(data['message']);
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            toastr.success(data['message']);
+                        }
+
+                    })
+                    .fail(function (data) {
+                        console.error(data)
+                        var errors = data.responseJSON;
+                        $.each(errors.errors, function (key, value) {
+                            toastr.error(value[0]);
+                        });
+                    })
+
+            } else {
+                toastr.info('Delete Cancelled!');
+            }
+        })
+}

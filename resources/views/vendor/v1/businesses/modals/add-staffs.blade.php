@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-staff-modal-form" action="{{route("admin.add.business.user")}}">
+                <form id="add-staff-modal-form" action="{{route("vendor.add.business.user")}}">
                     <div class="row">
                         <div class="col-md-8 offset-2">
                             <h5 class="modal-title">
@@ -26,8 +26,8 @@
                                     <div class="form-group">
                                         <label>Search Staff </label>
                                         <select id="users" name="users[]" class="form-control form-select-2" multiple required>
-                                            @if($users)
-                                                @foreach($users as $user)
+                                            @if($staffs)
+                                                @foreach($staffs as $user)
                                                     <option
                                                         value="{{$user->id}}">{{$user->firstname}} {{$user->surname}}
                                                         ({{$user->email}})
@@ -51,7 +51,7 @@
                                     </h5>
                                     <p>If user doesn't exist create a new user by clicking the add new button below.</p>
 
-                                    <a href="#"  class="btn btn-dark text-white mr-2 btn-rounded " id="add-new-staff-href"><i
+                                    <a href="{{route('vendor.create.user')}}"  class="btn btn-dark text-white mr-2 btn-rounded " ><i
                                             class="ti-plus"></i>New Staff</a>
                                 </div>
                             </div>

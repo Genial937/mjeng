@@ -26,7 +26,7 @@
 
                         <nav>
                             <ol class="cd-breadcrumb">
-                                <li><a href="{{route("admin.dashboard")}}" class="text-sm-left">Home</a></li>
+                                <li><a href="{{route("vendor.dashboard")}}" class="text-sm-left">Home</a></li>
                                 <li class="current"><em>Businesses</em></li>
                             </ol>
                         </nav>

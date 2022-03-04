@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMaterialInventoryTable extends Migration
+class CreateMaterialInventoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMaterialInventoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('material_inventory', function (Blueprint $table) {
+        Schema::create('material_inventories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('reg_no')->unique();
             $table->integer('business_id')->unsigned();
@@ -26,7 +26,10 @@ class CreateMaterialInventoryTable extends Migration
             $table->foreign('material_class_id')->references('id')->on('material_classes')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->integer('status')->default(0)->comment("0-pending approval,1-active,2-inactive,3-deleted");
+            $table->string('ownership')->nullable();
+            $table->text('description')->nullable();
             $table->text('comment')->nullable();
+            $table->timestamps();
         });
     }
 

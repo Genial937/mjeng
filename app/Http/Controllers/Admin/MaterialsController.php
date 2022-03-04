@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Materials;
+use App\MaterialInventory;
 use Illuminate\Http\Request;
 
 class MaterialsController extends Controller
@@ -41,10 +41,10 @@ class MaterialsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Materials  $materials
+     * @param  \App\MaterialInventory  $materials
      * @return \Illuminate\Http\Response
      */
-    public function show(Materials $materials)
+    public function show(MaterialInventory $materials)
     {
         //
     }
@@ -52,10 +52,10 @@ class MaterialsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Materials  $materials
+     * @param  \App\MaterialInventory  $materials
      * @return \Illuminate\Http\Response
      */
-    public function edit(Materials $materials)
+    public function edit(MaterialInventory $materials)
     {
         //
     }
@@ -64,10 +64,10 @@ class MaterialsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Materials  $materials
+     * @param  \App\MaterialInventory  $materials
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Materials $materials)
+    public function update(Request $request, MaterialInventory $materials)
     {
         //
     }
@@ -75,10 +75,10 @@ class MaterialsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Materials  $materials
+     * @param  \App\MaterialInventory  $materials
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Materials $materials)
+    public function destroy(MaterialInventory $materials)
     {
         //
     }

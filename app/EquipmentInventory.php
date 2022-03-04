@@ -5,14 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Equipments extends Model
+class EquipmentInventory extends Model
 {
     /**
      * @var string[]
      */
     protected $fillable=[
         "reg_no",
-        "user_id",
+        "business_id",
         "equipment_type_id",
         "equipment_model_id",
         "plate_no",
@@ -25,6 +25,7 @@ class Equipments extends Model
         "fuel_type",
         "engine_capacity",
         "status",
+        "images",
         "comment",
     ];
 
@@ -32,7 +33,7 @@ class Equipments extends Model
      * @return BelongsTo
      * This Equipment model
      */
-    public function model(): BelongsTo
+    public function equipmentModel(): BelongsTo
     {
         return $this->belongsTo(EquipmentModel::class);
     }
@@ -40,7 +41,7 @@ class Equipments extends Model
      * @return BelongsTo
      * This Equipment type
      */
-    public function type(): BelongsTo
+    public function equipmentType(): BelongsTo
     {
         return $this->belongsTo(EquipmentType::class);
     }
@@ -48,8 +49,8 @@ class Equipments extends Model
      * @return BelongsTo
      * This User type vendor who owns the equipment
      */
-    public function user(): BelongsTo
+    public function business(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Business::class);
     }
 }

@@ -38,9 +38,12 @@
     <link rel="stylesheet" href="{{url("plugins/tagsinput/bootstrap-tagsinput.css")}}" type="text/css">
     <!-- Custom css -->
     <link rel="stylesheet" href="{{url("assets/css/custom.css")}}" type="text/css">
-
+    <!-- Css -->
+    <link rel="stylesheet" href="{{url("plugins/dropzone/dropzone.css")}}" type="text/css">
     <!-- Style css -->
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css">
+    <!-- Css -->
+    <link rel="stylesheet" href="{{url("plugins/lightbox/magnific-popup.css")}}" type="text/css">
     <!-- Plugin scripts -->
     <script src="{{url("plugins/bundle.js")}}"></script>
     <!-- Datatable -->
@@ -57,6 +60,10 @@
     <script src="{{url("plugins/tagsinput/bootstrap-tagsinput.js")}}"></script>
     <!-- Javascript -->
     <script src="{{url("plugins/input-mask/jquery.mask.js")}}"></script>
+    <!-- Javascript -->
+    <script src="{{url("plugins/dropzone/dropzone.js")}}"></script>
+    <!-- Javascript -->
+    <script src="{{url("plugins/lightbox/jquery.magnific-popup.min.js")}}"></script>
     <script>
         $(function() {
             $.ajaxSetup({
@@ -83,6 +90,7 @@
 <script src="{{url("assets/js/mijengo/files.js")}}"></script>
 <!-- Files page  -->
 <script src="{{url("assets/js/mijengo/datatable.js")}}"></script>
+
 <!-- App scripts -->
 <script src="{{url("assets/js/app.min.js")}}"></script>
 </body>

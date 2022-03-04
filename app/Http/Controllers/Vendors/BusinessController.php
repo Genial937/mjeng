@@ -8,6 +8,7 @@ use App\Helpers\UploadFiles;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\User;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -279,11 +280,28 @@ class BusinessController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Business $business
-     * @return \Illuminate\Http\Response
+     * @param  \App\Site  $projectSite
+     * @return JsonResponse
      */
-    public function destroy(Business $business)
+    public function destroy(Request $request)
     {
-        //
+        try{
+            Business::where('id',$request->route("id"))->update(["status"=>4,'description'=>"Business deleted by ".Auth::user()->email]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Business successfully deleted.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
     }
+
 }

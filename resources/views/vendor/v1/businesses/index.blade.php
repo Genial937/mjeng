@@ -25,7 +25,7 @@
                     <div class=" mt-0">
                         <nav>
                             <ol class="cd-breadcrumb">
-                                <li><a href="{{route("admin.dashboard")}}" class="text-sm-left">Home</a></li>
+                                <li><a href="{{route("vendor.dashboard")}}" class="text-sm-left">Home</a></li>
                                 <li class="current"><em>Businesses</em></li>
                             </ol>
                         </nav>
@@ -46,6 +46,7 @@
                                             <th>Contact Phone</th>
                                             <th>Contact Email</th>
                                             <th>Business Address</th>
+                                            <th>Status</th>
                                             <th>Staffs</th>
                                             <th>Actions</th>
                                         </tr>
@@ -53,11 +54,23 @@
                                         <tbody>
                                         @if(!empty($businesses))
                                             @foreach($businesses as $business)
+                                                @if($business->status!==4)
                                                 <tr>
                                                     <td>{{$business->name}}</td>
                                                     <td>{{$business->email}}</td>
                                                     <td>{{$business->phone}}</td>
                                                     <td>{{$business->address}}</td>
+                                                    <td>
+                                                        @if($business->status==1)
+                                                            <label class="badge badge-info">Pending Approval by {{env("APP_NAME")}}</label>
+                                                            @elseif($business->status==2)
+                                                            <label class="badge badge-success">Approved</label>
+                                                            @elseif($business->status==3)
+                                                            <label class="badge badge-warning">Decline with reason</label>
+                                                             @elseif($business->status==4)
+                                                            <label class="badge badge-danger">Delete </label>
+                                                             @endif
+                                                    </td>
                                                     <td>
                                                         <div class="avatar-group">
                                                             @if(!empty($business->users))
@@ -82,14 +95,16 @@
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a href="#" class="dropdown-item" onclick="viewBusinessModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type']))}}','{{json_encode(json_decode($business->documents))}}')">View Details</a>
                                                                 <a href="{{route("vendor.edit.business",$business->id)}}"
-                                                                   class="dropdown-item">Edit</a>
-                                                                <a href="javascript:void(0)" onclick="viewStaffsModal('{{json_encode($business)}}')" class="dropdown-item">View Staff(s)</a>
-                                                                <a href="javascript:void(0)" onclick="addStaffModal('{{json_encode($business)}}','{{route("admin.create.user")}}?type=CONTRACTOR&business_id={{$business->id}}')" class="dropdown-item">Add Staff(s)</a>
-                                                                <a href="javascript:void(0)" class="dropdown-item">Delete</a>
+                                                                   class="dropdown-item">Update </a>
+                                                                <a href="javascript:void(0)" onclick="viewStaffsModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type','users']))}}')" class="dropdown-item">View Staff(s)</a>
+                                                                <a href="javascript:void(0)" onclick="addStaffModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type']))}}','{{route("admin.create.user")}}?type=CONTRACTOR&business_id={{$business->id}}')" class="dropdown-item">Add Staff(s)</a>
+                                                                <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("vendor.business.delete",$business->id)}}')">Delete</a>
+
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @endif
                                             @endforeach
                                         @endif
                                         </tbody>
@@ -108,7 +123,8 @@
         </div>
         <!-- ./ Content wrapper -->
     </div>
-{{--    @include("admin.v1.businesses.modals.add-staffs")--}}
+    @include("vendor.v1.businesses.modals.add-staffs")
+    @include("vendor.v1.businesses.modals.view-staffs")
     @include("vendor.v1.businesses.modals.view-business")
     <!-- App scripts -->
     <script src="{{url("assets/js/mijengo/select2.js")}}"></script>

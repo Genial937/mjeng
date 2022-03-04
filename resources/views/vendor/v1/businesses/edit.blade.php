@@ -9,6 +9,7 @@
     <!-- ./ Header -->
         <!-- Content wrapper -->
         <div class="content-wrapper">
+
             <!-- begin::navigation -->
         @include('vendor.v1.includes.main_nav')
         <!-- end::navigation -->
@@ -111,6 +112,22 @@
                                                            value="{{$business->address}}"
                                                            class="form-control border-input"
                                                            placeholder="e.g One Pandmore Place,13th floor, Kilimani Kenya">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>FeedBack</label>
+                                        @if($business->status==1)
+                                            <div class="alert alert-info">Pending Approval by {{env("APP_NAME")}}</div>
+                                        @elseif($business->status==2)
+                                                        <div class="alert alert-success">Approved</div>
+                                        @elseif($business->status==3)
+                                                        <div class="alert alert-warning">Decline with reason</div>
+                                        @elseif($business->status==4)
+                                                        <div class="alert alert-danger">Delete </div>
+                                        @endif
                                                 </div>
                                             </div>
                                         </div>

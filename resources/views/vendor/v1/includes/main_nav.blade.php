@@ -5,43 +5,42 @@
         </a>
     </div>
     <ul>
+
+        @if(count(App\User::where('id',Auth::id())->with('businesses')->first()->businesses))
         <li>
-            <a class="{{ Request::is('admin/') ? 'active' : ''}}" href="{{route("admin.dashboard")}}">
+            <a class="{{ Request::is('vendor/dashboard') ? 'active' : ''}}" href="{{route("vendor.dashboard")}}">
                 <i class="nav-link-icon ti-pie-chart"></i>
                 <span class="nav-link-label">Dashboard</span>
 
             </a>
         </li>
         <li>
-            <a class=" {{ Request::is('admin/projects/*') ? 'active' : ''}}" href="{{route("admin.project")}}">
+            <a class=" {{ Request::is('vendor/projects/*') ? 'active' : ''}}" href="{{route("vendor.project")}}">
                 <i class="nav-link-icon ti-folder"></i>
                 <span class="nav-link-label">Projects</span>
             </a>
         </li>
+          <li>
+                <a  href="{{route("vendor.inventory.equipment")}}">
+                    <i class="nav-link-icon ti-pie-chart"></i>
+                    <span class="nav-link-label">Inventory</span>
+
+                </a>
+        </li>
+        @endif
         <li>
-            <a class="{{ Request::is('admin/business/*') ? 'active' : ''}}" href="{{route("admin.contractor.businesses")}}">
+            <a class="{{ Request::is('vendor/business/*') ? 'active' : ''}}" href="{{route("vendor.businesses")}}">
                 <i class="nav-link-icon ti-briefcase"></i>
                 <span class="nav-link-label">Businesses</span>
             </a>
         </li>
-        <li>
-            <a  href="#">
-                <i class="nav-link-icon ti-pie-chart"></i>
-                <span class="nav-link-label">Inventory</span>
 
-            </a>
-        </li>
         <li>
-            <a class="{{ Request::is('admin/users') ? 'active' : ''}}" href="{{route("admin.users")}}">
+            <a class="{{ Request::is('vendor/users') ? 'active' : ''}}" href="{{route("vendor.users")}}">
                 <i class="nav-link-icon ti-user"></i>
                 <span class="nav-link-label">Users</span>
             </a>
         </li>
-        <li>
-            <a class="{{Request::is('admin/config/*') ? 'active' : ''}}" href="{{route("admin.task")}}">
-                <i class="nav-link-icon ti-settings"></i>
-                <span class="nav-link-label">Config</span>
-            </a>
-        </li>
+
     </ul>
 </div>

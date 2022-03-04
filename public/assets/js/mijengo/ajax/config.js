@@ -317,7 +317,7 @@ const editCounty = function (county_id,name, url) {
 }
 
 const getEquipmentMake=function(){
-    //get the equipement type id
+    //get the equipment type id
     let equipment_type_id =$("#equipment-type-id").val();
     $("#equipment-make-id").empty().append('<option selected  >Loading ...</option>');
     //request
@@ -325,7 +325,7 @@ const getEquipmentMake=function(){
         .done(function (data) {
             if(data["equipment_type"] && data["equipment_type"].equipment_makes.length >0){
                 //clear select
-                $("#equipment-make-id").empty().append('<option selected  >Choose equipment make</option>');
+                $("#equipment-make-id").empty().append('<option selected>Choose equipment make</option>');
                 //populate
                 $.each(data["equipment_type"].equipment_makes,function(key ,val){
                     $("#equipment-make-id").append('<option value="'+val.id+'"  >'+val.name+'</option>');

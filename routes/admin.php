@@ -235,6 +235,10 @@ Route::group(['prefix' => '/config/equipment/make','middleware' => ['log.route']
         'as' => 'admin.create.equipment.make',
         'uses' => 'Admin\EquipmentMakeController@store'
     ]);
+    Route::get('/{id}', [
+        'as' => 'admin.get.equipment.make',
+        'uses' => 'Admin\EquipmentMakeController@find'
+    ]);
 });
 Route::group(['prefix' => '/config/equipment/model','middleware' => ['log.route']], function () {
     Route::resource('/', 'Admin\EquipmentModelController')->names([
