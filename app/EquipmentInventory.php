@@ -35,7 +35,7 @@ class EquipmentInventory extends Model
      */
     public function equipmentModel(): BelongsTo
     {
-        return $this->belongsTo(EquipmentModel::class);
+        return $this->belongsTo(EquipmentModel::class)->with("equipmentMake");
     }
     /**
      * @return BelongsTo
@@ -43,7 +43,7 @@ class EquipmentInventory extends Model
      */
     public function equipmentType(): BelongsTo
     {
-        return $this->belongsTo(EquipmentType::class);
+        return $this->belongsTo(EquipmentType::class)->with("equipmentMakes");
     }
     /**
      * @return BelongsTo

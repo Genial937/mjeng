@@ -128,6 +128,8 @@ class RegisterController extends Controller
             "otp",
             "user_type"
           ));
+         //attach new/update role
+          $user->roles()->attach(1);
           //send email verification code
             //generate 6 digit code and update user
             $code=UniqueRandomChar::otpCode();

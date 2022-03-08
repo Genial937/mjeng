@@ -48,7 +48,8 @@
                                                 <div class="form-group">
                                                     <label>Business Type</label>
                                                     <select id="business-type" name="type" required
-                                                            class="form-control form-select-2">
+                                                            class="form-control form-select-2"
+                                                             onchange="getBusinessDocTye()" >
                                                         <option value="">Choose business type</option>
                                                         <option value="SOLE_PROPRIETOR">Sole Proprietor</option>
                                                         <option value="PARTNERSHIP">Partnership</option>

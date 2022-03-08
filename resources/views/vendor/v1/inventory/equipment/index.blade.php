@@ -37,9 +37,42 @@
                             <div class="content-title mt-0">
                                 <h4>All Equipments</h4>
                             </div>
+                            <div class="d-md-flex justify-content-between mb-4">
+                                <form id="search-equipment" method="GET">
+                                <ul class="list-inline mb-3">
+                                    <li class="list-inline-item mb-0">
+                                        <label>Filter By Business</label>
+                                        <select id="business-type" name="business_id" required
+                                                class="form-control form-select-2">
+                                            <option selected>Choose business</option>
+                                            @if(!empty($businesses))
+                                                @foreach($businesses as $business)
+                                                    <option @if(Request::get("business_id")==$business->id) selected @endif value="{{$business->id}}">{{$business->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </li>
+                                    <li class="list-inline-item mb-0">
+                                        <label>Filter By Status</label>
+                                        <select id="business-status" name="status"
+                                                class="form-control form-select-2">
+                                            <option selected>Choose status</option>
+                                            <option @if(Request::get("status")==0) selected @endif value="0">Pending Approval</option>
+                                            <option @if(Request::get("status")==1) selected @endif value="1">Working</option>
+                                            <option @if(Request::get("status")==2) selected @endif value="2">Ready</option>
+                                            <option @if(Request::get("status")==3) selected @endif value="3">Rejected</option>
+                                            <option @if(Request::get("status")==4) selected @endif value="4">Maintenance</option>
+                                        </select>
+                                    </li>
+                                    <li class="list-inline-item mb-0">
+                                       <button class="btn btn-dark" ><i class="ti-search"></i> Search</button>
+                                    </li>
+                                </ul>
+                                </form>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table data-table">
+                                    <table class="table table-files">
                                         <thead class="thead-light">
                                         <tr>
                                             <th>Business</th>
@@ -107,9 +140,10 @@
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <a href="#" class="dropdown-item" onclick="viewEquipmentModal('{{$equipment->business->name}}','{{json_encode($equipment->only(["reg_no","equipmentType", "equipmentModel","plate_no","yom","axel", "tw","gw","description","ownership","fuel_type","engine_capacity","status","comment",]))}}')">View Details</a>
+                                                                @if($equipment->status==0)
                                                                 <a href="{{route("vendor.inventory.edit.equipment",$equipment->id)}}" class="dropdown-item">Update </a>
-                                                               <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("vendor.delete.equipment",$equipment->id)}}')">Delete</a>
-
+                                                                <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("vendor.delete.equipment",$equipment->id)}}')">Delete</a>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </td>

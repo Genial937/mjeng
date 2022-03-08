@@ -36,12 +36,13 @@
                         @include("vendor.v1.inventory.includes.nav")
                         <div class="col-xl-8">
                             <div class="content-title mt-0">
-                                <h4> Create material your can supplier</h4>
+                                <h4> Materials </h4>
+                                <p>Create material available for supply.</p>
                             </div>
 
                                 <div class="row">
                                     <div class="col-md-6 margin-10-b">
-                                        <form action="{{route("vendor.material.equipment")}}"
+                                        <form action="{{route("vendor.material.create")}}"
                                               id="create-vendor-material-form" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
@@ -97,7 +98,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            <div class="row">
+                                         <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Description/Additional information</label>
@@ -107,9 +108,32 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="content-title margin-5-p">
+                                                <h4>Material Location</h4>
+                                                <p>This county and sub county the material is are located.</p>
+                                            </div>
+                                            <div class="form-row ">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="start-date">County</label>
+                                                    <select class="form-control form-select-2" name="county_id" id="county-id" onchange="getSubcounties()">
+                                                        <option>Choose a county</option>
+                                                        @if(!empty($counties))
+                                                            @foreach($counties as $county)
+                                                                <option value="{{$county->id}}">{{$county->name}}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="end-date">Sub County</label>
+                                                    <select class=" form-control form-select-2" name="sub_county_id" id="sub-county-id">
+                                                        <option>Select subcounty</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         <button
                                             class="btn btn-primary  btn-uppercase btn-rounded btn-create-material ">
-                                            Save Changes
+                                            Save
                                         </button>
                                             <input type="hidden" name="user_id" value="{{auth()->id()}}">
                                      </form>

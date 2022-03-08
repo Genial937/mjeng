@@ -9,6 +9,8 @@ $(document).ready(function () {
         hideDuration: 1500
     };
 
+
+
     //create vendor business
     $(document).on('submit', '#create-vendor-equipment-form', function (e) {
         e.preventDefault();
@@ -119,6 +121,45 @@ $(document).ready(function () {
             error: function (data) {
                 console.error(data)
                 button.text('Save ').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            }
+        })
+    });
+    //add material
+    $(document).on('submit', '#edit-vendor-material-form', function (e) {
+        e.preventDefault();
+        let form= $('#edit-vendor-material-form');
+        let button= $('.btn-edit-material');
+        button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url = form.attr('action');
+        $.ajax({
+            url: url,
+            method: "POST",
+            data:  new FormData( this ),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: "json",
+            enctype: 'multipart/form-data',
+            success: function (data) {
+                console.log(data)
+                if (data['success']) {
+                    button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+                } else {
+                    button.text('Save Changes').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            },
+            error: function (data) {
+                console.error(data)
+                button.text('Save Changes').prop('disabled', false);
                 var errors = data.responseJSON;
                 $.each(errors.errors, function (key, value) {
                     toastr.error(value[0]);
@@ -325,7 +366,7 @@ const getMaterialClass=function (){
 const viewMaterialModal=function (businessName,jsonMaterial){
     $("#view-material").modal("show");
     let material=JSON.parse(jsonMaterial)
-    console.log(material)
+
     //details
     $(".modal-business-name").text(businessName);
     $(".modal-material-ownership").text(material.ownership);
@@ -333,6 +374,34 @@ const viewMaterialModal=function (businessName,jsonMaterial){
     $(".modal-material-class").text(material.materialClass.name);
     $(".modal-material-reg-no").text(material.reg_no);
     $(".modal-material-description").text(material.description);
+    $(".modal-material-county").text(material.subCounty.county.name);
+    $(".modal-material-subcounty").text(material.subCounty.county.name);
     $(".modal-material-status").append(material.status===0?'<label class="badge badge-warning">Pending Approval</label>':material.status===1?'<label class="badge badge-success">Active</label>':material.status===2?'<label class="badge badge-danger">Inactive</label>':material.status===3?'<label class="badge badge-danger">Approval rejected</label>':'<label class="badge badge-danger">Deleted</label>');
     $(".modal-material-comment").append(material.status===0?'<label class="badge badge-warning">'+material.comment+'</label>':material.status===1?'<label class="badge badge-success">'+material.comment+'</label>':equipment.status===2?'<label class="badge badge-danger">'+material.comment+'</label>':equipment.status===3?'<label class="badge badge-danger">'+material.comment+'</label>':'<label class="badge badge-danger">'+equipment.comment+'</label>');
+}
+//get the county{id}-subcounties
+const getSubcounties=function(){
+    let county_id =$("#county-id").val();
+    let form_select= $("#sub-county-id");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //request
+    $.get("/admin/config/county/find/"+county_id)
+        .done(function (data) {
+            if(data["county"] && data["county"].subcounties.length >0){
+                //clear select
+                form_select.empty().append('<option selected  >Choose subcounty</option>');
+                //populate
+                $.each(data["county"].subcounties,function(key ,val){
+                    form_select.append('<option value="'+val.id+'"  >'+val.name+'</option>');
+                })
+            }
+
+        })
+        .fail(function (data) {
+            console.log(data)
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
 }

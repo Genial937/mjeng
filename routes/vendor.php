@@ -124,7 +124,19 @@ Route::group(['prefix' => '/material','middleware' => ['log.route','vendor.has.b
         'uses' => 'Vendors\MaterialController@showCreateView'
     ]);
     Route::post('/create', [
-        'as' => 'vendor.material.equipment',
+        'as' => 'vendor.material.create',
         'uses' => 'Vendors\MaterialController@store'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'vendor.inventory.edit.material',
+        'uses' => 'Vendors\MaterialController@showEditView'
+    ]);
+    Route::post('/edit', [
+        'as' => 'vendor.material.edit',
+        'uses' => 'Vendors\MaterialController@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'vendor.delete.material',
+        'uses' => 'Vendors\MaterialController@destroy'
     ]);
 });

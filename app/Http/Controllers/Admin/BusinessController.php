@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class BusinessController extends Controller
@@ -129,7 +130,7 @@ class BusinessController extends Controller
 
         try {
             $business_code=UniqueRandomChar::businessCode();
-            $request->request->add(["business_code"=>$business_code]);
+            $request->request->add(["business_code"=>$business_code,"comments"=>"Approved successfully by ".Auth::user()->email]);
             $business = Business::updateOrCreate(["name"=>$request->name,"phone"=>$request->phone],$request->only([
                 "business_code",
                 "name",
@@ -140,7 +141,8 @@ class BusinessController extends Controller
                 "address",
                 "status",
                 "type",
-                "description"
+                "description",
+                "comments"
             ]));
             //attach business to merchant
             //$business->users()->sync($request->user_id);

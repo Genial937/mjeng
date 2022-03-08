@@ -347,5 +347,15 @@
     <script src="{{url("assets/js/mijengo/datepicker.js")}}"></script>
     <script src="{{url("assets/js/mijengo/ajax/inventory.js")}}"></script>
     <!-- Javascript -->
-
+    <script>
+        $(document).ready(function(){
+            $("#equipment-type-id").trigger('change')
+            setTimeout(function () {
+                $("#equipment-make-id").val({{$equipment->equipmentModel->equipmentMake->id}}).trigger("change")
+                setTimeout(function () {
+                    $("#equipment-model-id").val({{$equipment->equipmentModel->id}}).trigger("change")
+                },4000)
+            },4000)
+        })
+    </script>
 @endsection

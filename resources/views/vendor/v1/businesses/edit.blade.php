@@ -49,7 +49,7 @@
                                                 <div class="form-group">
                                                     <label>Business Type</label>
                                                     <select id="business-type" name="type" required
-                                                            class="form-control form-select-2">
+                                                            class="form-control form-select-2" >
                                                         <option value="">Choose business type</option>
                                                         <option @if($business->type=="SOLE_PROPRIETOR") selected @endif value="SOLE_PROPRIETOR">Sole Proprietor</option>
                                                         <option @if($business->type=="PARTNERSHIP") selected @endif value="PARTNERSHIP">Partnership</option>

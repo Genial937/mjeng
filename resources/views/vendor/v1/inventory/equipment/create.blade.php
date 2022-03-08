@@ -189,7 +189,7 @@
                                             </div>
                                         <button
                                             class="btn btn-primary  btn-uppercase btn-rounded btn-create-equipment ">
-                                            Save Changes
+                                            Save
                                         </button>
                                            <input type="hidden" name="equipment_front_image" >
                                             <input type="hidden" name="equipment_back_image" >

@@ -37,6 +37,39 @@
                             <div class="content-title mt-0">
                                 <h4>Materials</h4>
                             </div>
+                            <div class="d-md-flex justify-content-between mb-4">
+                                <form id="search-equipment" method="GET">
+                                    <ul class="list-inline mb-3">
+                                        <li class="list-inline-item mb-0">
+                                            <label>Filter By Business</label>
+                                            <select id="business-type" name="business_id" required
+                                                    class="form-control form-select-2">
+                                                <option selected>Choose business</option>
+                                                @if(!empty($businesses))
+                                                    @foreach($businesses as $business)
+                                                        <option @if(Request::get("business_id")==$business->id) selected @endif value="{{$business->id}}">{{$business->name}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                        </li>
+                                        <li class="list-inline-item mb-0">
+                                            <label>Filter By Status</label>
+                                            <select id="business-status" name="status"
+                                                    class="form-control form-select-2">
+                                                <option selected>Choose status</option>
+                                                <option @if(Request::get("status")==0) selected @endif value="0">Pending Approval</option>
+                                                <option @if(Request::get("status")==1) selected @endif value="1">Working</option>
+                                                <option @if(Request::get("status")==2) selected @endif value="2">Ready</option>
+                                                <option @if(Request::get("status")==3) selected @endif value="3">Rejected</option>
+                                                <option @if(Request::get("status")==4) selected @endif value="4">Maintenance</option>
+                                            </select>
+                                        </li>
+                                        <li class="list-inline-item mb-0">
+                                            <button class="btn btn-dark" ><i class="ti-search"></i> Search</button>
+                                        </li>
+                                    </ul>
+                                </form>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table data-table">
@@ -46,6 +79,8 @@
                                             <th>Registration ID</th>
                                             <th>Type</th>
                                             <th>Class</th>
+                                            <th>County</th>
+                                            <th>Sub County</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -59,6 +94,8 @@
                                                     <td>{{$material->reg_no}}</td>
                                                     <td>{{$material->materialType->name}}</td>
                                                     <td>{{$material->materialClass->name}}</td>
+                                                    <td>{{$material->subCounty->county->name}}</td>
+                                                    <td>{{$material->subCounty->name}}</td>
                                                     <td>
                                                         @if($material->status==0)
                                                             <label class="badge badge-info">Pending Approval by {{env("APP_NAME")}}</label>
@@ -76,9 +113,11 @@
                                                                 <i class="ti-more-alt"></i>
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item" onclick="viewMaterialModal('{{$material->business->name}}','{{json_encode($material->only(["reg_no","materialClass", "materialType","description","ownership","status","comment",]))}}')">View Details</a>
-                                                                <a href="{{route("vendor.inventory.edit.equipment",$material->id)}}" class="dropdown-item">Update </a>
-                                                               <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("vendor.delete.equipment",$material->id)}}')">Delete</a>
+                                                                <a href="#" class="dropdown-item" onclick="viewMaterialModal('{{$material->business->name}}','{{json_encode($material->only(["reg_no","materialClass", "materialType","description","ownership","subCounty","status","comment",]))}}')">View Details</a>
+                                                                 @if($material->status==0)
+                                                                    <a href="{{route("vendor.inventory.edit.material",$material->id)}}" class="dropdown-item">Update </a>
+                                                                    <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("vendor.delete.material",$material->id)}}')">Delete</a>
+                                                                @endif
 
                                                             </div>
                                                         </div>

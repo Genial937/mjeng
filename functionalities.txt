@@ -76,7 +76,7 @@ Dashboard
 --delete- done
 --Assign staff to sites
 --Add staffs to sites
- 
+
 -Vendor/Supplier Business
 --Add- pending
 --Edit- pending
@@ -99,6 +99,7 @@ Dashboard
 --edit- pending
 --delete- pending
 --approve/reject- pending
+
 -Billing
 ========================
 -View
@@ -114,11 +115,10 @@ Dashboard
 --edit roles- pending
 --update roles- pending
 --delete roles- pending
-
 - User profile/setting
 ========================
 --change theme
---Update profile 
+--Update profile
 
 VENDORS
 ----------------------------------------------------------------------------------
@@ -144,10 +144,10 @@ Tasks
 Inventory
 ===========
 -Equipment
---View -pending
---add- pending
---edit- pending
---delete- pending
+--View - done
+--add- done
+--edit- done
+--delete - done
 --change the equipment status- out of service/maitainance/working condition
 -Material
 --View -pending
@@ -190,7 +190,7 @@ Projects
 
 Billing
 ===========================
--Activities done/issues under the Task 
+-Activities done/issues under the Task
 -Invoice pending/paid
 
 Users
@@ -203,4 +203,4 @@ Users
 - User profile/setting
 ========================
 --change theme
---Update profile 
+--Update profile

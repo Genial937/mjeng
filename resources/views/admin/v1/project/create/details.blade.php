@@ -78,7 +78,7 @@
                                         </div>
                                         <div class="content-title margin-5-p">
                                             <h4>Project Location</h4>
-                                            <p>This county and subcounty the project is situated/located.</p>
+                                            <p>This county and sub county the project is situated/located.</p>
                                         </div>
                                         <div class="form-row ">
                                             <div class="col-md-6 mb-3">

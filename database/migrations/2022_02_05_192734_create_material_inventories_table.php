@@ -25,7 +25,10 @@ class CreateMaterialInventoriesTable extends Migration
             $table->integer('material_class_id')->unsigned();
             $table->foreign('material_class_id')->references('id')->on('material_classes')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('status')->default(0)->comment("0-pending approval,1-active,2-inactive,3-deleted");
+            $table->integer('sub_county_id')->unsigned();
+            $table->foreign('sub_county_id')->references('id')->on('sub_counties')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('status')->default(0)->comment("0-pending approval,1-instock,2-outstock,3-deleted");
             $table->string('ownership')->nullable();
             $table->text('description')->nullable();
             $table->text('comment')->nullable();

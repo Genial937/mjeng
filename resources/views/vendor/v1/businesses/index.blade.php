@@ -37,6 +37,7 @@
                             <div class="content-title mt-0">
                                 <h4>All Business</h4>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table data-table">
@@ -75,9 +76,9 @@
                                                         <div class="avatar-group">
                                                             @if(!empty($business->users))
                                                                 @foreach($business->users as $user)
-                                                                    <figure class="avatar avatar-sm" title=""
+                                                                    <figure class="avatar avatar-sm text-capitalize" title=""
                                                                             data-toggle="tooltip"
-                                                                            data-original-title="{{$user->firstname}} {{$user->surname}}">
+                                                                            data-original-title="{{$user->firstname}} {{$user->surname}} - @if(!empty($user->roles)) @foreach($user->roles as $role) {{$role->display_name}} @endforeach @endif">
                                                                         <img
                                                                             src="{{asset("assets/media/image/user/avatar.png")}}"
                                                                             class="rounded-circle" alt="image">
@@ -93,7 +94,7 @@
                                                                 <i class="ti-more-alt"></i>
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item" onclick="viewBusinessModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type']))}}','{{json_encode(json_decode($business->documents))}}')">View Details</a>
+                                                                <a href="#" class="dropdown-item" onclick="viewBusinessModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type','status','comments']))}}','{{json_encode(json_decode($business->documents))}}')">View Details</a>
                                                                 <a href="{{route("vendor.edit.business",$business->id)}}"
                                                                    class="dropdown-item">Update </a>
                                                                 <a href="javascript:void(0)" onclick="viewStaffsModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type','users']))}}')" class="dropdown-item">View Staff(s)</a>

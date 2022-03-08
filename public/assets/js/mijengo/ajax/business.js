@@ -184,35 +184,54 @@ const viewStaffsModal=function (jsonBusiness){
         let data = [];
         $('.staff-table').dataTable().fnClearTable()
         $.each(business.users, function (key, val) {
-            data.push([val.firstname, val.surname, val.email, '<button type="button" id="remove-business-staff-' + val.id + '" onclick="removeBusinessStaff(' + val.id + ',' + business.id + ')" class="btn btn-danger btn-floating"><i class="ti-close"></i></button>']);
+            //filter admin
+            if(val.roles.some(e => e.name !== 'admin'))
+               data.push([val.firstname+' '+val.surname, val.email, val.phone, '<button type="button" id="remove-business-staff-' + val.id + '" onclick="removeBusinessStaff(' + val.id + ',' + business.id + ')" class="btn btn-danger btn-floating"><i class="ti-close"></i></button>']);
+
         });
-        $('.staff-table').dataTable().fnAddData(data);
+        if(data.length > 0)
+           $('.staff-table').dataTable().fnAddData(data);
     }else{
         toastr.error("Business doesn't have staff to view.");
     }
 }
 
 const removeBusinessStaff=function(user_id,business_id){
-    //po
-    $('#remove-business-staff-'+user_id).text('').append('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>').prop('disabled', true);
-    $.post('/admin/business/contractor/detach/user', {business_id,user_id})
-        .done(function (data) {
-            if (data['success']) {
-                toastr.success(data['message']);
-                $("#view-busines-staff").modal("hide");
+    //prompt
+    swal({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+            if (willDelete) {
+                $('#remove-business-staff-'+user_id).empty('').append('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>').prop('disabled', true);
+                $.post("/admin/business/contractor/detach/user",{business_id,user_id})
+                    .done(function (data) {
+                        if (data['success']) {
+                            toastr.success(data['message']);
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            toastr.success(data['message']);
+                        }
 
-                location.reload();
+                    })
+                    .fail(function (data) {
+                        console.error(data)
+                        var errors = data.responseJSON;
+                        $.each(errors.errors, function (key, value) {
+                            toastr.error(value[0]);
+                        });
+                    })
+
             } else {
-                toastr.success(data['message']);
+                toastr.info('Delete Cancelled!');
             }
         })
-        .fail(function (data) {
-            console.error(data)
-            var errors = data.responseJSON;
-            $.each(errors.errors, function (key, value) {
-                toastr.error(value[0]);
-            });
-        })
+
 
 };
 const viewBusinessModal=function (jsonBusiness,jsonDocuments){
@@ -220,19 +239,20 @@ const viewBusinessModal=function (jsonBusiness,jsonDocuments){
     let business=JSON.parse(jsonBusiness)
     let documents=JSON.parse(jsonDocuments)
    //details
+    console.log(business.comment)
     $(".modal-business-name").text(business.name);
     $(".modal-business-email").text(business.email);
     $(".modal-business-phone").text(business.phone);
     $(".modal-business-address").text(business.address);
     $(".modal-business-type").text(business.type);
-    $(".modal-business-status").append(business.status===1?'<label class="badge badge-warning">Pending Approval</label>':business.status===2?'<label class="badge badge-success">Approved</label>':"<label class=\"badge badge-danger\">Decline with reason</label>");
-    $(".modal-business-description").append(business.status===1?'<label class="badge badge-warning">'+business.description+'</label>':business.status===2?'<label class="badge badge-success">'+business.description+'</label>':"<label class=\"badge badge-danger\">'+business.description+'</label>");
+    $(".modal-business-status").empty().append(business.status===1?'<label class="badge badge-warning">Pending Approval</label>':business.status===2?'<label class="badge badge-success">Approved</label>':"<label class=\"badge badge-danger\">Decline with reason</label>");
+    $(".modal-business-description").empty().append(business.status===1?'<label class="badge badge-warning">'+business.comments+'</label>':business.status===2?'<label class="badge badge-success">'+business.comments+'</label>':'<label class="badge badge-danger">'+business.comments+'</label>');
 
     //documents
-    $(".modal-business-documents").text('')
+    $(".modal-business-documents").empty()
     $.each(documents, function (key, value) {
-        $(".modal-business-documents").append(' <h5 class="margin-5-p">'+value.doc_type+' : <span class="text-danger font-italic">'+value.doc_no+'</span></h5>');
-        $(".modal-business-documents").append(' <h5 class="margin-5-p">Document View : <span class="text-danger font-italic"><a class="btn btn-outline-info" href="'+value.doc_url+'">View</a> </span></h5>');
+        $(".modal-business-documents").append(' <p class="margin-5-p">'+value.doc_type+' : <span class="text-danger ">'+value.doc_no+'</span></p>');
+        $(".modal-business-documents").append(' <p class="margin-5-p">Document View : <span class="text-danger "><a class="btn-link" target="_blank" href="'+value.doc_url+'"><i class="ti-eye"></i> View</a> </span></p>');
     })
 }
 
@@ -271,4 +291,16 @@ const deleteRecord=function(url) {
                 toastr.info('Delete Cancelled!');
             }
         })
+}
+
+const documentTypeJson=JSON.parse('[{"business_type":"PARTNERSHIP", "document_type":"ID"},{"business_type":"PARTNERSHIP", "document_type":"PASSPORT"},{"business_type":"SOLE_PROPRIETOR", "document_type":"ID"},{"business_type":"SOLE_PROPRIETOR", "document_type":"PASSPORT"},{"business_type":"COMPANY", "document_type":"CERTIFICATE"}]');
+const getBusinessDocTye=function () {
+    let business_type=$("#business-type").val()
+    //clear select
+    $("#business-doc-type").empty().append('<option selected>Choose document type</option>');
+    //populate
+    $.each(documentTypeJson,function(key ,val){
+        if(business_type===val.business_type)
+          $("#business-doc-type").append('<option value="'+val.document_type+'"  >'+val.document_type+'</option>');
+    })
 }

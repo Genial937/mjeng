@@ -12,6 +12,7 @@ class MaterialInventory extends Model
         "business_id",
         "material_type_id",
         "material_class_id",
+        "sub_county_id",
         "ownership",
         "description",
         "comment",
@@ -29,7 +30,7 @@ class MaterialInventory extends Model
     }
     /**
      * @return BelongsTo
-     * This Equipment type
+     * This Material type
      */
     public function materialType(): BelongsTo
     {
@@ -37,10 +38,17 @@ class MaterialInventory extends Model
     }
     /**
      * @return BelongsTo
-     * This User type vendor who owns the equipment
+     *
      */
     public function business(): BelongsTo
     {
         return $this->belongsTo(Business::class);
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function subCounty(): BelongsTo
+    {
+        return $this->belongsTo(SubCounty::class)->with("county");
     }
 }

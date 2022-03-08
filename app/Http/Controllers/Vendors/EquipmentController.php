@@ -29,10 +29,29 @@ class EquipmentController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request  $request)
     {
-        $equipments = EquipmentInventory::with(["business","equipmentType","equipmentModel"])->get();
-        return view('vendor.v1.inventory.equipment.index',compact("equipments"));
+
+        //filter by business/status/
+        $user = User::with(["businesses", 'staffs'])
+            ->where("id", Auth::id())
+            ->first();
+        $businesses = isset($user->businesses) ? $user->businesses : [];
+        $business_id=$businesses[0]->id;
+        $status=2;
+        //check filters
+        if($request->has("business_id")):
+            $business_id=$request->business_id;
+        endif;
+        if($request->has("status")):
+            $status=$request->status;
+        endif;
+
+        $equipments = EquipmentInventory::with(["business","equipmentType","equipmentModel"])
+            ->where("business_id",$business_id)
+            ->where("status",$status)
+            ->get();
+        return view('vendor.v1.inventory.equipment.index',compact("equipments","businesses"));
     }
 
     /**

@@ -31,9 +31,10 @@ class BusinessController extends Controller
     public function index()
     {
         //user businesses
-        $user = User::with(["businesses", 'staffs'])
+        $user = User::with(["businesses", 'staffs','roles'])
             ->where("id", Auth::id())
             ->first();
+
         $businesses = isset($user->businesses) ? $user->businesses : [];
         $staffs = isset($user->staffs) ? $user->staffs : [];
         return view('vendor.v1.businesses.index', compact("businesses", "staffs"));
@@ -172,7 +173,7 @@ class BusinessController extends Controller
                 array_push($documents, ['doc_no' => $request->doc_no[$i], 'doc_type' => $request->doc_type[$i], 'doc_url' => $result->getData()->path]);
                 $i++;
             endforeach;
-            $request->request->add(["business_code" => $business_code, 'documents' => json_encode($documents)]);
+            $request->request->add(["business_code" => $business_code, 'documents' => json_encode($documents),"comments"=>"Business is pending approval from ".env("APP_NAME")]);
             $business = Business::create($request->only([
                 "business_code",
                 "name",
@@ -184,6 +185,7 @@ class BusinessController extends Controller
                 "status",
                 "type",
                 "documents",
+                "comments",
                 "description"
             ]));
             //attach business to user
