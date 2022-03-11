@@ -670,7 +670,7 @@ const editMaterialRequired=function(requirement){
     $("#modal-input-material-required-id").val(decode_requirement.id);
 
 }
-//edit material required
+//assign material required
 const assignEquipmentFromInventory=function(requirement){
     //decode
     let decode_requirement=$.parseJSON(requirement);
@@ -697,13 +697,16 @@ const getBusinessEquipments=function (){
                 let equipments= data["business"].equipments.filter(o=>Object.values(o).includes(parseInt(equipment_type_id)))
                 //populate
                 $.each(equipments,function(key ,val){
-                    //chack if here is any equipment assign for the business
-                    if(val.equipment_required.length>0) {
-                        //check if the equipment is already added
-                        if (val.equipment_required.some(e => e.pivot.equipment_inventory_id !== val.id))
+                    //check if equipment is open
+                    if(val.status!==0||val.status!==6||val.status!==3||val.status!==4) {
+                        //check if here is any equipment assign for the business
+                        if (val.equipment_required.length > 0) {
+                            //check if the equipment is already added and is approved by company
+                            if (val.equipment_required.some(e => e.pivot.equipment_inventory_id !== val.id))
+                                form_select.append('<option value="' + val.id + '"  >' + val.plate_no + '(' + val.equipment_type.name + ')</option>');
+                        } else {
                             form_select.append('<option value="' + val.id + '"  >' + val.plate_no + '(' + val.equipment_type.name + ')</option>');
-                    }else{
-                        form_select.append('<option value="' + val.id + '"  >' + val.plate_no + '(' + val.equipment_type.name + ')</option>');
+                        }
                     }
                 })
             }
@@ -769,6 +772,54 @@ const removeProjectEquipmentAssigned=function(equipment_id,equipment_required_id
             toastr.info('Delete Cancelled!');
         }
     })
-
-
 };
+//assign material required
+const assignMaterialFromInventory=function(material){
+    //decode
+    let decode_material=$.parseJSON(material);
+    console.log(decode_material)
+    $(".modal-material-type-name").text(decode_material.material_type.name);
+    $(".modal-material-class-required").text(decode_material.classification.name);
+    $("#modal-add-material-type-id").val(decode_material.material_type.id);
+    $("#modal-material-required-id").val(decode_material.id);
+    //show  modal
+    $("#add-materials").modal('show');
+}
+
+const getBusinessMaterials=function (){
+    let business_id=$("#modal-add-material-business-id").val();
+    let material_type_id=$("#modal-add-material-type-id").val();
+    let form_select= $("#modal-add-material-inventory");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //get business equipments
+    $.get("/admin/business/find/"+business_id)
+        .done(function (data) {
+            console.log(data)
+            if(data["business"] && data["business"].materials.length >0){
+                //clear select
+                form_select.empty();
+                //filter by material by type required
+                let materials= data["business"].materials.filter(o=>Object.values(o).includes(parseInt(material_type_id)))
+                //populate
+                $.each(materials,function(key ,val){
+                  //check if the material is instock
+                    if(val.status===1) {
+                        //check if here is any material assign/added for the business
+                        if (val.material_required.length > 0) {
+                            //check if the equipment is already added
+                            if (val.material_required.some(e => e.pivot.material_inventory_id !== val.id))
+                                form_select.append('<option value="' + val.id + '"  >' + val.material_type.name + '</option>');
+                        } else {
+                            form_select.append('<option value="' + val.id + '"  >' + val.material_type.name + '(' + val.material_class.name + ')</option>');
+                        }
+                    }
+                })
+            }
+        })
+        .fail(function (data) {
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}

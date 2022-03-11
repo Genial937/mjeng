@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class MaterialInventory extends Model
 {
@@ -50,5 +51,13 @@ class MaterialInventory extends Model
     public function subCounty(): BelongsTo
     {
         return $this->belongsTo(SubCounty::class)->with("county");
+    }
+    /**
+     * @return BelongsToMany
+     * This User type vendor who owns the equipment
+     */
+    public function materialRequired(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(MaterialsRequired::class);
     }
 }

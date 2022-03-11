@@ -208,7 +208,7 @@ class BusinessController extends Controller
         try{
             return response()->json([
                 'success' => true,
-                "business"=>Business::with("equipments")->find($request->route("id")),
+                "business"=>Business::with(["equipments","materials"])->find($request->route("id")),
                 'message' => 'Success',
             ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {

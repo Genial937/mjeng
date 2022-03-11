@@ -59,7 +59,7 @@
                                                 <option selected value="">Choose Material Type</option>
                                                 @if(!empty($material_types))
                                                     @foreach($material_types as $material_type)
-                                                        <option @if(Request::get("equipments_type_id")==$material_type->id) selected @endif value="{{$material_type->id}}">{{$material_type->name}}</option>
+                                                        <option @if(Request::get("material_type_id")==$material_type->id) selected @endif value="{{$material_type->id}}">{{$material_type->name}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -104,8 +104,8 @@
                                                         <i class="ti-more-alt"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item" onclick="editMaterialRequired('{{json_encode($material)}}')">Edit</a>
-                                                        <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("admin.delete.material.required",$material->id)}}')">Delete</a>
+                                                        <a href="#" class="dropdown-item" onclick="assignMaterialFromInventory('{{json_encode($material)}}')" > Add material(s)</a>
+                                                        <a href="#" class="dropdown-item" onclick="viewMaterialRequiredAssignedModal('{{json_encode($material)}}')" > View added material(s)</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -130,7 +130,7 @@
         <!-- ./ Content wrapper -->
     </div>
     <!-- modals  -->
-    @include("vendor.v1.project.modals.add-equipment")
+    @include("vendor.v1.project.modals.add-material")
     @include("vendor.v1.project.modals.view-equipments")
     <!-- Files page  -->
     <script src="{{url("assets/js/mijengo/select2.js")}}"></script>

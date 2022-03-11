@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MaterialInventoryMaterialRequired extends Migration
+class MaterialInventoryMaterialsRequired extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class MaterialInventoryMaterialRequired extends Migration
      */
     public function up()
     {
-        Schema::create('material_inventory_material_required', function (Blueprint $table) {
+        Schema::create('material_inventory_materials_required', function (Blueprint $table) {
             $table->integer('material_inventory_id')->unsigned();
 //            $table->foreign('material_inventory_id',"m_inv_id_foreign")->references('id')->on('material_inventory')
 //                ->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('material_required_id')->unsigned();
+            $table->integer('materials_required_id')->unsigned();
 //            $table->foreign('material_required_id',"m_re_id_foreign")->references('id')->on('materials_required')
 //                ->onUpdate('cascade')->onDelete('cascade');
         });

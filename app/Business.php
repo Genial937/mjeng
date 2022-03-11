@@ -26,4 +26,7 @@ class Business extends Model
     public function equipments() {
         return $this->hasMany(EquipmentInventory::class)->with(["equipmentType","equipmentRequired"]);
     }
+    public function materials() {
+        return $this->hasMany(MaterialInventory::class)->with(["materialClass","materialType",'materialRequired']);
+    }
 }
