@@ -37,21 +37,22 @@ class EquipmentController extends Controller
             ->where("id", Auth::id())
             ->first();
         $businesses = isset($user->businesses) ? $user->businesses : [];
-        $business_id=$businesses[0]->id;
-        $status=2;
+        $default_business=$businesses[0];
+        $business_id=$default_business->id;
+        $equipments = EquipmentInventory::with(["business","equipmentType","equipmentModel"])
+                ->where("business_id",$business_id);
         //check filters
         if($request->has("business_id")):
             $business_id=$request->business_id;
+            $equipments =$equipments->where("business_id",$business_id);
         endif;
         if($request->has("status")):
             $status=$request->status;
+            $equipments =$equipments->where("status",$status);
         endif;
+        $equipments =$equipments->get();
 
-        $equipments = EquipmentInventory::with(["business","equipmentType","equipmentModel"])
-            ->where("business_id",$business_id)
-            ->where("status",$status)
-            ->get();
-        return view('vendor.v1.inventory.equipment.index',compact("equipments","businesses"));
+        return view('vendor.v1.inventory.equipment.index',compact("equipments","businesses","default_business"));
     }
 
     /**

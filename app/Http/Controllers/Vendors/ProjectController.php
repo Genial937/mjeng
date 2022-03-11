@@ -22,12 +22,15 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $businesses=Business::get();
         $counties=County::all();
-        //projects
-        $projects = Project::where('status',1)->with(["business","subCounty"])->get();
+        //view open projects
+        $projects = Project::with(["business","subCounty"])->where('status',1);
+        //filters
+        $projects=$projects->get();
         return view('vendor.v1.project.index',compact("projects","businesses","counties"));
     }
 

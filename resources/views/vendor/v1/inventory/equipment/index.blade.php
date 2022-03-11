@@ -44,24 +44,27 @@
                                         <label>Filter By Business</label>
                                         <select id="business-type" name="business_id" required
                                                 class="form-control form-select-2">
-                                            <option selected>Choose business</option>
+                                            <option selected value="">Choose business</option>
                                             @if(!empty($businesses))
                                                 @foreach($businesses as $business)
-                                                    <option @if(Request::get("business_id")==$business->id) selected @endif value="{{$business->id}}">{{$business->name}}</option>
+                                                    <option @if(Request::get("business_id")==$business->id||$default_business->id==$business->id) selected @endif value="{{$business->id}}">{{$business->name}}</option>
                                                 @endforeach
                                             @endif
                                         </select>
                                     </li>
                                     <li class="list-inline-item mb-0">
                                         <label>Filter By Status</label>
-                                        <select id="business-status" name="status"
+                                        <select id="equipment-status" name="status"
                                                 class="form-control form-select-2">
                                             <option selected>Choose status</option>
-                                            <option @if(Request::get("status")==0) selected @endif value="0">Pending Approval</option>
-                                            <option @if(Request::get("status")==1) selected @endif value="1">Working</option>
-                                            <option @if(Request::get("status")==2) selected @endif value="2">Ready</option>
-                                            <option @if(Request::get("status")==3) selected @endif value="3">Rejected</option>
-                                            <option @if(Request::get("status")==4) selected @endif value="4">Maintenance</option>
+                                            <option @if(Request::get("status")=="0") selected @endif value="0">Approval Pending</option>
+                                            <option @if(Request::get("status")==1) selected @endif value="1">Ready to Work</option>
+                                            <option @if(Request::get("status")==2) selected @endif value="2">Engaged Outside</option>
+                                            <option @if(Request::get("status")==6) selected @endif value="7">Engaged by {{env("APP_NAME")}}</option>
+                                            <option @if(Request::get("status")==3) selected @endif value="3">Approval Rejected</option>
+                                            <option @if(Request::get("status")==4) selected @endif value="5">On Maintenance</option>
+                                            <option @if(Request::get("status")==6) selected @endif value="6">Out of Service</option>
+
                                         </select>
                                     </li>
                                     <li class="list-inline-item mb-0">
@@ -99,33 +102,42 @@
                                                     <td>
                                                         @if($equipment->status==0)
                                                             <label class="badge badge-info">Pending Approval by {{env("APP_NAME")}}</label>
-                                                            @elseif($equipment->status==0)
-                                                            <label class="badge badge-success">Active</label>
+                                                            @elseif($equipment->status==1)
+                                                            <label class="badge badge-success">Ready to Work</label>
                                                             @elseif($equipment->status==2)
-                                                            <label class="badge badge-warning">Inactive</label>
+                                                            <label class="badge badge-warning">Engaged Outside</label>
                                                              @elseif($equipment->status==3)
-                                                            <label class="badge badge-danger">Declined </label>
+                                                            <label class="badge badge-danger">Rejected on approval</label>
+                                                             @elseif($equipment->status==4)
+                                                             <label class="badge badge-danger">Deleted</label>
+                                                             @elseif($equipment->status==5)
+                                                             <label class="badge badge-danger">On Maintenance</label>
+                                                             @elseif($equipment->status==6)
+                                                             <label class="badge badge-danger">Out of Service</label>
+                                                             @elseif($equipment->status==7)
+                                                             <label class="badge badge-danger">Engage</label>
                                                              @endif
+
                                                     </td>
                                                     <td>
                                                         <div class="avatar-group">
                                                             <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="Front Image">
-                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_front_image))}}">
+                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_front_image??""))}}">
                                                                     <img src="{{url("assets/media/image/truck.png")}}" class="img-fluid" alt="image">
                                                                 </a>
                                                             </figure>
                                                             <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="Back Image">
-                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_back_image))}}">
+                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_back_image??""))}}">
                                                                     <img src="{{url("assets/media/image/truck.png")}}" class="img-fluid" alt="image">
                                                                 </a>
                                                             </figure>
                                                             <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="Right Image">
-                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_right_image))}}">
+                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_right_image??""))}}">
                                                                     <img src="{{url("assets/media/image/truck.png")}}" class="img-fluid" alt="image">
                                                                 </a>
                                                             </figure>
                                                             <figure class="avatar avatar-sm" title="" data-toggle="tooltip" data-original-title="Left Image">
-                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_left_image))}}">
+                                                                <a class="image-popup-gallery-item" href="{{url(\App\Helpers\UploadFiles::viewDocument(json_decode($equipment->images)->equipment_left_image??""))}}">
                                                                     <img src="{{url("assets/media/image/truck.png")}}" class="img-fluid" alt="image">
                                                                 </a>
                                                             </figure>
@@ -139,10 +151,12 @@
                                                                 <i class="ti-more-alt"></i>
                                                             </a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a href="#" class="dropdown-item" onclick="viewEquipmentModal('{{$equipment->business->name}}','{{json_encode($equipment->only(["reg_no","equipmentType", "equipmentModel","plate_no","yom","axel", "tw","gw","description","ownership","fuel_type","engine_capacity","status","comment",]))}}')">View Details</a>
+                                                                <a href="#" class="dropdown-item" onclick="viewEquipmentModal('{{$equipment->business->name}}','{{json_encode($equipment->only(["id","reg_no","equipmentType", "equipmentModel","plate_no","yom","axel", "tw","gw","description","ownership","fuel_type","engine_capacity","status","comment",]))}}')">View</a>
                                                                 @if($equipment->status==0)
                                                                 <a href="{{route("vendor.inventory.edit.equipment",$equipment->id)}}" class="dropdown-item">Update </a>
                                                                 <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("vendor.delete.equipment",$equipment->id)}}')">Delete</a>
+                                                                 @else
+                                                                    <a href="#" class="dropdown-item" onclick="changeEquipmentStatusModal('{{$equipment->business->name}}','{{json_encode($equipment->only(["id","reg_no","equipmentType", "equipmentModel","plate_no","yom","axel", "tw","gw","description","ownership","fuel_type","engine_capacity","status","comment",]))}}')">Status</a>
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -169,6 +183,7 @@
     </div>
 
     @include("vendor.v1.inventory.modals.view-equiments")
+    @include("vendor.v1.inventory.modals.change-equipment-status")
     <!-- App scripts -->
     <script src="{{url("assets/js/mijengo/select2.js")}}"></script>
     <script src="{{url("assets/js/mijengo/ajax/inventory.js")}}"></script>

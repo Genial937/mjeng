@@ -34,4 +34,11 @@ class EquipmentRequired extends Model
     {
         return $this->belongsTo(Task::class);
     }
+    public function equipmentInventory(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(EquipmentInventory::class)
+            ->with(["business"=> function ($query) {
+                $query->select('id', 'name');
+            }]);
+    }
 }

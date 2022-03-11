@@ -25,8 +25,8 @@
                         <p class="margin-5-p">Class : <span class="modal-material-class text-danger "></span></p>
                         <p class="margin-5-p">County : <span class="modal-material-county text-danger "></span></p>
                         <p class="margin-5-p">SubCounty : <span class="modal-material-subcounty text-danger "></span></p>
-                        <p class="margin-5-p">Status : <span class="modal-material-status"></span></p>
                         <p class="margin-5-p">Description : <span class="modal-material-description"></span></p>
+                        <p class="margin-5-p">Status : <span class="modal-material-status"></span></p>
                         <p class="margin-5-p">Feedback : <span class="modal-material-comment"></span></p>
 
 

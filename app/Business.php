@@ -24,6 +24,6 @@ class Business extends Model
         return $this->belongsToMany(User::class);
     }
     public function equipments() {
-        return $this->hasMany(EquipmentInventory::class);
+        return $this->hasMany(EquipmentInventory::class)->with(["equipmentType","equipmentRequired"]);
     }
 }

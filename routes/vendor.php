@@ -25,7 +25,24 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
     Route::resource('/', 'Vendors\ProjectController')->names([
         'index' => 'vendor.project'
     ]);
+    Route::get('/equipment/required/{project_id}', [
+        'as' => 'vendor.project.equipment.required',
+        'uses' => 'Vendors\EquipmentRequiredController@index'
+    ]);
+    Route::post('/add/equipment/required', [
+        'as' => 'vendor.project.add.equipment.required',
+        'uses' => 'Vendors\EquipmentRequiredController@assignEquipmentFromInventory'
+    ]);
+    Route::post('/remove/equipment/required', [
+        'as' => 'vendor.project.remove.equipment.required',
+        'uses' => 'Vendors\EquipmentRequiredController@removeEquipmentFromInventory'
+    ]);
+    Route::get('/material/required/{project_id}', [
+        'as' => 'vendor.project.material.required',
+        'uses' => 'Vendors\MaterialRequiredController@index'
+    ]);
 });
+
 Route::group(['prefix' => '/business','middleware' => ['log.route']], function () {
     Route::resource('/', 'Vendors\BusinessController')->names([
         'index' => 'vendor.businesses'

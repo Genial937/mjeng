@@ -303,7 +303,6 @@ const deleteRecord=function(url) {
 const viewEquipmentModal=function (businessName,jsonEquipment){
     $("#view-equipment").modal("show");
     let equipment=JSON.parse(jsonEquipment)
-     console.log(equipment)
     //details
     $(".modal-business-name").text(businessName);
     $(".modal-equipment-ownership").text(equipment.ownership);
@@ -318,8 +317,21 @@ const viewEquipmentModal=function (businessName,jsonEquipment){
     $(".modal-equipment-description").text(equipment.description);
     $(".modal-equipment-fuel-type").text(equipment.fuel_type);
     $(".modal-equipment-engine-capacity").text(equipment.engine_capacity);
-    $(".modal-equipment-status").append(equipment.status===0?'<label class="badge badge-warning">Pending Approval</label>':business.status===1?'<label class="badge badge-success">Active</label>':equipment.status===2?'<label class="badge badge-danger">Inactive</label>':equipment.status===3?'<label class="badge badge-danger">Approval rejected</label>':'<label class="badge badge-danger">Deleted</label>');
-    $(".modal-equipment-comment").append(equipment.status===0?'<label class="badge badge-warning">'+equipment.comment+'</label>':business.status===1?'<label class="badge badge-success">'+equipment.comment+'</label>':equipment.status===2?'<label class="badge badge-danger">'+equipment.comment+'</label>':equipment.status===3?'<label class="badge badge-danger">'+equipment.comment+'</label>':'<label class="badge badge-danger">'+equipment.comment+'</label>');
+    $(".modal-equipment-view-status")
+        .empty()
+        .append(equipment.status===0?'<label class="badge badge-warning">Pending Approval</label>':
+            equipment.status===1?'<label class="badge badge-success">Ready to work</label>':
+                equipment.status===2?'<label class="badge badge-danger">Engage Outside</label>':
+                    equipment.status===3?'<label class="badge badge-danger">Rejected during approval</label>':
+                        equipment.status===4?'<label class="badge badge-danger">Deleted</label>':
+                            equipment.status===5?'<label class="badge badge-danger">On Maintenance</label>':
+                                equipment.status===6?'<label class="badge badge-danger">Out of Service</label>':
+                                    '<label class="badge badge-success">Engage</label>');
+    $(".modal-equipment-view-comment")
+        .empty()
+        .append(equipment.status===0?'<label class="badge badge-warning">'+equipment.comment+'</label>':
+            equipment.status===1?'<label class="badge badge-success">'+equipment.comment+'</label>':
+                '<label class="badge badge-danger">'+equipment.comment+'</label>');
 }
 let magnificPopupGalleryConfig = {
     type: 'image',
@@ -376,8 +388,19 @@ const viewMaterialModal=function (businessName,jsonMaterial){
     $(".modal-material-description").text(material.description);
     $(".modal-material-county").text(material.subCounty.county.name);
     $(".modal-material-subcounty").text(material.subCounty.county.name);
-    $(".modal-material-status").append(material.status===0?'<label class="badge badge-warning">Pending Approval</label>':material.status===1?'<label class="badge badge-success">Active</label>':material.status===2?'<label class="badge badge-danger">Inactive</label>':material.status===3?'<label class="badge badge-danger">Approval rejected</label>':'<label class="badge badge-danger">Deleted</label>');
-    $(".modal-material-comment").append(material.status===0?'<label class="badge badge-warning">'+material.comment+'</label>':material.status===1?'<label class="badge badge-success">'+material.comment+'</label>':equipment.status===2?'<label class="badge badge-danger">'+material.comment+'</label>':equipment.status===3?'<label class="badge badge-danger">'+material.comment+'</label>':'<label class="badge badge-danger">'+equipment.comment+'</label>');
+    $(".modal-material-status")
+        .empty()
+        .append(material.status===0?'<label class="badge badge-warning">Pending Approval</label>':
+            material.status===1?'<label class="badge badge-success">In stock</label>':
+                material.status===2?'<label class="badge badge-danger">Out of stock</label>':
+                    material.status===3?'<label class="badge badge-danger">Deleted</label>':
+                        material.status===4?'<label class="badge badge-danger">Not Selling Anymore</label>':
+                            "");
+    $(".modal-material-comment")
+        .empty()
+        .append(material.status===0?'<label class="badge badge-warning">'+material.comment+'</label>':
+            material.status===1?'<label class="badge badge-success">'+material.comment+'</label>':
+                '<label class="badge badge-danger">'+material.comment+'</label>');
 }
 //get the county{id}-subcounties
 const getSubcounties=function(){
@@ -404,4 +427,27 @@ const getSubcounties=function(){
                 toastr.error(value[0]);
             });
         })
+}
+
+const changeEquipmentStatusModal=function (businessName,jsonEquipment) {
+    $("#change-equipment-status").modal("show");
+    let equipment=JSON.parse(jsonEquipment)
+    //details
+    $(".modal-business-name").text(businessName);
+    $(".modal-equipment-plate-no").text(equipment.plate_no);
+    $(".modal-equipment-id").val(equipment.id);
+    $(".modal-equipment-status").val(equipment.status).trigger("change");
+    $(".modal-equipment-comment").val(equipment.comment);
+}
+
+const changeMaterialStatusModal=function (businessName,jsonMaterial){
+    $("#change-material-status").modal("show");
+    let material=JSON.parse(jsonMaterial)
+    //details
+    $(".modal-business-name").text(businessName);
+    $(".modal-material-type").text(material.materialType.name);
+    $(".modal-material-class").text(material.materialClass.name);
+    $(".modal-material-id").val(material.id);
+    $(".modal-material-status").val(material.status).trigger("change");
+    $(".modal-material-comment").val(material.comment);
 }

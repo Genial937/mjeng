@@ -34,21 +34,22 @@ class MaterialController extends Controller
             ->where("id", Auth::id())
             ->first();
         $businesses = isset($user->businesses) ? $user->businesses : [];
-        $business_id=$businesses[0]->id;
-        $status=2;
+        $default_business=$businesses[0];
+        $business_id=$default_business->id;
+        $materials = MaterialInventory::with(["business","materialClass","materialType","subCounty"])
+            ->where("business_id",$business_id);
         //check filters
         if($request->has("business_id")):
             $business_id=$request->business_id;
+            $materials=$materials->where("business_id",$business_id);
         endif;
         if($request->has("status")):
             $status=$request->status;
+            $materials=$materials ->where("status",$status);
         endif;
-        $materials = MaterialInventory::with(["business","materialClass","materialType","subCounty"])
-            ->where("business_id",$business_id)
-            ->where("status",$status)
-            ->get();
+        $materials=$materials->get();
 
-        return view('vendor.v1.inventory.material.index',compact("materials","businesses"));
+        return view('vendor.v1.inventory.material.index',compact("materials","businesses","default_business"));
     }
 
     /**

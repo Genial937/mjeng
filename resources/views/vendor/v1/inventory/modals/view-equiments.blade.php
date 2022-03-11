@@ -32,9 +32,9 @@
                         <p class="margin-5-p">Gross Weight : <span class="modal-equipment-gw text-danger"></span></p>
                         <p class="margin-5-p">FuelType : <span class="modal-equipment-fuel-type text-danger"></span></p>
                         <p class="margin-5-p">Engine Capacity : <span class="modal-equipment-engine-capacity text-danger"></span></p>
-                        <p class="margin-5-p">Status : <span class="modal-equipment-status"></span></p>
                         <p class="margin-5-p">Description : <span class="modal-equipment-description"></span></p>
-                        <p class="margin-5-p">Feedback : <span class="modal-equipment-comment"></span></p>
+                        <p class="margin-5-p">Status : <span class="modal-equipment-view-status"></span></p>
+                        <p class="margin-5-p">Status Comment : <span class="modal-equipment-view-comment"></span></p>
 
 
                     </div>

@@ -34,72 +34,70 @@
                             </div>
 
                             <div class="d-md-flex justify-content-between mb-4">
-                                <ul class="list-inline mb-3">
-                                    <li class="list-inline-item mb-0">
-                                        <a href="#" class="btn btn-outline-light dropdown-toggle"
-                                           data-toggle="dropdown">
-                                            Export
-                                        </a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">CSV</a>
-                                            <a class="dropdown-item" href="#">PDF</a>
-                                        </div>
-                                    </li>
-                                </ul>
+
                             </div>
                             <div class="table-responsive">
-                                <table id="table-files" class="table table-borderless table-hover">
+                                <table  class="table table-borderless table-hover data-table-">
                                     <thead>
                                     <tr>
-                                        <th>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"
-                                                       id="files-select-all">
-                                                <label class="custom-control-label" for="files-select-all"></label>
-                                            </div>
-                                        </th>
                                         <th>Name</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
+                                        <th>Location</th>
+                                        <th>Durations</th>
                                         <th>Status</th>
-
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @if(!empty($projects))
                                         @foreach($projects as $project)
-                                            <tr>
-                                                <td></td>
-                                                <td class="text-wrap">
-                                                    <a href="#l" class="d-flex align-items-center">
-                                                        <figure class="avatar avatar-sm mr-3">
-                                    <span class="avatar-title bg-warning text-black-50 rounded-pill">
-                                        <i class="ti-folder"></i>
-                                    </span>
-                                                        </figure>
-                                                        <span class="d-flex flex-column">
-                                    <span class="text-primary">{{$project->name}}</span>
-                                        <span class="small font-italic ">{{$project->description}}</span>
-                                </span>
-                                                    </a>
-                                                </td>
-                                                <td>{{$project->start_date}}</td>
-                                                <td>{{$project->end_date}}</td>
-                                                <td>
-                                                    @if($project->status==0)
-                                                        <div class="badge bg-info-bright text-info">Draft</div>
-                                                    @elseif($project->status==1)
-                                                        <div class="badge bg-info-bright text-info">Published</div>
-                                                    @elseif($project->status==2)
-                                                        <div class="badge bg-info-bright text-info">Ongoing</div>
-                                                    @elseif($project->status==3)
-                                                        <div class="badge bg-info-bright text-info">Closed</div>
-                                                    @elseif($project->status==4)
-                                                        <div class="badge bg-info-bright text-info">Deleted</div>
-                                                    @endif
-                                                </td>
+                                            @if($project->status==1||$project->status==3)
+                                                <tr>
+                                                    <td class="text-wrap">
+                                                        <a href="#l" class="d-flex align-items-center">
+                                                            <figure class="avatar avatar-sm mr-3">
+                                                              <span class="avatar-title bg-warning text-black-50 rounded-pill">
+                                                                <i class="ti-folder"></i>
+                                                              </span>
+                                                            </figure>
+                                                            <span class="d-flex flex-column">
+                                                           <span class="text-primary">{{$project->name}}</span>
+                                                            <span class="small font-italic ">{{$project->description}}</span>
+                                                          </span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-wrap">
+                                                        <a href="#l" class="d-flex align-items-center">
+                                                            <span class="d-flex flex-column">
+                                                            <span class="text-primary">{{$project->subCounty->name}}</span>
+                                                            <span  class="small font-italic ">{{$project->subCounty->county->name}}</span>
+                                                           </span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-wrap">
+                                                        <a href="#l" class="d-flex align-items-center">
+                                                            <span class="d-flex flex-column">
+                                                            <span class="text-dark">{{$project->start_date}}  to  {{$project->end_date}} </span>
+                                                            <span  class="small font-italic ">{{App\Helpers\GeneralFunctions::getMonths($project->start_date,$project->end_date)}} months</span>
+                                                           </span>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @if($project->status==0)
+                                                            <div class="badge badge-info-bright text-info">Draft</div>
+                                                        @elseif($project->status==1)
+                                                            <div class="badge badge-info text-capitalize">Open(Ongoing Application)</div>
+                                                        @elseif($project->status==3)
+                                                            <div class="badge bg-info-bright text-info">Closed</div>
+                                                        @elseif($project->status==4)
+                                                            <div class="badge bg-info-bright text-info">Deleted</div>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{route("vendor.project.equipment.required",$project->id)}}" class="btn btn-dark text-white">Apply Now </a>
+                                                    </td>
+                                                </tr>
 
-                                            </tr>
+                                            @endif
                                         @endforeach
                                     @endif
                                     </tbody>

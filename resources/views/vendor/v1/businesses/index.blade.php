@@ -100,7 +100,6 @@
                                                                 <a href="javascript:void(0)" onclick="viewStaffsModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type','users']))}}')" class="dropdown-item">View Staff(s)</a>
                                                                 <a href="javascript:void(0)" onclick="addStaffModal('{{json_encode($business->only(['id', 'name', 'email','phone','address','type']))}}','{{route("admin.create.user")}}?type=CONTRACTOR&business_id={{$business->id}}')" class="dropdown-item">Add Staff(s)</a>
                                                                 <a href="#" class="dropdown-item" onclick="deleteRecord('{{route("vendor.business.delete",$business->id)}}')">Delete</a>
-
                                                             </div>
                                                         </div>
                                                     </td>

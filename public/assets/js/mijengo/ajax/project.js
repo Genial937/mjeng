@@ -248,6 +248,36 @@ $(document).ready(function () {
                 });
             })
     });
+    //add project equipment required
+    $(document).on('submit', '#add-equipment-required-form', function (e) {
+        e.preventDefault();
+        let form=$('#add-equipment-required-form');
+        let submit_button= $('.btn-equipment-required');
+        submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url,form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        //go to the next step
+                        location.reload()
+                    }, 2000);
+                } else {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_button.text('Save').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
 });
 //get the county{id}-subcounties
 const getSubcounties=function(){
@@ -640,3 +670,105 @@ const editMaterialRequired=function(requirement){
     $("#modal-input-material-required-id").val(decode_requirement.id);
 
 }
+//edit material required
+const assignEquipmentFromInventory=function(requirement){
+    //decode
+    let decode_requirement=$.parseJSON(requirement);
+    $(".modal-equipment-type-name").text(decode_requirement.equipment_type.name);
+    $("#modal-add-equipment-type-id").val(decode_requirement.equipment_type.id);
+    $(".modal-equipment-no-required").text(decode_requirement.no_equipment);
+    $("#modal-equipment-required-id").val(decode_requirement.id);
+    //show edit modal
+    $("#add-equipments").modal('show');
+}
+
+const getBusinessEquipments=function (){
+    let business_id=$("#modal-add-equipment-business-id").val();
+    let equipment_type_id=$("#modal-add-equipment-type-id").val();
+    let form_select= $("#modal-add-equipments");
+    form_select.empty().append('<option selected  >Loading ...</option>');
+    //get business equipments
+    $.get("/admin/business/find/"+business_id)
+        .done(function (data) {
+            if(data["business"] && data["business"].equipments.length >0){
+                //clear select
+                form_select.empty();
+                //filter by equipment type required
+                let equipments= data["business"].equipments.filter(o=>Object.values(o).includes(parseInt(equipment_type_id)))
+                //populate
+                $.each(equipments,function(key ,val){
+                    //chack if here is any equipment assign for the business
+                    if(val.equipment_required.length>0) {
+                        //check if the equipment is already added
+                        if (val.equipment_required.some(e => e.pivot.equipment_inventory_id !== val.id))
+                            form_select.append('<option value="' + val.id + '"  >' + val.plate_no + '(' + val.equipment_type.name + ')</option>');
+                    }else{
+                        form_select.append('<option value="' + val.id + '"  >' + val.plate_no + '(' + val.equipment_type.name + ')</option>');
+                    }
+                })
+            }
+        })
+        .fail(function (data) {
+            var errors = data.responseJSON;
+            $.each(errors.errors, function (key, value) {
+                toastr.error(value[0]);
+            });
+        })
+}
+const viewEquipmentRequiredAssignedModal=function (jsonEquipments){
+    let equipments=$.parseJSON(jsonEquipments);
+
+    if(equipments.equipment_inventory.length > 0) {
+        $("#view-equipment-added").modal("show");
+
+        let data = [];
+        let table=$('.equipment-assigned-table');
+        table.dataTable().fnClearTable();
+        $.each(equipments.equipment_inventory, function (key, val) {
+                data.push([val.business.name, val.plate_no, '<button type="button" id="remove-project-equipment-assigned-' + val.id + '" onclick="removeProjectEquipmentAssigned(' + val.id + ',' + equipments.id + ')" class="btn btn-dark">remove</button>']);
+        });
+        if(data.length > 0)
+            table.dataTable().fnAddData(data);
+    }else{
+        toastr.error("No Equipment submitted.");
+    }
+}
+
+const removeProjectEquipmentAssigned=function(equipment_id,equipment_required_id){
+    //prompt
+    swal({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $('#remove-project-equipment-assigned-'+equipment_id).empty('').append('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>').prop('disabled', true);
+            $.post("/vendor/projects/remove/equipment/required",{equipment_id,equipment_required_id})
+                .done(function (data) {
+                    if (data['success']) {
+                        toastr.success(data['message']);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        toastr.success(data['message']);
+                    }
+
+                })
+                .fail(function (data) {
+                    console.error(data)
+                    var errors = data.responseJSON;
+                    $.each(errors.errors, function (key, value) {
+                        toastr.error(value[0]);
+                    });
+                })
+
+        } else {
+            toastr.info('Delete Cancelled!');
+        }
+    })
+
+
+};

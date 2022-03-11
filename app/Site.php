@@ -31,4 +31,5 @@ class Site extends Model
     {
         return $this->belongsToMany(Task::class);
     }
+
 }

@@ -141,6 +141,10 @@ Route::group(['prefix' => '/business','middleware' => ['log.route']], function (
         'as' => 'admin.update.business.contractor',
         'uses' => 'Admin\BusinessController@update'
     ]);
+    Route::get('/find/{id}', [
+        'as' => 'admin.find.business',
+        'uses' => 'Admin\BusinessController@find'
+    ]);
 });
 Route::group(['prefix' => '/config/county','middleware' => ['log.route']], function () {
     Route::resource('/', 'Admin\CountyController')->names([

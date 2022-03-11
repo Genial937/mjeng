@@ -5,7 +5,7 @@ $(document).ready(function () {
         singleDatePicker: true,
         showDropdowns: true,
         locale: {
-            format: "Y-MM-D"
+            format: "Y-MM-DD"
         }
     });
 
