@@ -101,6 +101,7 @@ $(document).ready(function () {
                 });
             })
     });
+
     //add equipment required
     $(document).on('submit', '#create-equipment-required-form', function (e) {
         e.preventDefault();
@@ -253,6 +254,36 @@ $(document).ready(function () {
         e.preventDefault();
         let form=$('#add-equipment-required-form');
         let submit_button= $('.btn-equipment-required');
+        submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
+        var url =form.attr('action');
+        $.post(url,form.serialize())
+            .done(function (data) {
+                if (data['success']) {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                    setTimeout(function () {
+                        //go to the next step
+                        location.reload()
+                    }, 2000);
+                } else {
+                    submit_button.text('Save').prop('disabled', false);
+                    toastr.success(data['message']);
+                }
+            })
+            .fail(function (data) {
+                console.error(data)
+                submit_button.text('Save').prop('disabled', false);
+                var errors = data.responseJSON;
+                $.each(errors.errors, function (key, value) {
+                    toastr.error(value[0]);
+                });
+            })
+    });
+    //add project material required
+    $(document).on('submit', '#add-material-required-form', function (e) {
+        e.preventDefault();
+        let form=$('#add-material-required-form');
+        let submit_button= $('.btn-material-required');
         submit_button.text('').append('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span> Loading...').prop('disabled', true);
         var url =form.attr('action');
         $.post(url,form.serialize())

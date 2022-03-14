@@ -51,4 +51,11 @@ class MaterialsRequired extends Model
     {
         return $this->belongsTo(MaterialClass::class,'material_class_id');
     }
+    public function equipmentMaterial(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(MaterialInventory::class)
+            ->with(["business"=> function ($query) {
+                $query->select('id', 'name');
+            }]);
+    }
 }

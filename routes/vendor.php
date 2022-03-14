@@ -41,6 +41,10 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'as' => 'vendor.project.material.required',
         'uses' => 'Vendors\MaterialRequiredController@index'
     ]);
+    Route::post('/add/material/required', [
+        'as' => 'vendor.project.add.material.required',
+        'uses' => 'Vendors\MaterialRequiredController@assignMaterialFromInventory'
+    ]);
 });
 
 Route::group(['prefix' => '/business','middleware' => ['log.route']], function () {

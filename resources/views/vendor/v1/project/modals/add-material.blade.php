@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-equipment-required-form" action="{{route("vendor.project.add.equipment.required")}}">
+                <form id="add-material-required-form" action="{{route("vendor.project.add.material.required")}}">
                     <div class="row">
                         <div class="col-md-8 offset-2">
                             <h5 class="modal-title">

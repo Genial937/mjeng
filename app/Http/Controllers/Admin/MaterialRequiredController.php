@@ -122,7 +122,7 @@ class MaterialRequiredController extends Controller
             "payment_term_desc"=>"required|string",
             "cess"=>"required|string",
         ]);
-        //udpate to db
+        //update to db
         try{
             MaterialsRequired::where("id",$request->id)->update($request->only([
                 "site_id",

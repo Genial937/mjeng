@@ -169,6 +169,32 @@ class MaterialRequiredController extends Controller
             ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
     }
+
+    public function assignMaterialFromInventory(Request $request)
+    {
+        $this->validate($request, [
+            "material_required_id" => "required|exists:materials_requireds,id",
+            "material_inventory_id" => "required|exists:material_inventories,id"
+        ]);
+        try {
+            $material_required = MaterialsRequired::find($request->material_required_id);
+            $material_required->equipmentInventory()->attach($request->material_inventory_id);
+            return response()->json([
+                'success' => true,
+                'message' => 'Material required successfully deleted.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+    }
     /**
      * Remove the specified resource from storage.
      *
