@@ -62,16 +62,10 @@
                                 </ul>
                             </div>
                             <div class="table-responsive">
-                                <table id="table-files" class="table table-borderless table-hover">
+                                <table class="table table-borderless table-hover data-table">
                                     <thead>
                                     <tr>
-                                        <th>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"
-                                                       id="files-select-all">
-                                                <label class="custom-control-label" for="files-select-all"></label>
-                                            </div>
-                                        </th>
+
                                         <th>Name</th>
                                         <th>Start Date</th>
                                         <th>End Date</th>
@@ -84,7 +78,7 @@
                                     @if(!empty($projects))
                                         @foreach($projects as $project)
                                             <tr>
-                                                <td></td>
+
                                                 <td class="text-wrap">
                                                     <a href="#" class="d-flex align-items-center">
                                                         <figure class="avatar avatar-sm mr-3">
@@ -143,6 +137,8 @@
                                                                class="dropdown-item">Equipment Required</a>
                                                             <a href="{{route("admin.form.create.material.required",$project->id)}}?action=edit"
                                                                class="dropdown-item">Material Required</a>
+                                                            <a href="{{route("admin.project.vendor.application",$project->id)}}?action=edit"
+                                                               class="dropdown-item">Applications</a>
                                                         </div>
                                                     </div>
                                                 </td>

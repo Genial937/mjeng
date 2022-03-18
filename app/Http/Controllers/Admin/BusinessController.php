@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Business;
 use App\County;
 use App\Helpers\UniqueRandomChar;
+use App\Helpers\UploadFiles;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\User;
@@ -28,9 +29,38 @@ class BusinessController extends Controller
      */
     public function index()
     {
-        $businesses=Business::with("users")->get();
+        $businesses=Business::with("users")->orWhereNull("documents")->get();
         $users=User::where("user_type","CONTRACTOR")->get();
-        return view('admin.v1.businesses.contractor.index',compact("businesses",'users'));
+        $contractors_businesses=$businesses;
+        $vendors_businesses=Business::with("users")->whereNotNull("documents")->get();
+        return view('admin.v1.businesses.contractor.index',compact("businesses",'users','contractors_businesses','vendors_businesses'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function showVendorsBusinesses()
+    {
+        $businesses=Business::with("users")->whereNotNull("documents")->get();
+        $users=User::where("user_type","BUSINESS")->get();
+        $contractors_businesses=Business::with("users")->get();
+        $vendors_businesses=$businesses;
+        return view('admin.v1.businesses.vendor.index',compact("businesses",'users','contractors_businesses','vendors_businesses'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
+     */
+    public function showEditVendorsBusinessView(Request $request)
+    {
+        //user businesses
+        $business = Business::find($request->route('id'));
+        $documents = json_decode($business->documents);
+        $contractors_businesses=Business::with("users")->get();
+        $vendors_businesses=Business::with("users")->whereNotNull("documents")->get();
+        return view('admin.v1.businesses.vendor.edit', compact("business", 'documents','contractors_businesses','vendors_businesses'));
     }
     /**
      * Display a listing of the resource.
@@ -47,11 +77,12 @@ class BusinessController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function showEditContractorView(Request $request)
+    public function showEditContractorBusinessView(Request $request)
     {
-        $businesses=Business::with("users")->get();
+        $contractors_businesses=Business::with("users")->get();
+        $vendors_businesses=Business::with("users")->whereNotNull("documents")->get();
         $business=Business::find($request->route('id'));
-        return view('admin.v1.businesses.contractor.edit',compact("business",'businesses'));
+        return view('admin.v1.businesses.contractor.edit',compact("business",'contractors_businesses','vendors_businesses'));
     }
     /**
      * Show the form for creating a new resource.
@@ -186,6 +217,82 @@ class BusinessController extends Controller
             "type",
             "description"
            ));
+            return response()->json([
+                'success' => true,
+                'message' => 'Business updated successfully.'
+            ], JsonResponse::HTTP_OK);
+        } catch (QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => ["exception" => [$e->getMessage()]],
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Business $business
+     * @return JsonResponse
+     */
+    public function updateVendorBusiness(Request $request)
+    {
+        $this->validate($request, [
+            "id" => "required|exists:businesses",
+            "name" => "required",
+        ]);
+        try {
+
+            //upload files
+            $business = Business::find($request->id);
+            $documents = json_decode($business->documents);
+            $i = 0;
+            //check if doc file is available
+            if ($request->hasFile("doc_file")):
+                foreach ($request->file("doc_file") as $file):
+                    if (isset($file)):
+                        $result = UploadFiles::vendorBusinessFile($file, $request->doc_no[$i]);
+                        if ($result->getStatusCode() != 200)
+                            return response()->json([
+                                'success' => false,
+                                'errors' => $result->getData()->errors,
+                            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+                        if(isset($documents[$i])):
+                            $documents[$i]->doc_url = $result->getData()->path;
+                            $documents[$i]->doc_no = $request->doc_no[$i];
+                            $documents[$i]->doc_type = $request->doc_type[$i];
+                        else:
+                            array_push($documents, ['doc_no' => $request->doc_no[$i], 'doc_type' => $request->doc_type[$i], 'doc_url' => $result->getData()->path]);
+                        endif;
+                    endif;
+                    $i++;
+                endforeach;
+            endif;
+            //update doc no and type
+            if (isset($request->doc_type)):
+                foreach ($request->doc_type as $type):
+                    if(isset($documents[$i])):
+                        $documents[$i]->doc_no = $request->doc_no[$i];
+                        $documents[$i]->doc_type = $request->doc_type[$i];
+                    endif;
+                    $i++;
+                endforeach;
+            endif;
+            $request->request->add(['documents' => json_encode($documents)]);
+
+            Business::where("id", $request->id)->update($request->only(
+                "name",
+                "email",
+                "phone",
+                "country",
+                "city",
+                "address",
+                "documents",
+                "status",
+                "comments",
+                "type",
+                "description"
+            ));
             return response()->json([
                 'success' => true,
                 'message' => 'Business updated successfully.'

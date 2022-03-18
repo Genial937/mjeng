@@ -26,7 +26,7 @@
             </a>
         </li>
         <li>
-            <a  href="#">
+            <a class="{{ Request::is('admin/inventory/*') ? 'active' : ''}}" href="{{route("admin.inventory.equipment")}}">
                 <i class="nav-link-icon ti-pie-chart"></i>
                 <span class="nav-link-label">Inventory</span>
 

@@ -1,13 +1,13 @@
 <div class="col-xl-3 col-xl-3 files-sidebar">
     <div class="card border-0">
-        <h6 class="card-title">Businesses</h6>
+        <h6 class="card-title">My Inventory</h6>
 <div id="files"></div>
 <script>
     $(function () {
         var jsonData = {
             'data': [
                 {
-                    'text': 'Contractor',
+                    'text': 'Equipments Inventory',
                     'type': 'business',
                     'state': {
                         'opened': true,
@@ -17,33 +17,35 @@
                         {
                             'text': 'Create/Add',
                             'type': 'file',
-                            "a_attr" : { "href" : "{{route("admin.create.contractor")}}" },
+                            "a_attr" : { "href" : "{{route("admin.create.inventory.equipment")}}" },
                         },
                         {
-                            'text': 'Businesses({{count($contractors_businesses)}})',
+                            'text': 'View Equipments',
                             'type': 'file',
-                            "a_attr" : { "href" : "{{route("admin.contractor.businesses")}}" },
-                        },
-
+                            "a_attr" : { "href" : "{{route("admin.inventory.equipment")}}" },
+                        }
                     ]
                 },
                 {
-                    'text': 'Vendors/Suppliers',
+                    'text': 'Materials Inventory',
                     'type': 'business',
                     'state': {
                         'opened': true,
                         'selected': true
                     },
-
                     'children': [
                         {
-                            'text': 'Businesses({{count($vendors_businesses)}})',
+                            'text': 'Create/Add',
                             'type': 'file',
-                            "a_attr" : { "href" : "{{route("admin.vendor.businesses")}}" }
+                            "a_attr" : { "href" : "{{route("vendor.inventory.create.material")}}" },
+                        },
+                        {
+                            'text': 'View Materials',
+                            'type': 'file',
+                            "a_attr" : { "href" : "{{route("vendor.inventory.material")}}" },
                         }
-
                     ]
-                }
+                },
             ],
             themes: {
                 dots: true

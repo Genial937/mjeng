@@ -1,4 +1,4 @@
-<div class="modal fade" id="view-equipment-added" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="view-material-added" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,14 +9,15 @@
             </div>
             <div class="modal-body">
 
-                <h5 class="modal-title" >Equipment Added</h5>
-                <p>Inventory Equipment added to the requirements </p>
+                <h5 class="modal-title" >Material Added</h5>
+                <p>Inventory Material added to the requirements </p>
                 <div class="table-responsive">
-                    <table class="table equipment-assigned-table">
+                    <table class="table material-assigned-table">
                         <thead>
                         <tr>
                             <th scope="col">Business Name</th>
-                            <th scope="col">Plate no</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Class</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>

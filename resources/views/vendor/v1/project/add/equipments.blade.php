@@ -91,7 +91,7 @@
                                 @if(!empty($equipments_required))
 
                                     @foreach($equipments_required as $equipment)
-                                        <tr>
+                                        <tr class=" @if(count($equipment->equipmentInventory)) bg-success-gradient @endif">
                                             <td>{{$no++}}</td>
                                             <td>{{$equipment->site->name}}</td>
                                             <td>{{$equipment->task->name}}</td>
@@ -108,7 +108,7 @@
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a href="#" class="dropdown-item" onclick="assignEquipmentFromInventory('{{json_encode($equipment)}}')" > Add equipment(s)</a>
-                                                        <a href="#" class="dropdown-item" onclick="viewEquipmentRequiredAssignedModal('{{json_encode($equipment)}}')" > View added equipments(s)</a>
+                                                        <a href="#" class="dropdown-item" onclick="viewAssignedEquipmentModal('{{json_encode($equipment)}}')" > View added equipments(s)</a>
 
                                                     </div>
                                                 </div>

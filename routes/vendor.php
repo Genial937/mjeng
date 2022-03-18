@@ -45,6 +45,10 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'as' => 'vendor.project.add.material.required',
         'uses' => 'Vendors\MaterialRequiredController@assignMaterialFromInventory'
     ]);
+    Route::post('/remove/material/required', [
+        'as' => 'vendor.project.remove.material.required',
+        'uses' => 'Vendors\MaterialRequiredController@removeMaterialFromInventory'
+    ]);
 });
 
 Route::group(['prefix' => '/business','middleware' => ['log.route']], function () {

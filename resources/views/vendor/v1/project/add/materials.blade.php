@@ -88,7 +88,7 @@
                                 <tbody>
                                 @if(!empty($materials_required))
                                     @foreach($materials_required as $material)
-                                        <tr>
+                                        <tr class=" @if(count($material->materialInventory)) bg-success-gradient @endif">
                                             <td>{{$material->site->name}}</td>
                                             <td>{{$material->task->name}}</td>
                                             <td>{{$material->materialType->name}}</td>
@@ -105,7 +105,7 @@
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a href="#" class="dropdown-item" onclick="assignMaterialFromInventory('{{json_encode($material)}}')" > Add material(s)</a>
-                                                        <a href="#" class="dropdown-item" onclick="viewMaterialRequiredAssignedModal('{{json_encode($material)}}')" > View added material(s)</a>
+                                                        <a href="#" class="dropdown-item" onclick="viewAssignedMaterialsModal('{{json_encode($material)}}')" > View added material(s)</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -131,7 +131,7 @@
     </div>
     <!-- modals  -->
     @include("vendor.v1.project.modals.add-material")
-    @include("vendor.v1.project.modals.view-equipments")
+    @include("vendor.v1.project.modals.view-materials")
     <!-- Files page  -->
     <script src="{{url("assets/js/mijengo/select2.js")}}"></script>
     <script src="{{url("assets/js/mijengo/datepicker.js")}}"></script>

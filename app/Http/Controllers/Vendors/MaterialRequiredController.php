@@ -37,9 +37,13 @@ class MaterialRequiredController extends Controller
         //material type
         $material_types=MaterialType::get();
         //build query
-        $materials_required=MaterialsRequired::with(["materialType","site","task",'classification'])
+        $materials_required=MaterialsRequired::with(["materialType","site","task",'classification','materialInventory'])
+            ->select(
+                'materials_requireds.*'
+            )
             ->join('sites', 'sites.id', 'materials_requireds.site_id')
             ->where("sites.project_id",$project_id);
+
         //start filter
         if ($request->has("site_id")):
             $materials_required = $materials_required->where("sites.id", $request->site_id);
@@ -178,7 +182,7 @@ class MaterialRequiredController extends Controller
         ]);
         try {
             $material_required = MaterialsRequired::find($request->material_required_id);
-            $material_required->equipmentInventory()->attach($request->material_inventory_id);
+            $material_required->materialInventory()->attach($request->material_inventory_id);
             return response()->json([
                 'success' => true,
                 'message' => 'Material required successfully deleted.',
@@ -209,6 +213,31 @@ class MaterialRequiredController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Material Required successfully deleted.',
+            ], JsonResponse::HTTP_OK);
+        } catch (Exception $e) {
+            // something went wrong
+            return response()->json([
+                'success' => false,
+                'errors' => [
+                    "exception" => [
+                        $e->getMessage()
+                    ]]
+            ], JsonResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+    }
+    public function removeMaterialFromInventory(Request $request)
+    {
+        $this->validate($request, [
+            "material_id" => "required|exists:material_inventories,id",
+            "material_required_id" => "required|exists:materials_requireds,id"
+        ]);
+        try {
+            $material_required = MaterialsRequired::find($request->material_required_id);
+            $material_required->materialInventory()->detach($request->material_id);
+            return response()->json([
+                'success' => true,
+                'message' => 'Material required successfully removed.',
             ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {
             // something went wrong

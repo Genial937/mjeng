@@ -87,6 +87,40 @@ Route::group(['prefix' => '/projects','middleware' => ['log.route']], function (
         'as' => 'admin.delete.material.required',
         'uses' => 'Admin\MaterialRequiredController@destroy'
     ]);
+    Route::get('/applications/{id}', [
+        'as' => 'admin.project.vendor.application',
+        'uses' => 'Admin\SiteController@find'
+    ]);
+});
+Route::group(['prefix' => '/equipment','middleware' => ['log.route']], function () {
+    Route::get('/inventory', [
+        'as' => 'admin.inventory.equipment',
+        'uses' => 'Admin\EquipmentController@index'
+    ]);
+    Route::get('/create', [
+        'as' => 'admin.create.inventory.equipment',
+        'uses' => 'Admin\EquipmentController@showCreateView'
+    ]);
+    Route::post('/create', [
+        'as' => 'admin.create.inventory.equipment',
+        'uses' => 'Admin\EquipmentController@store'
+    ]);
+    Route::post('/images/{side}', [
+        'as' => 'admin.inventory.equipment.images',
+        'uses' => 'Admin\EquipmentController@storeImages'
+    ]);
+    Route::get('/edit/{id}', [
+        'as' => 'admin.inventory.edit.equipment',
+        'uses' => 'Admin\EquipmentController@showEditView'
+    ]);
+    Route::post('/update', [
+        'as' => 'admin.edit.equipment',
+        'uses' => 'Admin\EquipmentController@update'
+    ]);
+    Route::get('/delete/{id}', [
+        'as' => 'admin.delete.equipment',
+        'uses' => 'Admin\EquipmentController@destroy'
+    ]);
 });
 Route::group(['prefix' => '/users','middleware' => ['log.route']], function () {
     Route::resource('/', 'Admin\UsersController')->names([
@@ -123,7 +157,7 @@ Route::group(['prefix' => '/business','middleware' => ['log.route']], function (
     ]);
     Route::get('/contractor/edit/{id}', [
         'as' => 'admin.edit.contractor',
-        'uses' => 'Admin\BusinessController@showEditContractorView'
+        'uses' => 'Admin\BusinessController@showEditContractorBusinessView'
     ]);
     Route::post('/add/users', [
         'as' => 'admin.add.business.user',
@@ -144,6 +178,18 @@ Route::group(['prefix' => '/business','middleware' => ['log.route']], function (
     Route::get('/find/{id}', [
         'as' => 'admin.find.business',
         'uses' => 'Admin\BusinessController@find'
+    ]);
+    Route::get('/vendor', [
+        'as' => 'admin.vendor.businesses',
+        'uses' => 'Admin\BusinessController@showVendorsBusinesses'
+    ]);
+    Route::get('/vendor/edit/{id}', [
+        'as' => 'admin.edit.vendor.business',
+        'uses' => 'Admin\BusinessController@showEditVendorsBusinessView'
+    ]);
+    Route::post('/vendor/update', [
+        'as' => 'admin.update.vendor.business',
+        'uses' => 'Admin\BusinessController@updateVendorBusiness'
     ]);
 });
 Route::group(['prefix' => '/config/county','middleware' => ['log.route']], function () {

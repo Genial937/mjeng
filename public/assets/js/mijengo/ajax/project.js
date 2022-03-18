@@ -749,7 +749,7 @@ const getBusinessEquipments=function (){
             });
         })
 }
-const viewEquipmentRequiredAssignedModal=function (jsonEquipments){
+const viewAssignedEquipmentModal=function (jsonEquipments){
     let equipments=$.parseJSON(jsonEquipments);
 
     if(equipments.equipment_inventory.length > 0) {
@@ -816,7 +816,7 @@ const assignMaterialFromInventory=function(material){
     //show  modal
     $("#add-materials").modal('show');
 }
-
+//get business materials
 const getBusinessMaterials=function (){
     let business_id=$("#modal-add-material-business-id").val();
     let material_type_id=$("#modal-add-material-type-id").val();
@@ -854,3 +854,57 @@ const getBusinessMaterials=function (){
             });
         })
 }
+const viewAssignedMaterialsModal=function (jsonMaterials){
+    let material=$.parseJSON(jsonMaterials);
+     console.log(material)
+    if(material.material_inventory.length > 0) {
+        $("#view-material-added").modal("show");
+
+        let data = [];
+        let table=$('.material-assigned-table');
+        table.dataTable().fnClearTable();
+        $.each(material.material_inventory, function (key, val) {
+            data.push([val.business.name, val.material_type.name,val.material_class.name, '<button type="button" id="remove-project-material-assigned-' + val.id + '" onclick="removeProjectMaterialAssigned(' + val.id + ',' + material.id + ')" class="btn btn-dark">remove</button>']);
+        });
+        if(data.length > 0)
+            table.dataTable().fnAddData(data);
+    }else{
+        toastr.error("No Material submitted.");
+    }
+}
+const removeProjectMaterialAssigned=function(material_id,material_required_id){
+    //prompt
+    swal({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            $('#remove-project-material-assigned-'+material_id).empty('').append('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>').prop('disabled', true);
+            $.post("/vendor/projects/remove/material/required",{material_id,material_required_id})
+                .done(function (data) {
+                    if (data['success']) {
+                        toastr.success(data['message']);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    } else {
+                        toastr.success(data['message']);
+                    }
+
+                })
+                .fail(function (data) {
+                    console.error(data)
+                    var errors = data.responseJSON;
+                    $.each(errors.errors, function (key, value) {
+                        toastr.error(value[0]);
+                    });
+                })
+
+        } else {
+            toastr.info('Delete Cancelled!');
+        }
+    })
+};
